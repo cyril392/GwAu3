@@ -38,76 +38,59 @@ Func Attribute_GetAttributeInfo($a_i_AttributeID, $a_s_Info = "")
 EndFunc
 
 Func Attribute_GetPartyAttributeInfo($a_i_AttributeID, $a_i_HeroNumber = 0, $a_s_Info = "")
-    Local $l_i_AgentID
-    If $a_i_HeroNumber <> 0 Then
-        $l_i_AgentID = Party_GetMyPartyHeroInfo($a_i_HeroNumber, "AgentID")
-    Else
-        $l_i_AgentID = World_GetWorldInfo("MyID")
-    EndIf
+    Local $l_p_Pointer = World_GetWorldInfo("PartyAttributeArray")
+    Local $l_i_Size = World_GetWorldInfo("PartyAttributeArraySize")
 
-    Local $l_av_Buffer
-    Local $l_ai_Offset[5]
-    $l_ai_Offset[0] = 0
-    $l_ai_Offset[1] = 0x18
-    $l_ai_Offset[2] = 0x2C
-    $l_ai_Offset[3] = 0xAC
+    Local $l_i_AgentID = (($a_i_HeroNumber = 0) ? Agent_GetMyID() : Party_GetMyPartyHeroInfo($a_i_HeroNumber, "AgentID"))
+    Local $l_p_Agent = 0
 
-    For $l_i_Idx = 0 To World_GetWorldInfo("PartyAttributeArraySize")
-        $l_ai_Offset[4] = 0x43C * $l_i_Idx
-        $l_av_Buffer = Memory_ReadPtr($g_p_BasePointer, $l_ai_Offset)
-
-        If $l_av_Buffer[1] = $l_i_AgentID Then
-            Local $l_i_BaseAttrOffset = 0x43C * $l_i_Idx + 0x14 * $a_i_AttributeID + 0x4
-
-            Switch $a_s_Info
-                Case "ID"
-                    $l_ai_Offset[4] = $l_i_BaseAttrOffset
-                    $l_av_Buffer = Memory_ReadPtr($g_p_BasePointer, $l_ai_Offset)
-                    Return $l_av_Buffer[1]
-                Case "BaseLevel", "LevelBase"
-                    $l_ai_Offset[4] = $l_i_BaseAttrOffset + 0x4
-                    $l_av_Buffer = Memory_ReadPtr($g_p_BasePointer, $l_ai_Offset)
-                    Return $l_av_Buffer[1]
-                Case "Level", "CurrentLevel"
-                    $l_ai_Offset[4] = $l_i_BaseAttrOffset + 0x8
-                    $l_av_Buffer = Memory_ReadPtr($g_p_BasePointer, $l_ai_Offset)
-                    Return $l_av_Buffer[1]
-                Case "DecrementPoints"
-                    $l_ai_Offset[4] = $l_i_BaseAttrOffset + 0xC
-                    $l_av_Buffer = Memory_ReadPtr($g_p_BasePointer, $l_ai_Offset)
-                    Return $l_av_Buffer[1]
-                Case "IncrementPoints"
-                    $l_ai_Offset[4] = $l_i_BaseAttrOffset + 0x10
-                    $l_av_Buffer = Memory_ReadPtr($g_p_BasePointer, $l_ai_Offset)
-                    Return $l_av_Buffer[1]
-                Case "HasAttribute"
-                    $l_ai_Offset[4] = $l_i_BaseAttrOffset
-                    $l_av_Buffer = Memory_ReadPtr($g_p_BasePointer, $l_ai_Offset)
-                    Return $l_av_Buffer[1] <> 0
-                Case "BonusLevel"
-                    $l_ai_Offset[4] = $l_i_BaseAttrOffset + 0x4
-                    Local $l_i_BaseLevel = Memory_ReadPtr($g_p_BasePointer, $l_ai_Offset)[1]
-                    $l_ai_Offset[4] = $l_i_BaseAttrOffset + 0x8
-                    Local $l_i_CurrentLevel = Memory_ReadPtr($g_p_BasePointer, $l_ai_Offset)[1]
-                    Return $l_i_CurrentLevel - $l_i_BaseLevel
-                Case "IsMaxed"
-                    $l_ai_Offset[4] = $l_i_BaseAttrOffset + 0x8
-                    $l_av_Buffer = Memory_ReadPtr($g_p_BasePointer, $l_ai_Offset)
-                    Return $l_av_Buffer[1] >= 12
-                Case "IsRaisable"
-                    $l_ai_Offset[4] = $l_i_BaseAttrOffset + 0x10
-                    $l_av_Buffer = Memory_ReadPtr($g_p_BasePointer, $l_ai_Offset)
-                    Return $l_av_Buffer[1] > 0
-                Case "IsDecreasable"
-                    $l_ai_Offset[4] = $l_i_BaseAttrOffset + 0xC
-                    $l_av_Buffer = Memory_ReadPtr($g_p_BasePointer, $l_ai_Offset)
-                    Return $l_av_Buffer[1] > 0
-                Case Else
-                    Return 0
-            EndSwitch
+    For $i = 0 To $l_i_Size - 1
+        Local $l_p_AttributeArray = $l_p_Pointer + ($i * 0x43C)
+        If Memory_Read($l_p_AttributeArray, "dword") = $l_i_AgentID Then
+            $l_p_Agent = $l_p_AttributeArray
+            ExitLoop
         EndIf
     Next
-    Return 0
+
+    If $l_p_Agent = 0 Then Return 0
+    If $a_s_Info = "" Then Return $l_p_Agent
+
+    $l_p_Agent += 0x14 * $a_i_AttributeID + 0x4
+
+    Switch $a_s_Info
+        Case "ID", "AttributeID"
+            Return Memory_Read($l_p_Agent, "dword")
+        Case "BaseLevel", "LevelBase"
+            Return Memory_Read($l_p_Agent + 0x4, "dword")
+        Case "Level", "CurrentLevel"
+            Return Memory_Read($l_p_Agent + 0x8, "dword")
+        Case "DecrementPoints"
+            Return Memory_Read($l_p_Agent + 0xC, "long")
+        Case "IncrementPoints"
+            Return Memory_Read($l_p_Agent + 0x10, "long")
+        Case "HasAttribute"
+            Return Memory_Read($l_p_Agent + 0x8, "dword") > 0
+        Case "BonusLevel"
+            Local $l_i_BaseLevel = Memory_Read($l_p_Agent + 0x4, "dword")
+            Local $l_i_CurrentLevel = Memory_Read($l_p_Agent + 0x8, "dword")
+            Return $l_i_CurrentLevel - $l_i_BaseLevel
+        Case "IsMaxed"
+            Return Memory_Read($l_p_Agent + 0x4, "dword") >= 12
+        Case "IsDecreasable"
+            Return Memory_Read($l_p_Agent + 0xC, "long") > 0
+        Case "IsRaisable"
+            Return Memory_Read($l_p_Agent + 0x10, "long") > 0
+        Case "UnusedPoints"
+            Local $l_i_AttrCount = 45
+            $l_p_Agent = $l_p_Pointer + ($i * 0x43C) + (0x14 * $l_i_AttrCount) + 0xB0
+            Return Memory_Read($l_p_Agent, "dword")
+        Case "TotalPoints"
+            Local $l_i_AttrCount = 45
+            $l_p_Agent = $l_p_Pointer + ($i * 0x43C) + (0x14 * $l_i_AttrCount) + 0xB0 + 0x4
+            Return Memory_Read($l_p_Agent, "dword")
+        Case Else
+            Return 0
+    EndSwitch
 EndFunc
 
 Func Attribute_GetPartyAttributePointInfo($a_i_HeroNumber = 0, $a_s_Info = "")
