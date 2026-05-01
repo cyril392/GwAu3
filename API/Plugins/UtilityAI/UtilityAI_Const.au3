@@ -9,6 +9,7 @@ Global $g_as_CanUseCache[9]
 Global $g_b_CanUseSkill = True
 Global $g_b_SkillChanged = False
 Global $g_b_CacheWeaponSet = False
+Global $g_b_UAI_Debug = False
 Global $g_b_CallTarget = True
 
 ;Slecet your combat mode:

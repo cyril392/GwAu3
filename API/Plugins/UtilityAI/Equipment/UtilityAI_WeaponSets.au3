@@ -2,8 +2,8 @@
 
 #Region Set and Mods
 Func UAI_DeterminateWeaponSets()
-	Out("[DEBUG] ========== STARTING WEAPON SET ANALYSIS ==========")
-	Out("[DEBUG] Reading weapon sets directly from memory (no switching required)")
+	_D("========== STARTING WEAPON SET ANALYSIS ==========")
+	_D("Reading weapon sets directly from memory (no switching required)")
 
 	;Reset all best set trackers
 	$g_ai_High_Hp_Set[0] = 0
@@ -28,22 +28,24 @@ Func UAI_DeterminateWeaponSets()
 	;Read all 4 weapon sets directly from memory
 	For $l_i_Set = 0 To 3
 		Local $l_i_SetNum = $l_i_Set + 1
-		Out("[DEBUG] --- Analyzing Weapon Set " & $l_i_SetNum & " ---")
+		_D("--- Analyzing Weapon Set " & $l_i_SetNum & " ---")
 		UAI_SaveWeaponSetFromMemory($l_i_SetNum)
 	Next
 
-	Out("[DEBUG] ========== ANALYSIS COMPLETE ==========")
-	Out("[DEBUG] Best Sets Summary:")
-	Out("[DEBUG]   HP: Set #" & $g_ai_High_Hp_Set[1] & " (+" & $g_ai_High_Hp_Set[0] & " HP)")
-	Out("[DEBUG]   Energy: Set #" & $g_ai_High_Energy_Set[1] & " (+" & $g_ai_High_Energy_Set[0] & " Energy)")
-	Out("[DEBUG]   Offensive: Set #" & $g_ai_Best_Offensive_Set[1] & " (Score: " & $g_ai_Best_Offensive_Set[0] & ")")
-	Out("[DEBUG]   Defensive: Set #" & $g_ai_Best_Defensive_Set[1] & " (Score: " & $g_ai_Best_Defensive_Set[0] & ")")
-	Out("[DEBUG]   Casting: Set #" & $g_ai_Best_Casting_Set[1] & " (Score: " & $g_ai_Best_Casting_Set[0] & ")")
-	If $g_ai_Best_Enchant_Set[1] > 0 Then Out("[DEBUG]   Enchanting: Set #" & $g_ai_Best_Enchant_Set[1])
-	If $g_ai_Best_Ranged_Set[1] > 0 Then Out("[DEBUG]   Ranged: Set #" & $g_ai_Best_Ranged_Set[1])
-	If $g_ai_Best_Vampiric_Set[1] > 0 Then Out("[DEBUG]   Vampiric: Set #" & $g_ai_Best_Vampiric_Set[1])
-	If $g_ai_Best_Zealous_Set[1] > 0 Then Out("[DEBUG]   Zealous: Set #" & $g_ai_Best_Zealous_Set[1])
-	Out("[DEBUG] ========================================")
+	_D("========== ANALYSIS COMPLETE ==========")
+	_D("Best Sets Summary:")
+	_D("  HP: Set #" & $g_ai_High_Hp_Set[1] & " (+" & $g_ai_High_Hp_Set[0] & " HP)")
+	_D("  Energy: Set #" & $g_ai_High_Energy_Set[1] & " (+" & $g_ai_High_Energy_Set[0] & " Energy)")
+	_D("  Offensive: Set #" & $g_ai_Best_Offensive_Set[1] & " (Score: " & $g_ai_Best_Offensive_Set[0] & ")")
+	_D("  Defensive: Set #" & $g_ai_Best_Defensive_Set[1] & " (Score: " & $g_ai_Best_Defensive_Set[0] & ")")
+	_D("  Casting: Set #" & $g_ai_Best_Casting_Set[1] & " (Score: " & $g_ai_Best_Casting_Set[0] & ")")
+	If $g_b_UAI_Debug Then
+		If $g_ai_Best_Enchant_Set[1] > 0 Then _D("  Enchanting: Set #" & $g_ai_Best_Enchant_Set[1])
+		If $g_ai_Best_Ranged_Set[1] > 0 Then _D("  Ranged: Set #" & $g_ai_Best_Ranged_Set[1])
+		If $g_ai_Best_Vampiric_Set[1] > 0 Then _D("  Vampiric: Set #" & $g_ai_Best_Vampiric_Set[1])
+		If $g_ai_Best_Zealous_Set[1] > 0 Then _D("  Zealous: Set #" & $g_ai_Best_Zealous_Set[1])
+	EndIf
+	_D("========================================")
 EndFunc
 
 ;Read weapon set data directly from memory without switching
@@ -91,32 +93,32 @@ Func UAI_SaveWeaponSetFromMemory($a_i_Set)
 	$g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_HasVampiric] = 0
 	$g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_HasZealous] = 0
 
-	Out("[DEBUG] Saving Set " & $a_i_Set & " (from memory):")
-	Out("[DEBUG]   WeaponPtr: " & $l_p_WeaponPtr & " | OffhandPtr: " & $l_p_OffhandPtr)
-	Out("[DEBUG]   WeaponType: " & $l_i_WeaponType & " (" & UAI_GetWeaponTypeName($l_i_WeaponType) & ")")
-	Out("[DEBUG]   WeaponId: " & $l_i_WeaponId)
-	Out("[DEBUG]   OffhandType: " & $l_i_OffhandType & " (" & UAI_GetOffhandTypeName($l_i_OffhandType) & ")")
-	Out("[DEBUG]   OffhandId: " & $l_i_OffhandId)
+	_D("Saving Set " & $a_i_Set & " (from memory):")
+	_D("  WeaponPtr: " & $l_p_WeaponPtr & " | OffhandPtr: " & $l_p_OffhandPtr)
+	_D("  WeaponType: " & $l_i_WeaponType & " (" & UAI_GetWeaponTypeName($l_i_WeaponType) & ")")
+	_D("  WeaponId: " & $l_i_WeaponId)
+	_D("  OffhandType: " & $l_i_OffhandType & " (" & UAI_GetOffhandTypeName($l_i_OffhandType) & ")")
+	_D("  OffhandId: " & $l_i_OffhandId)
 
 	;Check if main weapon is two-handed
 	Local $l_b_TwoHanded = UAI_IsTwoHandedWeapon($l_i_WeaponType)
 
 	;Analyze mods and accumulate HP/Energy bonuses
 	If $l_i_WeaponId > 0 Then
-		Out("[DEBUG] Analyzing Main Weapon mods..." & ($l_b_TwoHanded ? " (Two-Handed)" : ""))
+		_D("Analyzing Main Weapon mods..." & ($l_b_TwoHanded ? " (Two-Handed)" : ""))
 		UAI_FindAndSaveModFromMemory($l_i_WeaponId, $l_i_WeaponType, $a_i_Set, 1)
 	Else
-		Out("[DEBUG]   => No main weapon equipped")
+		_D("  => No main weapon equipped")
 	EndIf
 
 	;Skip offhand analysis for two-handed weapons
 	If $l_b_TwoHanded Then
-		Out("[DEBUG]   => Skipping offhand (two-handed weapon equipped)")
+		_D("  => Skipping offhand (two-handed weapon equipped)")
 	ElseIf $l_i_OffhandId > 0 Then
-		Out("[DEBUG] Analyzing Offhand mods...")
+		_D("Analyzing Offhand mods...")
 		UAI_FindAndSaveModFromMemory($l_i_OffhandId, $l_i_OffhandType, $a_i_Set, 2)
 	Else
-		Out("[DEBUG]   => No offhand equipped")
+		_D("  => No offhand equipped")
 	EndIf
 
 	;After analyzing mods, update best set trackers
@@ -127,7 +129,7 @@ Func UAI_SaveWeaponSetFromMemory($a_i_Set)
 	Local $l_i_CastScore = $g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_CastingScore]
 	Local $l_i_EnchScore = $g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_EnchantScore]
 
-	Out("[DEBUG]   => Set Scores: HP+" & $l_i_SetHP & " | Energy+" & $l_i_SetEnergy & " | Off:" & $l_i_OffScore & " | Def:" & $l_i_DefScore & " | Cast:" & $l_i_CastScore & " | Ench:" & $l_i_EnchScore)
+	_D("  => Set Scores: HP+" & $l_i_SetHP & " | Energy+" & $l_i_SetEnergy & " | Off:" & $l_i_OffScore & " | Def:" & $l_i_DefScore & " | Cast:" & $l_i_CastScore & " | Ench:" & $l_i_EnchScore)
 
 	;Update best HP set
 	If $l_i_SetHP > $g_ai_High_Hp_Set[0] Then
@@ -185,11 +187,11 @@ Func UAI_FindAndSaveModFromMemory($a_i_ItemId, $a_i_ItemType, $a_i_Set, $a_i_Wea
 	Local $l_s_NewModStruct = ""
 	Local $l_s_WeaponSlot = ($a_i_Weapon = 1) ? "Main Hand" : "Offhand"
 
-	Out("[DEBUG]   Item ID: " & $a_i_ItemId & " (" & $l_s_WeaponSlot & ")")
-	Out("[DEBUG]   Raw ModStruct: " & $l_s_ModStruct)
+	_D("  Item ID: " & $a_i_ItemId & " (" & $l_s_WeaponSlot & ")")
+	_D("  Raw ModStruct: " & $l_s_ModStruct)
 
 	If $a_i_Weapon = 1 Then
-		Out("[DEBUG]   Weapon Type: " & $a_i_ItemType & " (" & UAI_GetWeaponTypeName($a_i_ItemType) & ")")
+		_D("  Weapon Type: " & $a_i_ItemType & " (" & UAI_GetWeaponTypeName($a_i_ItemType) & ")")
 		Switch $a_i_ItemType
 			Case $GC_I_TYPE_BOW ;5
 				UAI_SearchModsInArray($g_as2_BowUpgrade, $l_s_ModStruct, $l_s_NewModStruct, $l_i_Finding, $a_i_Set, $a_i_Weapon)
@@ -217,7 +219,7 @@ Func UAI_FindAndSaveModFromMemory($a_i_ItemId, $a_i_ItemType, $a_i_Set, $a_i_Wea
 				UAI_SearchModsInArray($g_as2_SpellCastingWeaponsInscription, $l_s_ModStruct, $l_s_NewModStruct, $l_i_Finding, $a_i_Set, $a_i_Weapon)
 		EndSwitch
 	ElseIf $a_i_Weapon = 2 Then
-		Out("[DEBUG]   Offhand Type: " & $a_i_ItemType & " (" & UAI_GetOffhandTypeName($a_i_ItemType) & ")")
+		_D("  Offhand Type: " & $a_i_ItemType & " (" & UAI_GetOffhandTypeName($a_i_ItemType) & ")")
 		Switch $a_i_ItemType
 			Case $GC_I_TYPE_OFFHAND ;12 = Focus
 				UAI_SearchModsInArray($g_as2_FocusUpgrade, $l_s_ModStruct, $l_s_NewModStruct, $l_i_Finding, $a_i_Set, $a_i_Weapon)
@@ -226,36 +228,36 @@ Func UAI_FindAndSaveModFromMemory($a_i_ItemId, $a_i_ItemType, $a_i_Set, $a_i_Wea
 				UAI_SearchModsInArray($g_as2_ShieldUpgrade, $l_s_ModStruct, $l_s_NewModStruct, $l_i_Finding, $a_i_Set, $a_i_Weapon)
 				UAI_SearchModsInArray($g_as2_FocusShieldWeaponsInscription, $l_s_ModStruct, $l_s_NewModStruct, $l_i_Finding, $a_i_Set, $a_i_Weapon)
 			Case 0 ; Nothing (empty slot)
-				Out("[DEBUG]   => Empty offhand slot")
+				_D("  => Empty offhand slot")
 		EndSwitch
 	EndIf
 
 	If $l_i_Finding = 0 Then
-		Out("[DEBUG]   => No mods found")
+		_D("  => No mods found")
 	Else
-		Out("[DEBUG]   => Total mods found: " & $l_i_Finding)
+		_D("  => Total mods found: " & $l_i_Finding)
 	EndIf
 EndFunc
 
 Func UAI_FindWeaponSetByType($a_i_Type)
-	Out("[DEBUG] Searching for weapon type " & $a_i_Type & "...")
+	_D("Searching for weapon type " & $a_i_Type & "...")
 	Local $l_i_CurrentType = UAI_GetPlayerInfo($GC_UAI_AGENT_WeaponItemType)
-	Out("[DEBUG] Current weapon type: " & $l_i_CurrentType)
+	_D("Current weapon type: " & $l_i_CurrentType)
 
 	If $l_i_CurrentType = $a_i_Type Then
-		Out("[DEBUG] => Already equipped type " & $a_i_Type & "! (returning 5)")
+		_D("=> Already equipped type " & $a_i_Type & "! (returning 5)")
 		Return 5 ;already have the right weapon type
 	Else
 		For $l_i_Set = 0 To 3
 			Local $l_i_SetType = $g_a2D_WeaponSets[$l_i_Set][$GC_UAI_WEAPONSET_WeaponType]
-			Out("[DEBUG] Set " & ($l_i_Set + 1) & " has weapon type: " & $l_i_SetType)
+			_D("Set " & ($l_i_Set + 1) & " has weapon type: " & $l_i_SetType)
 			If $l_i_SetType = $a_i_Type Then
-				Out("[DEBUG] => Found type " & $a_i_Type & " in Set " & ($l_i_Set + 1) & "!")
+				_D("=> Found type " & $a_i_Type & " in Set " & ($l_i_Set + 1) & "!")
 				Return $l_i_Set + 1
 			EndIf
 		Next
 	EndIf
-	Out("[DEBUG] => Weapon type " & $a_i_Type & " not found (returning 0)")
+	_D("=> Weapon type " & $a_i_Type & " not found (returning 0)")
 	Return 0 ;Don't find the weapon type in any set
 EndFunc
 
@@ -287,17 +289,14 @@ Func UAI_GetBestWeaponSetBySkillSlot($a_i_SkillSlot)
 	Switch $l_i_SkillType
 		;--- Casting Skills: Hex, Spell, Signet, Condition, Well, Ward, Item Spell, Weapon Spell ---
 		Case $GC_I_SKILL_TYPE_HEX, $GC_I_SKILL_TYPE_SPELL, $GC_I_SKILL_TYPE_SIGNET, $GC_I_SKILL_TYPE_CONDITION, $GC_I_SKILL_TYPE_WELL, $GC_I_SKILL_TYPE_WARD, $GC_I_SKILL_TYPE_ITEM_SPELL, $GC_I_SKILL_TYPE_WEAPON_SPELL
-			;Use best casting set (highest HCT/HSR score)
 			If $g_ai_Best_Casting_Set[1] > 0 Then
 				$l_i_BestSet = $g_ai_Best_Casting_Set[1]
 			EndIf
 
 		;--- Enchantment Spell: Prefer enchant duration, then casting ---
 		Case $GC_I_SKILL_TYPE_ENCHANTMENT
-			;First choice: Best enchant duration set
 			If $g_ai_Best_Enchant_Set[1] > 0 Then
 				$l_i_BestSet = $g_ai_Best_Enchant_Set[1]
-			;Second choice: Any casting set
 			ElseIf $g_ai_Best_Casting_Set[1] > 0 Then
 				$l_i_BestSet = $g_ai_Best_Casting_Set[1]
 			EndIf
@@ -321,7 +320,6 @@ Func UAI_GetBestWeaponSetBySkillSlot($a_i_SkillSlot)
 
 		;--- Shout/Chant/Echo: No specific weapon needed, keep current or use defensive ===
 		Case $GC_I_SKILL_TYPE_SHOUT, $GC_I_SKILL_TYPE_CHANT, $GC_I_SKILL_TYPE_ECHO_REFRAIN
-			;Keep current weapon set
 			Return
 
 		;--- Preparation: Typically for rangers, prefer bow ===
@@ -332,7 +330,6 @@ Func UAI_GetBestWeaponSetBySkillSlot($a_i_SkillSlot)
 
 		;--- Trap: No specific weapon, but defensive might help survive ===
 		Case $GC_I_SKILL_TYPE_TRAP
-			;Keep current or prefer defensive
 			Return
 
 		;--- Ritual: Casting set helps ===
@@ -358,11 +355,9 @@ Func UAI_GetBestWeaponSetBySkillSlot($a_i_SkillSlot)
 			EndIf
 
 		Case Else
-			;Unknown skill type, keep current
 			Return
 	EndSwitch
 
-	;Switch if we found a better set
 	If $l_i_BestSet > 0 And $l_i_BestSet <= 4 Then
 		UAI_ChangeWeaponSet($l_i_BestSet)
 	EndIf
@@ -370,7 +365,6 @@ EndFunc
 
 ;===================================================================================
 ; UAI_WeaponReqToItemType - Convert skill weapon requirement to item type
-; WeaponReq values are from skill data, ItemType values are from item data
 ;===================================================================================
 Func UAI_WeaponReqToItemType($a_i_WeaponReq)
 	Switch $a_i_WeaponReq
@@ -389,22 +383,18 @@ Func UAI_WeaponReqToItemType($a_i_WeaponReq)
 		Case 128 ;Sword attacks
 			Return $GC_I_TYPE_SWORD
 		Case Else
-			Return 0 ;No specific weapon required or unknown
+			Return 0
 	EndSwitch
 EndFunc
 
 ;===================================================================================
 ; UAI_GetBestWeaponSetForCombat - Intelligent weapon set selection based on combat state
-; Priority: Survival > Energy Management > Offensive/Situational
-; Returns: Best weapon set number (1-4), always returns a valid set
-; Uses hysteresis to prevent flip-flop
 ;===================================================================================
 Func UAI_GetBestWeaponSetForCombat()
 	Local $l_f_HP = UAI_GetPlayerInfo($GC_UAI_AGENT_HP)
 	Local $l_i_CurrentEnergy = UAI_GetPlayerInfo($GC_UAI_AGENT_CurrentEnergy)
 
-	;=== PRIORITY 1: SURVIVAL - Low HP, switch to defensive set ===
-	;Hysteresis: Enter defensive mode at 50%, stay until 70%
+	;=== PRIORITY 1: SURVIVAL ===
 	If $l_f_HP <= 0.30 Then
 		$g_b_InDefensiveMode = True
 	ElseIf $l_f_HP >= 0.50 Then
@@ -416,8 +406,7 @@ Func UAI_GetBestWeaponSetForCombat()
 		If $g_ai_High_Hp_Set[1] > 0 Then Return $g_ai_High_Hp_Set[1]
 	EndIf
 
-	;=== PRIORITY 2: ENERGY MANAGEMENT - Low energy, switch to high energy set ===
-	;Hysteresis: Enter low energy mode at 15, stay until 35
+	;=== PRIORITY 2: ENERGY MANAGEMENT ===
 	If $l_i_CurrentEnergy <= 5 Then
 		$g_b_InLowEnergyMode = True
 	ElseIf $l_i_CurrentEnergy >= 25 Then
@@ -429,36 +418,27 @@ Func UAI_GetBestWeaponSetForCombat()
 		If $g_ai_Best_Zealous_Set[1] > 0 Then Return $g_ai_Best_Zealous_Set[1]
 	EndIf
 
-	;=== PRIORITY 3: OFFENSIVE - Default combat set ===
+	;=== PRIORITY 3: OFFENSIVE ===
 	If $g_ai_Best_Offensive_Set[1] > 0 Then Return $g_ai_Best_Offensive_Set[1]
 
-	;=== FALLBACK: Return first available set ===
 	If $g_ai_Best_Casting_Set[1] > 0 Then Return $g_ai_Best_Casting_Set[1]
 	If $g_ai_High_Hp_Set[1] > 0 Then Return $g_ai_High_Hp_Set[1]
 
-	Return 1 ;Default to set 1 if nothing else available
+	Return 1
 EndFunc
 
 ;===================================================================================
 ; UAI_ShouldSwitchWeaponSet - Check if we should switch weapon sets in combat
-; Call this periodically during combat to adapt to changing situations
-; Returns: True if weapon set was changed, False otherwise
 ;===================================================================================
 Func UAI_ShouldSwitchWeaponSet()
 	Local $l_i_BestSet = UAI_GetBestWeaponSetForCombat()
-
-	;Already on best set? No switch needed
 	If UAI_IsOnWeaponSet($l_i_BestSet) Then Return False
-
-	;Switch to best set
 	UAI_ChangeWeaponSet($l_i_BestSet)
 	Return True
 EndFunc
 
 ;===================================================================================
 ; UAI_GetWeaponSetForSituation - Get best weapon set for specific situation
-; $a_s_Situation: "defensive", "offensive", "casting", "enchanting", "ranged", "energy"
-; Returns: Set number (1-4) or 0 if not available
 ;===================================================================================
 Func UAI_GetWeaponSetForSituation($a_s_Situation)
 	Switch $a_s_Situation
@@ -486,7 +466,6 @@ Func UAI_GetWeaponSetForSituation($a_s_Situation)
 EndFunc
 
 Func UAI_ChangeWeaponSet($a_i_Set)
-	;Quick check: Already on this set? Skip switch entirely
 	If UAI_IsOnWeaponSet($a_i_Set) Then Return
 
 	Local $l_i_SetToUse = 0
@@ -503,23 +482,17 @@ Func UAI_ChangeWeaponSet($a_i_Set)
 
 	Local $l_i_Deadlock = TimerInit()
 
-	;Double cancel to ensure we can switch
 	Core_PerformAction($GC_I_CONTROL_ACTION_CANCEL_ACTION, $GC_I_CONTROL_TYPE_ACTIVATE)
-;~ 	Agent_CancelAction()
 	Sleep(32)
 	Core_PerformAction($GC_I_CONTROL_ACTION_CANCEL_ACTION, $GC_I_CONTROL_TYPE_ACTIVATE)
-;~ 	Agent_CancelAction()
 	Sleep(32)
 
-	;Loop until we are on the correct set (by Item ID) or timeout
 	Do
 		Core_PerformAction($l_i_SetToUse, $GC_I_CONTROL_TYPE_ACTIVATE)
-;~ 		Item_SwitchWeaponSet($l_i_SetToUse)
 		Sleep(32)
 	Until UAI_IsOnWeaponSet($a_i_Set) Or TimerDiff($l_i_Deadlock) > 400
 EndFunc
 
-;Helper function to search mods in an upgrade array
 Func UAI_SearchModsInArray(ByRef $a_as2_UpgradeArray, ByRef $a_s_ModStruct, ByRef $a_s_NewModStruct, ByRef $a_i_Finding, $a_i_Set, $a_i_Weapon)
 	Local $l_i_Index = $a_i_Set - 1
 	For $i = 0 To UBound($a_as2_UpgradeArray) - 1
@@ -534,7 +507,7 @@ Func UAI_SearchModsInArray(ByRef $a_as2_UpgradeArray, ByRef $a_s_ModStruct, ByRe
 
 			Local $l_s_ModName = $a_as2_UpgradeArray[$i][0]
 			Local $l_s_Effect = $a_as2_UpgradeArray[$i][1]
-			Out("[DEBUG]     [MOD #" & $a_i_Finding & "] " & $l_s_ModName & " => " & $l_s_Effect)
+			_D("    [MOD #" & $a_i_Finding & "] " & $l_s_ModName & " => " & $l_s_Effect)
 
 			;Extract HP and Energy bonuses
 			Local $l_i_HPBonus = UAI_ExtractHPBonus($l_s_Effect)
@@ -548,7 +521,6 @@ Func UAI_SearchModsInArray(ByRef $a_as2_UpgradeArray, ByRef $a_s_ModStruct, ByRe
 				$g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_MaxEnergy] += $l_i_EnergyBonus
 			EndIf
 
-			;Detect offensive mods
 			If StringInStr($l_s_ModName, "Sundering") Then
 				$g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_OffensiveScore] += 20
 			EndIf
@@ -563,16 +535,12 @@ Func UAI_SearchModsInArray(ByRef $a_as2_UpgradeArray, ByRef $a_s_ModStruct, ByRe
 			If StringInStr($l_s_ModName, "Furious") Then
 				$g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_OffensiveScore] += 10
 			EndIf
-			;Condition mods (Barbed, Cruel, Crippling, Heavy, Poisonous, Silencing)
 			If StringInStr($l_s_Effect, "+33%") Then
 				$g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_OffensiveScore] += 5
 			EndIf
-			;Damage +% inscriptions
 			If StringInStr($l_s_Effect, "Damage +15%") Or StringInStr($l_s_Effect, "Damage 20%") Then
 				$g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_OffensiveScore] += 15
 			EndIf
-
-			;Detect defensive mods
 			If StringInStr($l_s_Effect, "Armor +") Then
 				$g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_DefensiveScore] += 10
 			EndIf
@@ -582,11 +550,9 @@ Func UAI_SearchModsInArray(ByRef $a_as2_UpgradeArray, ByRef $a_s_ModStruct, ByRe
 			If StringInStr($l_s_Effect, "Damage -") Then
 				$g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_DefensiveScore] += 5
 			EndIf
-			If StringInStr($l_s_Effect, "-20%") Then ;Condition duration reduction
+			If StringInStr($l_s_Effect, "-20%") Then
 				$g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_DefensiveScore] += 3
 			EndIf
-
-			;Detect casting mods (HCT/HSR)
 			If StringInStr($l_s_Effect, "HCT20") Then
 				$g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_CastingScore] += 20
 			ElseIf StringInStr($l_s_Effect, "HCT10") Then
@@ -597,8 +563,6 @@ Func UAI_SearchModsInArray(ByRef $a_as2_UpgradeArray, ByRef $a_s_ModStruct, ByRe
 			ElseIf StringInStr($l_s_Effect, "HSR10") Then
 				$g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_CastingScore] += 10
 			EndIf
-
-			;Detect enchant duration mod
 			If StringInStr($l_s_Effect, "Enchantment Duration") Or StringInStr($l_s_ModName, "Enchanting") Then
 				$g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_EnchantScore] += 20
 			EndIf
@@ -608,33 +572,22 @@ Func UAI_SearchModsInArray(ByRef $a_as2_UpgradeArray, ByRef $a_s_ModStruct, ByRe
 	Next
 EndFunc
 
-;Extract HP bonus from mod effect string
-;Patterns: "Health +30", "+30 HP", "+45 HP while...", "+60 HP while..."
 Func UAI_ExtractHPBonus($a_s_Effect)
-	;Pattern: "Health +XX" or "+XX HP"
 	Local $l_a_Result = StringRegExp($a_s_Effect, "Health \+(\d+)", 1)
 	If IsArray($l_a_Result) Then Return Int($l_a_Result[0])
-
 	$l_a_Result = StringRegExp($a_s_Effect, "\+(\d+) HP", 1)
 	If IsArray($l_a_Result) Then Return Int($l_a_Result[0])
-
 	Return 0
 EndFunc
 
-;Extract Energy bonus from mod effect string
-;Patterns: "Energy +5", "Energy +7", "Energy +15"
 Func UAI_ExtractEnergyBonus($a_s_Effect)
-	;Pattern: "Energy +XX"
 	Local $l_a_Result = StringRegExp($a_s_Effect, "Energy \+(\d+)", 1)
 	If IsArray($l_a_Result) Then Return Int($l_a_Result[0])
-
 	Return 0
 EndFunc
 
 ;===================================================================================
 ; UAI_IsOnWeaponSet - Check if player is currently on a specific weapon set
-; Compares Item IDs for accurate detection (not just weapon types)
-; Returns: True if currently on the specified set, False otherwise
 ;===================================================================================
 Func UAI_IsOnWeaponSet($a_i_Set)
 	If $a_i_Set < 1 Or $a_i_Set > 4 Then Return False
@@ -645,12 +598,9 @@ Func UAI_IsOnWeaponSet($a_i_Set)
 	Local $l_i_SetWeaponId = $g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_WeaponId]
 	Local $l_i_SetOffhandId = $g_a2D_WeaponSets[$l_i_Index][$GC_UAI_WEAPONSET_OffhandId]
 
-	;Compare by Item ID for accurate detection
 	Return ($l_i_CurrentWeaponId = $l_i_SetWeaponId And $l_i_CurrentOffhandId = $l_i_SetOffhandId)
 EndFunc
 
-;Helper function to check if weapon is two-handed
-;Two-handed weapons: Daggers, Hammer, Scythe, Bow, Staff
 Func UAI_IsTwoHandedWeapon($a_i_WeaponType)
 	Switch $a_i_WeaponType
 		Case $GC_I_TYPE_DAGGERS, $GC_I_TYPE_HAMMER, $GC_I_TYPE_SCYTHE, $GC_I_TYPE_BOW, $GC_I_TYPE_STAFF
@@ -660,8 +610,6 @@ Func UAI_IsTwoHandedWeapon($a_i_WeaponType)
 	EndSwitch
 EndFunc
 
-;Helper function to check if weapon is ranged
-;Ranged weapons: Bow, Spear, Wand, Staff
 Func UAI_IsRangedWeapon($a_i_WeaponType)
 	Switch $a_i_WeaponType
 		Case $GC_I_TYPE_BOW, $GC_I_TYPE_SPEAR, $GC_I_TYPE_WAND, $GC_I_TYPE_STAFF
@@ -671,38 +619,36 @@ Func UAI_IsRangedWeapon($a_i_WeaponType)
 	EndSwitch
 EndFunc
 
-;Helper function to get weapon type name for debug (using Item types from GwAu3_Const_Item.au3)
 Func UAI_GetWeaponTypeName($a_i_Type)
 	Switch $a_i_Type
-		Case $GC_I_TYPE_AXE ;2
+		Case $GC_I_TYPE_AXE     ; 2
 			Return "Axe"
-		Case $GC_I_TYPE_BOW ;5
+		Case $GC_I_TYPE_BOW     ; 5
 			Return "Bow"
-		Case $GC_I_TYPE_HAMMER ;15
+		Case $GC_I_TYPE_HAMMER  ; 15
 			Return "Hammer"
-		Case $GC_I_TYPE_WAND ;22
+		Case $GC_I_TYPE_WAND    ; 22
 			Return "Wand"
-		Case $GC_I_TYPE_STAFF ;26
+		Case $GC_I_TYPE_STAFF   ; 26
 			Return "Staff"
-		Case $GC_I_TYPE_SWORD ;27
+		Case $GC_I_TYPE_SWORD   ; 27
 			Return "Sword"
-		Case $GC_I_TYPE_DAGGERS ;32
+		Case $GC_I_TYPE_DAGGERS ; 32
 			Return "Daggers"
-		Case $GC_I_TYPE_SCYTHE ;35
+		Case $GC_I_TYPE_SCYTHE  ; 35
 			Return "Scythe"
-		Case $GC_I_TYPE_SPEAR ;36
+		Case $GC_I_TYPE_SPEAR   ; 36
 			Return "Spear"
 		Case Else
 			Return "Unknown (" & $a_i_Type & ")"
 	EndSwitch
 EndFunc
 
-;Helper function to get offhand type name for debug
 Func UAI_GetOffhandTypeName($a_i_Type)
 	Switch $a_i_Type
-		Case $GC_I_TYPE_OFFHAND ;12 = Focus
+		Case $GC_I_TYPE_OFFHAND ; 12 = Focus
 			Return "Focus"
-		Case $GC_I_TYPE_SHIELD ;24
+		Case $GC_I_TYPE_SHIELD  ; 24
 			Return "Shield"
 		Case 0
 			Return "Empty"
@@ -710,4 +656,5 @@ Func UAI_GetOffhandTypeName($a_i_Type)
 			Return "Unknown (" & $a_i_Type & ")"
 	EndSwitch
 EndFunc
+
 #EndRegion Set and Mods

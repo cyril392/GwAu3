@@ -2,27 +2,27 @@
 
 ; ========== Effect Structure Properties ==========
 Global Enum $GC_UAI_EFFECT_SkillID, _
-	$GC_UAI_EFFECT_AttributeLevel, _
-	$GC_UAI_EFFECT_EffectID, _
-	$GC_UAI_EFFECT_CasterID, _
-	$GC_UAI_EFFECT_Duration, _
-	$GC_UAI_EFFECT_Timestamp, _
-	$GC_UAI_EFFECT_TimeElapsed, _
-	$GC_UAI_EFFECT_TimeRemaining, _
-	$GC_UAI_EFFECT_COUNT
+		$GC_UAI_EFFECT_AttributeLevel, _
+		$GC_UAI_EFFECT_EffectID, _
+		$GC_UAI_EFFECT_CasterID, _
+		$GC_UAI_EFFECT_Duration, _
+		$GC_UAI_EFFECT_Timestamp, _
+		$GC_UAI_EFFECT_TimeElapsed, _
+		$GC_UAI_EFFECT_TimeRemaining, _
+		$GC_UAI_EFFECT_COUNT
 
 ; ========== Bond Structure Properties ==========
 Global Enum $GC_UAI_BOND_SkillID, _
-	$GC_UAI_BOND_Unknown, _
-	$GC_UAI_BOND_BONDID, _
-	$GC_UAI_BOND_TargetAgentID, _
-	$GC_UAI_BOND_COUNT
+		$GC_UAI_BOND_Unknown, _
+		$GC_UAI_BOND_BONDID, _
+		$GC_UAI_BOND_TargetAgentID, _
+		$GC_UAI_BOND_COUNT
 
 ; ========== Visible Effect Structure Properties ==========
 Global Enum $GC_UAI_VISEFFECT_EffectType, _
-	$GC_UAI_VISEFFECT_EffectID, _
-	$GC_UAI_VISEFFECT_HasEnded, _
-	$GC_UAI_VISEFFECT_COUNT
+		$GC_UAI_VISEFFECT_EffectID, _
+		$GC_UAI_VISEFFECT_HasEnded, _
+		$GC_UAI_VISEFFECT_COUNT
 
 ; ========== Global Cache ==========
 ; Effects cache: $g_amx3_EffectsCache[AgentIndex][EffectIndex][Property]
@@ -40,13 +40,13 @@ Global $g_ai_VisEffectsCount[1]
 ; ========== Internal: Cache Effects for all cached agents ==========
 Func UAI_CacheAgentEffects()
 	Static $ss_EffectStruct = Memory_CreateArrayStructure( _
-		"long SkillID[0x0];" & _
-		"dword AttributeLevel[0x4];" & _
-		"long EffectID[0x8];" & _
-		"dword CasterID[0xC];" & _
-		"float Duration[0x10];" & _
-		"dword Timestamp[0x14]", _
-		0x18)
+			"long SkillID[0x0];" & _
+			"dword AttributeLevel[0x4];" & _
+			"long EffectID[0x8];" & _
+			"dword CasterID[0xC];" & _
+			"float Duration[0x10];" & _
+			"dword Timestamp[0x14]", _
+			0x18)
 
 	Local $l_i_AgentCount = $g_i_AgentCacheCount
 	If $l_i_AgentCount = 0 Then Return SetError(1, 0, False)
@@ -96,16 +96,16 @@ Func UAI_CacheAgentEffects()
 	Next
 
 	Return True
-EndFunc
+EndFunc   ;==>UAI_CacheAgentEffects
 
 ; ========== Internal: Cache Bonds for all cached agents ==========
 Func UAI_CacheAgentBonds()
 	Static $s_d_BondStruct = Memory_CreateArrayStructure( _
-		"long SkillID[0x0];" & _
-		"dword Unknown[0x4];" & _
-		"long BondID[0x8];" & _
-		"dword TargetAgentID[0xC]", _
-		0x10)
+			"long SkillID[0x0];" & _
+			"dword Unknown[0x4];" & _
+			"long BondID[0x8];" & _
+			"dword TargetAgentID[0xC]", _
+			0x10)
 
 	Local $l_i_AgentCount = $g_i_AgentCacheCount
 	If $l_i_AgentCount = 0 Then Return SetError(1, 0, False)
@@ -142,7 +142,7 @@ Func UAI_CacheAgentBonds()
 				For $k = 0 To $l_i_BondCount - 1
 					$g_amx3_BondsCache[$i][$k][$GC_UAI_BOND_SkillID] = $l_amx2_AllBonds[$k][0]
 					$g_amx3_BondsCache[$i][$k][$GC_UAI_BOND_Unknown] = $l_amx2_AllBonds[$k][1]
-					$g_amx3_BondsCache[$i][$k][$GC_UAI_BOND_BondID] = $l_amx2_AllBonds[$k][2]
+					$g_amx3_BondsCache[$i][$k][$GC_UAI_BOND_BONDID] = $l_amx2_AllBonds[$k][2]
 					$g_amx3_BondsCache[$i][$k][$GC_UAI_BOND_TargetAgentID] = $l_amx2_AllBonds[$k][3]
 				Next
 
@@ -153,7 +153,7 @@ Func UAI_CacheAgentBonds()
 	Next
 
 	Return True
-EndFunc
+EndFunc   ;==>UAI_CacheAgentBonds
 
 ; ========== Internal: Cache Visible Effects for all cached agents ==========
 Func UAI_CacheAgentVisibleEffects()
@@ -194,7 +194,7 @@ Func UAI_CacheAgentVisibleEffects()
 	Next
 
 	Return True
-EndFunc
+EndFunc   ;==>UAI_CacheAgentVisibleEffects
 
 ; ========== Public: Check if agent has effect ==========
 Func UAI_AgentHasEffect($a_i_AgentID, $a_i_SkillID)
@@ -207,7 +207,7 @@ Func UAI_AgentHasEffect($a_i_AgentID, $a_i_SkillID)
 	Next
 
 	Return False
-EndFunc
+EndFunc   ;==>UAI_AgentHasEffect
 
 ; ========== Public: Check if player has effect ==========
 Func UAI_PlayerHasEffect($a_i_SkillID)
@@ -219,7 +219,7 @@ Func UAI_PlayerHasEffect($a_i_SkillID)
 	Next
 
 	Return False
-EndFunc
+EndFunc   ;==>UAI_PlayerHasEffect
 
 ; ========== Public: Get effect info ==========
 Func UAI_GetAgentEffectInfo($a_i_AgentID, $a_i_SkillID, $a_i_Property)
@@ -246,7 +246,7 @@ Func UAI_GetAgentEffectInfo($a_i_AgentID, $a_i_SkillID, $a_i_Property)
 	Next
 
 	Return 0
-EndFunc
+EndFunc   ;==>UAI_GetAgentEffectInfo
 
 ; ========== Public: Get player effect info ==========
 Func UAI_GetPlayerEffectInfo($a_i_SkillID, $a_i_Property)
@@ -271,20 +271,20 @@ Func UAI_GetPlayerEffectInfo($a_i_SkillID, $a_i_Property)
 	Next
 
 	Return 0
-EndFunc
+EndFunc   ;==>UAI_GetPlayerEffectInfo
 
 ; ========== Public: Get agent effect count ==========
 Func UAI_GetAgentEffectCount($a_i_AgentID)
 	Local $l_i_Index = UAI_GetIndexByID($a_i_AgentID)
 	If $l_i_Index = 0 Then Return 0
 	Return $g_ai_EffectsCount[$l_i_Index]
-EndFunc
+EndFunc   ;==>UAI_GetAgentEffectCount
 
 ; ========== Public: Get player effect count ==========
 Func UAI_GetPlayerEffectCount()
 	If $g_i_PlayerCacheIndex < 1 Then Return 0
 	Return $g_ai_EffectsCount[$g_i_PlayerCacheIndex]
-EndFunc
+EndFunc   ;==>UAI_GetPlayerEffectCount
 
 ; ========== Public: Check if agent upkeeps bonds ==========
 Func UAI_AgentUpkeepsBond($a_i_AgentID, $a_i_SkillID)
@@ -297,7 +297,7 @@ Func UAI_AgentUpkeepsBond($a_i_AgentID, $a_i_SkillID)
 	Next
 
 	Return False
-EndFunc
+EndFunc   ;==>UAI_AgentUpkeepsBond
 
 ; ========== Public: Check if player upkeeps bonds ==========
 Func UAI_PlayerUpkeepsBond($a_i_SkillID)
@@ -309,7 +309,7 @@ Func UAI_PlayerUpkeepsBond($a_i_SkillID)
 	Next
 
 	Return False
-EndFunc
+EndFunc   ;==>UAI_PlayerUpkeepsBond
 
 ; ========== Public: Get bond info ==========
 Func UAI_GetAgentBondInfo($a_i_AgentID, $a_i_SkillID, $a_i_Property)
@@ -326,7 +326,7 @@ Func UAI_GetAgentBondInfo($a_i_AgentID, $a_i_SkillID, $a_i_Property)
 	Next
 
 	Return 0
-EndFunc
+EndFunc   ;==>UAI_GetAgentBondInfo
 
 ; ========== Public: Get player bond info ==========
 Func UAI_GetPlayerBondInfo($a_i_SkillID, $a_i_Property)
@@ -341,20 +341,20 @@ Func UAI_GetPlayerBondInfo($a_i_SkillID, $a_i_Property)
 	Next
 
 	Return 0
-EndFunc
+EndFunc   ;==>UAI_GetPlayerBondInfo
 
 ; ========== Public: Get agent bond count ==========
 Func UAI_GetAgentBondCount($a_i_AgentID)
 	Local $l_i_Index = UAI_GetIndexByID($a_i_AgentID)
 	If $l_i_Index = 0 Then Return 0
 	Return $g_ai_BondsCount[$l_i_Index]
-EndFunc
+EndFunc   ;==>UAI_GetAgentBondCount
 
 ; ========== Public: Get player bond count ==========
 Func UAI_GetPlayerBondCount()
 	If $g_i_PlayerCacheIndex < 1 Then Return 0
 	Return $g_ai_BondsCount[$g_i_PlayerCacheIndex]
-EndFunc
+EndFunc   ;==>UAI_GetPlayerBondCount
 
 ; ========== Public: Check if agent has visible effect ==========
 Func UAI_AgentHasVisibleEffect($a_i_AgentID, $a_i_EffectType, $a_i_EffectID)
@@ -368,7 +368,7 @@ Func UAI_AgentHasVisibleEffect($a_i_AgentID, $a_i_EffectType, $a_i_EffectID)
 	Next
 
 	Return False
-EndFunc
+EndFunc   ;==>UAI_AgentHasVisibleEffect
 
 ; ========== Public: Check if player has visible effect ==========
 Func UAI_PlayerHasVisibleEffect($a_i_EffectType, $a_i_EffectID)
@@ -381,14 +381,14 @@ Func UAI_PlayerHasVisibleEffect($a_i_EffectType, $a_i_EffectID)
 	Next
 
 	Return False
-EndFunc
+EndFunc   ;==>UAI_PlayerHasVisibleEffect
 
 ; ========== Public: Get visible effect info ==========
 Func UAI_GetAgentVisibleEffectInfo($a_i_AgentID)
 	Local $l_ai2_VisEffects[1][1] = [[0]]
 	Local $l_i_Index = UAI_GetIndexByID($a_i_AgentID)
 	If $l_i_Index = 0 Then Return $l_ai2_VisEffects
-	
+
 	Local $l_i_Count = $g_ai_VisEffectsCount[$l_i_Index]
 	ReDim $l_ai2_VisEffects[1 + $l_i_Count][3]
 	$l_ai2_VisEffects[0][0] = $l_i_Count
@@ -400,7 +400,7 @@ Func UAI_GetAgentVisibleEffectInfo($a_i_AgentID)
 	Next
 
 	Return $l_ai2_VisEffects
-EndFunc
+EndFunc   ;==>UAI_GetAgentVisibleEffectInfo
 
 ; ========== Public: Get player visible effect info ==========
 Func UAI_GetPlayerVisibleEffectInfo()
@@ -418,62 +418,63 @@ Func UAI_GetPlayerVisibleEffectInfo()
 	Next
 
 	Return $l_ai2_VisEffects
-EndFunc
+EndFunc   ;==>UAI_GetPlayerVisibleEffectInfo
 
 ; ========== Public: Get agent visible effect count ==========
 Func UAI_GetAgentVisibleEffectCount($a_i_AgentID)
 	Local $l_i_Index = UAI_GetIndexByID($a_i_AgentID)
 	If $l_i_Index = 0 Then Return 0
 	Return $g_ai_VisEffectsCount[$l_i_Index]
-EndFunc
+EndFunc   ;==>UAI_GetAgentVisibleEffectCount
 
 ; ========== Public: Get player visible effect count ==========
 Func UAI_GetPlayerVisibleEffectCount()
 	If $g_i_PlayerCacheIndex < 1 Then Return 0
 	Return $g_ai_VisEffectsCount[$g_i_PlayerCacheIndex]
-EndFunc
+EndFunc   ;==>UAI_GetPlayerVisibleEffectCount
 
 Func UAI_GetFeederEnchOnTop()
 	Local $l_i_MyID = UAI_GetPlayerInfo($GC_UAI_AGENT_ID)
-    If $l_i_MyID = 0 Then Return SetError(1, 0, False)
+	If $l_i_MyID = 0 Then Return SetError(1, 0, False)
 
-    Local $l_i_EffectCount = UAI_GetPlayerEffectCount()
-    If $l_i_EffectCount = 0 Then Return False
+	Local $l_i_EffectCount = UAI_GetPlayerEffectCount()
+	If $l_i_EffectCount = 0 Then Return False
 
 	Local $l_i_Index = UAI_GetPlayerIndex()
 
-    Local $l_i_Timestamp = 0
-    Local $l_i_SkillID = 0
+	Local $l_i_Timestamp = 0
+	Local $l_i_SkillID = 0
 
-    For $i = 0 To $l_i_EffectCount - 1
-        Local $l_i_CurrentSkillID = $g_amx3_EffectsCache[$l_i_Index][$i][$GC_UAI_BOND_SkillID]
+	For $i = 0 To $l_i_EffectCount - 1
+		Local $l_i_CurrentSkillID = $g_amx3_EffectsCache[$l_i_Index][$i][$GC_UAI_BOND_SkillID]
 		If $GC_AMX2_SKILL_DATA[$l_i_CurrentSkillID][$GC_I_SKILL_PROFESSION] <> $GC_I_PROFESSION_DERVISH Then ContinueLoop
-        If $GC_AMX2_SKILL_DATA[$l_i_CurrentSkillID][$GC_I_SKILL_TYPE] <> $GC_I_SKILL_TYPE_ENCHANTMENT Then ContinueLoop
+		If $GC_AMX2_SKILL_DATA[$l_i_CurrentSkillID][$GC_I_SKILL_TYPE] <> $GC_I_SKILL_TYPE_ENCHANTMENT Then ContinueLoop
 		Local $l_i_CurrentTimeStamp = $g_amx3_EffectsCache[$l_i_Index][$i][$GC_UAI_EFFECT_Timestamp]
-        If $l_i_CurrentTimeStamp > $l_i_Timestamp Then 
-            $l_i_Timestamp = $l_i_CurrentTimeStamp
-            $l_i_SkillID = $l_i_CurrentSkillID
-        EndIf
-    Next
+		If $l_i_CurrentTimeStamp > $l_i_Timestamp Then
+			$l_i_Timestamp = $l_i_CurrentTimeStamp
+			$l_i_SkillID = $l_i_CurrentSkillID
+		EndIf
+	Next
 
-    Local $l_ai_FeederEnchantmens[8] = [$GC_I_SKILL_ID_GRENTHS_FINGERS, $GC_I_SKILL_ID_AURA_OF_THORNS, _
-        $GC_I_SKILL_ID_BALTHAZARS_RAGE, $GC_I_SKILL_ID_DUST_CLOAK, $GC_I_SKILL_ID_STAGGERING_FORCE, _
-        $GC_I_SKILL_ID_PIOUS_RENEWAL, $GC_I_SKILL_ID_EREMITES_ZEAL, $GC_I_SKILL_ID_ZEALOUS_RENEWAL]
+	Local $l_ai_FeederEnchantmens[8] = [$GC_I_SKILL_ID_GRENTHS_FINGERS, $GC_I_SKILL_ID_AURA_OF_THORNS, _
+			$GC_I_SKILL_ID_BALTHAZARS_RAGE, $GC_I_SKILL_ID_DUST_CLOAK, $GC_I_SKILL_ID_STAGGERING_FORCE, _
+			$GC_I_SKILL_ID_PIOUS_RENEWAL, $GC_I_SKILL_ID_EREMITES_ZEAL, $GC_I_SKILL_ID_ZEALOUS_RENEWAL]
 
-    If $l_i_SkillID <> 0 And (_ArrayBinarySearch($l_ai_FeederEnchantmens, $l_i_SkillID)) >= 0 Then Return True
-    Return False
-EndFunc
+	If $l_i_SkillID <> 0 And (_ArrayBinarySearch($l_ai_FeederEnchantmens, $l_i_SkillID)) >= 0 Then Return True
+	Return False
+EndFunc   ;==>UAI_GetFeederEnchOnTop
 
 Func UAI_PlayerHasEffectType($a_s_EffectType = "")
 	Local $l_i_MyID = UAI_GetPlayerInfo($GC_UAI_AGENT_ID)
-    If $l_i_MyID = 0 Then Return SetError(1, 0, False)
+	If $l_i_MyID = 0 Then Return SetError(1, 0, False)
 
-    Local $l_i_EffectCount = UAI_GetPlayerEffectCount()
-    If $l_i_EffectCount = 0 Then Return False
+	Local $l_i_EffectCount = UAI_GetPlayerEffectCount()
+	If $l_i_EffectCount = 0 Then Return False
 
 	Local $l_i_Index = UAI_GetPlayerIndex()
 
 	Local $l_i_EffectType = ""
+
 	Switch $a_s_EffectType
 		Case "HasStance"
 			$l_i_EffectType = $GC_I_SKILL_TYPE_STANCE
@@ -485,13 +486,15 @@ Func UAI_PlayerHasEffectType($a_s_EffectType = "")
 			Return SetError(2, 0, False)
 	EndSwitch
 
-    For $i = ($l_i_EffectCount - 1) To 0 Step -1
+	If Not IsArray($g_amx3_EffectsCache) Then Return False
+	For $i = ($l_i_EffectCount - 1) To 0 Step -1
 		Local $l_i_CurrentSkillID = $g_amx3_EffectsCache[$l_i_Index][$i][$GC_UAI_BOND_SkillID]
+		If $l_i_CurrentSkillID <= 0 Or $l_i_CurrentSkillID >= UBound($GC_AMX2_SKILL_DATA) Then ContinueLoop
 		Local $l_i_SkillType = $GC_AMX2_SKILL_DATA[$l_i_CurrentSkillID][$GC_I_SKILL_TYPE]
 		If $l_i_SkillType = $l_i_EffectType Then
 			SetExtended($l_i_CurrentSkillID)
 			Return True
 		EndIf
-    Next
-    Return False
-EndFunc
+	Next
+	Return False
+EndFunc   ;==>UAI_PlayerHasEffectType
