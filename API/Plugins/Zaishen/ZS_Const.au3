@@ -333,6 +333,9 @@ Global $g_i_ZS_ExecSkill = 0
 Global $g_i_ZS_ExecTarget = 0
 Global $g_b_ZS_ExecIsRez = False
 Global $g_i_ZS_ExecTimeout = 0
+; Skill ID -> casts in a row the game did not start: from 2, the skill is set aside a while (disabled by a foe...)
+Global $g_m_ZS_NoCast[]
+Global $g_i_ZS_NoCastPause = 10000
 Global $g_i_ZS_AttackTarget = 0
 Global $g_i_ZS_AttackSince = 0
 Global $g_s_ZS_LastCommand = ""            ; last command issued, also filled in dry run (tests)

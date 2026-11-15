@@ -74,7 +74,7 @@ D:\AutoIt3\AutoIt3.exe /ErrorStdOut "API\Plugins\Zaishen\Tools\ZS_CoverageReport
 D:\AutoIt3\Au3Check.exe -q "API\Plugins\Zaishen\Tests\ZS_TestBench.au3"
 ```
 
-Résultats au 16/11/2026 : 218/218 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
+Résultats au 16/11/2026 : 220/220 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
 2 398 skills équipables, tous avec une famille (0 sans comportement).
 
 ## Historique des retours en jeu
@@ -224,6 +224,10 @@ Résultats au 16/11/2026 : 218/218 ; évaluation ≈ 18 ms pour 40 agents et une
     joueur marche vers la cible (jusqu'à 4 s de plus) ;
   - set en main du derviche non reconnu (objets tenus 661/0, set lu 661/662) : réglé par la
     reconnaissance sur l'arme seule (correction du 15/11).
+  - Psychic Instability (« no cast » x19) : c'est une interruption, classée en dégâts de zone faute de
+    drapeau dans les données ; elle ne part plus que sur un ennemi qui incante. Garde-fou général : un skill
+    que le jeu refuse 2 fois de suite est mis de côté 10 s ; le journal note alors le champ « disabled »
+    de la barre lu dans le jeu (skill désactivé par un ennemi ? cause à confirmer au prochain essai).
 
 ## Écarts par rapport au cahier des charges
 

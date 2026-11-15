@@ -264,6 +264,8 @@ Func ZS_LoadDefs_Audit()
 	ZS_DefineSkill($GC_I_SKILL_ID_CONCUSSION_SHOT, $GC_ZS_FAM_INTERRUPT, -1, "Only=Spell")
 	ZS_DefineSkill($GC_I_SKILL_ID_DISRUPTING_THROW, $GC_ZS_FAM_INTERRUPT, -1, "Need=Conditioned")
 	ZS_DefineSkill($GC_I_SKILL_ID_CRY_OF_PAIN, $GC_ZS_FAM_INTERRUPT, -1, "Need=|Prefer=Hexed")
+	; Interrupts any action, knocks down the foes around when it was a skill (was taken for area damage)
+	ZS_DefineSkill($GC_I_SKILL_ID_PSYCHIC_INSTABILITY, $GC_ZS_FAM_INTERRUPT, -1, "Need=")
 
 	; ===== Area damage: worth a pack, not one foe, and not foes on the run =====
 	ZS_DefineSkill($GC_I_SKILL_ID_METEOR_SHOWER, -1, -1, "MinFoes=2|Avoid=Moving")

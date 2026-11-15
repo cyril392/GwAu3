@@ -54,6 +54,9 @@ Func ZS_Evaluate()
 		$l_i_Family = $g_amx2_ZS_Slot[$l_i_Slot][$GC_ZS_S_Family]
 		If $l_i_Family = $GC_ZS_FAM_NONE Then ContinueLoop
 		If $l_s_EndsOn <> "" And ZS_Eval_WouldEnd($l_i_Slot, $l_s_EndsOn) Then ContinueLoop
+		; Set aside after the game refused it twice in a row (ZS_Exec_NoteNoCast)
+		Local $l_s_Aside = "skill:" & $g_amx2_ZS_Slot[$l_i_Slot][$GC_ZS_S_SkillID]
+		If MapExists($g_m_ZS_Recent, $l_s_Aside) And $g_m_ZS_Recent[$l_s_Aside] > $g_i_ZS_Now Then ContinueLoop
 		If ZS_Veto_Resources($l_i_Slot) <> "" Then ContinueLoop
 		ZS_Eval_Slot($l_i_Slot, $l_i_Family)
 	Next

@@ -188,6 +188,7 @@ Func ZS_Perception_ForgetTracking()
 	ZS_Hazard_Reset()
 	$g_i_ZS_MoveUntil = 0
 	$g_m_ZS_SeenProf = $l_m_Empty
+	$g_m_ZS_NoCast = $l_m_Empty
 EndFunc   ;==>ZS_Perception_ForgetTracking
 #EndRegion Build from the game
 

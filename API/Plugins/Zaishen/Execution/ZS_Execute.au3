@@ -75,6 +75,21 @@ Func ZS_Exec_TargetLost()
 	Return $l_b_Dead
 EndFunc   ;==>ZS_Exec_TargetLost
 
+;~ Description: The game did not start the skill of the slot. Twice in a row: something forbids it (disabled by a
+;~ foe skill, a condition Zaishen does not see...): set aside $g_i_ZS_NoCastPause ms instead of trying again and again.
+;~ The journal gets the bar's "disabled" field read from the game, to find out the cause.
+Func ZS_Exec_NoteNoCast($a_i_Slot)
+	Local $l_i_SkillID = $g_i_ZS_ExecSkill
+	Local $l_i_N = (MapExists($g_m_ZS_NoCast, $l_i_SkillID) ? $g_m_ZS_NoCast[$l_i_SkillID] : 0) + 1
+	$g_m_ZS_NoCast[$l_i_SkillID] = $l_i_N
+	If Not $g_b_ZS_DryRun And $g_h_GWProcess <> 0 Then ZS_Log_Event("not started: " & ZS_SkillName($l_i_SkillID) & " (slot " & $a_i_Slot & _
+			", bar disabled field 0x" & Hex(Skill_GetSkillbarInfo($a_i_Slot, "Disabled"), 8) & ", energy " & Round($g_f_ZS_Energy) & ")")
+	If $l_i_N >= 2 Then
+		$g_m_ZS_Recent["skill:" & $l_i_SkillID] = $g_i_ZS_Now + $g_i_ZS_NoCastPause
+		ZS_Log_Event(ZS_SkillName($l_i_SkillID) & " not started " & $l_i_N & " times in a row: set aside " & Round($g_i_ZS_NoCastPause / 1000) & " s")
+	EndIf
+EndFunc   ;==>ZS_Exec_NoteNoCast
+
 ;~ Description: Give up the running action; the pair may be tried again shortly.
 Func ZS_Exec_Abort($a_s_Reason, $a_b_SendCancel)
 	If $a_b_SendCancel Then ZS_Cmd_Cancel()
@@ -98,11 +113,15 @@ Func ZS_Execute()
 				$g_i_ZS_StatCancelled += 1
 				Return ZS_Exec_Abort("target lost before cast:", True)
 			EndIf
-			If $l_i_MySkill = $g_i_ZS_ExecSkill Then Return ZS_Exec_SetState($GC_ZS_ST_CASTING)
+			If $l_i_MySkill = $g_i_ZS_ExecSkill Then
+				If MapExists($g_m_ZS_NoCast, $g_i_ZS_ExecSkill) Then MapRemove($g_m_ZS_NoCast, $g_i_ZS_ExecSkill)
+				Return ZS_Exec_SetState($GC_ZS_ST_CASTING)
+			EndIf
 			; No activation seen but the skill is spent: it was instant
 			Local $l_b_Spent = Not $g_amx2_ZS_Slot[$l_i_Slot][$GC_ZS_S_Recharged]
 			If $g_amx2_ZS_Slot[$l_i_Slot][$GC_ZS_S_AdrenReq] > 0 Then $l_b_Spent = ($g_amx2_ZS_Slot[$l_i_Slot][$GC_ZS_S_Adrenaline] < $g_amx2_ZS_Slot[$l_i_Slot][$GC_ZS_S_AdrenReq])
 			If $l_b_Spent And $g_amx2_ZS_Slot[$l_i_Slot][$GC_ZS_S_SkillID] = $g_i_ZS_ExecSkill Then
+				If MapExists($g_m_ZS_NoCast, $g_i_ZS_ExecSkill) Then MapRemove($g_m_ZS_NoCast, $g_i_ZS_ExecSkill)
 				$g_i_ZS_StatCasts += 1
 				Return ZS_Exec_SetState($GC_ZS_ST_AFTERCAST)
 			EndIf
@@ -110,6 +129,7 @@ Func ZS_Execute()
 				; Still walking to the target (a range shorter than thought, a foe that moved): the game will cast on arrival
 				If ZS_Is($l_i_Me, $GC_ZS_AF_MOVING) And $l_i_Elapsed <= $g_i_ZS_ExecTimeout + 4000 Then Return
 				$g_i_ZS_StatTimeouts += 1
+				ZS_Exec_NoteNoCast($l_i_Slot)
 				Return ZS_Exec_Abort("no cast after " & $l_i_Elapsed & " ms:", False)
 			EndIf
 			Return
