@@ -618,6 +618,18 @@ Func ZS_Eval_OutOfCombat($a_i_Slot, $a_i_AgentID)
 	If $l_b_Speed And $a_i_AgentID <> $g_i_ZS_MyID And $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_TargetMask] <> $GC_ZS_TM_ALLY Then Return 0
 	If ZS_Eval_BuffState($a_i_Slot, $a_i_AgentID) < 0 Then Return 0
 	If $g_b_ZS_Explain Then $g_s_ZS_Why = ($l_b_Speed ? "out of combat: walking" : "out of combat: kept up")
+	; A party speed skill goes before a personal one, more so with more of us around to share it
+	If $l_b_Speed And ZS_IsGroupSpeed($a_i_Slot) Then
+		Local $l_f_Area = $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_AoE]
+		If $l_f_Area <= 0 Or $l_f_Area > $GC_I_RANGE_EARSHOT Then $l_f_Area = $GC_I_RANGE_EARSHOT
+		Local $l_i_With = 0
+		For $i = 1 To $g_ai_ZS_Allies[0]
+			If $g_amx2_ZS_Agent[$g_ai_ZS_Allies[$i]][$GC_ZS_A_Dist] <= $l_f_Area Then $l_i_With += 1
+		Next
+		If $l_i_With > 4 Then $l_i_With = 4
+		If $g_b_ZS_Explain Then $g_s_ZS_Why &= ", party speed for " & ($l_i_With + 1)
+		Return 0.45 + 0.05 * $l_i_With
+	EndIf
 	Return 0.4
 EndFunc   ;==>ZS_Eval_OutOfCombat
 

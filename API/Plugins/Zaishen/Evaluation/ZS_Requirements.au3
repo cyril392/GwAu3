@@ -143,6 +143,23 @@ Func ZS_CountOurSpirits($a_f_Range)
 	Return $l_i_N
 EndFunc   ;==>ZS_CountOurSpirits
 
+;~ Description: A speed effect on the player other than $a_i_Except (a skill whose definition says "Speed="), 0 when none.
+Func ZS_OtherSpeedOnMe($a_i_Except)
+	Local $l_av_Def
+	For $l_i_SkillID In MapKeys($g_m_ZS_SelfFx)
+		If $l_i_SkillID = $a_i_Except Or Not MapExists($g_m_ZS_Defs, $l_i_SkillID) Then ContinueLoop
+		$l_av_Def = $g_m_ZS_Defs[$l_i_SkillID]
+		If StringInStr("|" & $l_av_Def[3], "|Speed=") Then Return $l_i_SkillID
+	Next
+	Return 0
+EndFunc   ;==>ZS_OtherSpeedOnMe
+
+;~ Description: True for a speed skill that works on the party around the player (Incoming!, Fall Back!...).
+Func ZS_IsGroupSpeed($a_i_Slot)
+	If $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Family] = $GC_ZS_FAM_PARTY_BUFF Then Return True
+	Return $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_TargetMask] = $GC_ZS_TM_SELF And $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_AoE] >= $GC_I_RANGE_NEARBY
+EndFunc   ;==>ZS_IsGroupSpeed
+
 ;~ Description: Living allied minions within $a_f_Range of the player.
 Func ZS_CountMinions($a_f_Range)
 	Local $l_i_N = 0
@@ -218,6 +235,11 @@ Func ZS_Req_Slot($a_i_Slot)
 	; Speed=1: a speed skill, only worth it while the player walks; Speed=2: also used for its other effect
 	; in fights (Escape blocks), a speed skill out of combat only
 	If ZS_SlotParam($a_i_Slot, "Speed") = "1" And Not ZS_Is($g_i_ZS_MeIdx, $GC_ZS_AF_MOVING) Then Return "player not moving"
+	; Speed boosts do not add up: another one on the player (ours, or a party shout another bot gave) is enough
+	If ZS_SlotParam($a_i_Slot, "Speed") = "1" Then
+		Local $l_i_Other = ZS_OtherSpeedOnMe($g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_SkillID])
+		If $l_i_Other <> 0 Then Return "already sped up by " & ZS_SkillName($l_i_Other)
+	EndIf
 	$l_s_V = ZS_SlotParam($a_i_Slot, "SelfIsNot")
 	If $l_s_V <> "" And ZS_QualifiesList($g_i_ZS_MeIdx, $l_s_V, False) Then Return "player is " & $l_s_V
 	$l_s_V = ZS_SlotParam($a_i_Slot, "SpiritsNear")
