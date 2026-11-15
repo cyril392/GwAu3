@@ -51,7 +51,8 @@ Func ZS_Knowledge_LoadDefs()
 	ZS_DefineSkill($GC_I_SKILL_ID_CLUMSINESS, -1, -1, "Prefer=NotCaster,Attacking")
 	ZS_DefineSkill($GC_I_SKILL_ID_INEPTITUDE, -1, -1, "Prefer=NotCaster,Attacking")
 	ZS_DefineSkill($GC_I_SKILL_ID_WANDERING_EYE, -1, -1, "Prefer=NotCaster,Attacking")
-	ZS_DefineSkill($GC_I_SKILL_ID_EMPATHY, -1, -1, "Prefer=NotCaster,Attacking")
+	; Empathy only hurts a foe that attacks: never on one that is not attacking right now
+	ZS_DefineSkill($GC_I_SKILL_ID_EMPATHY, -1, -1, "Need=Attacking|Prefer=NotCaster")
 
 	; --- Hexes against skill users (from the game descriptions) ---
 	; Spells that fail when cast on one of OUR allies: offensive casters, the one casting first
