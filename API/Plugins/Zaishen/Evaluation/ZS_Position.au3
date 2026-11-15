@@ -226,7 +226,23 @@ Func ZS_Pos_EscapeFrom($a_i_H, ByRef $a_f_X, ByRef $a_f_Y)
 EndFunc   ;==>ZS_Pos_EscapeFrom
 
 ;~ Description: True when the player fights at range (bow, spear, wand or staff): it gains nothing in melee.
+;~ The build decides first, not the weapon in hand: a dervish or an assassin holding a staff for its energy,
+;~ or whose weapon is misread, is still a melee fighter.
 Func ZS_Pos_Ranged()
+	Local Const $l_i_Melee = BitOR($GC_I_SKILL_REQUIRE_AXE, $GC_I_SKILL_REQUIRE_DAGGER, $GC_I_SKILL_REQUIRE_HAMMER, _
+			$GC_I_SKILL_REQUIRE_SCYTHE, $GC_I_SKILL_REQUIRE_SWORD)
+	; Attack skills of a melee weapon on the bar
+	For $l_i_Slot = 1 To 8
+		If $g_amx2_ZS_Slot[$l_i_Slot][$GC_ZS_S_SkillID] = 0 Or $g_amx2_ZS_Slot[$l_i_Slot][$GC_ZS_S_Type] <> $GC_I_SKILL_TYPE_ATTACK Then ContinueLoop
+		If BitAND($g_amx2_ZS_Slot[$l_i_Slot][$GC_ZS_S_WeaponReq], $l_i_Melee) Then Return False
+	Next
+	; The home weapon set is a melee weapon
+	If $g_i_ZS_HomeSet > 0 And BitAND($g_amx2_ZS_WSet[$g_i_ZS_HomeSet][$GC_ZS_W_Bit], $l_i_Melee) Then Return False
+	; A melee profession with nothing else to tell
+	Switch $g_amx2_ZS_Agent[$g_i_ZS_MeIdx][$GC_ZS_A_Primary]
+		Case $GC_I_PROFESSION_WARRIOR, $GC_I_PROFESSION_ASSASSIN, $GC_I_PROFESSION_DERVISH
+			Return False
+	EndSwitch
 	Switch $g_amx2_ZS_Agent[$g_i_ZS_MeIdx][$GC_ZS_A_WeaponType]
 		Case $GC_I_WEAPON_TYPE_AXE, $GC_I_WEAPON_TYPE_HAMMER, $GC_I_WEAPON_TYPE_DAGGERS, $GC_I_WEAPON_TYPE_SCYTHE, $GC_I_WEAPON_TYPE_SWORD
 			Return False

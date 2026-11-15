@@ -74,7 +74,7 @@ D:\AutoIt3\AutoIt3.exe /ErrorStdOut "API\Plugins\Zaishen\Tools\ZS_CoverageReport
 D:\AutoIt3\Au3Check.exe -q "API\Plugins\Zaishen\Tests\ZS_TestBench.au3"
 ```
 
-Résultats au 15/11/2026 : 215/215 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
+Résultats au 15/11/2026 : 217/217 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
 2 398 skills équipables, tous avec une famille (0 sans comportement).
 
 ## Historique des retours en jeu
@@ -206,6 +206,14 @@ Résultats au 15/11/2026 : 215/215 ; évaluation ≈ 18 ms pour 40 agents et une
   **Vitesse perso hors combat** (`$g_i_ZS_SoloSpeed`, menu « Solo speed » du Follower) : Auto (défaut) =
   seulement seul ou pour rattraper le groupe (allié le plus proche à plus de 900), pour qu'un bot ne
   distance jamais les autres ; Never ; Always (bot de run solo). En combat : inchangé.
+- 15/11 — **1er essai en jeu** (assassin + derviche) :
+  - l'assassin au bâton ne passait pas aux dagues : le set en main n'était pas reconnu (ID d'objet lus
+    sur 16 bits signés côté agent, 32 bits côté inventaire) et un set inconnu interdisait tout switch.
+    Comparaison sur les 16 bits bas ; un switch nécessaire (arme d'une attaque) reste permis même si le
+    set en main est inconnu ; sets lus et objets tenus écrits dans le journal à chaque instance ;
+  - le derviche revenait vers le leader entre ses sorts : il était pris pour un personnage à distance
+    (arme tenue seule) et reculait au contact. Le build décide maintenant (attaques de mêlée sur la barre,
+    set maison de mêlée, guerrier / assassin / derviche) avant l'arme tenue.
 
 ## Écarts par rapport au cahier des charges
 

@@ -84,8 +84,11 @@ EndFunc   ;==>ZS_Weapon_ParseMods
 
 ;~ Description: Find the set in hand from the items held. Called by ZS_Perceive every tick (no memory read).
 Func ZS_Weapon_Perceive($a_i_WeaponID, $a_i_OffhandID, $a_b_NewInstance)
-	If $a_b_NewInstance Or $g_i_ZS_SetsReadAt < 0 Then ZS_Weapon_ReadSets()
+	Local $l_b_Read = ($a_b_NewInstance Or $g_i_ZS_SetsReadAt < 0)
+	If $l_b_Read Then ZS_Weapon_ReadSets()
 	$g_i_ZS_ActiveSet = ZS_Weapon_FindActive($a_i_WeaponID, $a_i_OffhandID)
+	; What was read, in the journal: checks the sets and the item IDs in game
+	If $l_b_Read Then ZS_Log_Event("weapon sets (held items " & $a_i_WeaponID & "/" & $a_i_OffhandID & "): " & StringReplace(ZS_Weapon_Describe(), @CRLF, " |"))
 	; Items changed since the sets were read (the player swapped a weapon): read again, not too often
 	If $g_i_ZS_ActiveSet = 0 And ($a_i_WeaponID <> 0 Or $a_i_OffhandID <> 0) And $g_i_ZS_Now - $g_i_ZS_SetsReadAt > 3000 Then
 		ZS_Weapon_ReadSets()
@@ -94,13 +97,29 @@ Func ZS_Weapon_Perceive($a_i_WeaponID, $a_i_OffhandID, $a_b_NewInstance)
 	If $g_i_ZS_SwitchTo <> 0 And ($g_i_ZS_ActiveSet = $g_i_ZS_SwitchTo Or $g_i_ZS_Now > $g_i_ZS_SwitchUntil) Then $g_i_ZS_SwitchTo = 0
 EndFunc   ;==>ZS_Weapon_Perceive
 
+;~ The agent keeps the item IDs on 16 bits (read signed: above 32767 they come negative), the inventory on 32:
+;~ both are compared on their low 16 bits. A set whose weapon matches wins over one that only matches the off-hand.
 Func ZS_Weapon_FindActive($a_i_WeaponID, $a_i_OffhandID)
+	Local $l_i_W = BitAND($a_i_WeaponID, 0xFFFF), $l_i_O = BitAND($a_i_OffhandID, 0xFFFF), $l_i_WeaponOnly = 0, $l_i_OffOnly = 0
 	For $l_i_Set = 1 To 4
 		If Not $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_Present] Then ContinueLoop
-		If $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_WeaponID] = $a_i_WeaponID And $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_OffhandID] = $a_i_OffhandID Then Return $l_i_Set
+		Local $l_b_W = (BitAND($g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_WeaponID], 0xFFFF) = $l_i_W)
+		Local $l_b_O = (BitAND($g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_OffhandID], 0xFFFF) = $l_i_O)
+		If $l_b_W And $l_b_O Then Return $l_i_Set
+		If $l_b_W And $l_i_W <> 0 And $l_i_WeaponOnly = 0 Then $l_i_WeaponOnly = $l_i_Set
+		If $l_b_O And $l_i_O <> 0 And $l_i_OffOnly = 0 Then $l_i_OffOnly = $l_i_Set
 	Next
-	Return 0
+	If $l_i_WeaponOnly <> 0 Then Return $l_i_WeaponOnly
+	Return $l_i_OffOnly
 EndFunc   ;==>ZS_Weapon_FindActive
+
+;~ Description: True when at least one weapon set was read.
+Func ZS_Weapon_AnySet()
+	For $l_i_Set = 1 To 4
+		If $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_Present] Then Return True
+	Next
+	Return False
+EndFunc   ;==>ZS_Weapon_AnySet
 
 ;~ Description: Forget the sets and the switch history (tests, reset).
 Func ZS_Weapon_Reset()
@@ -122,7 +141,8 @@ Func ZS_Weapon_Describe()
 	Local $l_s = "home " & $g_i_ZS_HomeSet & ", in hand " & $g_i_ZS_ActiveSet
 	For $l_i_Set = 1 To 4
 		If Not $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_Present] Then ContinueLoop
-		$l_s &= @CRLF & "  set " & $l_i_Set & ": item type " & $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_ItemType] & "/" & $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_OffhandType] & _
+		$l_s &= @CRLF & "  set " & $l_i_Set & ": items " & $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_WeaponID] & "/" & $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_OffhandID] & _
+				", item type " & $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_ItemType] & "/" & $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_OffhandType] & _
 				", energy " & $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_EFlat] & " (now " & ZS_Weapon_Bonus($l_i_Set) & ")" & _
 				", enchant +" & $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_Ench] & "%, HCT " & $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_HCT] & _
 				"%, HSR " & $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_HSR] & "%"
@@ -191,7 +211,6 @@ EndFunc   ;==>ZS_Weapon_IsFighter
 ;~ otherwise the set with the most energy; the set in hand wins ties.
 Func ZS_Weapon_ComputeHome()
 	$g_i_ZS_HomeSet = 0
-	If $g_i_ZS_ActiveSet = 0 Then Return
 	If $g_i_ZS_HomeSetForced >= 1 And $g_i_ZS_HomeSetForced <= 4 And $g_amx2_ZS_WSet[$g_i_ZS_HomeSetForced][$GC_ZS_W_Present] Then
 		$g_i_ZS_HomeSet = $g_i_ZS_HomeSetForced
 		Return
@@ -219,7 +238,9 @@ EndFunc   ;==>ZS_Weapon_ComputeHome
 
 ;~ Description: True when a switch may be sent now. An optional switch (comfort, not need) is stricter.
 Func ZS_Weapon_CanSwitch($a_b_Optional)
-	If Not $g_b_ZS_WeaponSwap Or $g_i_ZS_ActiveSet = 0 Then Return False
+	If Not $g_b_ZS_WeaponSwap Then Return False
+	; Set in hand not recognised: only a needed switch (the weapon of an attack), never a comfort one
+	If $g_i_ZS_ActiveSet = 0 And ($a_b_Optional Or Not ZS_Weapon_AnySet()) Then Return False
 	If $g_i_ZS_Now < $g_i_ZS_SwitchFrozenUntil Then Return False
 	Local $l_i_Last = $g_ai_ZS_SwitchTimes[3]
 	If $a_b_Optional Then
@@ -274,9 +295,8 @@ EndFunc   ;==>ZS_Weapon_AttackReady
 
 ;~ Description: Set holding a weapon of requirement mask $a_i_Req (home first, then the one in hand), 0 = none.
 Func ZS_Weapon_SetWithBit($a_i_Req)
-	If $g_i_ZS_ActiveSet = 0 Then Return 0
 	If $g_i_ZS_HomeSet > 0 And BitAND($a_i_Req, $g_amx2_ZS_WSet[$g_i_ZS_HomeSet][$GC_ZS_W_Bit]) Then Return $g_i_ZS_HomeSet
-	If BitAND($a_i_Req, $g_amx2_ZS_WSet[$g_i_ZS_ActiveSet][$GC_ZS_W_Bit]) Then Return $g_i_ZS_ActiveSet
+	If $g_i_ZS_ActiveSet > 0 And BitAND($a_i_Req, $g_amx2_ZS_WSet[$g_i_ZS_ActiveSet][$GC_ZS_W_Bit]) Then Return $g_i_ZS_ActiveSet
 	For $l_i_Set = 1 To 4
 		If $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_Present] And BitAND($a_i_Req, $g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_Bit]) Then Return $l_i_Set
 	Next
@@ -312,7 +332,7 @@ EndFunc   ;==>ZS_Weapon_BorrowOK
 ;~ Description: Set wanted for using the skill of a slot (0 = the one in hand). $g_s_ZS_WeaponWhy says why.
 Func ZS_Weapon_ForSkill($a_i_Slot, $a_b_OnOther = True)
 	$g_s_ZS_WeaponWhy = ""
-	If $g_i_ZS_ActiveSet = 0 Or Not $g_b_ZS_WeaponSwap Then Return 0
+	If Not $g_b_ZS_WeaponSwap Then Return 0
 	Local $l_i_Set
 	If $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Type] = $GC_I_SKILL_TYPE_ATTACK Then
 		Local $l_i_Req = $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_WeaponReq]
@@ -321,6 +341,7 @@ Func ZS_Weapon_ForSkill($a_i_Slot, $a_b_OnOther = True)
 		If $l_i_Set > 0 Then $g_s_ZS_WeaponWhy = "weapon of set " & $l_i_Set
 		Return $l_i_Set
 	EndIf
+	If $g_i_ZS_ActiveSet = 0 Then Return 0 ; energy and enchantment need to know the set in hand
 
 	; Not enough energy in hand: borrow it from another set
 	Local $l_f_Cost = ZS_Cost_Energy($a_i_Slot, $a_b_OnOther)
