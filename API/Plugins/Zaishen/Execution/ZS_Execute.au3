@@ -37,6 +37,12 @@ Func ZS_Cmd_SwitchSet($a_i_Set)
 	Core_PerformAction($GC_I_CONTROL_INVENTORY_ACTIVATE_WEAPON_SET_1 + $a_i_Set - 1, $GC_I_CONTROL_TYPE_ACTIVATE)
 EndFunc   ;==>ZS_Cmd_SwitchSet
 
+Func ZS_Cmd_Move($a_f_X, $a_f_Y)
+	$g_s_ZS_LastCommand = "Move " & Round($a_f_X) & "," & Round($a_f_Y)
+	If $g_b_ZS_DryRun Then Return
+	Map_Move($a_f_X, $a_f_Y, 0)
+EndFunc   ;==>ZS_Cmd_Move
+
 Func ZS_Cmd_Cancel()
 	$g_s_ZS_LastCommand = "Cancel"
 	If $g_b_ZS_DryRun Then Return
@@ -143,8 +149,35 @@ Func ZS_Execute()
 			$g_m_ZS_Recent["endbuff"] = $g_i_ZS_Now + 1500 + $g_i_ZS_Ping
 			ZS_Log_Decision()
 			ZS_Cmd_EndBuff($g_amx2_ZS_Slot[$g_av_ZS_Decision[$GC_ZS_D_Slot]][$GC_ZS_S_SkillID])
+		Case $GC_ZS_ACT_MOVE
+			ZS_Exec_Move()
 	EndSwitch
 EndFunc   ;==>ZS_Execute
+
+;~ Description: Walk to the destination of the decision. Stays Idle: the move goes on by itself, and is offered
+;~ again each tick until reached (ZS_Eval_Position), so the order is only sent again when it changed or got lost.
+Func ZS_Exec_Move()
+	Local $l_f_X = $g_av_ZS_Decision[$GC_ZS_D_X], $l_f_Y = $g_av_ZS_Decision[$GC_ZS_D_Y]
+	Local $l_b_Same = ($g_i_ZS_MoveUntil > $g_i_ZS_Now And ZS_Pos_Dist($l_f_X, $l_f_Y, $g_f_ZS_MoveX, $g_f_ZS_MoveY) < 60)
+	If $l_b_Same And $g_i_ZS_Now - $g_i_ZS_MoveSentAt < 1000 Then Return
+	If Not $l_b_Same Then
+		; A new move: until when it may take, then the step back cooldown
+		Local $l_f_Dist = ZS_Pos_Dist($l_f_X, $l_f_Y, $g_amx2_ZS_Agent[$g_i_ZS_MeIdx][$GC_ZS_A_X], $g_amx2_ZS_Agent[$g_i_ZS_MeIdx][$GC_ZS_A_Y])
+		Local $l_i_Ms = Int($l_f_Dist / $g_f_ZS_WalkSpeed) + 800
+		If $l_i_Ms > 5000 Then $l_i_Ms = 5000
+		$g_f_ZS_MoveX = $l_f_X
+		$g_f_ZS_MoveY = $l_f_Y
+		$g_i_ZS_MoveUntil = $g_i_ZS_Now + $l_i_Ms
+		$g_i_ZS_MoveBand = $g_av_ZS_Decision[$GC_ZS_D_Band]
+		$g_f_ZS_MoveU = $g_av_ZS_Decision[$GC_ZS_D_Utility]
+		$g_s_ZS_MoveWhy = StringRegExpReplace($g_av_ZS_Decision[$GC_ZS_D_Why], "^keep moving: ", "")
+		If StringLeft($g_s_ZS_MoveWhy, 9) = "step back" Then $g_m_ZS_Recent["backoff"] = $g_i_ZS_Now + $l_i_Ms + $g_i_ZS_BackOffCooldown
+		$g_i_ZS_StatMoves += 1
+		ZS_Log_Decision()
+	EndIf
+	$g_i_ZS_MoveSentAt = $g_i_ZS_Now
+	ZS_Cmd_Move($l_f_X, $l_f_Y)
+EndFunc   ;==>ZS_Exec_Move
 
 ;~ Description: True when the decided action waits for a weapon set (switch sent now, or on its way).
 ;~ In dry run the switch is only written in the journal and the action goes on.

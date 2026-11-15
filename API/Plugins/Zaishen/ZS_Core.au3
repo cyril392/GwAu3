@@ -75,7 +75,7 @@ EndFunc   ;==>ZS_Reset
 Func ZS_Stats()
 	Local $l_f_Avg = ($g_i_ZS_StatTicks > 0 ? $g_f_ZS_StatTickMsSum / $g_i_ZS_StatTicks : 0)
 	Return "ticks " & $g_i_ZS_StatTicks & ", avg " & Round($l_f_Avg, 1) & " ms, max " & Round($g_f_ZS_StatTickMsMax, 1) & " ms, casts " & _
-			$g_i_ZS_StatCasts & ", cancelled " & $g_i_ZS_StatCancelled & ", timeouts " & $g_i_ZS_StatTimeouts & ", weapon switches " & $g_i_ZS_StatSwitches
+			$g_i_ZS_StatCasts & ", cancelled " & $g_i_ZS_StatCancelled & ", timeouts " & $g_i_ZS_StatTimeouts & ", weapon switches " & $g_i_ZS_StatSwitches & ", moves " & $g_i_ZS_StatMoves
 EndFunc   ;==>ZS_Stats
 #EndRegion Public
 
@@ -98,6 +98,8 @@ Func ZS_Describe($a_i_Rank)
 	ElseIf $g_amx2_ZS_Top[$a_i_Rank][$GC_ZS_D_Action] = $GC_ZS_ACT_ENDBUFF Then
 		Local $l_i_EndSlot = $g_amx2_ZS_Top[$a_i_Rank][$GC_ZS_D_Slot]
 		$l_s_What = "end s" & $l_i_EndSlot & " " & ZS_SkillName($g_amx2_ZS_Slot[$l_i_EndSlot][$GC_ZS_S_SkillID])
+	ElseIf $g_amx2_ZS_Top[$a_i_Rank][$GC_ZS_D_Action] = $GC_ZS_ACT_MOVE Then
+		$l_s_What = "move to " & Round($g_amx2_ZS_Top[$a_i_Rank][$GC_ZS_D_X]) & "," & Round($g_amx2_ZS_Top[$a_i_Rank][$GC_ZS_D_Y])
 	ElseIf $g_amx2_ZS_Top[$a_i_Rank][$GC_ZS_D_Action] = $GC_ZS_ACT_SKILL Then
 		Local $l_i_Slot = $g_amx2_ZS_Top[$a_i_Rank][$GC_ZS_D_Slot]
 		$l_s_What = "s" & $l_i_Slot & " " & ZS_SkillName($g_amx2_ZS_Slot[$l_i_Slot][$GC_ZS_S_SkillID]) & _

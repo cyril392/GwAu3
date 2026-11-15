@@ -260,7 +260,8 @@ Global Const $GC_AS_ZS_BANDNAMES[$GC_ZS_BAND_COUNT] = ["Idle", "Damage", "Upkeep
 
 #Region Decision
 ; DROP = drop the bundle of the slot ; ENDBUFF = end the enchantment of the slot the player keeps up (Unyielding Aura)
-Global Enum $GC_ZS_ACT_NONE, $GC_ZS_ACT_SKILL, $GC_ZS_ACT_ATTACK, $GC_ZS_ACT_DROP, $GC_ZS_ACT_ENDBUFF
+; MOVE = walk to ($GC_ZS_D_X, $GC_ZS_D_Y): leave a damaging area, step back from melee foes...
+Global Enum $GC_ZS_ACT_NONE, $GC_ZS_ACT_SKILL, $GC_ZS_ACT_ATTACK, $GC_ZS_ACT_DROP, $GC_ZS_ACT_ENDBUFF, $GC_ZS_ACT_MOVE
 
 ; Columns of a decision / candidate row
 Global Enum $GC_ZS_D_Action, _
@@ -270,6 +271,8 @@ Global Enum $GC_ZS_D_Action, _
 	$GC_ZS_D_Utility, _
 	$GC_ZS_D_Score, _         ; band * 10 + utility
 	$GC_ZS_D_Why, _           ; filled when $g_b_ZS_Explain
+	$GC_ZS_D_X, _             ; destination of a MOVE
+	$GC_ZS_D_Y, _
 	$GC_ZS_D_COUNT
 
 Global Const $GC_ZS_TOPN = 5
@@ -286,6 +289,25 @@ Global $g_m_ZS_FoeDanger[]                  ; foe skill ID -> value of interrupt
 Global $g_i_ZS_LastFoeTarget = 0                  ; target of the previous foe action (inertia)
 Global $g_m_ZS_Recent[]                           ; "skillID:agentID" -> ms until which the pair is not recast
 #EndRegion Decision
+
+#Region Positioning
+; Zaishen moves the player during a fight: out of a damaging area, back from melee foes (casters), to a dead
+; ally with a resurrecting urn. Off with False: the player then only moves to reach its targets (the game does it).
+Global $g_b_ZS_Positioning = True
+Global $g_i_ZS_BackOffCooldown = 4000      ; ms between two steps back from melee foes
+Global $g_f_ZS_BackOffStep = 400           ; length of a step back
+Global $g_f_ZS_WalkSpeed = 0.28            ; units per ms (normal walking speed)
+; Damaging areas foes put on the ground (Fire Storm, Maelstrom...): [i][x, y, radius, untilMs, skillID]
+Global Enum $GC_ZS_HZ_X, $GC_ZS_HZ_Y, $GC_ZS_HZ_R, $GC_ZS_HZ_Until, $GC_ZS_HZ_Skill, $GC_ZS_HZ_COUNT
+Global $g_amx2_ZS_Hazard[1][$GC_ZS_HZ_COUNT]
+Global $g_i_ZS_HazardCount = 0
+Global $g_m_ZS_HazCast[]                   ; foe agentID -> [skillID, aimX, aimY, startMs] while it casts an area spell
+Global $g_m_ZS_HazSkill[]                  ; skill ID -> True/False: leaves a damaging area on the ground (cache)
+; The move being made: kept until reached or timed out, so a lesser action does not stop it halfway
+Global $g_f_ZS_MoveX = 0, $g_f_ZS_MoveY = 0, $g_i_ZS_MoveUntil = 0, $g_i_ZS_MoveBand = 0, $g_f_ZS_MoveU = 0
+Global $g_s_ZS_MoveWhy = "", $g_i_ZS_MoveSentAt = -100000
+Global $g_i_ZS_StatMoves = 0
+#EndRegion Positioning
 
 #Region Execution
 Global Enum $GC_ZS_ST_IDLE, _       ; free to start an action

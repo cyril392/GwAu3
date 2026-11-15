@@ -14,6 +14,7 @@
 ;   F|agentID|skillID|remainMs|casterID|attributeLevel|ageMs      remainMs empty = kept up (maintained)
 ;        ageMs: ms since applied (smallest = newest); empty = in file order, the last line being the newest
 ;   B|skillID|agentID            the spirit that ritual created (bound while playing)
+;   H|x|y|radius|remainMs|skillID   a damaging area a foe put on the ground
 ;   N|skillID|targetID           an enchantment the player keeps up (bond), on that target
 ;   W|set|itemType|offhandType|energy|energyEnchanted|energyHexed|energyHPAbove|hpAboveThr|energyHPBelow|hpBelowThr|enchant%|hct%|hsr%
 ;        a weapon set (1..4); item types as GwAu3_Const_Item ($GC_I_TYPE_*); the set in hand is M|wset=n
@@ -97,6 +98,9 @@ Func ZS_Snapshot_Load($a_s_File)
 
 			Case "B"
 				$g_m_ZS_SpiritOf[Int($l_as_P[1])] = Int($l_as_P[2])
+
+			Case "H"
+				ZS_Hazard_Add(Number($l_as_P[1]), Number($l_as_P[2]), Int($l_as_P[5]), Int($l_as_P[4]), Number($l_as_P[3]))
 
 			Case "W"
 				Local $l_i_Set = Int($l_as_P[1])
@@ -275,6 +279,11 @@ Func ZS_Snapshot_Save($a_s_File, $a_s_Comment = "")
 	Next
 	For $l_i_Skill In MapKeys($g_m_ZS_SpiritOf)
 		FileWriteLine($l_h_File, "B|" & $l_i_Skill & "|" & $g_m_ZS_SpiritOf[$l_i_Skill])
+	Next
+	For $i = 0 To $g_i_ZS_HazardCount - 1
+		FileWriteLine($l_h_File, "H|" & Round($g_amx2_ZS_Hazard[$i][$GC_ZS_HZ_X]) & "|" & Round($g_amx2_ZS_Hazard[$i][$GC_ZS_HZ_Y]) & "|" & _
+				Round($g_amx2_ZS_Hazard[$i][$GC_ZS_HZ_R]) & "|" & ($g_amx2_ZS_Hazard[$i][$GC_ZS_HZ_Until] - $g_i_ZS_Now) & "|" & _
+				$g_amx2_ZS_Hazard[$i][$GC_ZS_HZ_Skill] & "   # " & ZS_SkillName($g_amx2_ZS_Hazard[$i][$GC_ZS_HZ_Skill]))
 	Next
 	For $i = 1 To $g_i_ZS_AgentCount
 		FileWriteLine($l_h_File, "A|" & $g_amx2_ZS_Agent[$i][$GC_ZS_A_ID] & "|" & Round($g_amx2_ZS_Agent[$i][$GC_ZS_A_X]) & "|" & Round($g_amx2_ZS_Agent[$i][$GC_ZS_A_Y]) & _

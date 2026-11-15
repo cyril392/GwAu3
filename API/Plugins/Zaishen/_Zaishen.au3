@@ -16,6 +16,7 @@
 #include "Evaluation/ZS_Requirements.au3"
 #include "Evaluation/ZS_Evaluate.au3"
 #include "Evaluation/ZS_Dervish.au3"
+#include "Evaluation/ZS_Position.au3"
 #include "Equipment/ZS_Weapons.au3"
 #include "Execution/ZS_Execute.au3"
 #include "ZS_Core.au3"

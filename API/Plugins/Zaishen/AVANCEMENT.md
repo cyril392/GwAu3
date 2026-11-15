@@ -74,7 +74,7 @@ D:\AutoIt3\AutoIt3.exe /ErrorStdOut "API\Plugins\Zaishen\Tools\ZS_CoverageReport
 D:\AutoIt3\Au3Check.exe -q "API\Plugins\Zaishen\Tests\ZS_TestBench.au3"
 ```
 
-Résultats au 15/11/2026 : 194/194 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
+Résultats au 15/11/2026 : 205/205 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
 2 398 skills équipables, tous avec une famille (0 sans comportement).
 
 ## Historique des retours en jeu
@@ -179,6 +179,18 @@ Résultats au 15/11/2026 : 194/194 ; évaluation ≈ 18 ms pour 40 agents et une
     Charging Strike...), `MinionsNear=`, `Spread=1` (maléfices qui s'étendent), `EndFor=LowHealth`
     (Aura of Displacement), qualificatifs `PetAlive/PetDead/PetHurt`, `NotEnchanted`, `NotBlind` ;
     `Need=/Avoid=` jugent aussi le joueur pour un buff qui peut viser un allié.
+- 15/11 — **positionnement en combat** (`Evaluation/ZS_Position.au3`) : un déplacement est un candidat
+  comme les skills (action `MOVE`), il ne part que s'il vaut plus que le reste :
+  - **zones de dégâts au sol** (Fire Storm, Meteor Shower, Maelstrom, Chaos Storm, Searing Heat, Bed of
+    Coals, Eruption, Savannah Heat, Sandstorm, Lightning Storm, Churning Earth, versions de monstres
+    comprises) : un ennemi vu en train de les lancer vers l'un de nous laisse, quand le sort aboutit, une
+    zone là où se tenait la cible ; si le joueur y est pour encore plus d'1 s, il en sort (bande Survie),
+    du côté du groupe, sans entrer dans une autre zone ;
+  - **recul** d'un joueur à distance (arc, lance, baguette, bâton) frappé au corps à corps : un pas de 400
+    vers le groupe, en gardant un ennemi à portée de sort, au plus toutes les 4 s ; un soin urgent passe avant ;
+  - **urne qui ressuscite** : aller jusqu'à l'allié mort hors de sa zone ;
+  - un déplacement commencé continue jusqu'au bout (une action moins importante ne l'arrête pas) ;
+  - case « Move in fights » dans le Follower (`$g_b_ZS_Positioning`) ; ligne `H|` des snapshots.
 
 ## Écarts par rapport au cahier des charges
 
@@ -204,6 +216,8 @@ Résultats au 15/11/2026 : 194/194 ; évaluation ≈ 18 ms pour 40 agents et une
 - **Familier** (`Party_GetPetInfo` : propriétaire = nous) et **rangs d'attribut** pour les durées
   (`Attribute_GetPartyAttributeInfo`, aussi pour les attributs PvE qui peuvent revenir à 0).
 - Comfort Animal ressuscite-t-il bien un familier mort (version actuelle du skill) ?
+- **Déplacements** (`Map_Move`) : le joueur sort bien des zones et recule sans tourner en rond ; vitesse
+  de marche supposée 0,28 unité/ms ; rayon des zones = celui de la table (Fire Storm 156).
 
 - **Mods d'armes** : identifiants déduits des tables d'UtilityAI (`C867` énergie de base des armes de
   caster, `D822` énergie +N, `B820` énergie −N, `F822`/`2823`/`0823`/`1823` énergie conditionnelle,
@@ -253,7 +267,11 @@ Résultats au 15/11/2026 : 194/194 ; évaluation ≈ 18 ms pour 40 agents et une
   bloquant jusqu'à 3 s) ; il attend que la condition soit remplie là où il est.
 - Effets de coût portés tels quels depuis UtilityAI ; Healer's Covenant et Expert Focus utilisent la
   force de l'effet à son niveau d'attribut (à vérifier sur quelques cas).
-- Aucune gestion de la portée d'aggro des groupes non engagés.
+- Aucune gestion de la portée d'aggro des groupes non engagés ; pas de fuite face à un groupe trop fort
+  (demande la carte et un chemin) ; pas de « kiting ».
+- Zones de dégâts : seules celles lancées **pendant que Zaishen regarde** sont connues (pas celles posées
+  avant, ni les puits ennemis dont le cadavre est inconnu) ; centre = l'allié que l'ennemi regardait.
+  Les esprits ennemis ne sont pas évités (ils se tuent).
 - La menace (`ZS_Threat`) combine : ennemis au contact (< 300), ennemis à distance qui attaquent ou
   incantent **orientés** vers la cible (`ZS_AimOf` attribue chaque ennemi à celui d'entre nous qu'il
   vise le mieux), et **vie perdue par seconde** (`ZS_Perception_TrackDamage`, lissée sur ~1 s).

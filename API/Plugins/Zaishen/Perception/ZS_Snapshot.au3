@@ -185,6 +185,8 @@ Func ZS_Perception_ForgetTracking()
 	$g_i_ZS_LastFoeTarget = 0
 	$g_i_ZS_AttackTarget = 0
 	$g_i_ZS_CalledTarget = 0
+	ZS_Hazard_Reset()
+	$g_i_ZS_MoveUntil = 0
 EndFunc   ;==>ZS_Perception_ForgetTracking
 #EndRegion Build from the game
 
@@ -254,6 +256,7 @@ Func ZS_Snapshot_Finalize()
 	$g_i_ZS_MaintainedCount = $g_i_ZS_BondCount
 
 	ZS_Snapshot_TrackSpirits()
+	ZS_Hazard_Update()
 	$g_b_ZS_InCombat = ZS_Snapshot_DetectCombat()
 	ZS_Weapon_ComputeHome()
 	Return True

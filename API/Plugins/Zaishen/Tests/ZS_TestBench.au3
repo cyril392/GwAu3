@@ -17,6 +17,7 @@ $g_b_ZS_Explain = True
 
 Bench_Classification()
 Bench_DamageTracking()
+Bench_Hazards()
 Bench_Scenarios()
 Bench_StateMachine()
 Bench_Speed()
@@ -121,6 +122,39 @@ Func Bench_DamageTracking()
 EndFunc   ;==>Bench_DamageTracking
 #EndRegion 1b) damage tracking
 
+#Region 1c) damaging areas
+;~ Description: A foe casting Fire Storm at the player: when the cast completes, an area appears where the player
+;~ stood and the player walks out of it. An interrupted cast leaves nothing.
+Func Bench_Hazards()
+	Bench_Line("")
+	Bench_Line("== Damaging areas (two ticks) ==")
+	Local $l_s_File = @TempDir & "\zs_bench_hazard.zs"
+	Local $l_h = FileOpen($l_s_File, 2)
+	FileWrite($l_h, "M|now=1000|ping=80|myid=1|energy=30|maxenergy=40" & @CRLF & _
+			"S|1|194" & @CRLF & _
+			"A|1|0|0|0.9|480|0|ally|player|0|0|6|0|0|12" & @CRLF & _
+			"A|10|700|0|1|0|0|foe|-|197|1500|6|0|0|0|0|0|-1|0" & @CRLF) ; Fire Storm, 1.5 s into its 2 s, facing the player
+	FileClose($l_h)
+	For $l_i_Case = 1 To 2
+		ZS_Snapshot_Load($l_s_File)
+		Bench_Check(MapExists($g_m_ZS_HazCast, 10), "cast " & $l_i_Case & ": Fire Storm at the player followed")
+		; next tick: the cast is over (completed in case 1, cut by a knockdown in case 2)
+		$g_i_ZS_Now += 600
+		$g_amx2_ZS_Agent[2][$GC_ZS_A_Skill] = 0
+		If $l_i_Case = 2 Then $g_amx2_ZS_Agent[2][$GC_ZS_A_Flags] = BitOR($g_amx2_ZS_Agent[2][$GC_ZS_A_Flags], $GC_ZS_AF_KNOCKED)
+		ZS_Snapshot_Finalize()
+		If $l_i_Case = 1 Then
+			Bench_Check($g_i_ZS_HazardCount = 1 And ZS_Hazard_At(0, 0) >= 0, "completed cast leaves an area on the player", $g_i_ZS_HazardCount & " areas")
+			ZS_Evaluate()
+			Bench_Check($g_av_ZS_Decision[$GC_ZS_D_Action] = $GC_ZS_ACT_MOVE, "the player walks out of it", ZS_Describe(0))
+		Else
+			Bench_Check($g_i_ZS_HazardCount = 0, "interrupted cast leaves nothing", $g_i_ZS_HazardCount & " areas")
+		EndIf
+	Next
+	FileDelete($l_s_File)
+EndFunc   ;==>Bench_Hazards
+#EndRegion 1c) damaging areas
+
 #Region 2) scenarios
 Func Bench_Scenarios()
 	Bench_Line("")
@@ -174,6 +208,7 @@ Func Bench_Expect($a_s_Pair)
 			If $l_i_Action = $GC_ZS_ACT_ATTACK Then $l_s_Is = "attack"
 			If $l_i_Action = $GC_ZS_ACT_DROP Then $l_s_Is = "drop"
 			If $l_i_Action = $GC_ZS_ACT_ENDBUFF Then $l_s_Is = "endbuff"
+			If $l_i_Action = $GC_ZS_ACT_MOVE Then $l_s_Is = "move"
 			If $l_s_Is <> StringLower($l_s_Value) Then Return "action is " & $l_s_Is & ", expected " & $l_s_Value
 		Case "slot"
 			If $l_i_Action = $GC_ZS_ACT_NONE Or $l_i_Action = $GC_ZS_ACT_ATTACK Or $g_av_ZS_Decision[$GC_ZS_D_Slot] <> Int($l_s_Value) Then Return "expected slot " & $l_s_Value
@@ -185,6 +220,15 @@ Func Bench_Expect($a_s_Pair)
 			If Not StringInStr("," & $l_s_Value & ",", "," & $g_av_ZS_Decision[$GC_ZS_D_TargetID] & ",") Then Return "expected a target among " & $l_s_Value
 		Case "band"
 			If $l_i_Action = $GC_ZS_ACT_NONE Or $GC_AS_ZS_BANDNAMES[$g_av_ZS_Decision[$GC_ZS_D_Band]] <> $l_s_Value Then Return "expected band " & $l_s_Value
+		Case "movefrom", "moveto"
+			; a move whose destination is farther from (movefrom) / nearer to (moveto) the point "x,y" than the player
+			If $l_i_Action <> $GC_ZS_ACT_MOVE Then Return "expected a move"
+			Local $l_as_XY = StringSplit($l_s_Value, ",", 2)
+			Local $l_f_PX = Number($l_as_XY[0]), $l_f_PY = Number($l_as_XY[1])
+			Local $l_f_Now = ZS_Pos_Dist($g_amx2_ZS_Agent[$g_i_ZS_MeIdx][$GC_ZS_A_X], $g_amx2_ZS_Agent[$g_i_ZS_MeIdx][$GC_ZS_A_Y], $l_f_PX, $l_f_PY)
+			Local $l_f_Then = ZS_Pos_Dist($g_av_ZS_Decision[$GC_ZS_D_X], $g_av_ZS_Decision[$GC_ZS_D_Y], $l_f_PX, $l_f_PY)
+			If $l_s_Key = "movefrom" And $l_f_Then <= $l_f_Now Then Return "move does not go away from " & $l_s_Value
+			If $l_s_Key = "moveto" And $l_f_Then >= $l_f_Now Then Return "move does not go towards " & $l_s_Value
 		Case "wset"
 			; weapon set the execution would switch to for this decision (0 = stays on the set in hand)
 			Local $l_i_Want = 0

@@ -60,6 +60,7 @@ Func ZS_Evaluate()
 	ZS_Eval_Bundles()
 	ZS_Eval_EndBuffs()
 	ZS_Eval_AutoAttack()
+	ZS_Eval_Position()
 
 	If $g_i_ZS_TopCount = 0 Then Return False
 	For $i = 0 To $GC_ZS_D_COUNT - 1
@@ -410,7 +411,7 @@ Func ZS_Eval_AutoAttack()
 EndFunc   ;==>ZS_Eval_AutoAttack
 
 ;~ Description: Insert a candidate in the ranking of the tick (best first, $GC_ZS_TOPN kept).
-Func ZS_Eval_Offer($a_i_Action, $a_i_Slot, $a_i_TargetID, $a_i_Band, $a_f_Utility, $a_s_Why)
+Func ZS_Eval_Offer($a_i_Action, $a_i_Slot, $a_i_TargetID, $a_i_Band, $a_f_Utility, $a_s_Why, $a_f_X = 0, $a_f_Y = 0)
 	If $a_f_Utility > 9.9 Then $a_f_Utility = 9.9
 	Local $l_f_Score = $a_i_Band * 10 + $a_f_Utility
 
@@ -434,6 +435,8 @@ Func ZS_Eval_Offer($a_i_Action, $a_i_Slot, $a_i_TargetID, $a_i_Band, $a_f_Utilit
 	$g_amx2_ZS_Top[$l_i_Pos][$GC_ZS_D_Utility] = $a_f_Utility
 	$g_amx2_ZS_Top[$l_i_Pos][$GC_ZS_D_Score] = $l_f_Score
 	$g_amx2_ZS_Top[$l_i_Pos][$GC_ZS_D_Why] = $a_s_Why
+	$g_amx2_ZS_Top[$l_i_Pos][$GC_ZS_D_X] = $a_f_X
+	$g_amx2_ZS_Top[$l_i_Pos][$GC_ZS_D_Y] = $a_f_Y
 	If $g_i_ZS_TopCount < $GC_ZS_TOPN Then $g_i_ZS_TopCount += 1
 EndFunc   ;==>ZS_Eval_Offer
 #EndRegion Candidates
