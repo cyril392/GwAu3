@@ -38,6 +38,8 @@ EndFunc   ;==>ZS_Tick
 
 ;~ Description: Fight around ($a_f_X, $a_f_Y) until no foe is left, the player is down, the map changes,
 ;~ the player is farther than $a_f_MaxDistance from the point (0 = no limit), or $a_s_ExitCallback returns True.
+;~ Out of combat it makes one tick and returns: called in a bot loop, it also resurrects, heals and speeds the
+;~ player up between fights. An action under way is always finished before it returns.
 ;~ Returns True when the fight ended with the player alive.
 Func ZS_Fight($a_f_X, $a_f_Y, $a_f_AggroRange = 1320, $a_f_MaxDistance = 3500, $a_s_ExitCallback = "")
 	Local $l_i_Map = Map_GetMapID()
@@ -49,6 +51,11 @@ Func ZS_Fight($a_f_X, $a_f_Y, $a_f_AggroRange = 1320, $a_f_MaxDistance = 3500, $
 		If $l_i_Status = $GC_ZS_TICK_DOWN Then Return False
 		If $l_i_Status = $GC_ZS_TICK_NOFOE Then Return True
 		If Map_GetMapID() <> $l_i_Map Then Return False
+		; An action under way (a resurrection out of combat, a cast...) is finished before the bot moves again
+		If $g_i_ZS_State <> $GC_ZS_ST_IDLE Then
+			Sleep($g_i_ZS_TickSleep)
+			ContinueLoop
+		EndIf
 
 		If $a_f_MaxDistance > 0 Then
 			$l_f_DX = $g_amx2_ZS_Agent[$g_i_ZS_MeIdx][$GC_ZS_A_X] - $a_f_X

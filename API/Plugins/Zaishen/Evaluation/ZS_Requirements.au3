@@ -215,6 +215,9 @@ Func ZS_Req_Slot($a_i_Slot)
 	If $l_s_V <> "" And Not ZS_QualifiesList($g_i_ZS_MeIdx, $l_s_V, True) Then Return "player not " & $l_s_V
 	$l_s_V = ZS_SlotParam($a_i_Slot, "SelfIsAny")
 	If $l_s_V <> "" And Not ZS_QualifiesList($g_i_ZS_MeIdx, $l_s_V, False) Then Return "player none of " & $l_s_V
+	; Speed=1: a speed skill, only worth it while the player walks; Speed=2: also used for its other effect
+	; in fights (Escape blocks), a speed skill out of combat only
+	If ZS_SlotParam($a_i_Slot, "Speed") = "1" And Not ZS_Is($g_i_ZS_MeIdx, $GC_ZS_AF_MOVING) Then Return "player not moving"
 	$l_s_V = ZS_SlotParam($a_i_Slot, "SelfIsNot")
 	If $l_s_V <> "" And ZS_QualifiesList($g_i_ZS_MeIdx, $l_s_V, False) Then Return "player is " & $l_s_V
 	$l_s_V = ZS_SlotParam($a_i_Slot, "SpiritsNear")

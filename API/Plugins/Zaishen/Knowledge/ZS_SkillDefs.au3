@@ -1,4 +1,4 @@
-#include-once
+﻿#include-once
 
 ; Zaishen dedicated skill definitions (layer 3).
 ; Only skills whose family cannot be deduced from the game data, or that need a parameter, belong here.
@@ -31,6 +31,8 @@
 ;   OnPet=1         cast on the player, judged on the player's pet; PetRez=1 also brings a dead pet back,
 ;                   PetRez=2 only that (Revive Animal)
 ;   Hold=1          Interrupt attack: never used as a plain attack when nothing is to be stopped
+;   Speed=1 | 2     speed skill: used while the player walks, in fights and between them (2: in fights as usual)
+;   OutOfCombat=1   a buff also kept up between fights (the others wait for a fight)
 
 Func ZS_Knowledge_LoadDefs()
 	; --- Mesmer: interrupts that only work on spells and chants ---
@@ -173,7 +175,6 @@ Func ZS_LoadDefs_Audit()
 	ZS_DefineSkill($GC_I_SKILL_ID_DEFY_PAIN, $GC_ZS_FAM_SELF_BUFF, $GC_ZS_TM_SELF, "Defensive=1")   ; was taken for an area skill
 	ZS_DefineSkill($GC_I_SKILL_ID_ENDURE_PAIN, -1, -1, "Defensive=1")
 	ZS_DefineSkill($GC_I_SKILL_ID_MENTAL_BLOCK, -1, -1, "Defensive=1")
-	ZS_DefineSkill($GC_I_SKILL_ID_DARK_ESCAPE, -1, -1, "Defensive=1")
 	ZS_DefineSkill($GC_I_SKILL_ID_SAVE_YOURSELVES_LUXON, -1, -1, "Defensive=1")
 	ZS_DefineSkill($GC_I_SKILL_ID_SAVE_YOURSELVES_KURZICK, -1, -1, "Defensive=1")
 	ZS_DefineSkill($GC_I_SKILL_ID_THERES_NOTHING_TO_FEAR, -1, -1, "Defensive=1")
@@ -361,16 +362,25 @@ Func ZS_LoadDefs_Audit()
 	ZS_DefineSkill($GC_I_SKILL_ID_JUNUNDU_TUNNEL, -1, -1, "MinAdjacent=1")
 	ZS_DefineSkill($GC_I_SKILL_ID_JUNUNDU_FEAST, $GC_ZS_FAM_CORPSE, $GC_ZS_TM_SELF)
 	ZS_DefineSkill($GC_I_SKILL_ID_AURA_OF_THE_LICH, $GC_ZS_FAM_CORPSE)
-	; Speed: only when on the move, never instead of a fighting stance
-	ZS_DefineSkill($GC_I_SKILL_ID_SPRINT, -1, -1, "SelfIs=Moving")
-	ZS_DefineSkill($GC_I_SKILL_ID_PIOUS_HASTE, -1, -1, "SelfIs=Moving")
-	ZS_DefineSkill($GC_I_SKILL_ID_ENCHANTED_HASTE, -1, -1, "SelfIs=Moving")
-	ZS_DefineSkill($GC_I_SKILL_ID_FEATHERFOOT_GRACE, -1, -1, "SelfIs=Moving")
-	ZS_DefineSkill($GC_I_SKILL_ID_CHARGE, -1, -1, "SelfIs=Moving")
-	ZS_DefineSkill($GC_I_SKILL_ID_FALL_BACK, -1, -1, "SelfIs=Moving")
-	ZS_DefineSkill($GC_I_SKILL_ID_RETREAT, -1, -1, "SelfIs=Moving")
-	ZS_DefineSkill($GC_I_SKILL_ID_MAKE_HASTE, -1, -1, "SelfIs=Moving")
-	ZS_DefineSkill($GC_I_SKILL_ID_HASTY_REFRAIN, -1, -1, "SelfIs=Moving")
+	; Speed: only while walking, in a fight or between fights (following the leader); never instead of a
+	; fighting stance. Speed=2: its other effect is used in fights as usual (Escape blocks), speed out of combat.
+	ZS_DefineSkill($GC_I_SKILL_ID_SPRINT, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_DASH, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_STORM_DJINNS_HASTE, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_ZOJUNS_HASTE, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_BURNING_SPEED, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_PIOUS_HASTE, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_ENCHANTED_HASTE, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_FEATHERFOOT_GRACE, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_CHARGE, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_FALL_BACK, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_RETREAT, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_INCOMING, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_MAKE_HASTE, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_HASTY_REFRAIN, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_WINDBORNE_SPEED, -1, -1, "Speed=1")
+	ZS_DefineSkill($GC_I_SKILL_ID_ESCAPE, -1, -1, "Speed=2")
+	ZS_DefineSkill($GC_I_SKILL_ID_DARK_ESCAPE, -1, -1, "Defensive=1|Speed=2")
 	; Effects that end when the player uses some kind of skill: nothing else of that kind while they last
 	ZS_DefineSkill($GC_I_SKILL_ID_BATTLE_RAGE, -1, -1, "EndsOn=NonAdrenal")
 	ZS_DefineSkill($GC_I_SKILL_ID_BULLS_CHARGE, -1, -1, "EndsOn=Skill")

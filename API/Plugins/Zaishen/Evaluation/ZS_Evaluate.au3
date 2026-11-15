@@ -603,6 +603,24 @@ Func ZS_Eval_GlyphFollowUp($a_i_Slot)
 	Return 0
 EndFunc   ;==>ZS_Eval_GlyphFollowUp
 
+;~ Description: Utility of a buff out of combat. Only two kinds go between fights:
+;~ - a speed skill ("Speed=") while the player walks (following the leader, going back to a fight);
+;~ - a skill told so ("OutOfCombat=1": a pre-buff kept up, a maintained enchantment...).
+;~ Not twice: an effect still up for a while is left alone.
+Func ZS_Eval_OutOfCombat($a_i_Slot, $a_i_AgentID)
+	Local $l_b_Speed = (Int(ZS_SlotParam($a_i_Slot, "Speed", 0)) > 0)
+	If $l_b_Speed Then
+		If Not ZS_Is($g_i_ZS_MeIdx, $GC_ZS_AF_MOVING) Then Return 0
+	ElseIf ZS_SlotParam($a_i_Slot, "OutOfCombat") <> "1" Then
+		Return 0
+	EndIf
+	; A speed buff given to an ally (Windborne Speed): on the player, it walks with the party
+	If $l_b_Speed And $a_i_AgentID <> $g_i_ZS_MyID And $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_TargetMask] <> $GC_ZS_TM_ALLY Then Return 0
+	If ZS_Eval_BuffState($a_i_Slot, $a_i_AgentID) < 0 Then Return 0
+	If $g_b_ZS_Explain Then $g_s_ZS_Why = ($l_b_Speed ? "out of combat: walking" : "out of combat: kept up")
+	Return 0.4
+EndFunc   ;==>ZS_Eval_OutOfCombat
+
 ;~ Description: Slot of the bar holding $a_i_SkillID, 0 when none.
 Func ZS_Eval_SlotOf($a_i_SkillID)
 	For $l_i_S = 1 To 8
@@ -768,13 +786,13 @@ Func ZS_Eval_Utility($a_i_Slot, $a_i_Family, $a_i_Idx)
 
 		Case $GC_ZS_FAM_ENERGY_BUFF
 			; Attunements, Ether Renewal...: they pay for everything else, keep them up during fights
-			If Not $g_b_ZS_InCombat Then Return 0
+			If Not $g_b_ZS_InCombat Then Return ZS_Eval_OutOfCombat($a_i_Slot, $l_i_ID)
 			If ZS_Eval_BuffState($a_i_Slot, $l_i_ID) < 0 Then Return 0
 			$l_f_U = 0.65
 			If $g_b_ZS_Explain Then $g_s_ZS_Why = "energy buff not active"
 
 		Case $GC_ZS_FAM_SELF_BUFF, $GC_ZS_FAM_GENERIC_SELF, $GC_ZS_FAM_ITEM_SPELL
-			If Not $g_b_ZS_InCombat Then Return 0
+			If Not $g_b_ZS_InCombat Then Return ZS_Eval_OutOfCombat($a_i_Slot, $l_i_ID)
 			; Holding an urn: drop it first (ZS_Eval_Bundles), never pick another one over it
 			If $a_i_Family = $GC_ZS_FAM_ITEM_SPELL And $g_i_ZS_HeldUrn <> 0 Then Return 0
 			If ZS_Eval_BuffState($a_i_Slot, $l_i_ID) < 0 Then Return 0
@@ -820,7 +838,7 @@ Func ZS_Eval_Utility($a_i_Slot, $a_i_Family, $a_i_Idx)
 			EndIf
 
 		Case $GC_ZS_FAM_PARTY_BUFF
-			If Not $g_b_ZS_InCombat Then Return 0
+			If Not $g_b_ZS_InCombat Then Return ZS_Eval_OutOfCombat($a_i_Slot, $l_i_ID)
 			If ZS_Eval_BuffState($a_i_Slot, $l_i_ID) < 0 Then Return 0
 			If ZS_Eval_IsDefensive($a_i_Slot) Then
 				Local $l_f_Pressure = ZS_Eval_PartyPressure()
@@ -835,7 +853,7 @@ Func ZS_Eval_Utility($a_i_Slot, $a_i_Family, $a_i_Idx)
 			EndIf
 
 		Case $GC_ZS_FAM_ALLY_BUFF, $GC_ZS_FAM_GENERIC_ALLY
-			If Not $g_b_ZS_InCombat Then Return 0
+			If Not $g_b_ZS_InCombat Then Return ZS_Eval_OutOfCombat($a_i_Slot, $l_i_ID)
 			If ZS_Eval_BuffState($a_i_Slot, $l_i_ID) < 0 Then Return 0
 			If ZS_Eval_IsDefensive($a_i_Slot) Then
 				If ZS_Threat($a_i_Idx) < 0.2 Then Return 0
@@ -849,7 +867,7 @@ Func ZS_Eval_Utility($a_i_Slot, $a_i_Family, $a_i_Idx)
 			EndIf
 
 		Case $GC_ZS_FAM_WEAPON_SPELL
-			If Not $g_b_ZS_InCombat Then Return 0
+			If Not $g_b_ZS_InCombat Then Return ZS_Eval_OutOfCombat($a_i_Slot, $l_i_ID)
 			If BitAND($l_i_Flags, $GC_ZS_AF_WEAPONSPELL) Then Return 0
 			; A protective one (Weapon of Warding, Vengeful Weapon...) goes to whoever is being hit
 			If ZS_Eval_IsDefensive($a_i_Slot) Then

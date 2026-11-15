@@ -74,7 +74,7 @@ D:\AutoIt3\AutoIt3.exe /ErrorStdOut "API\Plugins\Zaishen\Tools\ZS_CoverageReport
 D:\AutoIt3\Au3Check.exe -q "API\Plugins\Zaishen\Tests\ZS_TestBench.au3"
 ```
 
-Résultats au 15/11/2026 : 205/205 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
+Résultats au 15/11/2026 : 210/210 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
 2 398 skills équipables, tous avec une famille (0 sans comportement).
 
 ## Historique des retours en jeu
@@ -191,6 +191,14 @@ Résultats au 15/11/2026 : 205/205 ; évaluation ≈ 18 ms pour 40 agents et une
   - **urne qui ressuscite** : aller jusqu'à l'allié mort hors de sa zone ;
   - un déplacement commencé continue jusqu'au bout (une action moins importante ne l'arrête pas) ;
   - case « Move in fights » dans le Follower (`$g_b_ZS_Positioning`) ; ligne `H|` des snapshots.
+- 15/11 — **hors combat** : le Follower appelle `ZS_Fight` à chaque tour de boucle (un tick puis retour
+  quand il n'y a pas d'ennemi). Résurrections, soins et retraits de maléfice/condition marchaient déjà hors
+  combat ; ajoutés : les **skills de vitesse** (`Speed=1` : Sprint, Dash, Storm Djinn's Haste, Zojun's
+  Haste, Burning Speed, Pious Haste, Charge!, Fall Back!, Incoming!, Make Haste!, Windborne Speed... ;
+  `Speed=2` : Escape, Dark Escape gardent leur usage en combat) quand le joueur marche, et `OutOfCombat=1`
+  pour tout skill qu'on veut entretenir entre les combats. Les autres buffs attendent le combat.
+  `ZS_Fight` ne rend plus la main pendant une action en cours : une résurrection n'est plus coupée par le
+  déplacement du Follower.
 
 ## Écarts par rapport au cahier des charges
 
