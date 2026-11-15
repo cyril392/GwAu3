@@ -74,7 +74,7 @@ D:\AutoIt3\AutoIt3.exe /ErrorStdOut "API\Plugins\Zaishen\Tools\ZS_CoverageReport
 D:\AutoIt3\Au3Check.exe -q "API\Plugins\Zaishen\Tests\ZS_TestBench.au3"
 ```
 
-Résultats au 16/11/2026 : 220/220 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
+Résultats au 16/11/2026 : 222/222 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
 2 398 skills équipables, tous avec une famille (0 sans comportement).
 
 ## Historique des retours en jeu
@@ -228,6 +228,13 @@ Résultats au 16/11/2026 : 220/220 ; évaluation ≈ 18 ms pour 40 agents et une
     drapeau dans les données ; elle ne part plus que sur un ennemi qui incante. Garde-fou général : un skill
     que le jeu refuse 2 fois de suite est mis de côté 10 s ; le journal note alors le champ « disabled »
     de la barre lu dans le jeu (skill désactivé par un ennemi ? cause à confirmer au prochain essai).
+- 16/11 — **fichier des problèmes** ($g_s_ZS_IssueFile, Follower : logs\zaishen_issues.log, commun à tous
+  les bots, toujours actif) : une ligne date | personnage | carte | skill | problème, la 1re fois puis toutes
+  les 10 fois. Deux problèmes : un skill que **le jeu ne lance pas** (avec énergie et champ « disabled »
+  de la barre), et un skill **prêt mais jamais choisi** pendant 60 s de combat ($g_i_ZS_IdleAlertMs), avec
+  la raison (blocage, condition sur le joueur, ou aucune cible ne convient + ses paramètres). Ne sont pas
+  signalés : l'attente de recharge, d'adrénaline ou d'énergie, et les skills qui attendent une occasion par
+  nature (résurrections, soins, protections, retraits, interruptions, défensifs, urnes, cadavres).
 
 ## Écarts par rapport au cahier des charges
 

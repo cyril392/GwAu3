@@ -47,6 +47,10 @@ Func ZS_Evaluate()
 
 	; An effect on the player that ends when it uses some kind of skill (Battle Rage, Charging Strike...)
 	Local $l_s_EndsOn = ZS_Eval_EndsOnRule()
+	; Time since the previous evaluation, for the problems file (a pause between fights does not count)
+	Local $l_i_Dt = $g_i_ZS_Now - $g_i_ZS_LastEvalAt
+	If $l_i_Dt < 0 Or $l_i_Dt > 1000 Then $l_i_Dt = 0
+	$g_i_ZS_LastEvalAt = $g_i_ZS_Now
 
 	Local $l_i_Family
 	For $l_i_Slot = 1 To 8
@@ -57,8 +61,14 @@ Func ZS_Evaluate()
 		; Set aside after the game refused it twice in a row (ZS_Exec_NoteNoCast)
 		Local $l_s_Aside = "skill:" & $g_amx2_ZS_Slot[$l_i_Slot][$GC_ZS_S_SkillID]
 		If MapExists($g_m_ZS_Recent, $l_s_Aside) And $g_m_ZS_Recent[$l_s_Aside] > $g_i_ZS_Now Then ContinueLoop
-		If ZS_Veto_Resources($l_i_Slot) <> "" Then ContinueLoop
+		Local $l_s_Veto = ZS_Veto_Resources($l_i_Slot)
+		If $l_s_Veto <> "" Then
+			ZS_Issue_TrackSlot($l_i_Slot, False, $l_s_Veto, $l_i_Dt)
+			ContinueLoop
+		EndIf
+		Local $l_i_Before = $g_i_ZS_CandidateCount
 		ZS_Eval_Slot($l_i_Slot, $l_i_Family)
+		ZS_Issue_TrackSlot($l_i_Slot, $g_i_ZS_CandidateCount > $l_i_Before, "", $l_i_Dt)
 	Next
 	ZS_Eval_Bundles()
 	ZS_Eval_EndBuffs()

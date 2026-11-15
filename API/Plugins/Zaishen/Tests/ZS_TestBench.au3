@@ -18,6 +18,7 @@ $g_b_ZS_Explain = True
 Bench_Classification()
 Bench_DamageTracking()
 Bench_Hazards()
+Bench_Issues()
 Bench_Scenarios()
 Bench_StateMachine()
 Bench_Speed()
@@ -154,6 +155,35 @@ Func Bench_Hazards()
 	FileDelete($l_s_File)
 EndFunc   ;==>Bench_Hazards
 #EndRegion 1c) damaging areas
+
+#Region 1d) problems file
+;~ Description: Backfire with only a warrior around for a minute of fight: reported as ready but never chosen.
+Func Bench_Issues()
+	Bench_Line("")
+	Bench_Line("== Problems file ==")
+	Local $l_s_Saved = $g_s_ZS_IssueFile
+	$g_s_ZS_IssueFile = "" ; journal only, no file written by the bench
+	ZS_Snapshot_Load(@ScriptDir & "\Scenarios\req_backfire_needs_caster.zs")
+	Local $l_m_Empty[]
+	$g_m_ZS_IssueCount = $l_m_Empty
+	$g_i_ZS_LastEvalAt = $g_i_ZS_Now
+	For $i = 1 To 125
+		$g_i_ZS_Now += 500
+		ZS_Evaluate()
+	Next
+	Local $l_b_Found = False
+	For $l_s_Key In MapKeys($g_m_ZS_IssueCount)
+		If StringLeft($l_s_Key, 3) = "28|" And StringInStr($l_s_Key, "never chosen") Then $l_b_Found = True
+	Next
+	Bench_Check($l_b_Found, "Backfire ready but never chosen for 60 s is reported")
+	Local $l_b_Flare = False
+	For $l_s_Key In MapKeys($g_m_ZS_IssueCount)
+		If StringLeft($l_s_Key, 4) = "194|" Then $l_b_Flare = True
+	Next
+	Bench_Check(Not $l_b_Flare, "Flare (recharging all along) is not reported")
+	$g_s_ZS_IssueFile = $l_s_Saved
+EndFunc   ;==>Bench_Issues
+#EndRegion 1d) problems file
 
 #Region 2) scenarios
 Func Bench_Scenarios()

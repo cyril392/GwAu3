@@ -82,8 +82,8 @@ Func ZS_Exec_NoteNoCast($a_i_Slot)
 	Local $l_i_SkillID = $g_i_ZS_ExecSkill
 	Local $l_i_N = (MapExists($g_m_ZS_NoCast, $l_i_SkillID) ? $g_m_ZS_NoCast[$l_i_SkillID] : 0) + 1
 	$g_m_ZS_NoCast[$l_i_SkillID] = $l_i_N
-	If Not $g_b_ZS_DryRun And $g_h_GWProcess <> 0 Then ZS_Log_Event("not started: " & ZS_SkillName($l_i_SkillID) & " (slot " & $a_i_Slot & _
-			", bar disabled field 0x" & Hex(Skill_GetSkillbarInfo($a_i_Slot, "Disabled"), 8) & ", energy " & Round($g_f_ZS_Energy) & ")")
+	ZS_Issue($l_i_SkillID, "the game did not start it", "slot " & $a_i_Slot & ", energy " & Round($g_f_ZS_Energy) & _
+			($g_h_GWProcess <> 0 And Not $g_b_ZS_DryRun ? ", bar disabled field 0x" & Hex(Skill_GetSkillbarInfo($a_i_Slot, "Disabled"), 8) : ""))
 	If $l_i_N >= 2 Then
 		$g_m_ZS_Recent["skill:" & $l_i_SkillID] = $g_i_ZS_Now + $g_i_ZS_NoCastPause
 		ZS_Log_Event(ZS_SkillName($l_i_SkillID) & " not started " & $l_i_N & " times in a row: set aside " & Round($g_i_ZS_NoCastPause / 1000) & " s")

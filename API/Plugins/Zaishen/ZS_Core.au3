@@ -86,6 +86,71 @@ Func ZS_Stats()
 EndFunc   ;==>ZS_Stats
 #EndRegion Public
 
+#Region Problems file
+;~ Description: Note a problem of a skill in the problems file ($g_s_ZS_IssueFile): the first time, then every 10 times.
+Func ZS_Issue($a_i_SkillID, $a_s_Problem, $a_s_Detail = "")
+	Local $l_s_Key = $a_i_SkillID & "|" & $a_s_Problem
+	Local $l_i_N = (MapExists($g_m_ZS_IssueCount, $l_s_Key) ? $g_m_ZS_IssueCount[$l_s_Key] : 0) + 1
+	$g_m_ZS_IssueCount[$l_s_Key] = $l_i_N
+	If $l_i_N <> 1 And Mod($l_i_N, 10) <> 0 Then Return
+	ZS_Log_Event("PROBLEM " & ZS_SkillName($a_i_SkillID) & ": " & $a_s_Problem & ($a_s_Detail = "" ? "" : " - " & $a_s_Detail))
+	If $g_s_ZS_IssueFile = "" Then Return
+	Local $l_s_Map = ($g_h_GWProcess <> 0 ? Map_GetMapID() : 0)
+	Local $l_h = FileOpen($g_s_ZS_IssueFile, 1 + 8)
+	If $l_h = -1 Then Return
+	FileWriteLine($l_h, @YEAR & "-" & @MON & "-" & @MDAY & " " & @HOUR & ":" & @MIN & " | " & $g_s_ZS_IssueTag & " | map " & $l_s_Map & _
+			" | " & ZS_SkillName($a_i_SkillID) & " (" & $a_i_SkillID & ") | " & $a_s_Problem & ($l_i_N > 1 ? " (x" & $l_i_N & ")" : "") & _
+			($a_s_Detail = "" ? "" : " | " & $a_s_Detail))
+	FileClose($l_h)
+EndFunc   ;==>ZS_Issue
+
+;~ Description: Follow a slot during fights: ready (recharged, resources there) but never offered as a candidate for
+;~ $g_i_ZS_IdleAlertMs of combat = reported once, with why. $a_b_Offered: it was a candidate this tick;
+;~ $a_s_Veto: the resource veto of the tick ("" = none).
+Func ZS_Issue_TrackSlot($a_i_Slot, $a_b_Offered, $a_s_Veto, $a_i_Dt)
+	Local $l_i_SkillID = $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_SkillID]
+	If $g_ai_ZS_SlotIdleSkill[$a_i_Slot] <> $l_i_SkillID Then
+		$g_ai_ZS_SlotIdleSkill[$a_i_Slot] = $l_i_SkillID
+		$g_ai_ZS_SlotIdleMs[$a_i_Slot] = 0
+	EndIf
+	If $a_b_Offered Or Not $g_b_ZS_InCombat Or $g_ai_ZS_Foes[0] = 0 Then
+		If $a_b_Offered Then $g_ai_ZS_SlotIdleMs[$a_i_Slot] = 0
+		Return
+	EndIf
+	; Waiting for its resources is normal
+	Switch $a_s_Veto
+		Case "recharge", "adrenaline", "energy", "sacrifice", "overcast", "maintained limit", "no energy regeneration"
+			Return
+	EndSwitch
+	; Skills that wait for an occasion by nature
+	If $g_i_ZS_IdleAlertMs <= 0 Then Return
+	Switch $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Family]
+		Case $GC_ZS_FAM_NONE, $GC_ZS_FAM_RESURRECT, $GC_ZS_FAM_HEAL_SINGLE, $GC_ZS_FAM_HEAL_SELF, $GC_ZS_FAM_HEAL_PARTY, _
+				$GC_ZS_FAM_PROTECT, $GC_ZS_FAM_HEX_REMOVAL, $GC_ZS_FAM_COND_REMOVAL, $GC_ZS_FAM_INTERRUPT, $GC_ZS_FAM_ITEM_SPELL, _
+				$GC_ZS_FAM_CORPSE, $GC_ZS_FAM_ENCH_REMOVAL
+			Return
+	EndSwitch
+	If ZS_Eval_IsDefensive($a_i_Slot) Then Return
+	; Still up on the player: nothing to do
+	If ZS_SelfHasFx($l_i_SkillID) Then Return
+
+	$g_ai_ZS_SlotIdleMs[$a_i_Slot] += $a_i_Dt
+	If $g_ai_ZS_SlotIdleMs[$a_i_Slot] >= $g_i_ZS_IdleAlertMs Then
+		; Why, as things stand now (only worked out when reporting: it costs)
+		If $a_s_Veto <> "" Then
+			$g_as_ZS_SlotIdleWhy[$a_i_Slot] = "blocked: " & $a_s_Veto
+		Else
+			Local $l_s_Req = ZS_Req_Slot($a_i_Slot)
+			$g_as_ZS_SlotIdleWhy[$a_i_Slot] = ($l_s_Req <> "" ? $l_s_Req : "no target suits it" & _
+					($g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Params] = "" ? "" : " (" & $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Params] & ")"))
+		EndIf
+		ZS_Issue($l_i_SkillID, "ready but never chosen in " & Round($g_i_ZS_IdleAlertMs / 1000) & " s of fight", _
+				$g_as_ZS_SlotIdleWhy[$a_i_Slot] & " [" & $GC_AS_ZS_FAMNAMES[$g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Family]] & "]")
+		$g_ai_ZS_SlotIdleMs[$a_i_Slot] = 0
+	EndIf
+EndFunc   ;==>ZS_Issue_TrackSlot
+#EndRegion Problems file
+
 #Region Journal
 Global $g_h_ZS_Log = -1
 Global $g_s_ZS_LogOpened = ""

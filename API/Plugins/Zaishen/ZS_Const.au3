@@ -333,6 +333,13 @@ Global $g_i_ZS_ExecSkill = 0
 Global $g_i_ZS_ExecTarget = 0
 Global $g_b_ZS_ExecIsRez = False
 Global $g_i_ZS_ExecTimeout = 0
+; Problems file: skills the game refuses, skills never chosen while ready. One line per problem, the first time
+; then every 10 times. "" = off. $g_s_ZS_IssueTag starts each line (the character name).
+Global $g_s_ZS_IssueFile = "", $g_s_ZS_IssueTag = ""
+Global $g_m_ZS_IssueCount[]                       ; "skillID|problem" -> times seen
+Global $g_i_ZS_IdleAlertMs = 60000                ; combat time a skill may stay ready and never chosen before it is reported
+Global $g_ai_ZS_SlotIdleMs[9], $g_ai_ZS_SlotIdleSkill[9], $g_as_ZS_SlotIdleWhy[9]
+Global $g_i_ZS_LastEvalAt = 0
 ; Skill ID -> casts in a row the game did not start: from 2, the skill is set aside a while (disabled by a foe...)
 Global $g_m_ZS_NoCast[]
 Global $g_i_ZS_NoCastPause = 10000
