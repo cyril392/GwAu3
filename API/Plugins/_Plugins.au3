@@ -5,4 +5,5 @@
 #include "StoC/_StoC.au3"
 #include "Pathfinder/_Pathfinder.au3"
 #include "UtilityAI/_UtilityAI.au3"
+#include "Zaishen/_Zaishen.au3"
 #include "_Extend.au3"

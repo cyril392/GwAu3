@@ -1,0 +1,3476 @@
+SkillID	Name	Type	Family	TargetMask	Origin
+1	Healing Signet	7	HealSelf	1	rule+uai
+2	Resurrection Signet	7	Resurrect	8	rule+uai
+3	Signet of Capture	7	None	1	def
+4	BAMPH	10	None	0	rule
+5	Power Block	5	Interrupt	4	def
+6	Mantra of Earth	3	SelfBuff	1	def
+7	Mantra of Flame	3	SelfBuff	1	def
+8	Mantra of Frost	3	SelfBuff	1	def
+9	Mantra of Lightning	3	SelfBuff	1	def
+10	Hex Breaker	3	SelfBuff	1	rule
+11	Distortion	3	SelfBuff	1	rule
+12	Mantra of Celerity	3	SelfBuff	1	rule
+13	Mantra of Recovery	3	SelfBuff	1	rule
+14	Mantra of Persistence	3	SelfBuff	1	rule
+15	Mantra of Inscriptions	3	SelfBuff	1	rule
+16	Mantra of Concentration	3	SelfBuff	1	rule
+17	Mantra of Resolve	3	SelfBuff	1	rule
+18	Mantra of Signets	3	SelfBuff	1	rule
+19	Fragility	4	Hex	4	rule
+20	Confusion	4	Hex	4	rule
+21	Inspired Enchantment	5	EnchRemoval	4	def
+22	Inspired Hex	5	HexRemoval	3	rule+uai
+23	Power Spike	5	Interrupt	4	def
+24	Power Leak	5	Interrupt	4	def
+25	Power Drain	5	Interrupt	4	def
+26	Empathy	4	Hex	4	def
+27	Shatter Delusions	5	DamageAoE	4	rule+uai
+28	Backfire	4	Hex	4	def
+29	Blackout	10	Damage	4	rule
+30	Diversion	4	Hex	4	def
+31	Conjure Phantasm	4	Hex	4	rule+uai
+32	Illusion of Weakness	6	SelfBuff	1	rule
+33	Illusionary Weaponry	6	SelfBuff	1	rule
+34	Sympathetic Visage	6	AllyBuff	3	rule
+35	Ignorance	4	Hex	4	rule+uai
+36	Arcane Conundrum	4	Hex	4	def
+37	Illusion of Haste	6	SelfBuff	1	rule
+38	Channeling	6	EnergyBuff	1	rule
+39	Energy Surge	5	DamageAoE	4	def
+40	Ether Feast	5	Damage	4	rule+uai
+41	Ether Lord	4	Hex	4	def
+42	Energy Burn	5	Damage	4	rule+uai
+43	Clumsiness	4	Hex	4	def
+44	Phantom Pain	4	Hex	4	rule+uai
+45	Ethereal Burden	4	Hex	4	rule+uai
+46	Guilt	4	Hex	4	def
+47	Ineptitude	4	Hex	4	def
+48	Spirit of Failure	4	Hex	4	rule+uai
+49	Mind Wrack	4	Hex	4	rule+uai
+50	Wastrels Worry	4	Hex	4	def
+51	Shame	4	Hex	4	def
+52	Panic	4	Hex	4	def
+53	Migraine	4	Hex	4	def
+54	Crippling Anguish	4	Hex	4	rule+uai
+55	Fevered Dreams	4	Hex	4	rule
+56	Soothing Images	4	Hex	4	rule
+57	Cry of Frustration	5	Interrupt	4	rule
+58	Signet of Midnight	7	Damage	4	rule
+59	Signet of Weariness	7	DamageAoE	4	rule
+60	Signet of Illusions beta version	7	SelfBuff	1	rule
+61	Leech Signet	7	Interrupt	4	rule
+62	Signet of Humility	7	Damage	4	def
+63	Keystone Signet	7	SelfBuff	1	def
+64	Mimic	5	Damage	4	rule
+65	Arcane Mimicry	5	None	2	def
+66	Spirit Shackles	4	Hex	4	rule+uai
+67	Shatter Hex	5	HexRemoval	3	rule+uai
+68	Drain Enchantment	5	EnchRemoval	4	def
+69	Shatter Enchantment	5	EnchRemoval	4	def
+70	Disappear	5	SelfBuff	1	rule
+71	Unnatural Signet alpha version	7	SelfBuff	1	rule
+72	Elemental Resistance	3	SelfBuff	1	def
+73	Physical Resistance	3	SelfBuff	1	def
+74	Echo	6	SelfBuff	1	rule
+75	Arcane Echo	6	SelfBuff	1	rule
+76	Imagined Burden	4	Hex	4	rule+uai
+77	Chaos Storm	5	DamageAoE	4	def
+78	Epidemic	5	DamageAoE	4	rule+uai
+79	Energy Drain	5	Energy	4	rule+uai
+80	Energy Tap	5	Energy	4	rule+uai
+81	Arcane Thievery	5	Damage	4	rule+uai
+82	Mantra of Recall	6	EnergyBuff	1	rule
+83	Animate Bone Horror	5	Corpse	1	rule
+84	Animate Bone Fiend	5	Corpse	1	rule
+85	Animate Bone Minions	5	Corpse	1	rule
+86	Grenths Balance	5	Damage	4	rule
+87	Veratas Gaze	5	Damage	4	rule
+88	Veratas Aura	6	SelfBuff	1	rule
+89	Deathly Chill	5	Damage	4	rule+uai
+90	Veratas Sacrifice	5	SelfBuff	1	rule
+91	Well of Power	9	Corpse	1	rule
+92	Well of Blood	9	Corpse	1	rule
+93	Well of Suffering	9	Corpse	1	rule
+94	Well of the Profane	9	Corpse	1	rule
+95	Putrid Explosion	5	Corpse	1	rule
+96	Soul Feast	5	HealSelf	1	rule
+97	Necrotic Traversal	5	None	1	def
+98	Consume Corpse	5	Energy	1	rule
+99	Parasitic Bond	4	Hex	4	rule+uai
+100	Soul Barbs	4	Hex	4	rule
+101	Barbs	4	Hex	4	rule+uai
+102	Shadow Strike	5	Damage	4	rule+uai
+103	Price of Failure	4	Hex	4	def
+104	Death Nova	6	AllyBuff	32	def
+105	Deathly Swarm	5	DamageAoE	4	rule
+106	Rotting Flesh	5	Damage	4	rule
+107	Virulence	5	Damage	4	rule+uai
+108	Suffering	4	Hex	4	def
+109	Life Siphon	4	Hex	4	rule+uai
+110	Unholy Feast	5	HealSelf	1	def
+111	Awaken the Blood	6	SelfBuff	1	rule
+112	Desecrate Enchantments	5	DamageAoE	4	rule+uai
+113	Tainted Flesh	6	AllyBuff	3	def
+114	Aura of the Lich	6	Corpse	1	def
+115	Blood Renewal	6	HealSelf	1	rule
+116	Dark Aura	6	AllyBuff	3	rule
+117	Enfeeble	5	Damage	4	rule
+118	Enfeebling Blood	5	DamageAoE	4	rule
+119	Blood is Power	6	AllyBuff	2	def
+120	Blood of the Master	5	GenericSelf	1	rule
+121	Spiteful Spirit	4	Hex	4	def
+122	Malign Intervention	4	Hex	4	rule+uai
+123	Insidious Parasite	4	Hex	4	def
+124	Spinal Shivers	4	Hex	4	rule+uai
+125	Wither	4	Hex	4	rule+uai
+126	Life Transfer	4	Hex	4	rule
+127	Mark of Subversion	4	Hex	4	rule+uai
+128	Soul Leech	4	Hex	4	rule+uai
+129	Defile Flesh	4	Hex	4	rule+uai
+130	Demonic Flesh	6	SelfBuff	1	rule
+131	Barbed Signet	7	DamageAoE	4	rule
+132	Plague Signet	7	Damage	4	def
+133	Dark Pact	5	Damage	4	rule
+134	Order of Pain	6	PartyBuff	1	def
+135	Faintheartedness	4	Hex	4	def
+136	Shadow of Fear	4	Hex	4	def
+137	Rigor Mortis	4	Hex	4	rule+uai
+138	Dark Bond	6	SelfBuff	1	rule
+139	Infuse Condition	6	SelfBuff	1	rule
+140	Malaise	4	Hex	4	rule+uai
+141	Rend Enchantments	5	EnchRemoval	4	def
+142	Lingering Curse	4	Hex	4	rule
+143	Strip Enchantment	5	EnchRemoval	4	def
+144	Chilblains	5	DamageAoE	4	rule+uai
+145	Signet of Agony	7	PBAoE	1	rule
+146	Offering of Blood	5	Energy	1	rule
+147	Dark Fury	6	PartyBuff	1	def
+148	Order of the Vampire	6	PartyBuff	1	def
+149	Plague Sending	5	DamageAoE	4	def
+150	Mark of Pain	4	Hex	4	def
+151	Feast of Corruption	5	DamageAoE	4	rule+uai
+152	Taste of Death	5	GenericAlly	32	def
+153	Vampiric Gaze	5	Damage	4	rule+uai
+154	Plague Touch	10	Damage	4	def
+155	Vile Touch	10	Damage	4	rule
+156	Vampiric Touch	10	Damage	4	rule+uai
+157	Blood Ritual	6	AllyBuff	2	def
+158	Touch of Agony	10	Damage	4	rule
+159	Weaken Armor	5	DamageAoE	4	rule
+160	Windborne Speed	6	AllyBuff	3	rule
+161	Lightning Storm	5	DamageAoE	4	def
+162	Gale	5	Damage	4	rule
+163	Whirlwind	5	PBAoE	1	rule
+164	Elemental Attunement	6	EnergyBuff	1	rule
+165	Armor of Earth	6	SelfBuff	1	def
+166	Kinetic Armor	6	SelfBuff	1	def
+167	Eruption	5	DamageAoE	4	def
+168	Magnetic Aura	6	SelfBuff	1	def
+169	Earth Attunement	6	EnergyBuff	1	rule
+170	Earthquake	5	DamageAoE	4	def
+171	Stoning	5	Damage	4	rule+uai
+172	Stone Daggers	5	Damage	4	rule
+173	Grasping Earth	4	PBAoE	1	def
+174	Aftershock	5	PBAoE	1	rule
+175	Ward Against Elements	11	Ward	1	def
+176	Ward Against Melee	11	Ward	1	def
+177	Ward Against Foes	11	Ward	1	def
+178	Ether Prodigy	6	EnergyBuff	1	def
+179	Incendiary Bonds	4	Hex	4	rule
+180	Aura of Restoration	6	SelfBuff	1	rule
+181	Ether Renewal	6	EnergyBuff	1	rule
+182	Conjure Flame	6	SelfBuff	1	rule
+183	Inferno	5	PBAoE	1	rule
+184	Fire Attunement	6	EnergyBuff	1	rule
+185	Mind Burn	5	DamageAoE	4	rule
+186	Fireball	5	DamageAoE	4	rule+uai
+187	Meteor	5	DamageAoE	4	rule
+188	Flame Burst	5	PBAoE	1	rule
+189	Rodgorts Invocation	5	DamageAoE	4	def
+190	Mark of Rodgort	4	Hex	4	def
+191	Immolate	5	Damage	4	rule
+192	Meteor Shower	5	DamageAoE	4	def
+193	Phoenix	5	DamageAoE	4	rule
+194	Flare	5	DamageAoE	4	rule+uai
+195	Lava Font	5	PBAoE	1	rule
+196	Searing Heat	5	DamageAoE	4	def
+197	Fire Storm	5	DamageAoE	4	def
+198	Glyph of Elemental Power	12	SelfBuff	1	rule
+199	Glyph of Energy	12	SelfBuff	1	rule
+200	Glyph of Lesser Energy	12	SelfBuff	1	rule
+201	Glyph of Concentration	12	SelfBuff	1	rule
+202	Glyph of Sacrifice	12	SelfBuff	1	rule
+203	Glyph of Renewal	12	SelfBuff	1	rule
+204	Rust	4	Hex	4	rule
+205	Lightning Surge	4	Hex	4	rule
+206	Armor of Frost	6	SelfBuff	1	def
+207	Conjure Frost	6	SelfBuff	1	rule
+208	Water Attunement	6	EnergyBuff	1	rule
+209	Mind Freeze	4	Hex	4	rule+uai
+210	Ice Prison	4	Hex	4	rule+uai
+211	Ice Spikes	4	Hex	4	def
+212	Frozen Burst	4	PBAoE	1	def
+213	Shard Storm	4	Hex	4	rule+uai
+214	Ice Spear	6	GenericFoe	4	rule
+215	Maelstrom	5	DamageAoE	4	def
+216	Iron Mist	6	SelfBuff	1	rule
+217	Crystal Wave	5	PBAoE	1	rule
+218	Obsidian Flesh	6	SelfBuff	1	def
+219	Obsidian Flame	5	Damage	4	rule
+220	Blinding Flash	5	Damage	4	def
+221	Conjure Lightning	6	SelfBuff	1	rule
+222	Lightning Strike	4	Hex	4	rule+uai
+223	Chain Lightning	5	DamageAoE	4	rule
+224	Enervating Charge	5	Damage	4	rule
+225	Air Attunement	6	EnergyBuff	1	rule
+226	Mind Shock	5	Damage	4	rule
+227	Glimmering Mark	4	Hex	4	rule+uai
+228	Thunderclap	5	DamageAoE	4	rule
+229	Lightning Orb	5	Damage	4	rule
+230	Lightning Javelin	5	DamageAoE	4	rule+uai
+231	Shock	10	Damage	4	rule
+232	Lightning Touch	10	DamageAoE	4	rule
+233	Swirling Aura	6	SelfBuff	1	def
+234	Deep Freeze	4	Hex	4	def
+235	Blurred Vision	4	Hex	4	rule
+236	Mist Form	6	PartyBuff	1	rule
+237	Water Trident	5	DamageAoE	4	def
+238	Armor of Mist	6	SelfBuff	1	def
+239	Ward Against Harm	11	Ward	1	def
+240	Smite	5	DamageAoE	4	rule+uai
+241	Life Bond	6	Protect	2	def
+242	Balthazars Spirit	6	AllyBuff	3	def
+243	Strength of Honor	6	AllyBuff	3	def
+244	Life Attunement	6	Protect	3	rule
+245	Protective Spirit	6	Protect	3	rule+uai
+246	Divine Intervention	6	AllyBuff	3	def
+247	Symbol of Wrath	5	DamageAoE	4	rule
+248	Retribution	6	AllyBuff	3	def
+249	Holy Wrath	6	AllyBuff	2	def
+250	Essence Bond	6	AllyBuff	3	rule+uai
+251	Scourge Healing	4	Hex	4	rule+uai
+252	Banish	5	Damage	4	rule+uai
+253	Scourge Sacrifice	4	Hex	4	rule
+254	Vigorous Spirit	6	HealSingle	3	rule+uai
+255	Watchful Spirit	6	HealSingle	3	rule+uai
+256	Blessed Aura	6	SelfBuff	1	rule
+257	Aegis	6	PartyBuff	1	rule
+258	Guardian	6	Protect	3	rule+uai
+259	Shield of Deflection	6	Protect	3	rule+uai
+260	Aura of Faith	6	Protect	3	rule+uai
+261	Shield of Regeneration	6	HealSingle	3	rule+uai
+262	Shield of Judgment	6	AllyBuff	3	def
+263	Protective Bond	6	Protect	3	rule+uai
+264	Pacifism	4	Hex	4	rule+uai
+265	Amity	4	PBAoE	1	def
+266	Peace and Harmony	6	AllyBuff	3	rule+uai
+267	Judges Insight	6	AllyBuff	3	def
+268	Unyielding Aura	6	SelfBuff	1	def
+269	Mark of Protection	6	HealSingle	3	rule+uai
+270	Life Barrier	6	Protect	2	def
+271	Zealots Fire	6	SelfBuff	1	rule
+272	Balthazars Aura	6	AllyBuff	3	def
+273	Spell Breaker	6	AllyBuff	3	def
+274	Healing Seed	6	HealSingle	2	rule
+275	Mend Condition	5	CondRemoval	2	rule+uai
+276	Restore Condition	5	CondRemoval	2	rule+uai
+277	Mend Ailment	5	CondRemoval	3	rule+uai
+278	Purge Conditions	5	CondRemoval	3	rule+uai
+279	Divine Healing	5	HealParty	1	rule
+280	Heal Area	5	HealParty	1	rule
+281	Orison of Healing	5	HealSingle	3	rule+uai
+282	Word of Healing	5	HealSingle	3	def
+283	Dwaynas Kiss	5	HealSingle	2	rule+uai
+284	Divine Boon	6	SelfBuff	1	rule
+285	Healing Hands	6	HealSingle	3	rule+uai
+286	Heal Other	5	HealSingle	2	rule+uai
+287	Heal Party	5	HealParty	1	rule
+288	Healing Breeze	6	HealSingle	3	rule+uai
+289	Vital Blessing	6	Protect	3	rule+uai
+290	Mending	6	HealSingle	3	rule+uai
+291	Live Vicariously	6	AllyBuff	3	rule
+292	Infuse Health	5	HealSingle	2	def
+293	Signet of Devotion	7	HealSingle	3	rule
+294	Signet of Judgment	7	DamageAoE	4	rule
+295	Purge Signet	7	HexRemoval	3	rule
+296	Bane Signet	7	Damage	4	rule+uai
+297	Blessed Signet	7	GenericSelf	1	rule
+298	Martyr	5	GenericSelf	1	rule
+299	Shielding Hands	6	Protect	3	rule+uai
+300	Contemplation of Purity	10	HexRemoval	1	rule
+301	Remove Hex	5	HexRemoval	3	rule+uai
+302	Smite Hex	5	HexRemoval	3	def
+303	Convert Hexes	5	HexRemoval	2	rule+uai
+304	Light of Dwayna	5	Resurrect	1	rule+uai
+305	Resurrect	5	Resurrect	8	rule+uai
+306	Rebirth	5	Resurrect	8	rule+uai
+307	Reversal of Fortune	6	HealSingle	3	rule+uai
+308	Succor	6	AllyBuff	2	rule
+309	Holy Veil	6	HexRemoval	3	rule+uai
+310	Divine Spirit	6	SelfBuff	1	rule
+311	Draw Conditions	5	CondRemoval	2	rule+uai
+312	Holy Strike	10	Damage	4	rule+uai
+313	Healing Touch	5	HealSingle	3	rule+uai
+314	Restore Life	5	Resurrect	8	rule+uai
+315	Vengeance	6	Resurrect	8	rule+uai
+316	To the Limit	15	PartyBuff	1	rule
+317	Battle Rage	3	SelfBuff	1	def
+318	Defy Pain	16	SelfBuff	1	def
+319	Rush	3	SelfBuff	1	rule
+320	Hamstring	14	Attack	4	rule
+321	Wild Blow	14	Attack	4	rule
+322	Power Attack	14	Attack	4	rule
+323	Desperation Blow	14	Attack	4	rule
+324	Thrill of Victory	14	Attack	4	rule
+325	Distracting Blow	14	Interrupt	4	rule
+326	Protectors Strike	14	Attack	4	rule
+327	Griffons Sweep	14	Attack	4	rule
+328	Pure Strike	14	Attack	4	rule
+329	Skull Crack	14	Interrupt	4	rule+uai
+330	Cyclone Axe	14	Attack	4	def
+331	Hammer Bash	14	Attack	4	rule
+332	Bulls Strike	14	Attack	4	rule
+333	I Will Avenge You	15	PartyBuff	1	rule
+334	Axe Rake	14	Attack	4	rule+uai
+335	Cleave	14	Attack	4	rule
+336	Executioners Strike	14	Attack	4	rule
+337	Dismember	14	Attack	4	rule
+338	Eviscerate	14	Attack	4	rule
+339	Penetrating Blow	14	Attack	4	rule
+340	Disrupting Chop	14	Interrupt	4	rule
+341	Swift Chop	14	Attack	4	rule
+342	Axe Twist	14	Attack	4	rule+uai
+343	For Great Justice	15	PartyBuff	1	rule
+344	Flurry	3	SelfBuff	1	rule
+345	Defensive Stance	3	SelfBuff	1	rule
+346	Frenzy	3	SelfBuff	1	def
+347	Endure Pain	16	SelfBuff	1	def
+348	Watch Yourself	15	PartyBuff	1	rule
+349	Sprint	3	SelfBuff	1	def
+350	Belly Smash	14	Attack	4	rule+uai
+351	Mighty Blow	14	Attack	4	rule
+352	Crushing Blow	14	Attack	4	rule+uai
+353	Crude Swing	14	Attack	4	rule
+354	Earth Shaker	14	Attack	4	rule
+355	Devastating Hammer	14	Attack	4	rule
+356	Irresistible Blow	14	Attack	4	rule
+357	Counter Blow	14	Attack	4	rule+uai
+358	Backbreaker	14	Attack	4	rule
+359	Heavy Blow	14	Attack	4	rule+uai
+360	Staggering Blow	14	Attack	4	rule
+361	Dolyak Signet	7	SelfBuff	1	rule
+362	Warriors Cunning	16	SelfBuff	1	rule+uai
+363	Shield Bash	16	SelfBuff	1	rule+uai
+364	Charge	15	PartyBuff	1	def
+365	Victory Is Mine	15	GenericFoe	4	rule
+366	Fear Me	15	PartyBuff	1	rule
+367	Shields Up	15	PartyBuff	1	rule
+368	I Will Survive	15	PartyBuff	1	rule
+369	Dont Believe Their Lies	15	PartyBuff	1	rule
+370	Berserker Stance	3	SelfBuff	1	rule
+371	Balanced Stance	3	SelfBuff	1	rule
+372	Gladiators Defense	3	SelfBuff	1	rule
+373	Deflect Arrows	3	SelfBuff	1	rule
+374	Warriors Endurance	16	SelfBuff	1	def
+375	Dwarven Battle Stance	3	SelfBuff	1	rule
+376	Disciplined Stance	3	SelfBuff	1	def
+377	Wary Stance	3	SelfBuff	1	rule
+378	Shield Stance	3	SelfBuff	1	rule
+379	Bulls Charge	3	SelfBuff	1	def
+380	Bonettis Defense	3	SelfBuff	1	rule
+381	Hundred Blades	16	PBAoE	1	rule+uai
+382	Sever Artery	14	Attack	4	rule
+383	Galrath Slash	14	Attack	4	rule
+384	Gash	14	Attack	4	rule+uai
+385	Final Thrust	14	Attack	4	rule+uai
+386	Seeking Blade	14	Attack	4	rule
+387	Riposte	16	SelfBuff	1	rule+uai
+388	Deadly Riposte	16	SelfBuff	1	rule+uai
+389	Flourish	10	GenericSelf	1	rule
+390	Savage Slash	14	Interrupt	4	rule
+391	Hunters Shot	14	Attack	4	rule
+392	Pin Down	14	Attack	4	rule
+393	Crippling Shot	14	Attack	4	rule
+394	Power Shot	14	Attack	4	rule+uai
+395	Barrage	14	Attack	4	rule
+396	Dual Shot	14	Attack	4	rule+uai
+397	Quick Shot	14	Attack	4	rule
+398	Penetrating Attack	14	Attack	4	rule
+399	Distracting Shot	14	Interrupt	4	rule
+400	Precision Shot	14	Attack	4	rule
+401	Splinter Shot monster skill	14	Attack	4	rule
+402	Determined Shot	14	Attack	4	rule
+403	Called Shot	14	Attack	4	rule
+404	Poison Arrow	14	Attack	4	rule
+405	Oath Shot	14	Attack	4	rule
+406	Debilitating Shot	14	Attack	4	rule
+407	Point Blank Shot	14	Attack	4	rule+uai
+408	Concussion Shot	14	Interrupt	4	def
+409	Punishing Shot	14	Interrupt	4	rule
+410	Call of Ferocity	15	PartyBuff	1	rule
+411	Charm Animal	10	None	64	def
+412	Call of Protection	15	PartyBuff	1	rule
+413	Call of Elemental Protection	15	PartyBuff	1	rule
+414	Call of Vitality	15	PartyBuff	1	rule
+415	Call of Haste	15	PartyBuff	1	rule
+416	Call of Healing	15	PartyBuff	1	rule
+417	Call of Resilience	15	PartyBuff	1	rule
+418	Call of Feeding	15	PartyBuff	1	rule
+419	Call of the Hunter	15	PartyBuff	1	rule
+420	Call of Brutality	15	PartyBuff	1	rule
+421	Call of Disruption	15	PartyBuff	1	rule
+422	Revive Animal	10	HealSingle	1	def
+423	Symbiotic Bond	15	PartyBuff	1	rule
+424	Throw Dirt	10	DamageAoE	4	rule
+425	Dodge	3	SelfBuff	1	rule
+426	Savage Shot	14	Interrupt	4	rule
+427	Antidote Signet	7	CondRemoval	1	def
+428	Incendiary Arrows	14	Attack	4	rule
+429	Melandrus Arrows	19	SelfBuff	1	rule
+430	Marksmans Wager	19	SelfBuff	1	rule
+431	Ignite Arrows	19	SelfBuff	1	def
+432	Read the Wind	19	SelfBuff	1	def
+433	Kindle Arrows	19	SelfBuff	1	def
+434	Choking Gas	19	SelfBuff	1	rule
+435	Apply Poison	19	SelfBuff	1	def
+436	Comfort Animal	10	HealSingle	1	def
+437	Bestial Pounce	20	PetAttack	4	rule+uai
+438	Maiming Strike	20	PetAttack	4	rule+uai
+439	Feral Lunge	20	PetAttack	4	rule+uai
+440	Scavenger Strike	20	PetAttack	4	rule+uai
+441	Melandrus Assault	20	PetAttack	4	rule
+442	Ferocious Strike	20	PetAttack	4	rule
+443	Predators Pounce	20	PetAttack	4	rule
+444	Brutal Strike	20	PetAttack	4	rule+uai
+445	Disrupting Lunge	20	PetAttack	4	rule+uai
+446	Troll Unguent	10	HealSelf	1	rule+uai
+447	Otyughs Cry	15	PartyBuff	1	rule
+448	Escape	3	SelfBuff	1	rule
+449	Practiced Stance	3	SelfBuff	1	rule
+450	Whirling Defense	3	SelfBuff	1	rule
+451	Melandrus Resilience	3	SelfBuff	1	rule
+452	Dryders Defenses	3	SelfBuff	1	rule
+453	Lightning Reflexes	3	SelfBuff	1	rule
+454	Tigers Fury	3	SelfBuff	1	rule
+455	Storm Chaser	3	SelfBuff	1	rule
+456	Serpents Quickness	3	SelfBuff	1	rule
+457	Dust Trap	21	Trap	1	rule
+458	Barbed Trap	21	Trap	1	rule
+459	Flame Trap	21	Trap	1	rule
+460	Healing Spring	21	HealParty	1	def
+461	Spike Trap	21	Trap	1	rule
+462	Winter	22	Spirit	1	rule
+463	Winnowing	22	Spirit	1	rule
+464	Edge of Extinction	22	Spirit	1	rule
+465	Greater Conflagration	22	Spirit	1	rule
+466	Conflagration	22	Spirit	1	rule
+467	Fertile Season	22	Spirit	1	rule
+468	Symbiosis	22	Spirit	1	rule
+469	Primal Echoes	22	Spirit	1	rule
+470	Predatory Season	22	Spirit	1	rule
+471	Frozen Soil	22	Spirit	1	rule
+472	Favorable Winds	22	Spirit	1	rule
+473	High Winds	22	Spirit	1	rule
+474	Energizing Wind	22	Spirit	1	rule
+475	Quickening Zephyr	22	Spirit	1	rule
+476	Natures Renewal	22	Spirit	1	rule
+477	Muddy Terrain	22	Spirit	1	rule
+478	Bleeding	8	None	0	rule
+479	Blind	8	None	0	rule
+480	Burning	8	None	0	rule
+481	Crippled	8	None	0	rule
+482	Deep Wound	8	None	0	rule
+483	Disease	8	None	0	rule
+484	Poison	8	None	0	rule
+485	Dazed	8	None	0	rule
+486	Weakness	8	None	0	rule
+487	Cleansed	18	None	0	rule
+488	Eruption environment	5	PBAoE	1	rule
+489	Fire Storm environment	5	PBAoE	1	rule
+490	Vital Blessing monster skill	6	SelfBuff	1	rule
+491	Fount Of Maguuma	5	SelfBuff	1	rule
+492	Healing Fountain	5	SelfBuff	1	rule
+493	Icy Ground	5	SelfBuff	1	rule
+494	Maelstrom environment	5	PBAoE	1	rule
+495	Mursaat Tower skill	5	DamageAoE	4	rule
+496	Quicksand environment effect	5	SelfBuff	1	rule
+497	Curse of the Bloodstone	5	SelfBuff	1	rule
+498	Chain Lightning environment	5	PBAoE	1	rule
+499	Obelisk Lightning	5	GenericSelf	1	rule
+500	Tar	5	SelfBuff	1	rule
+501	Siege Attack	14	Attack	4	rule
+502	Resurrect Party	10	SelfBuff	1	rule
+503	Scepter of Orrs Aura	7	SelfBuff	1	rule
+504	Scepter of Orrs Power	7	SelfBuff	1	rule
+505	Burden Totem	4	GenericSelf	1	rule
+506	Splinter Mine skill	7	PBAoE	1	rule
+507	Entanglement	7	PBAoE	1	rule
+508	Dwarven Powder Keg	7	PBAoE	1	rule
+509	Seed of Resurrection	7	GenericSelf	1	rule
+510	Deafening Roar	10	PBAoE	1	rule
+511	Brutal Mauling	14	Attack	4	rule
+512	Crippling Attack	14	Attack	4	rule
+513	Charm Animal monster skill	10	None	0	rule
+514	Breaking Charm	10	None	0	rule
+515	Charr Buff	6	SelfBuff	64	rule
+516	Claim Resource	10	None	0	rule
+517	Claim Resource	10	None	0	rule
+518	Claim Resource	10	None	0	rule
+519	Claim Resource	10	None	0	rule
+520	Claim Resource	10	None	0	rule
+521	Claim Resource	10	None	0	rule
+522	Claim Resource	10	None	0	rule
+523	Claim Resource	10	None	0	rule
+524	Dozen Shot	14	Attack	4	rule
+525	Nibble	5	HealSelf	1	rule
+526	Claim Resource	10	None	0	rule
+527	Claim Resource	10	None	0	rule
+528	Reflection	17	None	0	rule
+529	Unknow	17	None	0	rule
+530	Giant Stomp	14	Attack	4	rule
+531	Agnars Rage	14	Attack	4	rule
+532	Healing Breeze Agnars Rage	6	HealSingle	3	rule+uai
+533	Crystal Haze	4	None	0	rule
+534	Crystal Bonds	4	Hex	4	rule+uai
+535	Jagged Crystal Skin	3	SelfBuff	1	rule
+536	Crystal Hibernation	10	SelfBuff	1	rule
+537	Stun Immunity	17	None	0	rule
+538	Invulnerability	17	None	0	rule
+539	Hunger of the Lich	14	None	0	rule
+540	Embrace the Pain	3	SelfBuff	1	rule
+541	Life Vortex	10	PBAoE	1	rule
+542	Oracle Link	4	GenericSelf	2	rule
+543	Guardian Pacify	5	SelfBuff	1	rule
+544	Soul Vortex	5	GenericSelf	1	rule
+545	Unknow	5	GenericAlly	2	rule
+546	Spectral Agony	10	DamageAoE	4	rule
+547	Natural Resistance	17	None	0	rule
+548	Natural Resistance	17	None	0	rule
+549	Guild Lord Aura	17	None	0	rule
+550	Critical Hit Probability	17	None	0	rule
+551	Stun on Critical Hit	17	None	0	rule
+552	Blood Splattering	17	None	0	rule
+553	Inanimate Object	17	None	0	rule
+554	Undead sensitivity to Light	17	None	0	rule
+555	Energy Boost	17	None	0	rule
+556	Health Drain	17	None	0	rule
+557	Immunity to Critical Hits	17	None	0	rule
+558	Titans get plus Health regen and set enemies on fire each time he is hit	17	None	0	rule
+559	Undying	17	None	0	rule
+560	Resurrect Gargoyle	5	Resurrect	8	rule
+561	Seal Regen	17	None	0	rule
+562	Lightning Orb	5	Damage	4	rule
+563	Wurm Siege Dunes of Despair	5	DamageAoE	4	rule
+564	Wurm Siege	5	DamageAoE	4	rule
+565	Claim Resource	10	PBAoE	1	rule
+566	Shiver Touch	5	Damage	4	rule
+567	Spontaneous Combustion	4	PBAoE	1	rule
+568	Vanish	5	GenericSelf	1	rule
+569	Victory or Death	16	PBAoE	1	rule
+570	Mark of Insecurity	4	Hex	4	rule+uai
+571	Disrupting Dagger	5	Interrupt	4	rule+uai
+572	Deadly Paradox	3	SelfBuff	1	rule
+573	Teleport Players	10	GenericSelf	1	rule
+574	Quest skill for Coastal Exam	7	Resurrect	1	rule
+575	Holy Blessing	1	None	0	rule
+576	Statues Blessing	5	GenericAlly	64	rule
+577	Siege Attack	14	Attack	4	rule
+578	Siege Attack	14	Attack	4	rule
+579	Domain of Skill Damage	5	SelfBuff	1	rule
+580	Domain of Energy Draining	5	SelfBuff	1	rule
+581	Domain of Elements	5	SelfBuff	1	rule
+582	Domain of Health Draining	5	SelfBuff	1	rule
+583	Domain of Slow	5	SelfBuff	1	rule
+584	Divine Fire	6	SelfBuff	1	rule
+585	Swamp Water	5	SelfBuff	1	rule
+586	Janthirs Gaze	5	SelfBuff	1	rule
+587	Fake Spell	5	GenericSelf	1	rule
+588	Charm Animal monster	10	Damage	4	rule
+589	Stormcaller skill	5	SelfBuff	1	rule
+590	Knock	10	GenericSelf	1	rule
+591	Quest Skill	5	GenericSelf	1	rule
+592	Rurik Must Live	5	SelfBuff	1	rule
+593	Blessing of the Kurzicks	1	None	0	rule
+594	Lichs Phylactery	17	None	0	rule
+595	Restore Life monster skill	5	Resurrect	1	rule
+596	Chimera of Intensity	6	SelfBuff	64	rule
+597	Unknow	17	None	0	rule
+598	Unknow	17	None	0	rule
+599	Unknow	17	None	0	rule
+600	Unknow	17	None	0	rule
+601	Unknow	17	None	0	rule
+602	Unknow	17	None	0	rule
+603	Unknow	17	None	0	rule
+604	Unknow	17	None	0	rule
+605	Unknow	17	None	0	rule
+606	Unknow	17	None	0	rule
+607	Unknow	17	None	0	rule
+608	Unknow	17	None	0	rule
+609	Unknow	17	None	0	rule
+610	Unknow	17	None	0	rule
+611	Unknow	17	None	0	rule
+612	Unknow	17	None	0	rule
+613	Unknow	17	None	0	rule
+614	Unknow	17	None	0	rule
+615	Unknow	17	None	0	rule
+616	Unknow	17	None	0	rule
+617	Unknow	17	None	0	rule
+618	Unknow	17	None	0	rule
+619	Unknow	17	None	0	rule
+620	Unknow	17	None	0	rule
+621	Unknow	17	None	0	rule
+622	Unknow	17	None	0	rule
+623	Unknow	17	None	0	rule
+624	Unknow	17	None	0	rule
+625	Unknow	17	None	0	rule
+626	Unknow	17	None	0	rule
+627	Unknow	17	None	0	rule
+628	Unknow	17	None	0	rule
+629	Unknow	17	None	0	rule
+630	Unknow	17	None	0	rule
+631	Unknow	17	None	0	rule
+632	Unknow	17	None	0	rule
+633	Unknow	17	None	0	rule
+634	Unknow	17	None	0	rule
+635	Unknow	17	None	0	rule
+636	Unknow	17	None	0	rule
+637	Unknow	17	None	0	rule
+638	Unknow	17	None	0	rule
+639	Unknow	17	None	0	rule
+640	Unknow	17	None	0	rule
+641	Unknow	17	None	0	rule
+642	Unknow	17	None	0	rule
+643	Unknow	17	None	0	rule
+644	Unknow	17	None	0	rule
+645	Unknow	17	None	0	rule
+646	Unknow	17	None	0	rule
+647	Unknow	17	None	0	rule
+648	Unknow	17	None	0	rule
+649	Unknow	17	None	0	rule
+650	Unknow	17	None	0	rule
+651	Unknow	17	None	0	rule
+652	Unknow	17	None	0	rule
+653	Unknow	17	None	0	rule
+654	Unknow	17	None	0	rule
+655	Unknow	17	None	0	rule
+656	Unknow	17	None	0	rule
+657	Life Draining	17	None	0	rule
+658	Unknow	17	None	0	rule
+659	Unknow	17	None	0	rule
+660	Unknow	17	None	0	rule
+661	Unknow	17	None	0	rule
+662	Unknow	17	None	0	rule
+663	Unknow	17	None	0	rule
+664	Unknow	17	None	0	rule
+665	Unknow	17	None	0	rule
+666	Unknow	17	None	0	rule
+667	Unknow	17	None	0	rule
+668	Unknow	17	None	0	rule
+669	Unknow	17	None	0	rule
+670	Unknow	17	None	0	rule
+671	Unknow	17	None	0	rule
+672	Unknow	17	None	0	rule
+673	Unknow	17	None	0	rule
+674	Unknow	17	None	0	rule
+675	Unknow	17	None	0	rule
+676	Unknow	17	None	0	rule
+677	Unknow	17	None	0	rule
+678	Unknow	17	None	0	rule
+679	Unknow	17	None	0	rule
+680	Unknow	17	None	0	rule
+681	Unknow	17	None	0	rule
+682	Unknow	17	None	0	rule
+683	Unknow	17	None	0	rule
+684	Unknow	17	None	0	rule
+685	Unknow	17	None	0	rule
+686	Unknow	17	None	0	rule
+687	Unknow	17	None	0	rule
+688	Unknow	17	None	0	rule
+689	Unknow	17	None	0	rule
+690	Unknow	17	None	0	rule
+691	Unknow	17	None	0	rule
+692	Unknow	17	None	0	rule
+693	Unknow	17	None	0	rule
+694	Unknow	17	None	0	rule
+695	Unknow	17	None	0	rule
+696	Unknow	17	None	0	rule
+697	Unknow	17	None	0	rule
+698	Unknow	17	None	0	rule
+699	Unknow	17	None	0	rule
+700	Unknow	17	None	0	rule
+701	Unknow	17	None	0	rule
+702	Unknow	17	None	0	rule
+703	Unknow	17	None	0	rule
+704	Unknow	17	None	0	rule
+705	Unknow	17	None	0	rule
+706	Unknow	17	None	0	rule
+707	Unknow	17	None	0	rule
+708	Unknow	17	None	0	rule
+709	Unknow	17	None	0	rule
+710	Unknow	17	None	0	rule
+711	Unknow	17	None	0	rule
+712	Unknow	17	None	0	rule
+713	Unknow	17	None	0	rule
+714	Unknow	17	None	0	rule
+715	Unknow	17	None	0	rule
+716	Unknow	17	None	0	rule
+717	Unknow	17	None	0	rule
+718	Unknow	17	None	0	rule
+719	Unknow	17	None	0	rule
+720	Unknow	17	None	0	rule
+721	Unknow	17	None	0	rule
+722	Unknow	17	None	0	rule
+723	Unknow	17	None	0	rule
+724	Unknow	17	None	0	rule
+725	Unknow	17	None	0	rule
+726	Unknow	17	None	0	rule
+727	Unknow	17	None	0	rule
+728	Unknow	17	None	0	rule
+729	Unknow	17	None	0	rule
+730	Unknow	17	None	0	rule
+731	Unknow	17	None	0	rule
+732	Unknow	17	None	0	rule
+733	Unknow	17	None	0	rule
+734	Unknow	17	None	0	rule
+735	Unknow	17	None	0	rule
+736	Unknow	17	None	0	rule
+737	Unknow	17	None	0	rule
+738	Unknow	17	None	0	rule
+739	Unknow	17	None	0	rule
+740	Unknow	17	None	0	rule
+741	Unknow	17	None	0	rule
+742	Unknow	17	None	0	rule
+743	Unknow	17	None	0	rule
+744	Unknow	17	None	0	rule
+745	Unknow	17	None	0	rule
+746	Unknow	17	None	0	rule
+747	Unknow	17	None	0	rule
+748	Unknow	17	None	0	rule
+749	Unknow	17	None	0	rule
+750	Unknow	17	None	0	rule
+751	Unknow	17	None	0	rule
+752	Unknow	17	None	0	rule
+753	Unknow	17	None	0	rule
+754	Unknow	17	None	0	rule
+755	Unknow	17	None	0	rule
+756	Unknow	17	None	0	rule
+757	Unknow	17	None	0	rule
+758	Unknow	17	None	0	rule
+759	Unknow	17	None	0	rule
+760	Unknow	17	None	0	rule
+761	Unknow	17	None	0	rule
+762	Unknow	17	None	0	rule
+763	Jaundiced Gaze	6	EnchRemoval	4	def
+764	Wail of Doom	4	Hex	4	rule+uai
+765	Heros Insight	2	None	0	rule
+766	Gaze of Contempt	5	Damage	4	def
+767	Berserkers Insight	2	None	0	rule
+768	Slayers Insight	2	None	0	rule
+769	Vipers Defense	5	GenericAlly	64	rule
+770	Return	5	None	2	def
+771	Aura of Displacement	6	GenericFoe	4	def
+772	Generous Was Tsungrai	24	ItemSpell	1	def
+773	Mighty Was Vorizun	24	ItemSpell	1	rule
+774	To the Death	18	None	0	rule
+775	Death Blossom	14	Attack	4	rule+uai
+776	Twisting Fangs	14	Attack	4	rule+uai
+777	Horns of the Ox	14	Attack	4	rule+uai
+778	Falling Spider	14	Attack	4	rule+uai
+779	Black Lotus Strike	14	Attack	4	rule+uai
+780	Fox Fangs	14	Attack	4	rule+uai
+781	Moebius Strike	14	Attack	4	rule+uai
+782	Jagged Strike	14	Attack	4	rule
+783	Unsuspecting Strike	14	Attack	4	rule
+784	Entangling Asp	5	Damage	4	rule+uai
+785	Mark of Death	4	Hex	4	rule+uai
+786	Iron Palm	10	Damage	4	rule+uai
+787	Resilient Weapon	25	WeaponSpell	3	def
+788	Blind Was Mingson	24	ItemSpell	1	def
+789	Grasping Was Kuurong	24	ItemSpell	1	def
+790	Vengeful Was Khanhei	24	ItemSpell	1	rule
+791	Flesh of My Flesh	5	Resurrect	8	rule+uai
+792	Splinter Weapon	25	WeaponSpell	3	def
+793	Weapon of Warding	25	WeaponSpell	3	def
+794	Wailing Weapon	25	WeaponSpell	3	rule
+795	Nightmare Weapon	25	WeaponSpell	3	rule
+796	Sorrows Flame	5	PBAoE	1	rule
+797	Sorrows Fist	5	PBAoE	1	rule
+798	Blast Furnace	5	GenericSelf	1	rule
+799	Beguiling Haze	5	Damage	4	rule
+800	Enduring Toxin	4	Hex	4	rule+uai
+801	Shroud of Silence	4	Hex	4	rule+uai
+802	Expose Defenses	4	Hex	4	rule+uai
+803	Power Leech	4	Interrupt	4	rule+uai
+804	Arcane Languor	4	Hex	4	rule+uai
+805	Animate Vampiric Horror	5	Corpse	1	rule
+806	Cultists Fervor	6	SelfBuff	1	rule
+807	Unknow	6	SelfBuff	1	rule
+808	Reapers Mark	4	Hex	4	rule+uai
+809	Shatterstone	4	Hex	4	rule
+810	Protectors Defense	10	PBAoE	1	rule
+811	Run as One	3	SelfBuff	1	rule
+812	Defiant Was Xinrae	24	ItemSpell	1	def
+813	Lyssas Aura	6	SelfBuff	1	rule
+814	Shadow Refuge	6	HealSelf	1	rule
+815	Scorpion Wire	4	Hex	4	rule+uai
+816	Mirrored Stance	4	Hex	4	rule+uai
+817	Discord	5	Damage	4	def
+818	Well of Weariness	9	Corpse	1	rule
+819	Vampiric Spirit	6	GenericFoe	4	rule
+820	Depravity	4	Hex	4	rule
+821	Icy Veins	4	Hex	4	rule
+822	Weaken Knees	4	Hex	4	rule+uai
+823	Burning Speed	6	SelfBuff	1	rule
+824	Lava Arrows	5	DamageAoE	4	rule
+825	Bed of Coals	5	DamageAoE	4	def
+826	Shadow Form	6	SelfBuff	1	def
+827	Siphon Strength	4	Hex	4	rule+uai
+828	Vile Miasma	4	Hex	4	def
+829	Veratas Promise	6	SelfBuff	1	rule
+830	Ray of Judgment	5	DamageAoE	4	rule
+831	Primal Rage	3	SelfBuff	1	rule
+832	Animate Flesh Golem	5	Corpse	1	rule
+833	Borrowed Energy	6	GenericFoe	4	rule
+834	Reckless Haste	4	Hex	4	def
+835	Blood Bond	4	Hex	4	rule
+836	Ride the Lightning	5	Damage	4	def
+837	Energy Boon	6	AllyBuff	3	rule
+838	Dwaynas Sorrow	6	AllyBuff	3	rule
+839	Retreat	15	PartyBuff	1	def
+840	Poisoned Heart	5	PBAoE	1	rule
+841	Fetid Ground	5	Damage	4	rule+uai
+842	Arc Lightning	5	DamageAoE	4	rule
+843	Gust	6	SelfBuff	64	rule
+844	Churning Earth	5	DamageAoE	4	rule
+845	Liquid Flame	5	DamageAoE	4	def
+846	Steam	5	Damage	4	rule
+847	Boon Signet	7	HealSingle	3	rule
+848	Reverse Hex	6	HexRemoval	3	rule+uai
+849	Lacerating Chop	14	Attack	4	rule+uai
+850	Fierce Blow	14	Attack	4	rule+uai
+851	Sun and Moon Slash	14	Attack	4	rule
+852	Splinter Shot	14	Attack	4	rule
+853	Melandrus Shot	14	Attack	4	rule
+854	Snare	21	Trap	1	rule
+855	Chomper	5	PBAoE	1	rule
+856	Kilroy Stonekin	15	PartyBuff	1	rule
+857	Adventurers Insight	2	None	0	rule
+858	Dancing Daggers	5	DamageAoE	4	rule
+859	Conjure Nightmare	4	Hex	4	rule+uai
+860	Signet of Disruption	7	Interrupt	4	rule+uai
+861	Dissipation	4	Hex	4	rule+uai
+862	Ravenous Gaze	5	DamageAoE	4	rule
+863	Order of Apostasy	6	PartyBuff	1	rule
+864	Oppressive Gaze	5	DamageAoE	4	rule
+865	Lightning Hammer	5	Damage	4	rule
+866	Vapor Blade	5	Damage	4	def
+867	Healing Light	5	HealSingle	3	rule+uai
+868	Aim True	15	PartyBuff	1	rule
+869	Coward	15	GenericFoe	4	rule+uai
+870	Pestilence	22	Spirit	1	rule
+871	Shadowsong	22	Spirit	1	rule
+872	Shadowsong attack	14	None	0	rule
+873	Resurrect monster skill	5	Resurrect	1	rule
+874	Consuming Flames	14	None	0	rule
+875	Chains of Enslavement	18	None	0	rule
+876	Signet of Shadows	7	Damage	4	rule+uai
+877	Lyssas Balance	5	Damage	4	rule
+878	Visions of Regret	4	Hex	4	def
+879	Illusion of Pain	4	Hex	4	rule+uai
+880	Stolen Speed	4	Hex	4	rule
+881	Ether Signet	7	Energy	1	def
+882	Signet of Disenchantment	7	Damage	4	rule
+883	Vocal Minority	4	Hex	4	rule
+884	Searing Flames	5	DamageAoE	4	def
+885	Shield Guardian	6	PartyBuff	1	rule
+886	Restful Breeze	6	AllyBuff	3	rule
+887	Signet of Rejuvenation	7	HealSingle	3	rule+uai
+888	Whirling Axe	14	Attack	4	rule
+889	Forceful Blow	14	Attack	4	rule
+890	Headshot	15	PartyBuff	1	rule
+891	None Shall Pass	15	PartyBuff	1	rule
+892	Quivering Blade	14	Attack	4	rule
+893	Seeking Arrows	19	SelfBuff	1	rule
+894	Rampagers Insight	2	None	0	rule
+895	Hunters Insight	2	None	0	rule
+896	Amulet of Protection	17	None	0	rule
+897	Oath of Healing	5	None	0	rule
+898	Overload	4	Hex	4	def
+899	Images of Remorse	4	Hex	4	def
+900	Shared Burden	4	Hex	4	def
+901	Soul Bind	4	Hex	4	rule+uai
+902	Blood of the Aggressor	5	Damage	4	rule+uai
+903	Icy Prism	5	DamageAoE	4	def
+904	Furious Axe	14	Attack	4	rule
+905	Auspicious Blow	14	Attack	4	rule+uai
+906	On Your Knees	15	PartyBuff	1	rule
+907	Dragon Slash	14	Attack	4	rule
+908	Marauders Shot	14	Attack	4	rule
+909	Focused Shot	14	Attack	4	rule
+910	Spirit Rift	5	DamageAoE	4	rule
+911	Union	22	Spirit	1	rule
+912	Blessing of the Kurzicks	1	None	0	rule
+913	Tranquil Was Tanasen	24	ItemSpell	1	rule
+914	Consume Soul	5	DamageAoE	4	rule
+915	Spirit Light	5	HealSingle	3	rule+uai
+916	Lamentation	4	Hex	4	rule
+917	Rupture Soul	5	GenericAlly	64	def
+918	Spirit to Flesh	5	GenericAlly	64	def
+919	Spirit Burn	5	DamageAoE	4	rule
+920	Destruction	22	Spirit	1	rule
+921	Dissonance	22	Spirit	1	rule
+922	Dissonance attack	14	None	0	rule
+923	Disenchantment	22	Spirit	1	rule
+924	Disenchantment attack	14	None	0	rule
+925	Recall	6	None	2	def
+926	Sharpen Daggers	6	SelfBuff	1	rule
+927	Shameful Fear	4	Hex	4	rule+uai
+928	Shadow Shroud	4	Hex	4	rule+uai
+929	Shadow of Haste	3	SelfBuff	1	rule
+930	Auspicious Incantation	6	SelfBuff	1	rule
+931	Power Return	5	Interrupt	4	rule+uai
+932	Complicate	5	Interrupt	4	rule
+933	Shatter Storm	5	Damage	4	rule+uai
+934	Unnatural Signet	7	DamageAoE	4	def
+935	Rising Bile	4	Hex	4	rule
+936	Envenom Enchantments	5	Damage	4	rule+uai
+937	Shockwave	5	PBAoE	1	rule
+938	Ward of Stability	11	Ward	1	def
+939	Icy Shackles	4	Hex	4	rule+uai
+940	Cry of Lament	5	HealParty	1	rule
+941	Blessed Light	5	HexRemoval	3	rule+uai
+942	Withdraw Hexes	5	HexRemoval	3	rule+uai
+943	Extinguish	5	CondRemoval	1	rule
+944	Signet of Strength	7	SelfBuff	1	rule
+945	REMOVE With Haste	15	PartyBuff	1	rule
+946	Trappers Focus	19	SelfBuff	1	rule
+947	Brambles	22	Spirit	1	rule
+948	Desperate Strike	14	Attack	4	rule
+949	Way of the Fox	6	SelfBuff	1	rule
+950	Shadowy Burden	4	Hex	4	rule+uai
+951	Siphon Speed	4	Hex	4	rule+uai
+952	Deaths Charge	5	Damage	4	def
+953	Power Flux	4	Interrupt	4	rule+uai
+954	Expel Hexes	5	HexRemoval	3	rule+uai
+955	Rip Enchantment	5	Damage	4	rule+uai
+956	Energy Font	6	SelfBuff	1	rule
+957	Spell Shield	6	SelfBuff	1	rule
+958	Healing Whisper	5	HealSingle	2	rule+uai
+959	Ethereal Light	5	HealSingle	3	rule+uai
+960	Release Enchantments	5	HealSelf	1	rule
+961	Lacerate	22	Spirit	1	rule
+962	Spirit Transfer	5	HealSingle	3	def
+963	Restoration	22	Resurrect	1	rule
+964	Vengeful Weapon	25	WeaponSpell	3	def
+965	Archemorus Strike	5	GenericSelf	1	rule
+966	Spear of Archemorus Level 1	5	GenericSelf	1	rule
+967	Spear of Archemorus Level 2	5	GenericSelf	1	rule
+968	Spear of Archemorus Level 3	5	GenericSelf	1	rule
+969	Spear of Archemorus Level 4	5	GenericSelf	1	rule
+970	Spear of Archemorus Level 5	5	GenericSelf	1	rule
+971	Argos Cry	5	DamageAoE	4	rule
+972	Jade Fury	5	None	0	rule
+973	Blinding Powder	5	DamageAoE	4	rule
+974	Mantis Touch	10	Damage	4	rule
+975	Exhausting Assault	14	Attack	4	rule+uai
+976	Repeating Strike	14	Attack	4	rule+uai
+977	Way of the Lotus	6	SelfBuff	1	rule
+978	Mark of Instability	4	Hex	4	rule+uai
+979	Mistrust	4	Hex	4	def
+980	Feast of Souls	5	HealParty	1	def
+981	Recuperation	22	Spirit	1	rule
+982	Shelter	22	Spirit	1	rule
+983	Weapon of Shadow	25	WeaponSpell	3	def
+984	Torch Enchantment	6	SelfBuff	1	rule
+985	Caltrops	5	DamageAoE	4	rule
+986	Nine Tail Strike	14	Attack	4	rule+uai
+987	Way of the Empty Palm	6	SelfBuff	1	rule
+988	Temple Strike	14	Attack	4	rule+uai
+989	Golden Phoenix Strike	14	Attack	4	rule+uai
+990	Expunge Enchantments	10	Damage	4	rule+uai
+991	Deny Hexes	5	HexRemoval	3	rule+uai
+992	Triple Chop	14	Attack	4	rule
+993	Enraged Smash	14	Attack	4	rule+uai
+994	Renewing Smash	14	Attack	4	rule+uai
+995	Tiger Stance	3	SelfBuff	1	rule
+996	Standing Slash	14	Attack	4	rule
+997	Famine	22	Spirit	1	rule
+998	Torch Hex	4	GenericSelf	1	rule
+999	Torch Degeneration Hex	4	GenericSelf	1	rule
+1000	Blinding Snow	5	Interrupt	4	rule
+1001	Avalanche skill	5	DamageAoE	4	rule
+1002	Snowball	5	DamageAoE	4	rule
+1003	Mega Snowball	5	Damage	4	rule
+1004	Yuletide	18	None	0	rule
+1005	Ice Skates	3	SelfBuff	1	rule
+1006	Ice Fort	6	SelfBuff	1	rule
+1007	Yellow Snow	19	SelfBuff	1	rule
+1008	Hidden Rock	12	SelfBuff	1	rule
+1009	Snow Down the Shirt	4	Hex	4	rule+uai
+1010	Mmmm Snowcone	15	PartyBuff	1	rule
+1011	Holiday Blues	5	Corpse	1	rule
+1012	Icicles	4	Hex	4	rule
+1013	Ice Breaker	6	AllyBuff	3	rule
+1014	Lets Get Em	15	PartyBuff	1	rule
+1015	Flurry of Ice	5	DamageAoE	4	rule
+1016	Snowball NPC	5	GenericAlly	3	rule
+1017	Undying	17	None	0	rule
+1018	Critical Eye	16	SelfBuff	1	rule+uai
+1019	Critical Strike	14	Attack	4	rule+uai
+1020	Blades of Steel	14	Attack	4	rule+uai
+1021	Jungle Strike	14	Attack	4	rule+uai
+1022	Wild Strike	14	Attack	4	rule+uai
+1023	Leaping Mantis Sting	14	Attack	4	rule+uai
+1024	Black Mantis Thrust	14	Attack	4	rule+uai
+1025	Disrupting Stab	14	Interrupt	4	rule
+1026	Golden Lotus Strike	14	Attack	4	rule+uai
+1027	Critical Defenses	6	SelfBuff	1	rule
+1028	Way of Perfection	6	SelfBuff	1	rule
+1029	Dark Apostasy	6	SelfBuff	1	rule
+1030	Locusts Fury	6	SelfBuff	1	rule
+1031	Shroud of Distress	6	SelfBuff	1	rule
+1032	Heart of Shadow	5	HealSelf	1	def
+1033	Impale	10	Damage	4	rule+uai
+1034	Seeping Wound	4	Hex	4	rule+uai
+1035	Assassins Promise	4	Hex	4	rule+uai
+1036	Signet of Malice	7	Damage	4	rule
+1037	Dark Escape	3	SelfBuff	1	def
+1038	Crippling Dagger	5	DamageAoE	4	rule+uai
+1039	Star Strike	10	PBAoE	1	rule
+1040	Spirit Walk	5	None	64	def
+1041	Unseen Fury	3	SelfBuff	1	rule
+1042	Flashing Blades	3	SelfBuff	1	rule
+1043	Dash	3	SelfBuff	1	rule+uai
+1044	Dark Prison	4	Hex	4	rule+uai
+1045	Palm Strike	10	Damage	4	rule
+1046	Assassin of Lyssa	1	None	0	rule
+1047	Mesmer of Lyssa	1	None	0	rule
+1048	Revealed Enchantment	5	Energy	4	rule+uai
+1049	Revealed Hex	5	HexRemoval	3	rule+uai
+1050	Disciple of Energy	1	None	0	rule
+1051	Empathy Koro	4	Hex	4	rule+uai
+1052	Accumulated Pain	5	Damage	4	rule+uai
+1053	Psychic Distraction	5	Interrupt	4	rule+uai
+1054	Ancestors Visage	6	AllyBuff	3	rule
+1055	Recurring Insecurity	4	Hex	4	rule+uai
+1056	Kitahs Burden	4	Hex	4	rule+uai
+1057	Psychic Instability	5	DamageAoE	4	rule+uai
+1058	Chaotic Power	1	None	0	rule
+1059	Hex Eater Signet	7	HexRemoval	3	rule
+1060	Celestial Haste	5	SelfBuff	1	rule
+1061	Feedback	5	Damage	4	rule+uai
+1062	Arcane Larceny	5	Damage	4	rule+uai
+1063	Chaotic Ward	1	None	0	rule
+1064	Favor of the Gods	1	None	0	rule
+1065	Dark Aura blessing	1	None	0	rule
+1066	Spoil Victor	4	Hex	4	rule+uai
+1067	Lifebane Strike	5	Damage	4	rule+uai
+1068	Bitter Chill	5	Damage	4	rule+uai
+1069	Taste of Pain	5	Damage	4	rule+uai
+1070	Defile Enchantments	5	DamageAoE	4	rule+uai
+1071	Shivers of Dread	4	Hex	4	rule+uai
+1072	Star Servant	10	GenericSelf	1	rule
+1073	Necromancer of Grenth	1	None	0	rule
+1074	Ritualist of Grenth	1	None	0	rule
+1075	Vampiric Swarm	5	DamageAoE	4	rule
+1076	Blood Drinker	5	Damage	4	rule
+1077	Vampiric Bite	10	Damage	4	rule
+1078	Wallows Bite	10	Damage	4	rule
+1079	Enfeebling Touch	10	Damage	4	rule
+1080	Disciple of Ice	1	None	0	rule
+1081	Teinais Wind	5	DamageAoE	4	rule
+1082	Shock Arrow	5	DamageAoE	4	rule+uai
+1083	Unsteady Ground	5	DamageAoE	4	rule
+1084	Sliver Armor	6	SelfBuff	1	rule
+1085	Ash Blast	4	Hex	4	rule
+1086	Dragons Stomp	5	DamageAoE	4	def
+1087	Unnatural Resistance	1	None	0	rule
+1088	Second Wind	5	Energy	1	rule
+1089	Cloak of Faith	1	None	0	rule
+1090	Smoldering Embers	4	Hex	4	rule+uai
+1091	Double Dragon	6	AllyBuff	2	def
+1092	Disciple of the Air	1	None	0	rule
+1093	Teinais Heat	11	Ward	1	def
+1094	Breath of Fire	5	DamageAoE	4	rule
+1095	Star Burst	5	DamageAoE	4	rule
+1096	Glyph of Essence	12	SelfBuff	1	rule
+1097	Teinais Prison	4	Hex	4	rule+uai
+1098	Mirror of Ice	4	PBAoE	64	rule
+1099	Teinais Crystals	5	DamageAoE	4	rule
+1100	Celestial Storm	10	DamageAoE	4	rule
+1101	Monk of Dwayna	1	None	0	rule
+1102	Aura of the Grove	23	None	0	rule
+1103	Cathedral Collapse	23	None	0	rule
+1104	Miasma	23	None	0	rule
+1105	Acid Trap	23	None	0	rule
+1106	Shield of Saint Viktor	5	PBAoE	1	rule
+1107	Urn of Saint Viktor Level 1	5	GenericSelf	1	rule
+1108	Urn of Saint Viktor Level 2	5	GenericSelf	1	rule
+1109	Urn of Saint Viktor Level 3	5	GenericSelf	1	rule
+1110	Urn of Saint Viktor Level 4	5	GenericSelf	1	rule
+1111	Urn of Saint Viktor Level 5	5	GenericSelf	1	rule
+1112	Aura of Light	1	None	0	rule
+1113	Kirins Wrath	5	PBAoE	1	rule
+1114	Spirit Bond	6	Protect	3	rule
+1115	Air of Enchantment	6	Protect	2	rule
+1116	Warriors Might	1	None	0	rule
+1117	Heavens Delight	5	HealParty	1	rule
+1118	Healing Burst	5	HealSingle	3	rule+uai
+1119	Kareis Healing Circle	5	HealParty	1	rule
+1120	Jameis Gaze	5	HealSingle	2	rule
+1121	Gift of Health	5	HealSingle	2	rule+uai
+1122	Battle Fervor	1	None	0	rule
+1123	Life Sheath	6	Protect	3	rule+uai
+1124	Star Shine	10	GenericSelf	1	rule
+1125	Disciple of Fire	1	None	0	rule
+1126	Empathic Removal	5	HexRemoval	2	rule+uai
+1127	Warrior of Balthazar	1	None	0	rule
+1128	Resurrection Chant	5	Resurrect	8	rule+uai
+1129	Word of Censure	5	DamageAoE	4	rule+uai
+1130	Spear of Light	5	Damage	4	rule+uai
+1131	Stonesoul Strike	10	Damage	4	rule+uai
+1132	Shielding Branches	1	None	0	rule
+1133	Drunken Blow	14	Attack	4	rule
+1134	Leviathans Sweep	14	Attack	4	rule
+1135	Jaizhenju Strike	14	Attack	4	rule
+1136	Penetrating Chop	14	Attack	4	rule
+1137	Yeti Smash	14	Attack	4	rule
+1138	Disciple of the Earth	1	None	0	rule
+1139	Ranger of Melandru	1	None	0	rule
+1140	Storm of Swords	10	PBAoE	1	rule
+1141	You Will Die	15	GenericFoe	4	rule
+1142	Auspicious Parry	3	SelfBuff	1	rule
+1143	Strength of the Oak	1	None	0	rule
+1144	Silverwing Slash	14	Attack	4	rule
+1145	Destroy Enchantment	23	None	0	rule
+1146	Shove	10	Damage	4	rule+uai
+1147	Base Defense	10	None	0	rule
+1148	Carrier Defense	10	None	0	rule
+1149	The Chalice of Corruption	10	GenericSelf	1	rule
+1150	Unknow	17	None	0	rule
+1151	Song of the Mists	15	PartyBuff	1	rule
+1152	Demonic Agility	6	SelfBuff	1	rule
+1153	Blessing of the Kirin	6	None	0	rule
+1154	Emperor Degen	17	None	0	rule
+1155	Juggernaut Toss	10	None	0	rule
+1156	Aura of the Juggernaut	16	PBAoE	1	rule
+1157	Star Shards	4	GenericSelf	1	rule
+1158	Unknow	17	None	0	rule
+1159	Unknow	17	None	0	rule
+1160	Unknow	17	None	0	rule
+1161	Unknow	17	None	0	rule
+1162	Unknow	17	None	0	rule
+1163	Unknow	17	None	0	rule
+1164	Unknow	17	None	0	rule
+1165	Unknow	17	None	0	rule
+1166	Unknow	17	None	0	rule
+1167	Unknow	17	None	0	rule
+1168	Unknow	17	None	0	rule
+1169	Unknow	4	GenericSelf	1	rule
+1170	Unknow	17	None	0	rule
+1171	Unknow	17	None	0	rule
+1172	Turtle Shell	3	SelfBuff	1	rule
+1173	Exposed Underbelly	17	None	0	rule
+1174	Cathedral Collapse	5	SelfBuff	1	rule
+1175	Blood of zu Heltzer	5	GenericSelf	1	rule
+1176	Afflicted Soul Explosion	17	None	0	rule
+1177	Invincibility	17	None	0	rule
+1178	Last Stand	10	GenericSelf	1	rule
+1179	Dark Chain Lightning	14	None	0	rule
+1180	Seadragon Health Trigger	17	None	0	rule
+1181	Corrupted Breath	19	SelfBuff	1	rule
+1182	Renewing Corruption	3	None	0	rule
+1183	Corrupted Dragon Spores	5	None	0	rule+uai
+1184	Corrupted Dragon Scales	5	None	0	rule
+1185	Construct Possession	10	None	0	rule
+1186	Siege Turtle Attack The Eternal Grove	10	None	0	rule
+1187	Siege Turtle Attack Fort Aspenwood	10	None	0	rule
+1188	Siege Turtle Attack Gyala Hatchery	10	None	0	rule
+1189	Of Royal Blood	5	GenericSelf	1	rule
+1190	Passage to Tahnnakai	5	GenericSelf	1	rule
+1191	Sundering Attack	14	Attack	4	rule
+1192	Zojuns Shot	14	Attack	4	rule
+1193	Consume Spirit	23	None	0	rule
+1194	Predatory Bond	15	PartyBuff	1	rule
+1195	Heal as One	10	HealSelf	1	rule
+1196	Zojuns Haste	3	SelfBuff	1	rule
+1197	Needling Shot	14	Attack	4	def
+1198	Broad Head Arrow	14	Attack	4	rule+uai
+1199	Glass Arrows	19	SelfBuff	1	def
+1200	Archers Signet	7	SelfBuff	1	rule
+1201	Savage Pounce	20	PetAttack	4	rule+uai
+1202	Enraged Lunge	20	PetAttack	4	rule+uai
+1203	Bestial Mauling	20	PetAttack	4	rule+uai
+1204	Energy Drain effect	23	None	0	rule
+1205	Poisonous Bite	20	PetAttack	4	rule+uai
+1206	Pounce	20	PetAttack	4	rule+uai
+1207	Celestial Stance	10	SelfBuff	1	rule
+1208	Sheer Exhaustion	23	None	0	rule
+1209	Bestial Fury	3	SelfBuff	1	rule
+1210	Life Drain	23	None	0	rule
+1211	Vipers Nest	21	Trap	1	rule
+1212	Equinox	22	Spirit	1	rule
+1213	Tranquility	22	Spirit	1	rule
+1214	Acute Weakness	23	None	0	rule
+1215	Clamor of Souls	5	DamageAoE	4	rule
+1216	Unknow	5	GenericSelf	1	rule
+1217	Ritual Lord	16	SelfBuff	1	rule
+1218	Cruel Was Daoshen	24	ItemSpell	1	def
+1219	Protective Was Kaolai	24	ItemSpell	1	def
+1220	Attuned Was Songkai	24	ItemSpell	1	rule
+1221	Resilient Was Xiko	24	ItemSpell	1	def
+1222	Lively Was Naomei	24	ItemSpell	1	def
+1223	Anguished Was Lingwah	24	ItemSpell	1	def
+1224	Draw Spirit	5	None	64	def
+1225	Channeled Strike	5	Damage	4	rule
+1226	Spirit Boon Strike	5	DamageAoE	4	rule
+1227	Essence Strike	5	Energy	4	rule+uai
+1228	Spirit Siphon	5	Energy	1	def
+1229	Explosive Growth	6	SelfBuff	1	rule
+1230	Boon of Creation	6	SelfBuff	1	rule
+1231	Spirit Channeling	6	EnergyBuff	1	def
+1232	Armor of Unfeeling	10	SelfBuff	1	def
+1233	Soothing Memories	5	HealSingle	3	rule+uai
+1234	Mend Body and Soul	5	CondRemoval	3	rule+uai
+1235	Dulled Weapon	4	Hex	4	rule
+1236	Binding Chains	4	Hex	4	rule
+1237	Painful Bond	4	Hex	4	rule
+1238	Signet of Creation	7	GenericSelf	1	rule
+1239	Signet of Spirits	7	Spirit	1	def
+1240	Soul Twisting	16	SelfBuff	1	def
+1241	Celestial Summoning	10	SelfBuff	1	rule
+1242	Archemorus Strike Celestial Summoning	5	GenericSelf	1	rule
+1243	Shield of Saint Viktor Celestial Summoning	5	PBAoE	1	rule
+1244	Ghostly Haste	6	SelfBuff	1	def
+1245	Gaze from Beyond	5	DamageAoE	4	rule
+1246	Ancestors Rage	10	GenericAlly	3	rule
+1247	Pain	22	Spirit	1	rule
+1248	Pain attack	14	None	0	rule
+1249	Displacement	22	Spirit	1	rule
+1250	Preservation	22	Spirit	1	rule
+1251	Life	22	Spirit	1	rule
+1252	Earthbind	22	Spirit	1	rule
+1253	Bloodsong	22	Spirit	1	rule
+1254	Bloodsong attack	14	None	0	rule
+1255	Wanderlust	22	Spirit	1	rule
+1256	Wanderlust attack	14	None	0	rule
+1257	Spirit Light Weapon	25	WeaponSpell	3	def
+1258	Brutal Weapon	25	WeaponSpell	3	def
+1259	Guided Weapon	25	WeaponSpell	3	rule
+1260	Meekness	4	Hex	4	def
+1261	Frigid Armor	6	SelfBuff	1	def
+1262	Healing Ring	5	HealParty	1	def
+1263	Renew Life	5	Resurrect	8	rule+uai
+1264	Doom	5	Damage	4	rule
+1265	Wielders Boon	5	HealSingle	3	rule
+1266	Soothing	22	Spirit	1	rule
+1267	Vital Weapon	25	WeaponSpell	3	def
+1268	Weapon of Quickening	25	WeaponSpell	3	def
+1269	Signet of Rage	7	Damage	4	rule
+1270	Fingers of Chaos	3	None	0	rule
+1271	Echoing Banishment	15	None	0	rule
+1272	Suicidal Impulse	4	None	0	rule
+1273	Impossible Odds	10	None	0	rule
+1274	Battle Scars	3	None	0	rule
+1275	Riposting Shadows	3	None	0	rule
+1276	Meditation of the Reaper	10	None	0	rule
+1277	Battle Cry	5	SelfBuff	1	rule
+1278	Elemental Defense Zone	5	GenericSelf	1	rule
+1279	Melee Defense Zone	5	GenericSelf	1	rule
+1280	Blessed Water	23	None	0	rule
+1281	Defiled Water	23	None	0	rule
+1282	Stone Spores	23	None	0	rule
+1283	Turret Arrow	5	GenericSelf	1	rule
+1284	Blood Flower skill	5	GenericSelf	1	rule
+1285	Fire Flower skill	5	PBAoE	1	rule
+1286	Poison Arrow flower	5	GenericSelf	1	rule
+1287	Haiju Lagoon Water	23	None	0	rule
+1288	Aspect of Exhaustion	23	None	0	rule
+1289	Aspect of Exposure	23	None	0	rule
+1290	Aspect of Surrender	23	None	0	rule
+1291	Aspect of Death	23	None	0	rule
+1292	Aspect of Soothing	23	None	0	rule
+1293	Aspect of Pain	23	None	0	rule
+1294	Aspect of Lethargy	23	None	0	rule
+1295	Aspect of Depletion energy loss	23	None	0	rule
+1296	Aspect of Failure	23	None	0	rule
+1297	Aspect of Shadows	23	None	0	rule
+1298	Scorpion Aspect	23	None	0	rule
+1299	Aspect of Fear	23	None	0	rule
+1300	Aspect of Depletion energy depletion damage	23	None	0	rule
+1301	Aspect of Decay	23	None	0	rule
+1302	Aspect of Torment	23	None	0	rule
+1303	Nightmare Aspect	23	None	0	rule
+1304	Spiked Coral	23	None	0	rule
+1305	Shielding Urn skill	5	PBAoE	1	rule
+1306	Extensive Plague Exposure	18	None	0	rule
+1307	Forests Binding	10	None	0	rule
+1308	Exploding Spores	10	PBAoE	1	rule
+1309	Suicide Energy	14	Attack	4	rule
+1310	Suicide Health	14	Attack	4	rule
+1311	Nightmare Refuge	6	None	0	rule
+1312	Oni Health Lock	17	None	0	rule
+1313	Oni Shadow Health Lock	17	None	0	rule
+1314	Signet of Attainment	7	GenericSelf	1	rule
+1315	Rage of the Sea	10	GenericAlly	2	rule
+1316	Meditation of the Reaper	10	SelfBuff	1	rule
+1317	Unknow	10	SelfBuff	1	rule
+1318	Fireball obelisk	5	PBAoE	1	rule
+1319	Final Thrust	14	None	0	rule
+1320	Unknow	17	None	0	rule
+1321	Unknow	17	None	0	rule
+1322	Unknow	17	None	0	rule
+1323	Sugar Rush medium	6	SelfBuff	1	rule
+1324	Torment Slash	10	DamageAoE	4	rule
+1325	Spirit of the Festival	18	None	0	rule
+1326	Trade Winds	10	None	0	rule+uai
+1327	Dragon Blast	10	None	0	rule
+1328	Imperial Majesty	10	None	0	rule
+1329	Monster doesnt get death penalty	17	None	0	rule
+1330	Twisted Spikes	21	Trap	1	rule
+1331	Marble Trap	21	Trap	1	rule
+1332	Shadow Tripwire	21	Trap	1	rule
+1333	Extend Conditions	5	DamageAoE	4	rule+uai
+1334	Hypochondria	5	DamageAoE	4	rule
+1335	Wastrels Demise	4	Hex	4	def
+1336	Spiritual Pain	5	DamageAoE	4	rule
+1337	Drain Delusions	5	Energy	4	rule+uai
+1338	Persistence of Memory	6	SelfBuff	1	rule
+1339	Symbols of Inspiration	10	Damage	4	rule
+1340	Symbolic Celerity	6	SelfBuff	1	rule
+1341	Frustration	4	Hex	4	rule+uai
+1342	Tease	5	DamageAoE	4	rule+uai
+1343	Ether Phantom	4	Hex	4	rule+uai
+1344	Web of Disruption	4	Interrupt	4	rule+uai
+1345	Enchanters Conundrum	4	Hex	4	rule
+1346	Signet of Illusions	7	GenericSelf	1	rule
+1347	Discharge Enchantment	5	Damage	4	rule+uai
+1348	Hex Eater Vortex	5	HexRemoval	3	rule+uai
+1349	Mirror of Disenchantment	5	Damage	4	rule+uai
+1350	Simple Thievery	5	Damage	4	rule+uai
+1351	Animate Shambling Horror	5	Corpse	1	rule
+1352	Order of Undeath	5	SelfBuff	1	rule
+1353	Putrid Flesh	5	GenericAlly	32	def
+1354	Feast for the Dead	5	GenericAlly	64	rule
+1355	Jagged Bones	6	SelfBuff	32	rule
+1356	Contagion	6	SelfBuff	1	rule
+1357	Bloodletting	6	SelfBuff	1	rule
+1358	Ulcerous Lungs	4	Hex	4	def
+1359	Pain of Disenchantment	5	DamageAoE	4	rule+uai
+1360	Mark of Fury	4	Hex	4	rule+uai
+1361	Recurring Scourge	4	Hex	4	rule+uai
+1362	Corrupt Enchantment	4	Hex	4	rule+uai
+1363	Signet of Sorrow	7	DamageAoE	4	rule
+1364	Signet of Suffering	7	SelfBuff	1	rule
+1365	Signet of Lost Souls	7	Damage	4	rule+uai
+1366	Well of Darkness	9	Corpse	1	rule
+1367	Blinding Surge	5	DamageAoE	4	rule+uai
+1368	Chilling Winds	4	Hex	4	rule
+1369	Lightning Bolt	5	DamageAoE	4	rule+uai
+1370	Storm Djinns Haste	6	SelfBuff	1	rule
+1371	Stone Striker	6	SelfBuff	1	rule
+1372	Sandstorm	5	DamageAoE	4	def
+1373	Stone Sheath	6	AllyBuff	2	def
+1374	Ebon Hawk	5	DamageAoE	4	rule
+1375	Stoneflesh Aura	6	SelfBuff	1	def
+1376	Glyph of Restoration	12	SelfBuff	1	rule
+1377	Ether Prism	16	Energy	1	rule+uai
+1378	Master of Magic	6	EnergyBuff	1	rule
+1379	Glowing Gaze	5	Energy	4	def
+1380	Savannah Heat	5	DamageAoE	4	def
+1381	Flame Djinns Haste	6	SelfBuff	1	rule
+1382	Freezing Gust	4	Hex	4	rule+uai
+1383	Rocky Ground	23	None	0	rule
+1384	Sulfurous Haze	23	None	0	rule
+1385	Siege Attack	14	Attack	4	rule
+1386	Sentry Trap skill	10	GenericSelf	1	rule
+1387	Caltrops monster	10	PBAoE	1	rule
+1388	Sacred Branch	10	PBAoE	1	rule
+1389	Light of Seborhin	10	PBAoE	1	rule
+1390	Judges Intervention	6	AllyBuff	3	def
+1391	Supportive Spirit	6	AllyBuff	3	rule
+1392	Watchful Healing	6	HealSingle	3	rule
+1393	Healers Boon	6	SelfBuff	1	rule
+1394	Healers Covenant	6	SelfBuff	1	rule
+1395	Balthazars Pendulum	6	AllyBuff	3	rule
+1396	Words of Comfort	5	HealSingle	3	rule+uai
+1397	Light of Deliverance	5	HealParty	1	rule
+1398	Scourge Enchantment	4	Hex	4	rule+uai
+1399	Shield of Absorption	6	Protect	3	rule
+1400	Reversal of Damage	6	AllyBuff	3	def
+1401	Mending Touch	5	CondRemoval	3	rule+uai
+1402	Critical Chop	14	Attack	4	rule
+1403	Agonizing Chop	14	Attack	4	rule+uai
+1404	Flail	3	SelfBuff	1	rule
+1405	Charging Strike	3	SelfBuff	1	def
+1406	Headbutt	10	Damage	4	rule
+1407	Lions Comfort	10	HealSelf	1	rule
+1408	Rage of the Ntouka	16	SelfBuff	1	rule
+1409	Mokele Smash	14	Attack	4	rule
+1410	Overbearing Smash	14	Attack	4	rule+uai
+1411	Signet of Stamina	7	SelfBuff	1	rule
+1412	Youre All Alone	15	GenericFoe	4	rule
+1413	Burst of Aggression	3	SelfBuff	1	rule
+1414	Enraging Charge	3	SelfBuff	1	rule
+1415	Crippling Slash	14	Attack	4	rule
+1416	Barbarous Slice	14	Attack	4	rule
+1417	Vial of Purified Water	4	Hex	4	rule+uai
+1418	Disarm Trap	10	GenericSelf	1	rule
+1419	Feeding Frenzy skill	14	Attack	4	rule
+1420	Quake Of Ahdashim	14	None	0	rule
+1421	Shield of Madness	17	None	0	rule
+1422	Create Light of Seborhin	10	None	0	rule
+1423	Unlock Cell	10	GenericSelf	1	rule
+1424	Stop Pump	5	GenericSelf	1	rule
+1425	Unknow	17	None	0	rule
+1426	Shield of Madness	17	None	0	rule
+1427	Shield of Ether	17	None	0	rule
+1428	Shield of Iron	17	None	0	rule
+1429	Shield of Strength	17	None	0	rule
+1430	Wave of Torment	5	PBAoE	1	rule
+1431	Unknow	17	None	0	rule
+1432	Unknow	17	None	0	rule
+1433	Corsairs Net	4	Hex	4	rule
+1434	Corrupted Healing	5	HealSingle	2	rule
+1435	Corrupted Roots	17	None	0	rule
+1436	Corrupted Strength	3	SelfBuff	1	rule
+1437	Desert Wurm disguise	29	None	0	rule
+1438	Junundu Feast	10	Corpse	1	def
+1439	Junundu Strike	10	Damage	4	rule
+1440	Junundu Smash	10	PBAoE	1	rule+uai
+1441	Junundu Siege	10	Damage	4	rule
+1442	Junundu Tunnel	3	SelfBuff	1	def
+1443	Leave Junundu	10	None	1	def
+1444	Summon Torment	5	PBAoE	1	rule
+1445	Signal Flare	10	GenericSelf	1	rule
+1446	The Elixir of Strength	10	GenericSelf	1	rule
+1447	Ehzah from Above	10	Damage	4	rule
+1448	Unknow	17	None	0	rule
+1449	Last Rites of Torment	4	PBAoE	1	rule
+1450	Abaddons Conspiracy	6	None	0	rule
+1451	Hungers Bite	14	None	0	rule
+1452	From Hell	17	None	0	rule
+1453	Pains Embrace	17	None	0	rule
+1454	Call to the Torment	10	SelfBuff	1	rule
+1455	Command of Torment	10	SelfBuff	1	rule
+1456	Abaddons Favor	10	GenericAlly	3	rule
+1457	Abaddons Chosen	6	SelfBuff	1	rule
+1458	Enchantment Collapse	4	Hex	4	rule+uai
+1459	Call of Sacrifice	4	Hex	4	rule+uai
+1460	Enemies Must Die	15	GenericFoe	4	rule
+1461	Earth Vortex	14	Attack	4	rule
+1462	Frost Vortex	14	Attack	4	rule
+1463	Rough Current	16	GenericSelf	1	rule
+1464	Turbulent Flow	16	GenericSelf	1	rule
+1465	Prepared Shot	14	Attack	4	rule
+1466	Burning Arrow	14	Attack	4	rule
+1467	Arcing Shot	14	Attack	4	rule
+1468	Strike as One	15	PartyBuff	64	rule
+1469	Crossfire	14	Attack	4	rule
+1470	Barbed Arrows	19	SelfBuff	1	def
+1471	Scavengers Focus	10	SelfBuff	1	rule
+1472	Toxicity	22	Spirit	1	rule
+1473	Quicksand	22	Spirit	1	rule
+1474	Storms Embrace	3	SelfBuff	1	rule
+1475	Trappers Speed	3	SelfBuff	1	rule
+1476	Tripwire	21	Trap	1	rule
+1477	Kournan Guardsman	29	None	0	rule
+1478	Renewing Surge	4	Hex	4	rule+uai
+1479	Offering of Spirit	5	Energy	1	rule
+1480	Spirits Gift	6	SelfBuff	1	rule
+1481	Death Pact Signet	7	Resurrect	8	rule+uai
+1482	Reclaim Essence	5	GenericSelf	1	def
+1483	Banishing Strike	14	Attack	4	rule
+1484	Mystic Sweep	14	Attack	4	rule+uai
+1485	Eremites Attack	14	Attack	4	rule+uai
+1486	Reap Impurities	14	Attack	4	rule
+1487	Twin Moon Sweep	14	Attack	4	rule
+1488	Victorious Sweep	14	Attack	4	rule
+1489	Irresistible Sweep	14	Attack	4	rule
+1490	Pious Assault	14	Attack	4	rule
+1491	Mystic Twister	5	PBAoE	1	rule
+1492	REMOVE Wind Prayers skill	6	SelfBuff	1	rule
+1493	Grenths Fingers	6	SelfBuff	1	rule
+1494	REMOVE Boon of the Gods	6	SelfBuff	1	rule
+1495	Aura of Thorns	6	SelfBuff	1	rule
+1496	Balthazars Rage	6	SelfBuff	1	rule
+1497	Dust Cloak	6	SelfBuff	1	rule
+1498	Staggering Force	6	SelfBuff	1	rule+uai
+1499	Pious Renewal	6	SelfBuff	1	rule
+1500	Mirage Cloak	6	SelfBuff	1	rule
+1501	REMOVE Balthazars Rage	6	SelfBuff	1	rule
+1502	Arcane Zeal	6	SelfBuff	1	rule
+1503	Mystic Vigor	6	SelfBuff	1	rule
+1504	Watchful Intervention	6	AllyBuff	3	rule+uai
+1505	Vow of Piety	6	SelfBuff	1	rule
+1506	Vital Boon	6	HealSelf	1	rule
+1507	Heart of Holy Flame	6	SelfBuff	1	rule
+1508	Extend Enchantments	16	SelfBuff	1	rule+uai
+1509	Faithful Intervention	6	SelfBuff	1	rule
+1510	Sand Shards	6	SelfBuff	1	rule+uai
+1511	Intimidating Aura beta version	6	SelfBuff	1	rule
+1512	Lyssas Haste	6	SelfBuff	1	rule+uai
+1513	Guiding Hands	6	SelfBuff	1	rule
+1514	Fleeting Stability	6	SelfBuff	1	rule
+1515	Armor of Sanctity	6	SelfBuff	1	rule
+1516	Mystic Regeneration	6	SelfBuff	1	rule+uai
+1517	Vow of Silence	6	SelfBuff	1	rule
+1518	Avatar of Balthazar	26	SelfBuff	1	def
+1519	Avatar of Dwayna	26	SelfBuff	1	def
+1520	Avatar of Grenth	26	SelfBuff	1	def
+1521	Avatar of Lyssa	26	SelfBuff	1	def
+1522	Avatar of Melandru	26	SelfBuff	1	def
+1523	Meditation	6	EnergyBuff	1	rule
+1524	Eremites Zeal	6	PartyBuff	1	rule
+1525	Natural Healing	5	HealSelf	1	rule
+1526	Imbue Health	5	HealSingle	2	def
+1527	Mystic Healing	5	HealParty	1	def
+1528	Dwaynas Touch	5	HealSingle	3	rule+uai
+1529	Pious Restoration	5	HealSelf	1	rule
+1530	Signet of Pious Light	7	HealSingle	3	rule
+1531	Intimidating Aura	6	SelfBuff	1	rule
+1532	Mystic Sandstorm	5	PBAoE	1	rule
+1533	Winds of Disenchantment	5	PBAoE	1	rule
+1534	Rending Touch	5	Damage	4	rule
+1535	Crippling Sweep	14	Attack	4	rule+uai
+1536	Wounding Strike	14	Attack	4	rule
+1537	Wearying Strike	14	Attack	4	rule
+1538	Lyssas Assault	14	Attack	4	rule
+1539	Chilling Victory	14	Attack	4	rule
+1540	Conviction	6	SelfBuff	1	rule
+1541	Enchanted Haste	6	SelfBuff	1	def
+1542	Pious Concentration	3	SelfBuff	1	rule
+1543	Pious Haste	3	SelfBuff	1	def
+1544	Whirling Charge	6	SelfBuff	1	rule
+1545	Test of Faith	5	Damage	4	rule+uai
+1546	Blazing Spear	14	Attack	4	rule+uai
+1547	Mighty Throw	14	Attack	4	rule
+1548	Cruel Spear	14	Attack	4	rule+uai
+1549	Harriers Toss	14	Attack	4	rule
+1550	Unblockable Throw	14	Attack	4	rule
+1551	Spear of Lightning	14	Attack	4	rule+uai
+1552	Wearying Spear	14	Attack	4	rule
+1553	Anthem of Fury	27	PartyBuff	1	rule
+1554	Crippling Anthem	27	PartyBuff	1	rule
+1555	Defensive Anthem	27	PartyBuff	1	rule
+1556	Godspeed	15	PartyBuff	1	rule
+1557	Anthem of Flame	27	PartyBuff	1	rule
+1558	Go for the Eyes	15	PartyBuff	1	rule
+1559	Anthem of Envy	27	PartyBuff	1	rule
+1560	Song of Power	27	PartyBuff	1	rule
+1561	Zealous Anthem	27	PartyBuff	1	rule
+1562	Aria of Zeal	27	PartyBuff	1	rule
+1563	Lyric of Zeal	27	PartyBuff	1	rule
+1564	Ballad of Restoration	27	HealParty	1	rule
+1565	Chorus of Restoration	27	HealParty	1	rule
+1566	Aria of Restoration	27	HealParty	1	rule
+1567	Song of Concentration	27	PartyBuff	1	rule
+1568	Anthem of Guidance	27	PartyBuff	1	rule
+1569	Energizing Chorus	27	PartyBuff	1	rule
+1570	Song of Purification	27	CondRemoval	1	rule
+1571	Hexbreaker Aria	27	PartyBuff	1	rule
+1572	Brace Yourself	15	AllyBuff	2	rule
+1573	Awe	10	Damage	4	def
+1574	Enduring Harmony	28	AllyBuff	3	rule
+1575	Blazing Finale	28	AllyBuff	3	rule
+1576	Burning Refrain	28	AllyBuff	3	rule
+1577	Finale of Restoration	28	AllyBuff	3	def
+1578	Mending Refrain	28	AllyBuff	3	def
+1579	Purifying Finale	28	AllyBuff	3	def
+1580	Bladeturn Refrain	28	AllyBuff	3	rule
+1581	Glowing Signet	7	Energy	4	def
+1582	REMOVE Leadership skill	3	SelfBuff	1	rule
+1583	Leaders Zeal	10	PBAoE	1	rule
+1584	Leaders Comfort	10	HealSelf	1	rule
+1585	Signet of Synergy	7	HealSingle	2	rule
+1586	Angelic Protection	10	Protect	2	def
+1587	Angelic Bond	10	SelfBuff	1	rule
+1588	Cautery Signet	7	CondRemoval	1	rule
+1589	Stand Your Ground	15	PartyBuff	1	rule
+1590	Lead the Way	15	AllyBuff	3	rule
+1591	Make Haste	15	AllyBuff	2	def
+1592	We Shall Return	15	Resurrect	1	rule+uai
+1593	Never Give Up	15	PartyBuff	1	rule
+1594	Help Me	15	AllyBuff	3	rule
+1595	Fall Back	15	PartyBuff	1	def
+1596	Incoming	15	PartyBuff	1	rule
+1597	Theyre on Fire	15	PartyBuff	1	rule
+1598	Never Surrender	15	HealParty	1	rule
+1599	Its Just a Flesh Wound	15	CondRemoval	2	rule
+1600	Barbed Spear	14	Attack	4	def
+1601	Vicious Attack	14	Attack	4	rule
+1602	Stunning Strike	14	Attack	4	def
+1603	Merciless Spear	14	Attack	4	rule+uai
+1604	Disrupting Throw	14	Interrupt	4	def
+1605	Wild Throw	14	Attack	4	rule
+1606	Curse of the Staff of the Mists	16	PBAoE	1	rule
+1607	Aura of the Staff of the Mists	16	PBAoE	1	rule
+1608	Power of the Staff of the Mists	16	GenericSelf	1	rule
+1609	Scepter of Ether	10	PBAoE	1	rule
+1610	Summoning of the Scepter	5	PBAoE	1	rule
+1611	Rise From Your Grave	5	GenericSelf	1	rule
+1612	Sugar Rush long	6	SelfBuff	1	rule
+1613	Corsair disguise	29	None	0	rule
+1614	REMOVE Queen Wail	15	PartyBuff	1	rule
+1615	REMOVE Queen Armor	3	SelfBuff	1	rule
+1616	Queen Heal	10	HealSelf	1	rule
+1617	Queen Wail	15	PartyBuff	1	rule
+1618	Queen Armor	3	SelfBuff	1	rule
+1619	Queen Bite	10	Damage	4	rule
+1620	Queen Thump	10	PBAoE	1	rule
+1621	Queen Siege	10	Damage	4	rule
+1622	Junundu Tunnel monster skill	3	SelfBuff	1	rule
+1623	Skin of Stone	17	None	0	rule
+1624	Dervish of the Mystic	1	None	0	rule
+1625	Dervish of the Wind	1	None	0	rule
+1626	Paragon of Leadership	1	None	0	rule
+1627	Paragon of Motivation	1	None	0	rule
+1628	Dervish of the Blade	1	None	0	rule
+1629	Paragon of Command	1	None	0	rule
+1630	Paragon of the Spear	1	None	0	rule
+1631	Dervish of the Earth	1	None	0	rule
+1632	Master of DPS	17	None	0	rule
+1633	Malicious Strike	14	Attack	4	rule
+1634	Shattering Assault	14	Attack	4	rule+uai
+1635	Golden Skull Strike	14	Attack	4	rule+uai
+1636	Black Spider Strike	14	Attack	4	rule+uai
+1637	Golden Fox Strike	14	Attack	4	rule
+1638	Deadly Haste	6	SelfBuff	1	rule
+1639	Assassins Remedy	6	SelfBuff	1	rule
+1640	Foxs Promise	6	SelfBuff	1	rule
+1641	Feigned Neutrality	6	HealSelf	1	rule
+1642	Hidden Caltrops	4	Hex	4	rule+uai
+1643	Assault Enchantments	10	Damage	4	rule+uai
+1644	Wastrels Collapse	10	Damage	4	rule
+1645	Lift Enchantment	10	Damage	4	rule+uai
+1646	Augury of Death	4	Hex	4	rule+uai
+1647	Signet of Toxic Shock	7	Damage	4	rule+uai
+1648	Signet of Twilight	7	Damage	4	rule
+1649	Way of the Assassin	3	SelfBuff	1	rule
+1650	Shadow Walk	3	SelfBuff	1	rule
+1651	Deaths Retreat	5	GenericAlly	2	rule
+1652	Shadow Prison	4	Hex	4	rule+uai
+1653	Swap	5	None	64	def
+1654	Shadow Meld	6	AllyBuff	2	rule
+1655	Price of Pride	4	Hex	4	rule+uai
+1656	Air of Disenchantment	4	Hex	4	rule
+1657	Signet of Clumsiness	7	DamageAoE	4	rule+uai
+1658	Symbolic Posture	3	SelfBuff	1	rule
+1659	Toxic Chill	5	Damage	4	rule+uai
+1660	Well of Silence	9	Corpse	1	rule
+1661	Glowstone	5	Energy	4	rule+uai
+1662	Mind Blast	5	Damage	4	rule
+1663	Elemental Flame	6	SelfBuff	1	rule
+1664	Invoke Lightning	5	DamageAoE	4	rule
+1665	Battle Cry	5	SelfBuff	1	rule
+1666	Mending Shrine Bonus	5	SelfBuff	1	rule
+1667	Energy Shrine Bonus	5	SelfBuff	1	rule
+1668	Northern Health Shrine Bonus	5	SelfBuff	1	rule
+1669	Southern Health Shrine Bonus	5	SelfBuff	1	rule
+1670	Siege Attack Bombardment	14	Attack	4	rule
+1671	Curse of Silence	23	None	0	rule
+1672	To the Pain Hero Battles	5	GenericSelf	1	rule
+1673	Edge of Reason	18	None	0	rule
+1674	Depths of Madness environment effect	18	None	0	rule
+1675	Cower in Fear	18	None	0	rule
+1676	Dreadful Pain	18	None	0	rule
+1677	Veiled Nightmare	18	None	0	rule
+1678	Base Protection	18	None	0	rule
+1679	Kournan Siege Flame	23	None	0	rule
+1680	Drake Skin	16	SelfBuff	1	rule
+1681	Skale Vigor	16	SelfBuff	1	rule
+1682	Pahnai Salad item effect	16	SelfBuff	1	rule
+1683	Pensive Guardian	6	Protect	3	rule
+1684	Scribes Insight	6	EnergyBuff	1	rule
+1685	Holy Haste	6	SelfBuff	1	rule
+1686	Glimmer of Light	5	HealSingle	3	rule+uai
+1687	Zealous Benediction	5	HealSingle	3	def
+1688	Defenders Zeal	4	Hex	4	rule+uai
+1689	Signet of Mystic Wrath	7	Damage	4	rule
+1690	Signet of Removal	7	HexRemoval	3	def
+1691	Dismiss Condition	5	CondRemoval	3	def
+1692	Divert Hexes	5	HexRemoval	3	rule+uai
+1693	Counterattack	14	Attack	4	rule+uai
+1694	Magehunter Strike	14	Attack	4	rule+uai
+1695	Soldiers Strike	14	Attack	4	rule
+1696	Decapitate	14	Attack	4	rule
+1697	Magehunters Smash	14	Attack	4	rule
+1698	Soldiers Stance	3	SelfBuff	1	rule
+1699	Soldiers Defense	3	SelfBuff	1	rule
+1700	Frenzied Defense	3	SelfBuff	1	rule
+1701	Steady Stance	3	SelfBuff	1	rule
+1702	Steelfang Slash	14	Attack	4	rule+uai
+1703	Sunspear Battle Call	18	None	0	rule
+1704	Untouchable	16	SelfBuff	1	rule
+1705	Earth Shattering Blow	14	Attack	4	rule
+1706	Corrupt Power	10	Damage	4	rule
+1707	Words of Madness Qwytzylkak	4	None	0	rule
+1708	Gaze of MoavuKaal	10	Damage	4	rule
+1709	Presence of the Skale Lord	27	PartyBuff	1	rule
+1710	Madness Dart	4	Hex	4	rule+uai
+1711	The Apocrypha is changing to another form	10	SelfBuff	1	rule
+1712	Unknow	26	SelfBuff	1	rule
+1713	Unknow	26	SelfBuff	1	rule
+1714	Unknow	26	SelfBuff	1	rule
+1715	Reform Carvings	10	SelfBuff	1	rule
+1716	Unknow	17	None	0	rule
+1717	Sunspear Siege	5	GenericSelf	1	rule
+1718	Soul Torture	10	GenericSelf	1	rule
+1719	Screaming Shot	14	Attack	4	rule
+1720	Keen Arrow	14	Attack	4	rule
+1721	Rampage as One	16	SelfBuff	1	rule
+1722	Forked Arrow	14	Attack	4	rule
+1723	Disrupting Accuracy	19	SelfBuff	1	rule
+1724	Experts Dexterity	3	SelfBuff	1	rule
+1725	Roaring Winds	22	Spirit	1	rule
+1726	Magebane Shot	14	Interrupt	4	def
+1727	Natural Stride	3	SelfBuff	1	rule
+1728	Hekets Rampage	3	SelfBuff	1	rule
+1729	Smoke Trap	21	Trap	1	rule
+1730	Infuriating Heat	22	Spirit	1	rule
+1731	Vocal Was Sogolon	24	ItemSpell	1	rule
+1732	Destructive Was Glaive	24	ItemSpell	1	def
+1733	Wielders Strike	5	Damage	4	rule
+1734	Gaze of Fury	22	Spirit	1	rule
+1735	Gaze of Fury attack	14	Attack	4	rule
+1736	Spirits Strength	6	SelfBuff	1	rule
+1737	Wielders Zeal	6	SelfBuff	1	rule
+1738	Sight Beyond Sight	6	SelfBuff	1	rule
+1739	Renewing Memories	6	SelfBuff	1	rule
+1740	Wielders Remedy	6	SelfBuff	1	rule
+1741	Ghostmirror Light	5	HealSingle	2	def
+1742	Signet of Ghostly Might	7	SelfBuff	1	rule
+1743	Signet of Binding	7	GenericAlly	64	rule
+1744	Caretakers Charge	5	DamageAoE	4	rule
+1745	Anguish	22	Spirit	1	rule
+1746	Anguish attack	14	None	0	rule
+1747	Empowerment	22	Spirit	1	rule
+1748	Recovery	22	Spirit	1	rule
+1749	Weapon of Fury	25	WeaponSpell	3	rule
+1750	Xinraes Weapon	25	WeaponSpell	3	def
+1751	Warmongers Weapon	25	WeaponSpell	3	rule
+1752	Weapon of Remedy	25	WeaponSpell	3	def
+1753	Rending Sweep	14	Attack	4	rule
+1754	Onslaught	6	SelfBuff	1	rule
+1755	Mystic Corruption	6	SelfBuff	1	rule
+1756	Grenths Grasp	6	SelfBuff	1	rule
+1757	Veil of Thorns	6	SelfBuff	1	rule
+1758	Harriers Grasp	6	SelfBuff	1	rule
+1759	Vow of Strength	6	SelfBuff	1	rule
+1760	Ebon Dust Aura	6	SelfBuff	1	rule
+1761	Zealous Vow	6	EnergyBuff	1	rule
+1762	Heart of Fury	3	SelfBuff	1	rule
+1763	Zealous Renewal	6	EnergyBuff	1	rule
+1764	Attackers Insight	6	SelfBuff	1	rule
+1765	Rending Aura	6	SelfBuff	1	rule
+1766	Featherfoot Grace	6	SelfBuff	1	def
+1767	Reapers Sweep	14	Attack	4	rule
+1768	Harriers Haste	6	SelfBuff	1	rule
+1769	Focused Anger	16	SelfBuff	1	rule
+1770	Natural Temper	16	SelfBuff	1	def
+1771	Song of Restoration	27	HealParty	1	rule
+1772	Lyric of Purification	27	CondRemoval	1	rule
+1773	Soldiers Fury	28	PartyBuff	1	rule
+1774	Aggressive Refrain	28	PartyBuff	1	rule
+1775	Energizing Finale	28	AllyBuff	3	rule
+1776	Signet of Aggression	7	GenericSelf	1	rule
+1777	Remedy Signet	7	CondRemoval	1	rule
+1778	Signet of Return	7	Resurrect	8	rule+uai
+1779	Make Your Time	15	PartyBuff	1	rule
+1780	Cant Touch This	15	PartyBuff	1	rule
+1781	Find Their Weakness	15	AllyBuff	3	rule
+1782	The Power Is Yours	15	PartyBuff	1	rule
+1783	Slayers Spear	14	Attack	4	rule
+1784	Swift Javelin	14	Attack	4	rule
+1785	Natures Speed	3	SelfBuff	1	rule
+1786	Weapon of Mastery	25	WeaponSpell	3	rule
+1787	Accelerated Growth	6	SelfBuff	1	rule
+1788	Forge the Way	15	AllyBuff	2	rule
+1789	Anthem of Aggression	27	PartyBuff	1	rule
+1790	Skale Hunt	1	None	0	rule
+1791	Mandragor Hunt	1	None	0	rule
+1792	Skree Battle	1	None	0	rule
+1793	Insect Hunt	1	None	0	rule
+1794	Corsair Bounty	1	None	0	rule
+1795	Plant Hunt	1	None	0	rule
+1796	Undead Hunt	1	None	0	rule
+1797	Eternal Suffering	23	None	0	rule
+1798	Eternal Suffering	23	None	0	rule
+1799	Eternal Suffering	23	None	0	rule
+1800	Eternal Languor	23	None	0	rule
+1801	Eternal Languor	23	None	0	rule
+1802	Eternal Languor	23	None	0	rule
+1803	Eternal Lethargy	23	None	0	rule
+1804	Eternal Lethargy	23	None	0	rule
+1805	Eternal Lethargy	23	None	0	rule
+1806	Unknow	17	None	0	rule
+1807	Unknow	17	None	0	rule
+1808	Thirst of the Drought	23	None	0	rule
+1809	Thirst of the Drought	23	None	0	rule
+1810	Thirst of the Drought	23	None	0	rule
+1811	Thirst of the Drought	23	None	0	rule
+1812	Thirst of the Drought	23	None	0	rule
+1813	Lightbringer	13	None	0	rule
+1814	Lightbringers Gaze	10	DamageAoE	4	rule
+1815	Lightbringer Signet	7	PBAoE	1	rule
+1816	Sunspear Rebirth Signet	7	Resurrect	8	rule+uai
+1817	Wisdom	13	None	0	rule
+1818	Maddened Strike	10	Damage	4	rule
+1819	Maddened Stance	17	None	0	rule
+1820	Spirit Form Remains of Sahlahja	6	SelfBuff	1	rule
+1821	Gods Blessing	6	SelfBuff	1	rule
+1822	Monster Hunt	1	None	0	rule
+1823	Monster Hunt	1	None	0	rule
+1824	Monster Hunt	1	None	0	rule
+1825	Monster Hunt	1	None	0	rule
+1826	Elemental Hunt	1	None	0	rule
+1827	Elemental Hunt	1	None	0	rule
+1828	Skree Battle	1	None	0	rule
+1829	Insect Hunt	1	None	0	rule
+1830	Insect Hunt	1	None	0	rule
+1831	Demon Hunt	1	None	0	rule
+1832	Minotaur Hunt	1	None	0	rule
+1833	Plant Hunt	1	None	0	rule
+1834	Plant Hunt	1	None	0	rule
+1835	Skale Hunt	1	None	0	rule
+1836	Skale Hunt	1	None	0	rule
+1837	Heket Hunt	1	None	0	rule
+1838	Heket Hunt	1	None	0	rule
+1839	Kournan Bounty	1	None	0	rule
+1840	Mandragor Hunt	1	None	0	rule
+1841	Mandragor Hunt	1	None	0	rule
+1842	Corsair Bounty	1	None	0	rule
+1843	Kournan Bounty	1	None	0	rule
+1844	Dhuum Battle	1	None	0	rule
+1845	Menzies Battle	1	None	0	rule
+1846	Elemental Hunt	1	None	0	rule
+1847	Monolith Hunt	1	None	0	rule
+1848	Monolith Hunt	1	None	0	rule
+1849	Margonite Battle	1	None	0	rule
+1850	Monster Hunt	1	None	0	rule
+1851	Titan Hunt	1	None	0	rule
+1852	Mandragor Hunt	1	None	0	rule
+1853	Giant Hunt	1	None	0	rule
+1854	Undead Hunt	1	None	0	rule
+1855	Kournan Siege	10	DamageAoE	4	rule
+1856	Lose your Head	29	None	0	rule
+1857	Wandering Mind	17	None	0	rule
+1858	Unknow	17	None	0	rule
+1859	Altar Buff	5	SelfBuff	1	rule
+1860	Sugar Rush short	6	SelfBuff	1	rule
+1861	Choking Breath	10	Damage	4	rule+uai
+1862	Junundu Bite	10	Damage	4	rule+uai
+1863	Blinding Breath	10	PBAoE	1	rule+uai
+1864	Burning Breath	10	DamageAoE	4	rule
+1865	Junundu Wail	10	Resurrect	1	rule+uai
+1866	Capture Point	5	GenericSelf	1	rule
+1867	Approaching the Vortex	23	None	0	rule
+1868	Unknow	10	GenericSelf	1	rule
+1869	Unknow	10	GenericSelf	1	rule
+1870	Unknow	10	GenericSelf	1	rule
+1871	Avatar of Sweetness	29	None	0	rule
+1872	Unknow	17	None	0	rule
+1873	Corrupted Lands	18	None	0	rule
+1874	Unknow	10	PBAoE	1	rule
+1875	Words of Madness	10	Damage	4	rule
+1876	Unknown Junundu Ability	10	None	1	def
+1877	Unknow	17	None	0	rule
+1878	Unknow	17	None	0	rule
+1879	Unknow	17	None	0	rule
+1880	Torment Slash Smothering Tendrils	10	DamageAoE	4	rule
+1881	Bonds of Torment	4	Hex	4	rule
+1882	Shadow Smash	17	None	0	rule
+1883	Bonds of Torment effect	17	None	0	rule
+1884	Consume Torment	10	None	0	rule
+1885	Banish Enchantment	5	DamageAoE	4	rule+uai
+1886	Summoning Shadows	10	None	0	rule
+1887	Lightbringers Insight	2	None	0	rule
+1888	Unknow	17	None	0	rule
+1889	Repressive Energy	23	None	0	rule
+1890	Enduring Torment	23	None	0	rule
+1891	Shroud of Darkness	23	None	0	rule
+1892	Demonic Miasma	23	None	0	rule
+1893	Enraged	16	SelfBuff	1	rule
+1894	Touch of Aaaaarrrrrrggghhh	10	None	0	rule
+1895	Wild Smash	14	None	0	rule
+1896	Unyielding Anguish	5	GenericSelf	1	rule
+1897	Jadoths Storm of Judgment	14	Attack	4	rule
+1898	Anguish Hunt	1	None	0	rule
+1899	Avatar of Holiday Cheer	29	None	0	rule
+1900	Side Step	10	PBAoE	1	rule
+1901	Jack Frost	22	Spirit	1	rule
+1902	Avatar of Grenth snow fighting skill	26	SelfBuff	1	rule
+1903	Avatar of Dwayna snow fighting skill	26	SelfBuff	1	rule
+1904	Steady Aim	15	PartyBuff	1	rule
+1905	Rudis Red Nose	29	None	0	rule
+1906	Unknow	10	GenericSelf	1	rule
+1907	Unknow	10	GenericSelf	1	rule
+1908	Unknow	10	GenericSelf	1	rule
+1909	Unknow	10	GenericSelf	1	rule
+1910	Charm Animal White Mantle	10	GenericSelf	1	rule
+1911	Volatile Charr Crystal	7	GenericSelf	1	rule
+1912	Hard mode	18	None	0	rule
+1913	Claim Resource Heroes Ascent	10	None	0	rule
+1914	Hard mode	17	None	0	rule
+1915	Hard Mode NPC Buff	17	None	0	rule
+1916	Sugar Jolt short	6	SelfBuff	1	rule
+1917	Rollerbeetle Racer	29	None	0	rule
+1918	Ram	16	PBAoE	1	rule
+1919	Harden Shell	16	SelfBuff	1	rule
+1920	Rollerbeetle Dash	16	SelfBuff	1	rule
+1921	Super Rollerbeetle	16	SelfBuff	1	rule
+1922	Rollerbeetle Echo	16	SelfBuff	1	rule
+1923	Distracting Lunge	16	GenericAlly	64	rule
+1924	Rollerbeetle Blast	16	GenericAlly	64	rule
+1925	Spit Rocks	16	GenericAlly	64	rule
+1926	Lunar Blessing	10	SelfBuff	1	rule
+1927	Lucky Aura	10	SelfBuff	1	rule
+1928	Spiritual Possession	10	SelfBuff	1	rule
+1929	Water	10	SelfBuff	1	rule
+1930	Pig Form	29	None	0	rule
+1931	Beetle Metamorphosis	29	None	0	rule
+1932	Unknow	16	GenericSelf	1	rule
+1933	Sugar Jolt long	6	SelfBuff	1	rule
+1934	Golden Egg skill	16	SelfBuff	1	rule
+1935	Torturous Embers	14	Attack	4	rule
+1936	Test Buff	29	None	0	rule
+1937	Infernal Rage	3	SelfBuff	1	rule
+1938	Putrid Flames	5	PBAoE	1	rule
+1939	Shroud of Ash	10	PBAoE	1	rule
+1940	Flame Call	10	GenericSelf	1	rule
+1941	Torturers Inferno	10	SelfBuff	1	rule
+1942	Whirling Fires	10	PBAoE	1	rule
+1943	Charr Siege Attack What Must Be Done	10	None	0	rule
+1944	Charr Siege Attack Against the Charr	10	None	0	rule
+1945	Birthday Cupcake skill	16	PBAoE	1	rule
+1946	Unknow	1	None	0	rule
+1947	Blessing of the Luxons	1	None	0	rule
+1948	Shadow Sanctuary Luxon	6	SelfBuff	1	rule
+1949	Ether Nightmare Luxon	4	Hex	4	rule+uai
+1950	Signet of Corruption	7	DamageAoE	4	rule
+1951	Elemental Lord Luxon	6	SelfBuff	1	rule
+1952	Selfless Spirit Luxon	6	SelfBuff	1	rule
+1953	Triple Shot Luxon	14	Attack	4	rule
+1954	Save Yourselves Luxon	15	PartyBuff	1	def
+1955	Aura of Holy Might Luxon	6	SelfBuff	1	rule+uai
+1956	Unknow	17	None	0	rule
+1957	Spear of Fury Luxon	14	Attack	4	rule
+1958	Attribute Balance	17	None	0	rule
+1959	Monster Hunt	1	None	0	rule
+1960	Monster Hunt	1	None	0	rule
+1961	Mandragor Hunt	1	None	0	rule
+1962	Mandragor Hunt	1	None	0	rule
+1963	Giant Hunt	1	None	0	rule
+1964	Giant Hunt	1	None	0	rule
+1965	Skree Battle	1	None	0	rule
+1966	Skree Battle	1	None	0	rule
+1967	Insect Hunt	1	None	0	rule
+1968	Insect Hunt	1	None	0	rule
+1969	Minotaur Hunt	1	None	0	rule
+1970	Minotaur Hunt	1	None	0	rule
+1971	Corsair Bounty	1	None	0	rule
+1972	Corsair Bounty	1	None	0	rule
+1973	Plant Hunt	1	None	0	rule
+1974	Plant Hunt	1	None	0	rule
+1975	Skale Hunt	1	None	0	rule
+1976	Skale Hunt	1	None	0	rule
+1977	Heket Hunt	1	None	0	rule
+1978	Heket Hunt	1	None	0	rule
+1979	Kournan Bounty	1	None	0	rule
+1980	Kournan Bounty	1	None	0	rule
+1981	Undead Hunt	1	None	0	rule
+1982	Undead Hunt	1	None	0	rule
+1983	Fire Dart	5	GenericSelf	1	rule
+1984	Ice Dart	5	SelfBuff	1	rule
+1985	Poison Dart	5	GenericSelf	1	rule
+1986	Vampiric Assault	14	Attack	4	rule+uai
+1987	Lotus Strike	14	Attack	4	rule
+1988	Golden Fang Strike	14	Attack	4	rule+uai
+1989	Way of the Mantis	6	SelfBuff	1	rule
+1990	Falling Lotus Strike	14	Attack	4	rule+uai
+1991	Sadists Signet	7	Damage	4	rule
+1992	Signet of Distraction	7	Interrupt	4	rule+uai
+1993	Signet of Recall	7	SelfBuff	1	rule
+1994	Power Lock	5	Interrupt	4	rule+uai
+1995	Waste Not Want Not	5	Energy	4	rule
+1996	Sum of All Fears	4	Hex	4	rule+uai
+1997	Withering Aura	6	AllyBuff	3	rule
+1998	Cacophony	4	Hex	4	rule+uai
+1999	Winters Embrace	4	Hex	4	rule+uai
+2000	Earthen Shackles	4	Hex	4	rule
+2001	Ward of Weakness	11	Ward	1	def
+2002	Glyph of Swiftness	12	SelfBuff	1	rule
+2003	Cure Hex	5	HexRemoval	3	rule+uai
+2004	Smite Condition	5	CondRemoval	3	rule+uai
+2005	Smiters Boon	6	SelfBuff	1	rule
+2006	Castigation Signet	7	Energy	4	rule+uai
+2007	Purifying Veil	6	CondRemoval	3	rule+uai
+2008	Pulverizing Smash	14	Attack	4	rule
+2009	Keen Chop	14	Attack	4	rule
+2010	Knee Cutter	14	Attack	4	rule+uai
+2011	Grapple	10	Damage	4	rule
+2012	Radiant Scythe	14	Attack	4	rule
+2013	Grenths Aura	6	SelfBuff	1	rule+uai
+2014	Signet of Pious Restraint	7	DamageAoE	4	rule
+2015	Farmers Scythe	14	Attack	4	rule
+2016	Energetic Was Lee Sa	24	ItemSpell	1	def
+2017	Anthem of Weariness	27	PartyBuff	1	rule
+2018	Anthem of Disruption	27	PartyBuff	1	rule
+2019	Burning Ground	5	GenericSelf	1	rule
+2020	Freezing Ground	5	SelfBuff	1	rule
+2021	Poison Ground	5	SelfBuff	1	rule
+2022	Fire Jet	5	SelfBuff	1	rule
+2023	Ice Jet	23	None	0	rule
+2024	Poison Jet	5	SelfBuff	1	rule
+2025	Lava Pool	23	None	0	rule
+2026	Water Pool	23	None	0	rule
+2027	Fire Spout	5	SelfBuff	1	rule
+2028	Ice Spout	23	None	0	rule
+2029	Poison Spout	5	SelfBuff	1	rule
+2030	Dhuum Battle	1	None	0	rule
+2031	Dhuum Battle	1	None	0	rule
+2032	Elemental Hunt	1	None	0	rule
+2033	Elemental Hunt	1	None	0	rule
+2034	Monolith Hunt	1	None	0	rule
+2035	Monolith Hunt	1	None	0	rule
+2036	Margonite Battle	1	None	0	rule
+2037	Margonite Battle	1	None	0	rule
+2038	Menzies Battle	1	None	0	rule
+2039	Menzies Battle	1	None	0	rule
+2040	Anguish Hunt	1	None	0	rule
+2041	Titan Hunt	1	None	0	rule
+2042	Titan Hunt	1	None	0	rule
+2043	Monster Hunt	1	None	0	rule
+2044	Monster Hunt	1	None	0	rule
+2045	Sarcophagus Spores	5	PBAoE	1	rule
+2046	Exploding Barrel	5	PBAoE	1	rule
+2047	Greater Hard Mode NPC Buff	17	None	0	rule
+2048	Fire Boulder	17	None	0	rule
+2049	Dire Snowball	17	None	0	rule
+2050	Boulder	17	None	0	rule
+2051	Summon Spirits Luxon	5	GenericSelf	1	rule
+2052	Shadow Fang	4	Hex	4	rule+uai
+2053	Calculated Risk	4	Hex	4	rule+uai
+2054	Shrinking Armor	4	Hex	4	rule+uai
+2055	Aneurysm	5	DamageAoE	4	rule+uai
+2056	Wandering Eye	4	Hex	4	def
+2057	Foul Feast	5	CondRemoval	2	def
+2058	Putrid Bile	4	Hex	4	rule
+2059	Shell Shock	5	DamageAoE	4	rule
+2060	Glyph of Immolation	12	SelfBuff	1	rule
+2061	Patient Spirit	6	HealSingle	3	rule+uai
+2062	Healing Ribbon	5	HealSingle	2	rule+uai
+2063	Aura of Stability	6	Protect	2	rule
+2064	Spotless Mind	6	HexRemoval	2	rule+uai
+2065	Spotless Soul	6	CondRemoval	2	rule+uai
+2066	Disarm	14	Attack	4	rule
+2067	I Meant to Do That	15	PartyBuff	1	rule
+2068	Rapid Fire	19	SelfBuff	1	rule
+2069	Sloth Hunters Shot	14	Attack	4	rule
+2070	Aura Slicer	14	Attack	4	rule
+2071	Zealous Sweep	14	Attack	4	rule
+2072	Pure Was Li Ming	24	ItemSpell	1	def
+2073	Weapon of Aggression	25	WeaponSpell	1	rule
+2074	Chest Thumper	14	Attack	4	rule
+2075	Hasty Refrain	28	AllyBuff	3	def
+2076	Drain Minion	5	GenericAlly	32	def
+2077	Cracked Armor	8	None	0	rule
+2078	Berserk	10	SelfBuff	1	rule
+2079	Fleshreavers Escape	5	PBAoE	1	rule
+2080	Chomp	10	GenericAlly	3	rule
+2081	Twisting Jaws	10	Damage	4	rule
+2082	Burning Immunity	17	None	0	rule
+2083	Mandragors Charge	5	Damage	4	rule
+2084	Rock Slide	5	GenericSelf	1	rule
+2085	Avalanche effect	5	SelfBuff	1	rule
+2086	Snaring Web	4	Hex	4	rule
+2087	Ceiling Collapse	5	DamageAoE	4	rule
+2088	Trample	10	DamageAoE	4	rule
+2089	Wurm Bile	4	Hex	4	rule
+2090	Ground Cover	17	None	0	rule
+2091	Shadow Sanctuary Kurzick	6	SelfBuff	1	rule
+2092	Ether Nightmare Kurzick	4	Hex	4	rule+uai
+2093	Signet of Corruption	7	DamageAoE	4	rule
+2094	Elemental Lord Kurzick	6	SelfBuff	1	rule
+2095	Selfless Spirit Kurzick	6	SelfBuff	1	rule
+2096	Triple Shot Kurzick	14	Attack	4	rule
+2097	Save Yourselves Kurzick	15	PartyBuff	1	def
+2098	Aura of Holy Might Kurzick	6	SelfBuff	1	rule+uai
+2099	Spear of Fury Kurzick	14	Attack	4	rule
+2100	Summon Spirits Kurzick	5	GenericSelf	1	rule
+2101	Critical Agility	6	SelfBuff	1	def
+2102	Cry of Pain	5	Interrupt	4	def
+2103	Necrosis	10	Damage	4	def
+2104	Intensity	16	SelfBuff	1	def
+2105	Seed of Life	6	AllyBuff	2	def
+2106	Call of the Eye	10	GenericSelf	1	rule
+2107	Whirlwind Attack	14	Attack	4	def
+2108	Never Rampage Alone	16	SelfBuff	1	rule
+2109	Eternal Aura	6	SelfBuff	1	rule+uai
+2110	Vampirism	22	Spirit	1	rule
+2111	Vampirism attack	14	None	0	rule
+2112	Theres Nothing to Fear	15	PartyBuff	1	def
+2113	Ursan Rage Blood Washes Blood	10	PBAoE	1	rule
+2114	Ursan Strike Blood Washes Blood	10	Damage	4	rule
+2115	Unknow	10	GenericSelf	1	rule
+2116	Sneak Attack	14	Attack	4	rule
+2117	Firebomb Explosion	7	PBAoE	1	rule
+2118	Firebomb	10	None	0	rule
+2119	Shield of Fire	10	None	0	rule
+2120	Respawn	17	None	0	rule
+2121	Marked For Death	17	None	0	rule
+2122	Spirit World Retreat	4	None	0	rule
+2123	Long Claws	17	None	0	rule
+2124	Shattered Spirit	14	Attack	4	rule
+2125	Spirit Roar	15	PartyBuff	1	rule
+2126	Spirit Senses	3	SelfBuff	1	rule
+2127	Unseen Aggression	14	Attack	4	rule
+2128	Volfen Pounce Curse of the Nornbear	6	SelfBuff	1	rule
+2129	Volfen Claw Curse of the Nornbear	10	Damage	4	rule
+2130	Unknow	10	GenericSelf	1	rule
+2131	Volfen Bloodlust Curse of the Nornbear	15	PartyBuff	1	rule
+2132	Volfen Agility Curse of the Nornbear	3	SelfBuff	1	rule
+2133	Volfen Blessing Curse of the Nornbear	10	SelfBuff	1	rule
+2134	Charging Spirit	3	SelfBuff	1	rule
+2135	Trampling Ox	14	Attack	4	rule+uai
+2136	Smoke Powder Defense	3	SelfBuff	1	rule
+2137	Confusing Images	4	Hex	4	rule+uai
+2138	Hexers Vigor	6	SelfBuff	1	rule
+2139	Masochism	6	EnergyBuff	1	rule
+2140	Piercing Trap	21	Trap	1	rule
+2141	Companionship	10	None	1	def
+2142	Feral Aggression	10	SelfBuff	1	rule
+2143	Disrupting Shot	14	Interrupt	4	def
+2144	Volley	14	Attack	4	rule
+2145	Expert Focus	19	SelfBuff	1	rule
+2146	Pious Fury	3	SelfBuff	1	rule
+2147	Crippling Victory	14	Attack	4	rule
+2148	Sundering Weapon	25	WeaponSpell	3	rule
+2149	Weapon of Renewal	25	WeaponSpell	3	rule
+2150	Maiming Spear	14	Attack	4	rule+uai
+2151	Temporal Sheen	17	None	0	rule
+2152	Flux Overload	7	PBAoE	1	rule
+2153	A pool of water	10	SelfBuff	1	rule
+2154	Phase Shield effect	10	SelfBuff	1	rule
+2155	Phase Shield monster skill	10	PBAoE	1	rule
+2156	Vitality Transfer	10	HealSingle	3	def
+2157	Golem Strike	14	Attack	4	rule
+2158	Bloodstone Slash	14	Attack	4	rule
+2159	Energy Blast golem	10	Damage	4	rule
+2160	Chaotic Energy	10	DamageAoE	4	rule
+2161	Golem Fire Shield	5	PBAoE	1	rule
+2162	The Way of Duty	23	None	0	rule
+2163	The Way of Kinship	23	None	0	rule
+2164	Diamondshard Mist environment effect	23	None	0	rule
+2165	Diamondshard Grave	5	SelfBuff	1	rule
+2166	The Way of Strength	23	None	0	rule
+2167	Diamondshard Mist	5	GenericSelf	1	rule
+2168	Raven Blessing A Gate Too Far	10	SelfBuff	1	rule
+2169	Unknow	10	GenericSelf	1	rule
+2170	Raven Flight A Gate Too Far	3	SelfBuff	1	rule
+2171	Raven Shriek A Gate Too Far	15	PartyBuff	1	rule
+2172	Raven Swoop A Gate Too Far	5	DamageAoE	4	rule
+2173	Raven Talons A Gate Too Far	10	Damage	4	rule
+2174	Aspect of Oak	10	SelfBuff	1	rule
+2175	Long Claws	17	None	0	rule
+2176	Tremor	15	PartyBuff	1	rule
+2177	Rage of the Jotun	3	SelfBuff	1	rule
+2178	Thundering Roar	15	PartyBuff	1	rule
+2179	Sundering Soulcrush	10	DamageAoE	4	rule
+2180	Pyroclastic Shot	10	None	0	rule
+2181	Explosive Force	10	PBAoE	1	rule
+2182	Unknow	14	Attack	4	rule
+2183	Unknow	14	Attack	4	rule
+2184	Rolling Shift	14	Attack	4	rule
+2185	Powder Keg Explosion	10	PBAoE	1	rule
+2186	Signet of Deadly Corruption	7	Damage	4	rule
+2187	Way of the Master	6	SelfBuff	1	rule
+2188	Defile Defenses	4	Hex	4	rule+uai
+2189	Angorodons Gaze	5	Damage	4	rule
+2190	Magnetic Surge	6	GenericFoe	4	rule
+2191	Slippery Ground	5	DamageAoE	4	rule
+2192	Glowing Ice	5	Damage	4	def
+2193	Energy Blast	5	Damage	4	rule
+2194	Distracting Strike	14	Attack	4	rule
+2195	Symbolic Strike	14	Attack	4	rule
+2196	Soldiers Speed	3	SelfBuff	1	rule
+2197	Body Blow	14	Attack	4	rule
+2198	Body Shot	14	Attack	4	def
+2199	Poison Tip Signet	7	SelfBuff	1	rule
+2200	Signet of Mystic Speed	7	SelfBuff	1	rule
+2201	Shield of Force	6	SelfBuff	1	rule
+2202	Mending Grip	5	HealSingle	3	def
+2203	Spiritleech Aura	10	SelfBuff	1	rule
+2204	Rejuvenation	22	Spirit	1	rule
+2205	Agony	22	Spirit	1	rule
+2206	Ghostly Weapon	25	WeaponSpell	2	rule
+2207	Inspirational Speech	10	GenericAlly	2	def
+2208	Burning Shield	16	SelfBuff	1	rule+uai
+2209	Holy Spear	14	Attack	4	rule
+2210	Spear Swipe	14	Attack	4	rule
+2211	Alkars Alchemical Acid	5	DamageAoE	4	rule
+2212	Light of Deldrimor	5	PBAoE	1	rule
+2213	Ear Bite	10	Damage	4	rule
+2214	Low Blow	10	Damage	4	rule+uai
+2215	Brawling Headbutt	10	Damage	4	rule
+2216	Dont Trip	15	PartyBuff	1	rule
+2217	By Urals Hammer	15	PartyBuff	1	rule+uai
+2218	Drunken Master	3	SelfBuff	1	rule
+2219	Great Dwarf Weapon	25	WeaponSpell	2	rule
+2220	Great Dwarf Armor	6	AllyBuff	3	rule+uai
+2221	Breath of the Great Dwarf	5	HealParty	1	def
+2222	Snow Storm	5	DamageAoE	4	rule
+2223	Black Powder Mine	21	Trap	1	rule
+2224	Summon Mursaat	5	SelfBuff	1	rule
+2225	Summon Ruby Djinn	5	SelfBuff	1	rule
+2226	Summon Ice Imp	5	SelfBuff	1	rule
+2227	Summon Naga Shaman	5	SelfBuff	1	rule
+2228	Deft Strike	14	Attack	4	rule
+2229	Signet of Infection	7	Damage	4	rule+uai
+2230	Tryptophan Signet	7	DamageAoE	4	rule+uai
+2231	Ebon Battle Standard of Courage	11	Ward	1	rule
+2232	Ebon Battle Standard of Wisdom	11	Ward	1	rule
+2233	Ebon Battle Standard of Honor	11	Ward	1	rule
+2234	Ebon Vanguard Sniper Support	5	DamageAoE	4	rule
+2235	Ebon Vanguard Assassin Support	5	Damage	4	rule+uai
+2236	Well of Ruin	9	Corpse	1	rule
+2237	Atrophy	4	Hex	4	rule+uai
+2238	Spear of Redemption	14	Attack	4	rule
+2239	Unknow	14	Attack	4	rule
+2240	Gelatinous Material Explosion	7	PBAoE	1	rule
+2241	Gelatinous Corpse Consumption	10	Corpse	1	rule
+2242	Gelatinous Mutation	10	None	0	rule
+2243	Gelatinous Absorption	10	SelfBuff	1	rule
+2244	Unstable Ooze Explosion	10	DamageAoE	4	rule
+2245	Golem Shrapnel	17	None	0	rule
+2246	Unstable Aura	10	SelfBuff	1	rule
+2247	Unstable Pulse	10	PBAoE	1	rule
+2248	Polymock Power Drain	5	Interrupt	4	rule+uai
+2249	Polymock Block	6	SelfBuff	1	rule
+2250	Polymock Glyph of Concentration	12	SelfBuff	1	rule
+2251	Polymock Ether Signet	7	Energy	1	rule
+2252	Polymock Glyph of Power	12	SelfBuff	1	rule
+2253	Polymock Overload	5	Damage	4	rule+uai
+2254	Polymock Glyph Destabilization	4	Hex	4	rule+uai
+2255	Polymock Mind Wreck	4	Hex	4	rule+uai
+2256	Order of Unholy Vigor	5	SelfBuff	1	rule
+2257	Order of the Lich	5	SelfBuff	1	rule
+2258	Master of Necromancy	5	SelfBuff	1	rule
+2259	Animate Undead	5	SelfBuff	1	rule
+2260	Polymock Deathly Chill	5	Damage	4	rule+uai
+2261	Polymock Rising Bile	4	Hex	4	rule
+2262	Polymock Rotting Flesh	5	Damage	4	rule
+2263	Polymock Lightning Strike	5	Damage	4	rule+uai
+2264	Polymock Lightning Orb	5	Damage	4	rule+uai
+2265	Polymock Lightning Djinns Haste	6	SelfBuff	1	rule
+2266	Polymock Flare	5	Damage	4	rule
+2267	Polymock Immolate	5	Damage	4	rule
+2268	Polymock Meteor	5	DamageAoE	4	rule+uai
+2269	Polymock Ice Spear	5	Damage	4	rule
+2270	Polymock Icy Prison	5	Interrupt	4	rule+uai
+2271	Polymock Mind Freeze	5	Damage	4	rule
+2272	Polymock Ice Shard Storm	5	Damage	4	rule
+2273	Polymock Frozen Trident	5	Damage	4	rule+uai
+2274	Polymock Smite	5	Damage	4	rule
+2275	Polymock Smite Hex	5	HexRemoval	3	rule
+2276	Polymock Bane Signet	7	Interrupt	4	rule+uai
+2277	Polymock Stone Daggers	5	Damage	4	rule
+2278	Polymock Obsidian Flame	5	Damage	4	rule
+2279	Polymock Earthquake	5	DamageAoE	4	rule+uai
+2280	Polymock Frozen Armor	6	SelfBuff	1	rule
+2281	Polymock Glyph Freeze	4	Hex	4	rule
+2282	Polymock Fireball	5	DamageAoE	4	rule
+2283	Polymock Rodgorts Invocation	5	DamageAoE	4	rule
+2284	Polymock Calculated Risk	4	Hex	4	rule+uai
+2285	Polymock Recurring Insecurity	4	Hex	4	rule+uai
+2286	Polymock Backfire	4	Hex	4	rule+uai
+2287	Polymock Guilt	4	Hex	4	rule+uai
+2288	Polymock Lamentation	5	Damage	4	rule
+2289	Polymock Spirit Rift	5	DamageAoE	4	rule
+2290	Polymock Painful Bond	4	Hex	4	rule
+2291	Polymock Signet of Clumsiness	7	Interrupt	4	rule+uai
+2292	Polymock Migraine	4	Hex	4	rule+uai
+2293	Polymock Glowing Gaze	5	Energy	4	rule+uai
+2294	Polymock Searing Flames	5	DamageAoE	4	rule+uai
+2295	Polymock Signet of Revenge	7	Damage	4	rule
+2296	Polymock Signet of Smiting	7	Damage	4	rule
+2297	Polymock Stoning	5	Damage	4	rule
+2298	Polymock Eruption	5	DamageAoE	4	rule
+2299	Polymock Shock Arrow	5	Damage	4	rule
+2300	Polymock Mind Shock	5	Damage	4	rule
+2301	Polymock Piercing Light Spear	5	Damage	4	rule
+2302	Polymock Mind Blast	5	Energy	4	rule
+2303	Polymock Savannah Heat	5	DamageAoE	4	rule
+2304	Polymock Diversion	4	Hex	4	rule+uai
+2305	Polymock Lightning Blast	5	Damage	4	rule
+2306	Polymock Poisoned Ground	5	Damage	4	rule
+2307	Polymock Icy Bonds	4	Hex	4	rule
+2308	Polymock Sandstorm	5	DamageAoE	4	rule+uai
+2309	Polymock Banish	5	Damage	4	rule
+2310	Mergoyle Form	29	None	0	rule
+2311	Skale Form	29	None	0	rule
+2312	Gargoyle Form	29	None	0	rule
+2313	Ice Imp Form	29	None	0	rule
+2314	Fire Imp Form	29	None	0	rule
+2315	Kappa Form	29	None	0	rule
+2316	Aloe Seed Form	29	None	0	rule
+2317	Earth Elemental Form	29	None	0	rule
+2318	Fire Elemental Form	29	None	0	rule
+2319	Ice Elemental Form	29	None	0	rule
+2320	Mirage Iboga Form	29	None	0	rule
+2321	Wind Rider Form	29	None	0	rule
+2322	Naga Shaman Form	29	None	0	rule
+2323	Mantis Dreamweaver Form	29	None	0	rule
+2324	Ruby Djinn Form	29	None	0	rule
+2325	Gaki Form	29	None	0	rule
+2326	Stone Rain Form	29	None	0	rule
+2327	Mursaat Elementalist Form	29	None	0	rule
+2328	Crystal Shield	6	SelfBuff	1	rule
+2329	Crystal Snare	4	Hex	4	rule
+2330	Paranoid Indignation	4	Hex	4	rule
+2331	Searing Breath	10	DamageAoE	4	rule
+2332	Kraks Charge	15	PartyBuff	1	rule
+2333	Brawling	10	GenericSelf	1	rule
+2334	Brawling Block	3	SelfBuff	1	def
+2335	Brawling Jab1	14	Attack	4	rule+uai
+2336	Brawling Jab2	14	Attack	4	rule+uai
+2337	Brawling Straight Right	14	Interrupt	4	rule+uai
+2338	Brawling Hook1	14	Attack	4	rule+uai
+2339	Brawling Hook2	14	Attack	4	rule+uai
+2340	Brawling Uppercut	14	Attack	4	rule+uai
+2341	Brawling Combo Punch	14	Attack	4	rule+uai
+2342	Brawling Headbutt Brawling skill	14	Attack	4	rule+uai
+2343	STAND UP	15	PartyBuff	1	rule
+2344	Call of Destruction	10	GenericSelf	1	rule
+2345	Flame Jet	10	DamageAoE	4	rule+uai
+2346	Lava Ground	10	PBAoE	1	rule
+2347	Lava Wave	10	SelfBuff	1	rule
+2348	Unknow	17	None	0	rule
+2349	Spirit Shield	10	PBAoE	1	rule
+2350	Summoning Lord	10	SelfBuff	1	rule
+2351	Charm Animal Ashlyn Spiderfriend	10	GenericSelf	1	rule
+2352	Charr Siege Attack Assault on the Stronghold	10	None	0	rule
+2353	Finish Him	15	GenericFoe	4	rule+uai
+2354	Dodge This	15	PartyBuff	1	rule+uai
+2355	I Am the Strongest	15	PartyBuff	1	rule+uai
+2356	I Am Unstoppable	15	SelfBuff	1	def
+2357	A Touch of Guile	4	Hex	4	rule+uai
+2358	You Move Like a Dwarf	15	GenericFoe	4	def
+2359	You Are All Weaklings	15	GenericFoe	4	rule+uai
+2360	Feel No Pain	16	SelfBuff	1	rule
+2361	Club of a Thousand Bears	14	Attack	4	rule
+2362	Unknow	10	GenericSelf	1	rule
+2363	Talon Strike	10	Damage	4	rule
+2364	Lava Blast	10	GenericSelf	1	rule
+2365	Thunderfist Strike	14	Attack	4	rule
+2366	Unknow	7	DamageAoE	4	rule
+2367	Alkars Concoction	10	SelfBuff	1	rule
+2368	Murakais Consumption	5	DamageAoE	4	rule+uai
+2369	Murakais Censure	5	SelfBuff	1	rule
+2370	Murakais Calamity	5	SelfBuff	1	rule
+2371	Murakais Storm of Souls	5	SelfBuff	1	rule
+2372	Edification	13	None	0	rule
+2373	Heart of the Norn	13	None	0	rule
+2374	Ursan Blessing	26	SelfBuff	1	rule
+2375	Ursan Strike	10	Damage	4	rule
+2376	Ursan Rage	10	DamageAoE	4	rule
+2377	Ursan Roar	15	PartyBuff	1	rule
+2378	Ursan Force	16	SelfBuff	1	rule
+2379	Volfen Blessing	26	SelfBuff	1	rule
+2380	Volfen Claw	10	Damage	4	rule
+2381	Volfen Pounce	3	SelfBuff	1	rule
+2382	Volfen Bloodlust	15	PartyBuff	1	rule
+2383	Volfen Agility	6	SelfBuff	1	rule
+2384	Raven Blessing	26	SelfBuff	1	rule
+2385	Raven Talons	10	Damage	4	rule
+2386	Raven Swoop	5	DamageAoE	4	rule
+2387	Raven Shriek	15	PartyBuff	1	rule
+2388	Raven Flight	3	SelfBuff	1	rule
+2389	Totem of Man	10	GenericSelf	1	rule
+2390	Filthy Explosion	5	PBAoE	1	rule
+2391	Murakais Call	5	GenericSelf	1	rule
+2392	Spawn Pods	10	GenericSelf	1	rule
+2393	Enraged Blast	10	GenericSelf	1	rule
+2394	Spawn Hatchling	10	GenericSelf	1	rule
+2395	Ursan Roar Blood Washes Blood	15	PartyBuff	1	rule
+2396	Ursan Force Blood Washes Blood	3	SelfBuff	1	rule
+2397	Ursan Aura	10	SelfBuff	1	rule
+2398	Consume Flames	5	GenericSelf	1	rule
+2399	Aura of the Great Destroyer	17	None	0	rule
+2400	Destroy the Humans	15	PartyBuff	1	rule
+2401	Charr Flame Keeper Form	29	None	0	rule
+2402	Titan Form	29	None	0	rule
+2403	Skeletal Mage Form	29	None	0	rule
+2404	Smoke Wraith Form	29	None	0	rule
+2405	Bone Dragon Form	29	None	0	rule
+2406	Unknow	29	None	0	rule
+2407	Dwarven Arcanist Form	29	None	0	rule
+2408	Dolyak Rider Form	29	None	0	rule
+2409	Extract Inscription	10	None	0	rule
+2410	Charr Shaman Form	29	None	0	rule
+2411	Mindbender	6	SelfBuff	1	rule
+2412	Smooth Criminal	5	Damage	4	def
+2413	Technobabble	5	DamageAoE	4	rule
+2414	Radiation Field	11	PBAoE	1	def
+2415	Asuran Scan	4	Hex	4	rule+uai
+2416	Air of Superiority	10	SelfBuff	1	rule
+2417	Mental Block	6	SelfBuff	1	def
+2418	Pain Inverter	4	Hex	4	rule
+2419	Healing Salve	7	HealSelf	1	rule
+2420	Ebon Escape	5	HealSingle	2	def
+2421	Weakness Trap	21	Trap	1	rule
+2422	Winds	22	Spirit	1	rule
+2423	Dwarven Stability	6	SelfBuff	1	rule
+2424	Stout Hearted	13	None	0	rule
+2425	Inscribed Ettin Aura	17	None	0	rule
+2426	Decipher Inscriptions	10	None	0	rule
+2427	Rebel Yell	13	None	0	rule
+2428	Unknow	10	GenericSelf	1	rule
+2429	Asuran Flame Staff	10	GenericSelf	1	rule
+2430	Aura of the Bloodstone	23	None	0	rule
+2431	Aura of the Bloodstone	23	None	0	rule
+2432	Aura of the Bloodstone	23	None	0	rule
+2433	Haunted Ground	10	GenericSelf	1	rule
+2434	Asuran Bodyguard	1	None	0	rule
+2435	Asuran Bodyguard	1	None	0	rule
+2436	Asuran Bodyguard	1	None	0	rule
+2437	Energy Channel	1	None	0	rule
+2438	Hunt Rampage	1	None	0	rule
+2439	Unknow	1	None	0	rule
+2440	Boss Bounty	1	None	0	rule
+2441	Hunt Point Bonus	1	None	0	rule
+2442	Hunt Point Bonus	1	None	0	rule
+2443	Hunt Point Bonus	1	None	0	rule
+2444	Time Attack	1	None	0	rule
+2445	Dwarven Raider	1	None	0	rule
+2446	Dwarven Raider	1	None	0	rule
+2447	Dwarven Raider	1	None	0	rule
+2448	Dwarven Raider	1	None	0	rule
+2449	Great Dwarfs Blessing	1	None	0	rule
+2450	Hunt Rampage	1	None	0	rule
+2451	Unknow	1	None	0	rule
+2452	Boss Bounty	1	None	0	rule
+2453	Hunt Point Bonus	1	None	0	rule
+2454	Hunt Point Bonus	1	None	0	rule
+2455	Unknow	1	None	0	rule
+2456	Time Attack	1	None	0	rule
+2457	Vanguard Patrol	1	None	0	rule
+2458	Vanguard Patrol	1	None	0	rule
+2459	Vanguard Patrol	1	None	0	rule
+2460	Vanguard Patrol	1	None	0	rule
+2461	Vanguard Commendation	1	None	0	rule
+2462	Hunt Rampage	1	None	0	rule
+2463	Unknow	1	None	0	rule
+2464	Boss Bounty	1	None	0	rule
+2465	Unknow	1	None	0	rule
+2466	Unknow	1	None	0	rule
+2467	Unknow	1	None	0	rule
+2468	Unknow	1	None	0	rule
+2469	Norn Hunting Party	1	None	0	rule
+2470	Norn Hunting Party	1	None	0	rule
+2471	Norn Hunting Party	1	None	0	rule
+2472	Norn Hunting Party	1	None	0	rule
+2473	Strength of the Norn	1	None	0	rule
+2474	Hunt Rampage	1	None	0	rule
+2475	Unknow	1	None	0	rule
+2476	Unknow	1	None	0	rule
+2477	Unknow	1	None	0	rule
+2478	Unknow	1	None	0	rule
+2479	Unknow	1	None	0	rule
+2480	Unknow	1	None	0	rule
+2481	Asuran Bodyguard	1	None	0	rule
+2482	Desperate Howl	27	PartyBuff	1	rule
+2483	Gloat	10	Corpse	1	rule
+2484	Metamorphosis	10	SelfBuff	1	rule
+2485	Inner Fire	10	SelfBuff	1	rule
+2486	Elemental Shift	26	SelfBuff	1	rule
+2487	Dryders Feast	5	Damage	4	rule+uai
+2488	Fungal Explosion	10	SelfBuff	1	rule
+2489	Blood Rage	10	SelfBuff	1	rule
+2490	Parasitic Bite	14	Attack	4	rule
+2491	False Death	17	None	0	rule
+2492	Ooze Combination	10	GenericAlly	3	rule
+2493	Ooze Division	10	GenericSelf	1	rule
+2494	Bear Form	26	SelfBuff	1	rule
+2495	Sweeping Strikes	17	None	0	rule
+2496	Spore Explosion	10	SelfBuff	1	rule
+2497	Dormant Husk	10	GenericSelf	1	rule
+2498	Monkey See  Monkey Do	10	SelfBuff	1	rule
+2499	Feeding Frenzy	10	GenericSelf	1	rule
+2500	Tengus Mimicry	15	PartyBuff	1	rule
+2501	Tongue Lash	4	Hex	4	rule+uai
+2502	Soulrending Shriek	10	Damage	4	rule+uai
+2503	Unreliable	4	GenericSelf	1	rule
+2504	Siege Devourer	26	SelfBuff	1	rule
+2505	Siege Devourer Feast	10	Corpse	1	rule
+2506	Devourer Bite	10	Damage	4	rule
+2507	Siege Devourer Swipe	10	PBAoE	1	rule
+2508	Devourer Siege	10	DamageAoE	4	rule
+2509	HYAHHHHH	3	SelfBuff	1	rule
+2510	HYAHHHHH	3	SelfBuff	1	rule
+2511	HYAHHHHH	3	SelfBuff	1	rule
+2512	HYAHHHHH	3	SelfBuff	1	rule
+2513	Dismount Siege Devourer	10	None	1	def
+2514	The Masters Mark	4	None	0	rule+uai
+2515	The Snipers Spear	14	Attack	4	rule
+2516	Mount	10	GenericAlly	64	rule
+2517	Reverse Polarity Fire Shield	5	PBAoE	1	rule
+2518	Tengus Gaze	10	GenericSelf	1	rule
+2519	Fix Monster Attributes	17	None	0	rule
+2520	Armor of Salvation item effect	16	SelfBuff	1	rule
+2521	Grail of Might item effect	16	SelfBuff	1	rule
+2522	Essence of Celerity item effect	16	GenericSelf	1	rule
+2523	Stone Dwarf Transformation	29	None	0	rule
+2524	Forgewights Blessing	10	GenericSelf	1	rule
+2525	Selvetarms Blessing	10	GenericSelf	1	rule
+2526	Thommiss Blessing	10	GenericSelf	1	rule
+2527	Duncans Defense	17	None	0	rule
+2528	Unknow	17	None	0	rule
+2529	Rands Attack	10	PBAoE	1	rule
+2530	Selvetarms Attack	17	None	0	rule
+2531	Thommiss Attack	17	None	0	rule
+2532	Create Spore	17	None	0	rule
+2533	Unknow	17	None	0	rule
+2534	Unknow	17	None	0	rule
+2535	Unknow	17	None	0	rule
+2536	Invigorating Mist	7	PBAoE	1	rule
+2537	Courageous Was Saidra	24	ItemSpell	1	def
+2538	Animate Undead Palawa Joko	5	SelfBuff	1	rule
+2539	Order of Unholy Vigor Palawa Joko	5	SelfBuff	1	rule
+2540	Order of the Lich Palawa Joko	5	SelfBuff	1	rule
+2541	Golem Boosters	3	SelfBuff	1	rule
+2542	Charm Animal monster	10	GenericSelf	1	rule
+2543	Wurm Siege Eye of the North	5	DamageAoE	4	rule
+2544	Tongue Whip	4	Hex	4	rule+uai
+2545	Lit Torch	10	GenericSelf	1	rule
+2546	Dishonorable	4	GenericSelf	1	rule
+2547	Hard Mode Dungeon Boss	17	None	0	rule
+2548	Veteran Asuran Bodyguard	1	None	0	rule
+2549	Veteran Dwarven Raider	1	None	0	rule
+2550	Veteran Vanguard Patrol	1	None	0	rule
+2551	Veteran Norn Hunting Party	1	None	0	rule
+2552	Unknow	1	None	0	rule
+2553	Unknow	1	None	0	rule
+2554	Unknow	1	None	0	rule
+2555	Unknow	1	None	0	rule
+2556	Unknow	1	None	0	rule
+2557	Unknow	1	None	0	rule
+2558	Unknow	1	None	0	rule
+2559	Unknow	1	None	0	rule
+2560	Unknow	1	None	0	rule
+2561	Unknow	1	None	0	rule
+2562	Unknow	1	None	0	rule
+2563	Unknow	1	None	0	rule
+2564	Unknow	1	None	0	rule
+2565	Dwarven Raider	1	None	0	rule
+2566	Dwarven Raider	1	None	0	rule
+2567	Dwarven Raider	1	None	0	rule
+2568	Dwarven Raider	1	None	0	rule
+2569	Unknow	1	None	0	rule
+2570	Great Dwarfs Blessing	1	None	0	rule
+2571	Boss Bounty	1	None	0	rule
+2572	Unknow	1	None	0	rule
+2573	Unknow	1	None	0	rule
+2574	Hunt Point Bonus	1	None	0	rule
+2575	Hunt Point Bonus	1	None	0	rule
+2576	Hunt Rampage	1	None	0	rule
+2577	Time Attack	1	None	0	rule
+2578	Vanguard Patrol	1	None	0	rule
+2579	Unknow	1	None	0	rule
+2580	Unknow	1	None	0	rule
+2581	Unknow	1	None	0	rule
+2582	Unknow	1	None	0	rule
+2583	Boss Bounty	1	None	0	rule
+2584	Unknow	1	None	0	rule
+2585	Hunt Point Bonus	1	None	0	rule
+2586	Unknow	1	None	0	rule
+2587	Unknow	1	None	0	rule
+2588	Unknow	1	None	0	rule
+2589	Vanguard Commendation	1	None	0	rule
+2590	Unknow	1	None	0	rule
+2591	Norn Hunting Party	1	None	0	rule
+2592	Norn Hunting Party	1	None	0	rule
+2593	Norn Hunting Party	1	None	0	rule
+2594	Norn Hunting Party	1	None	0	rule
+2595	Unknow	1	None	0	rule
+2596	Boss Bounty	1	None	0	rule
+2597	Unknow	1	None	0	rule
+2598	Strength of the Norn	1	None	0	rule
+2599	Hunt Point Bonus	1	None	0	rule
+2600	Unknow	1	None	0	rule
+2601	Hunt Point Bonus	1	None	0	rule
+2602	Hunt Rampage	1	None	0	rule
+2603	Time Attack	1	None	0	rule
+2604	Candy Corn skill	16	SelfBuff	1	rule
+2605	Candy Apple skill	16	SelfBuff	1	rule
+2606	Anton Costume Brawl disguise	29	None	0	rule
+2607	Erys Vasburg Costume Brawl disguise	29	None	0	rule
+2608	Olias Costume Brawl disguise	29	None	0	rule
+2609	Argo Costume Brawl disguise	29	None	0	rule
+2610	Mhenlo Costume Brawl disguise	29	None	0	rule
+2611	Lukas Costume Brawl disguise	29	None	0	rule
+2612	Aidan Costume Brawl disguise	29	None	0	rule
+2613	Kahmu Costume Brawl disguise	29	None	0	rule
+2614	Razah Costume Brawl disguise	29	None	0	rule
+2615	Morgahn Costume Brawl disguise	29	None	0	rule
+2616	Nika Costume Brawl disguise	29	None	0	rule
+2617	Seaguard Hala Costume Brawl disguise	29	None	0	rule
+2618	Livia Costume Brawl disguise	29	None	0	rule
+2619	Cynn Costume Brawl disguise	29	None	0	rule
+2620	Tahlkora Costume Brawl disguise	29	None	0	rule
+2621	Devona Costume Brawl disguise	29	None	0	rule
+2622	Zho Costume Brawl disguise	29	None	0	rule
+2623	Melonni Costume Brawl disguise	29	None	0	rule
+2624	Xandra Costume Brawl disguise	29	None	0	rule
+2625	Hayda Costume Brawl disguise	29	None	0	rule
+2626	Unknow	5	Interrupt	4	rule
+2627	Reapers Mark	4	Hex	4	rule+uai
+2628	Enfeeble	5	Damage	4	rule
+2629	Unknow	5	DamageAoE	4	rule
+2630	Signet of Lost Souls	7	Damage	4	rule
+2631	Unknow	4	Hex	4	rule
+2632	Searing Flames	5	DamageAoE	4	def
+2633	Glowing Gaze	5	Energy	4	def
+2634	Steam	5	Damage	4	rule
+2635	Flame Djinns Haste	6	SelfBuff	1	rule
+2636	Liquid Flame	5	DamageAoE	4	rule
+2637	Unknow	5	HexRemoval	3	rule
+2638	Unknow	6	Protect	3	rule
+2639	Smite Condition	5	CondRemoval	3	rule
+2640	Crippling Slash	14	Attack	4	rule
+2641	Sun and Moon Slash	14	Attack	4	rule
+2642	Enraging Charge	3	SelfBuff	1	rule
+2643	Tiger Stance	3	SelfBuff	1	rule
+2644	Burning Arrow	14	Attack	4	rule
+2645	Natural Stride	3	SelfBuff	1	rule
+2646	Falling Lotus Strike	14	Attack	4	rule
+2647	Anthem of Weariness	27	PartyBuff	1	rule
+2648	Pious Fury	3	SelfBuff	1	rule
+2649	Pie Induced Ecstasy	16	SelfBuff	1	rule
+2650	Charm Animal Charr Demolisher	10	GenericSelf	1	rule
+2651	Togo disguise	29	None	0	rule
+2652	Turai Ossa disguise	29	None	0	rule
+2653	Gwen disguise	29	None	0	rule
+2654	Saul DAlessio disguise	29	None	0	rule
+2655	Dragon Empire Rage	6	SelfBuff	1	rule
+2656	Call to the Spirit Realm	22	Spirit	1	rule
+2657	Call of Haste PvP	15	PartyBuff	1	rule
+2658	Hide	26	SelfBuff	1	rule
+2659	Feign Death	26	SelfBuff	1	rule
+2660	Flee	3	SelfBuff	1	rule
+2661	Throw Rock	10	DamageAoE	4	rule
+2662	Nightmarish Aura	10	SelfBuff	1	rule
+2663	Siege Strike	10	Damage	4	rule
+2664	Spike Trap spell	5	GenericSelf	1	rule
+2665	Barbed Bomb	10	PBAoE	1	rule
+2666	Fire and Brimstone	5	DamageAoE	4	rule
+2667	Balm Bomb	10	PBAoE	1	rule
+2668	Explosives	10	PBAoE	1	rule
+2669	Rations	10	PBAoE	1	rule
+2670	Form Up and Advance	15	PartyBuff	1	rule
+2671	Advance	15	PartyBuff	1	rule
+2672	Spectral Agony Saul DAlessio	4	Hex	4	rule+uai
+2673	Stun Bomb	10	PBAoE	1	rule
+2674	Banner of the Unseen	11	Ward	1	rule
+2675	Signet of the Unseen	7	DamageAoE	4	rule
+2676	For Elona	15	PartyBuff	1	rule
+2677	Giant Stomp Turai Ossa	10	GenericSelf	1	rule
+2678	Whirlwind Attack Turai Ossa	14	Attack	4	rule
+2679	Junundu Siege	10	Damage	4	rule
+2680	Distortion Gwen	3	SelfBuff	1	rule
+2681	Shared Burden Gwen	4	Hex	4	rule
+2682	Sum of All Fears Gwen	4	Hex	4	rule+uai
+2683	Castigation Signet Saul DAlessio	7	Energy	4	rule
+2684	Unnatural Signet Saul DAlessio	7	DamageAoE	4	rule
+2685	Dragon Slash Turai Ossa	14	Attack	4	rule
+2686	Essence Strike Togo	5	Energy	4	rule
+2687	Spirit Burn Togo	5	DamageAoE	4	rule
+2688	Spirit Rift Togo	5	DamageAoE	4	rule
+2689	Mend Body and Soul Togo	5	CondRemoval	3	rule+uai
+2690	Offering of Spirit Togo	5	Energy	1	rule
+2691	Disenchantment Togo	22	Spirit	1	rule
+2692	Fire Dart	10	GenericSelf	1	rule
+2693	Unknow	17	None	0	rule
+2694	Unknow	17	None	0	rule
+2695	Unknow	17	None	0	rule
+2696	Unknow	17	None	0	rule
+2697	Unknow	10	SelfBuff	1	rule
+2698	Unknow	23	None	0	rule
+2699	Corrupted Haiju Lagoon Water	18	None	0	rule
+2700	Journey to the North	17	None	0	rule
+2701	Rat Form	29	None	0	rule
+2702	Ox Form	29	None	0	rule
+2703	Tiger Form	29	None	0	rule
+2704	Rabbit Form	29	None	0	rule
+2705	Dragon Form	29	None	0	rule
+2706	Snake Form	29	None	0	rule
+2707	Horse Form	29	None	0	rule
+2708	Sheep Form	29	None	0	rule
+2709	Monkey Form	29	None	0	rule
+2710	Rooster Form	29	None	0	rule
+2711	Dog Form	29	None	0	rule
+2712	Party Time	2	None	0	rule
+2713	Victory is Ours	16	GenericSelf	1	rule
+2714	Dark Soul Explosion	17	None	0	rule
+2715	Chaotic Soul Explosion	17	None	0	rule
+2716	Fiery Soul Explosion	17	None	0	rule
+2717	Rejuvenating Soul Explosion	17	None	0	rule
+2718	Plague Spring	17	None	0	rule
+2719	Unbalancing Soul Explosion	17	None	0	rule
+2720	Shadowy Soul Explosion	17	None	0	rule
+2721	Ethereal Soul Explosion	17	None	0	rule
+2722	Redemption of Purity	5	Damage	4	rule
+2723	Purify Energy	5	PBAoE	1	rule
+2724	Purifying Flame	5	PBAoE	1	rule
+2725	Purifying Prayer	5	HexRemoval	3	def
+2726	Strength of Purity	3	SelfBuff	1	rule
+2727	Spring of Purity	21	Trap	1	rule
+2728	Way of the Pure	3	SelfBuff	1	rule
+2729	Purify Soul	5	SelfBuff	1	rule
+2730	Aura of Purity	6	SelfBuff	1	rule
+2731	Anthem of Purity	27	PartyBuff	1	rule
+2732	Falkens Fire Fist	14	Attack	4	rule
+2733	Falken Quick	16	SelfBuff	1	rule
+2734	Mind Wrack PvP	4	Hex	4	rule+uai
+2735	Quickening Terrain	18	None	0	rule
+2736	Massive Damage	18	None	0	rule
+2737	Minion Apocalypse	18	None	0	rule
+2738	Unknow	29	None	0	rule
+2739	Combat Costume Assassin	29	None	0	rule
+2740	Combat Costume Mesmer	29	None	0	rule
+2741	Combat Costume Necromancer	29	None	0	rule
+2742	Combat Costume Elementalist	29	None	0	rule
+2743	Combat Costume Monk	29	None	0	rule
+2744	Combat Costume Warrior	29	None	0	rule
+2745	Combat Costume Ranger	29	None	0	rule
+2746	Combat Costume Dervish	29	None	0	rule
+2747	Combat Costume Ritualist	29	None	0	rule
+2748	Combat Costume Paragon	29	None	0	rule
+2749	Unknow	17	None	0	rule
+2750	Unknow	17	None	0	rule
+2751	Unknow	17	None	0	rule
+2752	Unknow	17	None	0	rule
+2753	Unknow	17	None	0	rule
+2754	Unknow	17	None	0	rule
+2755	Jade Brotherhood Bomb	5	PBAoE	1	rule
+2756	Mad Kings Fan	4	GenericSelf	1	rule
+2757	Unknow	29	None	0	rule
+2758	Candy Corn Strike	7	Damage	4	rule
+2759	Rocket Propelled Gobstopper	5	DamageAoE	4	rule
+2760	Rain of Terror spell	5	DamageAoE	4	rule
+2761	Cry of Madness	15	PartyBuff	1	rule
+2762	Sugar Infusion	5	HealSingle	2	rule+uai
+2763	Feast of Vengeance	5	Damage	4	rule
+2764	Animate Candy Minions	5	Corpse	1	rule
+2765	Taste of Undeath	5	HealSingle	2	rule
+2766	Scourge of Candy	5	DamageAoE	4	rule
+2767	Motivating Insults	15	PartyBuff	1	rule
+2768	Mad King Pony Support	5	Damage	4	rule
+2769	Its Good to Be King	15	PartyBuff	1	rule
+2770	Maddening Laughter	15	PartyBuff	1	rule
+2771	Mad Kings Influence	29	None	0	rule
+2772	Unknow	29	None	0	rule
+2773	Unknow	29	None	0	rule
+2774	Unknow	29	None	0	rule
+2775	Unknow	29	None	0	rule
+2776	Unknow	29	None	0	rule
+2777	Unknow	29	None	0	rule
+2778	Unknow	29	None	0	rule
+2779	Unknow	29	None	0	rule
+2780	Unknow	29	None	0	rule
+2781	Unknow	18	None	0	rule
+2782	Unknow	17	None	0	rule
+2783	Unknow	17	None	0	rule
+2784	Unknow	17	None	0	rule
+2785	Unknow	17	None	0	rule
+2786	Unknow	17	None	0	rule
+2787	Unknow	17	None	0	rule
+2788	Unknow	17	None	0	rule
+2789	Unknow	5	Corpse	1	rule
+2790	Unknow	5	Corpse	1	rule
+2791	Unknow	6	SelfBuff	1	rule
+2792	Hidden Talent	18	None	0	rule
+2793	Couriers Haste	18	None	0	rule
+2794	Xinraes Revenge	18	None	0	rule
+2795	Unknow	5	DamageAoE	4	rule
+2796	Unknow	5	DamageAoE	4	rule
+2797	Unknow	6	SelfBuff	1	rule
+2798	Unknow	18	None	0	rule
+2799	Unknow	5	DamageAoE	4	rule
+2800	Unknow	18	None	0	rule
+2801	Unknow	18	None	0	rule
+2802	Unknow	16	SelfBuff	1	rule
+2803	Mind Freeze PvP	4	Hex	4	rule+uai
+2804	Mind Shock PvP	5	Damage	4	rule
+2805	Mist Form PvP	6	PartyBuff	1	rule
+2806	Ward Against Harm PvP	11	Ward	1	rule
+2807	Ride the Lightning PvP	5	GenericAlly	64	rule
+2808	Enraged Smash PvP	14	Attack	4	rule
+2809	Obsidian Flame PvP	5	Damage	4	rule
+2810	Meek Shall Inherit	18	None	0	rule
+2811	Unknow	18	None	0	rule
+2812	Unknow	18	None	0	rule
+2813	Inverse Ninja Law	18	None	0	rule
+2814	Unknow	18	None	0	rule
+2815	Unknow	18	None	0	rule
+2816	Unknow	18	None	0	rule
+2817	Unknow	18	None	0	rule
+2818	Unknow	17	None	0	rule
+2819	Unknow	17	None	0	rule
+2820	Unknow	17	None	0	rule
+2821	Unknow	17	None	0	rule
+2822	Unknow	17	None	0	rule
+2823	Unknow	17	None	0	rule
+2824	Unknow	17	None	0	rule
+2825	Unknow	17	None	0	rule
+2826	Unknow	17	None	0	rule
+2827	Unknow	17	None	0	rule
+2828	Unknow	17	None	0	rule
+2829	Unknow	17	None	0	rule
+2830	Unknow	17	None	0	rule
+2831	Unknow	10	SelfBuff	1	rule
+2832	Unknow	29	None	0	rule
+2833	Unknow	5	DamageAoE	4	rule
+2834	Unknow	21	Trap	1	rule
+2835	Unknow	5	SelfBuff	1	rule
+2836	Unknow	5	SelfBuff	1	rule
+2837	Unknow	3	SelfBuff	1	rule
+2838	Unknow	29	None	0	rule
+2839	Abyssal Form	29	None	0	rule
+2840	Asura Form	29	None	0	rule
+2841	Awakened Head Form	29	None	0	rule
+2842	Spider Form	29	None	0	rule
+2843	Charr Form	29	None	0	rule
+2844	Golem Form	29	None	0	rule
+2845	Hellhound Form	29	None	0	rule
+2846	Norn Form	29	None	0	rule
+2847	Ooze Form	29	None	0	rule
+2848	Rift Warden Form	29	None	0	rule
+2849	Unknow	29	None	0	rule
+2850	Yeti Form	29	None	0	rule
+2851	Snowman Form	29	None	0	rule
+2852	Energy Drain PvP	5	Energy	4	rule+uai
+2853	Energy Tap PvP	5	Energy	4	rule+uai
+2854	PvP effect	18	None	0	rule
+2855	Ward Against Melee PvP	11	Ward	1	rule
+2856	Lightning Orb PvP	5	Damage	4	rule
+2857	Aegis PvP	6	Protect	2	rule
+2858	Watch Yourself PvP	15	PartyBuff	1	rule
+2859	Enfeeble PvP	5	Damage	4	rule
+2860	Ether Renewal PvP	6	EnergyBuff	1	rule
+2861	Penetrating Attack PvP	14	Attack	4	rule
+2862	Shadow Form PvP	6	SelfBuff	1	rule
+2863	Discord PvP	5	Damage	4	rule
+2864	Sundering Attack PvP	14	Attack	4	rule
+2865	Ritual Lord PvP	16	SelfBuff	1	rule
+2866	Flesh of My Flesh PvP	5	Resurrect	8	rule+uai
+2867	Ancestors Rage PvP	10	GenericAlly	3	rule
+2868	Splinter Weapon PvP	25	WeaponSpell	3	rule
+2869	Assassins Remedy PvP	6	SelfBuff	1	rule
+2870	Blinding Surge PvP	5	DamageAoE	4	rule
+2871	Light of Deliverance PvP	5	HealParty	1	rule
+2872	Death Pact Signet PvP	7	Resurrect	8	rule+uai
+2873	Mystic Sweep PvP	14	Attack	4	rule
+2874	Eremites Attack PvP	14	Attack	4	rule
+2875	Harriers Toss PvP	14	Attack	4	rule
+2876	Defensive Anthem PvP	27	PartyBuff	1	rule
+2877	Ballad of Restoration PvP	27	HealParty	1	rule
+2878	Song of Restoration PvP	27	HealParty	1	rule
+2879	Incoming PvP	15	PartyBuff	1	rule
+2880	Never Surrender PvP	15	HealParty	1	rule
+2881	Unknow	5	Damage	4	rule
+2882	Mantra of Inscriptions PvP	3	SelfBuff	1	rule
+2883	For Great Justice PvP	15	PartyBuff	1	rule
+2884	Mystic Regeneration PvP	6	SelfBuff	1	rule
+2885	Enfeebling Blood PvP	5	DamageAoE	4	rule
+2886	Summoning Sickness	16	GenericSelf	1	rule
+2887	Signet of Judgment PvP	7	DamageAoE	4	rule
+2888	Chilling Victory PvP	14	Attack	4	rule
+2889	Unknow	16	GenericSelf	1	rule
+2890	Unknow	17	None	0	rule
+2891	Unyielding Aura PvP	6	Resurrect	8	rule
+2892	Spirit Bond PvP	6	Protect	3	rule+uai
+2893	Weapon of Warding PvP	25	WeaponSpell	3	rule
+2894	Bamph Lite	10	None	0	rule
+2895	Smiters Boon PvP	6	SelfBuff	1	rule
+2896	Battle Fervor Deactivating ROX	1	None	0	rule
+2897	Cloak of Faith Deactivating ROX	1	None	0	rule
+2898	Dark Aura Deactivating ROX	1	None	0	rule
+2899	Chaotic Power Deactivating ROX	1	None	0	rule
+2900	Strength of the Oak Deactivating ROX	1	None	0	rule
+2901	Sinister Golem Form	29	None	0	rule
+2902	Reactor Blast	5	PBAoE	1	rule
+2903	Reactor Blast Timer	10	SelfBuff	1	rule
+2904	Jade Brotherhood Disguise	29	None	0	rule
+2905	Internal Power Engaged	10	SelfBuff	1	rule
+2906	Target Acquisition	4	Hex	4	rule+uai
+2907	NOX Beam	5	DamageAoE	4	rule
+2908	NOX Field Dash	3	SelfBuff	1	rule
+2909	NOXion Buster	5	Damage	4	rule
+2910	Countdown	10	SelfBuff	1	rule
+2911	Bit Golem Breaker	5	Damage	4	rule
+2912	Bit Golem Rectifier	6	AllyBuff	2	rule
+2913	Bit Golem Crash	5	PBAoE	1	rule
+2914	Bit Golem Force	5	PBAoE	1	rule
+2915	Unknow	6	AllyBuff	2	rule
+2916	NOX Phantom	4	Hex	4	rule+uai
+2917	NOX Thunder	5	DamageAoE	4	rule
+2918	NOX Lock On	10	Damage	4	rule
+2919	NOX Driver	17	None	0	rule
+2920	NOX Fire	5	PBAoE	1	rule
+2921	NOX Knuckle	5	DamageAoE	4	rule
+2922	NOX Divider Drive	5	DamageAoE	4	rule
+2923	Yo Ho Ho and a Bottle of Grog	16	SelfBuff	1	rule
+2924	Oath of Protection	16	None	0	rule
+2925	Sloth Hunters Shot PvP	14	Attack	4	rule
+2926	Bamph Lifesteal	10	None	0	rule
+2927	Shrine Backlash	5	GenericSelf	1	rule
+2928	Amulet of Protection	16	GenericSelf	1	rule
+2929	Unknow	14	Attack	4	rule
+2930	Unknow	3	SelfBuff	1	rule
+2931	Unknow	10	HealSelf	1	rule
+2932	Unknow	14	Attack	4	rule
+2933	Unknow	14	Attack	4	rule
+2934	Unknow	6	AllyBuff	3	rule
+2935	Unknow	5	HexRemoval	2	rule
+2936	Unknow	7	Energy	4	rule
+2937	Unknow	4	Hex	4	rule
+2938	Unknow	5	Damage	4	rule
+2939	Unknow	5	GenericAlly	2	rule
+2940	Unknow	5	DamageAoE	4	rule
+2941	Unknow	5	Damage	4	rule
+2942	Unknow	4	Hex	4	rule
+2943	Unknow	6	SelfBuff	1	rule
+2944	Unknow	4	Hex	4	rule
+2945	Unknow	4	Hex	4	rule
+2946	Unknow	5	Damage	4	rule
+2947	Unknow	4	Hex	4	rule
+2948	Unknow	12	SelfBuff	1	rule
+2949	Unknow	12	SelfBuff	1	rule
+2950	Unknow	4	Hex	4	rule
+2951	Unknow	14	Attack	4	rule
+2952	Unknow	5	DamageAoE	4	rule
+2953	Unknow	7	SelfBuff	1	rule
+2954	Unknow	7	Damage	4	rule
+2955	Unknow	7	DamageAoE	4	rule
+2956	Unknow	6	HealSingle	3	rule
+2957	Western Health Shrine Bonus	5	SelfBuff	1	rule
+2958	Eastern Health Shrine Bonus	5	SelfBuff	1	rule
+2959	Experts Dexterity PvP	3	SelfBuff	1	rule
+2960	Unknow	10	None	0	rule
+2961	Delayed Blast BAMPH	10	None	0	rule
+2962	Grentch Form	29	None	0	rule
+2963	Unknow	17	None	0	rule
+2964	Snowball	5	DamageAoE	4	rule
+2965	Signet of Spirits PvP	7	GenericSelf	1	rule
+2966	Signet of Ghostly Might PvP	7	GenericAlly	64	rule
+2967	Avatar of Grenth PvP	26	SelfBuff	1	rule
+2968	Oversized Tonic Warning	16	SelfBuff	1	rule
+2969	Read the Wind PvP	19	SelfBuff	1	rule
+2970	Mursaat Form	29	None	0	rule
+2971	Blue Rock Candy Rush	16	SelfBuff	1	rule
+2972	Green Rock Candy Rush	16	SelfBuff	1	rule
+2973	Red Rock Candy Rush	16	SelfBuff	1	rule
+2974	Archer Form	29	None	0	rule
+2975	Avatar of Balthazar Form	29	None	0	rule
+2976	Champion of Balthazar Form	29	None	0	rule
+2977	Priest of Balthazar Form	29	None	0	rule
+2978	The Black Beast of Arrgh Form	29	None	0	rule
+2979	Crystal Guardian Form	29	None	0	rule
+2980	Crystal Spider Form	29	None	0	rule
+2981	Bone Dragon Form	29	None	0	rule
+2982	Saltspray Dragon Form	29	None	0	rule
+2983	Eye of Janthir Form	29	None	0	rule
+2984	Footman Form	29	None	0	rule
+2985	Ghostly Hero Form	29	None	0	rule
+2986	Guild Lord Form	29	None	0	rule
+2987	Gwen Doll Form	29	None	0	rule
+2988	Black Moa Form	29	None	0	rule
+2989	Black Moa Chick Form	29	None	0	rule
+2990	Moa Bird Form	29	None	0	rule
+2991	White Moa Form	29	None	0	rule
+2992	Rainbow Phoenix Form	29	None	0	rule
+2993	Brown Rabbit Form	29	None	0	rule
+2994	White Rabbit Form	29	None	0	rule
+2995	Seer Form	29	None	0	rule
+2996	Swarm of Bees Form	29	None	0	rule
+2997	Seed of Resurrection	7	GenericSelf	1	rule
+2998	Fragility PvP	4	Hex	4	rule
+2999	Strength of Honor PvP	6	AllyBuff	3	rule
+3000	Gunthers Gaze	10	GenericSelf	1	rule
+3001	Unknow	17	None	0	rule
+3002	Warriors Endurance PvP	3	SelfBuff	1	rule
+3003	Armor of Unfeeling PvP	6	SelfBuff	1	rule
+3004	Signet of Creation PvP	7	PBAoE	1	rule
+3005	Union PvP	22	Spirit	1	rule
+3006	Shadowsong PvP	22	Spirit	1	rule
+3007	Pain PvP	22	Spirit	1	rule
+3008	Destruction PvP	22	Spirit	1	rule
+3009	Soothing PvP	22	Spirit	1	rule
+3010	Displacement PvP	22	Spirit	1	rule
+3011	Preservation PvP	22	Spirit	1	rule
+3012	Life PvP	22	Spirit	1	rule
+3013	Recuperation PvP	22	Spirit	1	rule
+3014	Dissonance PvP	22	Spirit	1	rule
+3015	Earthbind PvP	22	Spirit	1	rule
+3016	Shelter PvP	22	Spirit	1	rule
+3017	Disenchantment PvP	22	Spirit	1	rule
+3018	Restoration PvP	22	Resurrect	1	rule+uai
+3019	Bloodsong PvP	22	Spirit	1	rule
+3020	Wanderlust PvP	22	Spirit	1	rule
+3021	Savannah Heat PvP	5	DamageAoE	4	rule
+3022	Gaze of Fury PvP	22	Spirit	1	rule
+3023	Anguish PvP	22	Spirit	1	rule
+3024	Empowerment PvP	22	Spirit	1	rule
+3025	Recovery PvP	22	Spirit	1	rule
+3026	Go for the Eyes PvP	15	PartyBuff	1	rule
+3027	Brace Yourself PvP	15	AllyBuff	2	rule
+3028	Blazing Finale PvP	28	AllyBuff	3	rule
+3029	Bladeturn Refrain PvP	28	AllyBuff	3	rule
+3030	Signet of Return PvP	7	Resurrect	8	rule+uai
+3031	Cant Touch This PvP	15	PartyBuff	1	rule
+3032	Stand Your Ground PvP	15	PartyBuff	1	rule
+3033	We Shall Return PvP	15	PartyBuff	1	rule+uai
+3034	Find Their Weakness PvP	15	AllyBuff	3	rule
+3035	Never Give Up PvP	15	PartyBuff	1	rule
+3036	Help Me PvP	15	AllyBuff	3	rule
+3037	Fall Back PvP	15	PartyBuff	1	rule
+3038	Agony PvP	22	Spirit	1	rule
+3039	Rejuvenation PvP	22	Spirit	1	rule
+3040	Anthem of Disruption PvP	27	PartyBuff	1	rule
+3041	Shadowsong Master Riyo	22	Spirit	1	rule
+3042	Pain	22	Spirit	1	rule
+3043	Wanderlust	22	Spirit	1	rule
+3044	Spirit Siphon Master Riyo	5	GenericAlly	64	rule
+3045	Comfort Animal PvP	10	GenericSelf	1	rule
+3046	Unknow	17	None	0	rule
+3047	Melandrus Assault PvP	20	PetAttack	4	rule+uai
+3048	Shroud of Distress PvP	6	SelfBuff	1	rule
+3049	Unseen Fury PvP	3	SelfBuff	1	rule
+3050	Predatory Bond PvP	15	PartyBuff	1	rule
+3051	Enraged Lunge PvP	20	PetAttack	4	rule
+3052	Conviction PvP	3	SelfBuff	1	rule
+3053	Signet of Deadly Corruption PvP	7	Damage	4	rule
+3054	Masochism PvP	6	SelfBuff	1	rule
+3055	Pain attack Togo	14	None	0	rule
+3056	Pain attack Togo	14	None	0	rule
+3057	Pain attack Togo	14	None	0	rule
+3058	Unholy Feast PvP	5	HealSelf	1	rule
+3059	Signet of Agony PvP	7	PBAoE	1	rule
+3060	Escape PvP	3	SelfBuff	1	rule
+3061	Death Blossom PvP	14	Attack	4	rule+uai
+3062	Finale of Restoration PvP	28	HealSingle	3	rule
+3063	Mantra of Resolve PvP	3	SelfBuff	1	rule
+3064	Lesser Hard Mode NPC Buff	17	None	0	rule
+3065	Charm Animal	10	GenericSelf	1	rule
+3066	Charm Animal	10	GenericSelf	1	rule
+3067	Henchman	17	None	0	rule
+3068	Charm Animal Codex	10	None	64	def
+3069	Agent of the Mad King	29	None	0	rule
+3070	Sugar Rush Agent of the Mad King	3	SelfBuff	1	rule
+3071	Sticky Ground	15	GenericFoe	4	rule
+3072	Sugar Shock	15	GenericFoe	4	rule
+3073	The Mad Kings Influence	15	PartyBuff	1	rule
+3074	Bone Spike	14	Attack	4	rule
+3075	Flurry of Splinters	14	Attack	4	rule
+3076	Everlasting Mobstopper skill	5	Damage	4	rule
+3077	Weakened by Dhuum	16	SelfBuff	1	rule
+3078	Curse of Dhuum	5	SelfBuff	1	rule
+3079	Dhuums Rest Reaper skill	5	GenericSelf	1	rule
+3080	Dhuum skill	16	SelfBuff	1	rule
+3081	Summon Champion	5	None	0	rule
+3082	Summon Minions	5	None	0	rule
+3083	Touch of Dhuum	10	None	0	rule
+3084	Reaping of Dhuum	14	None	0	rule
+3085	Judgment of Dhuum	5	None	0	rule
+3086	Weight of Dhuum hex	4	None	0	rule+uai
+3087	Dhuums Rest	5	SelfBuff	1	rule
+3088	Spiritual Healing	5	HealSingle	2	def
+3089	Encase Skeletal	5	Damage	4	rule
+3090	Reversal of Death	5	None	2	def
+3091	Ghostly Fury	5	Damage	4	rule
+3092	Henchman Form Pudash	29	None	0	rule
+3093	Henchman Form Dahlia	29	None	0	rule
+3094	Henchman Form Disenmaedel	29	None	0	rule
+3095	Henchman Form Errol Hyl	29	None	0	rule
+3096	Henchman Form Lulu Xan	29	None	0	rule
+3097	Henchman Form Tannaros	29	None	0	rule
+3098	Henchman Form Cassie Santi	29	None	0	rule
+3099	Henchman Form Redemptor Frohs	29	None	0	rule
+3100	Henchman Form Julyia	29	None	0	rule
+3101	Henchman Form Bellicus	29	None	0	rule
+3102	Henchman Form Dirk Shadowrise	29	None	0	rule
+3103	Henchman Form Vincent Evan	29	None	0	rule
+3104	Henchman Form Luzy Fiera	29	None	0	rule
+3105	Henchman Form Motoko Kai	29	None	0	rule
+3106	Henchman Form Hinata	29	None	0	rule
+3107	Henchman Form Kah Xan	29	None	0	rule
+3108	Henchman Form Narcissia	29	None	0	rule
+3109	Henchman Form Zen Siert	29	None	0	rule
+3110	Henchman Form Blenkeh	29	None	0	rule
+3111	Henchman Form Aurora Allesandra	29	None	0	rule
+3112	Henchman Form Teena the Raptor	29	None	0	rule
+3113	Henchman Form Lora Lanaya	29	None	0	rule
+3114	Henchman Form Adepte	29	None	0	rule
+3115	Henchman Form Haldibarn Earendul	29	None	0	rule
+3116	Henchman Form Daky	29	None	0	rule
+3117	Henchman Form Syn Spellstrike	29	None	0	rule
+3118	Henchman Form Divinus Tutela	29	None	0	rule
+3119	Henchman Form Blahks	29	None	0	rule
+3120	Henchman Form Erick	29	None	0	rule
+3121	Henchman Form Ghavin	29	None	0	rule
+3122	Henchman Form Hobba Inaste	29	None	0	rule
+3123	Henchman Form Bacchi Coi	29	None	0	rule
+3124	Henchman Form Suzu	29	None	0	rule
+3125	Henchman Form Rollo Lowlo	29	None	0	rule
+3126	Henchman Form Fuu Rin	29	None	0	rule
+3127	Henchman Form Nuno	29	None	0	rule
+3128	Henchman Form Alsacien	29	None	0	rule
+3129	Henchman Form Uto Wrotki	29	None	0	rule
+3130	Henchman Form Khai Kemnebi	29	None	0	rule
+3131	Henchman Form Cole	29	None	0	rule
+3132	Unknow	16	SelfBuff	1	rule
+3133	Weight of Dhuum	14	None	0	rule
+3134	Spirit Form disguise	29	None	0	rule
+3135	Spiritual Healing Reaper skill	5	HealSingle	2	def
+3136	Ghostly Fury Reaper skill	5	Damage	4	rule
+3137	Reindeer Form	29	None	0	rule
+3138	Reindeer Form	29	None	0	rule
+3139	Reindeer Form	29	None	0	rule
+3140	Staggering Blow PvP	14	Attack	4	rule
+3141	Lightning Reflexes PvP	3	SelfBuff	1	rule
+3142	Fierce Blow PvP	14	Attack	4	rule
+3143	Renewing Smash PvP	14	Attack	4	rule
+3144	Heal as One PvP	10	HealSelf	1	rule
+3145	Glass Arrows PvP	19	SelfBuff	1	rule
+3146	Protective Was Kaolai PvP	24	ItemSpell	1	rule
+3147	Keen Arrow PvP	14	Attack	4	rule
+3148	Anthem of Envy PvP	27	PartyBuff	1	rule
+3149	Mending Refrain PvP	28	HealParty	1	rule
+3150	Lesser Flame Sentinel Resistance	17	None	0	rule
+3151	Empathy PvP	4	Hex	4	rule+uai
+3152	Crippling Anguish PvP	4	Hex	4	rule+uai
+3153	Pain attack Signet of Spirits	14	None	0	rule
+3154	Pain attack Signet of Spirits	14	None	0	rule
+3155	Pain attack Signet of Spirits	14	None	0	rule
+3156	Soldiers Stance PvP	3	SelfBuff	1	rule
+3157	Destructive Was Glaive PvP	24	ItemSpell	1	rule
+3158	Unknow	17	None	0	rule
+3159	Charm Drake	10	GenericSelf	1	rule
+3160	Unknow	10	Damage	4	rule
+3161	Unknow	10	Damage	4	rule
+3162	Theres not enough time	15	PartyBuff	1	rule
+3163	Keirans Sniper Shot	14	Attack	4	rule
+3164	Falken Punch	14	Attack	4	rule
+3165	Golem Pilebunker	5	DamageAoE	4	rule
+3166	Drunken Stumbling	3	SelfBuff	1	rule
+3167	Unknow	5	DamageAoE	4	rule
+3168	Unknow	5	DamageAoE	4	rule
+3169	Unknow	5	Damage	4	rule
+3170	Koros Gaze	5	HealSingle	2	rule
+3171	Ebon Vanguard Assassin Support NPC	5	Damage	4	rule
+3172	Ebon Vanguard Battle Standard of Power	11	Ward	1	rule
+3173	Loose Magic	23	None	0	rule
+3174	Well Supplied	16	SelfBuff	1	rule
+3175	Guild Monument Protected	10	PBAoE	1	rule
+3176	Strong Natural Resistance	17	None	0	rule
+3177	Elite Regeneration	17	None	0	rule
+3178	Elite Regeneration	17	None	0	rule
+3179	Mantra of Signets PvP	3	SelfBuff	1	rule
+3180	Shatter Delusions PvP	5	DamageAoE	4	rule+uai
+3181	Illusionary Weaponry PvP	6	SelfBuff	1	rule
+3182	Panic PvP	4	Hex	4	rule
+3183	Migraine PvP	4	Hex	4	rule+uai
+3184	Accumulated Pain PvP	5	Damage	4	rule
+3185	Psychic Instability PvP	5	DamageAoE	4	rule
+3186	Shared Burden PvP	4	Hex	4	rule
+3187	Stolen Speed PvP	4	Hex	4	rule
+3188	Unnatural Signet PvP	7	DamageAoE	4	rule
+3189	Spiritual Pain PvP	5	DamageAoE	4	rule
+3190	Frustration PvP	4	Hex	4	rule
+3191	Mistrust PvP	4	Hex	4	rule
+3192	Enchanters Conundrum PvP	4	Hex	4	rule
+3193	Signet of Clumsiness PvP	7	DamageAoE	4	rule
+3194	Mirror of Disenchantment PvP	5	Damage	4	rule+uai
+3195	Wandering Eye PvP	4	Hex	4	rule
+3196	Calculated Risk PvP	4	Hex	4	rule
+3197	Adoration	5	HealSingle	3	rule+uai
+3198	Impending Dhuum	16	GenericAlly	64	rule
+3199	Sacrifice Pawn	10	GenericAlly	3	rule+uai
+3200	Isaiahs Balance	4	Hex	4	rule
+3201	Toriimos Burning Fury	3	SelfBuff	1	rule
+3202	Oath of Protection	16	None	0	rule
+3203	Unknow	10	PBAoE	1	rule
+3204	Defy Pain PvP	3	SelfBuff	1	rule
+3205	Entourage	10	None	0	rule
+3206	Spectral Infusion	16	PBAoE	1	rule
+3207	Entourage Buffer	10	None	0	rule
+3208	Wastrels Demise PvP	4	Hex	4	rule
+3209	Unknow	10	None	0	rule
+3210	Shiro Tagachi Costume Brawl disguise	29	None	0	rule
+3211	Dunham Costume Brawl disguise	29	None	0	rule
+3212	Palawa Joko Costume Brawl disguise	29	None	0	rule
+3213	Lawrence Crafton Costume Brawl disguise	29	None	0	rule
+3214	Saul DAlessio Costume Brawl disguise	29	None	0	rule
+3215	Turai Ossa Costume Brawl disguise	29	None	0	rule
+3216	Lieutenant Thackeray Costume Brawl disguise	29	None	0	rule
+3217	Gehraz Costume Brawl disguise	29	None	0	rule
+3218	Master Togo Costume Brawl disguise	29	None	0	rule
+3219	Egil Fireteller Costume Brawl disguise	29	None	0	rule
+3220	Mysterious Assassin Costume Brawl disguise	29	None	0	rule
+3221	Gwen Costume Brawl disguise	29	None	0	rule
+3222	Eve Costume Brawl disguise	29	None	0	rule
+3223	Elementalist Aziure Costume Brawl disguise	29	None	0	rule
+3224	Jamei Costume Brawl disguise	29	None	0	rule
+3225	Jora Costume Brawl disguise	29	None	0	rule
+3226	Margrid the Sly Costume Brawl disguise	29	None	0	rule
+3227	Varesh Ossa Costume Brawl disguise	29	None	0	rule
+3228	Headmaster Quin Costume Brawl disguise	29	None	0	rule
+3229	Kormir Costume Brawl disguise	29	None	0	rule
+3230	Unknow	29	None	0	rule
+3231	Barbed Signet PvP	7	SelfBuff	1	rule
+3232	Heal Party PvP	5	HealParty	1	rule
+3233	Spoil Victor PvP	4	Hex	4	rule
+3234	Visions of Regret PvP	4	Hex	4	rule
+3235	Keirans Sniper Shot Hearts of the North	14	Attack	4	rule
+3236	Gravestone Marker	14	Attack	4	rule+uai
+3237	Terminal Velocity	14	Attack	4	rule+uai
+3238	Relentless Assault	14	Attack	4	rule
+3239	Natures Blessing	3	SelfBuff	1	rule
+3240	Find Their Weakness Thackeray	15	AllyBuff	3	rule
+3241	Theres Nothing to Fear Thackeray	15	PartyBuff	1	def
+3242	Coming of Spring	5	Resurrect	8	rule
+3243	Promise of Death	4	Hex	4	rule
+3244	Withering Blade	14	Attack	4	rule
+3245	Deaths Embrace	5	Damage	4	rule
+3246	Venom Fang	14	Attack	4	rule+uai
+3247	Survivors Will	3	SelfBuff	1	rule
+3248	Keiran Thackeray disguise	29	None	0	rule
+3249	Rain of Arrows	14	Attack	4	rule
+3250	Unknow	14	Attack	4	rule
+3251	Fox Fangs PvP	14	Attack	4	rule+uai
+3252	Wild Strike PvP	14	Attack	4	rule+uai
+3253	Ultra Snowball	5	DamageAoE	4	rule
+3254	Blizzard	5	DamageAoE	4	rule
+3255	Unknow	17	None	0	rule
+3256	Unknow	17	None	0	rule
+3257	Unknow	17	None	0	rule
+3258	Unknow	17	None	0	rule
+3259	Ultra Snowball	5	DamageAoE	4	rule
+3260	Ultra Snowball	5	DamageAoE	4	rule
+3261	Ultra Snowball	5	DamageAoE	4	rule
+3262	Ultra Snowball	5	DamageAoE	4	rule
+3263	Banishing Strike PvP	14	Attack	4	rule
+3264	Twin Moon Sweep PvP	14	Attack	4	rule
+3265	Irresistible Sweep PvP	14	Attack	4	rule
+3266	Pious Assault PvP	14	Attack	4	rule
+3267	Ebon Dust Aura PvP	6	SelfBuff	1	rule
+3268	Heart of Holy Flame PvP	6	SelfBuff	1	rule
+3269	Guiding Hands PvP	6	SelfBuff	1	rule
+3270	Avatar of Dwayna PvP	26	SelfBuff	1	rule
+3271	Avatar of Melandru PvP	26	SelfBuff	1	rule
+3272	Mystic Healing PvP	5	GenericSelf	1	rule
+3273	Signet of Pious Restraint PvP	7	Damage	4	rule
+3274	Vanguard Initiate	18	None	0	rule
+3275	Unknow	18	None	0	rule
+3276	Unknow	18	None	0	rule
+3277	Unknow	18	None	0	rule
+3278	Unknow	18	None	0	rule
+3279	Unknow	18	None	0	rule
+3280	Unknow	18	None	0	rule
+3281	Unknow	18	None	0	rule
+3282	Victorious Renewal	18	None	0	rule
+3283	A Dying Curse	18	None	0	rule
+3284	Unknow	18	None	0	rule
+3285	Unknow	18	None	0	rule
+3286	Unknow	18	None	0	rule
+3287	Unknow	18	None	0	rule
+3288	Rage of the Djinn	18	None	0	rule
+3289	Fevered Dreams PvP	4	Hex	4	rule
+3290	Stun Grenade	5	DamageAoE	4	rule
+3291	Fragmentation Grenade	5	DamageAoE	4	rule
+3292	Tear Gas	5	DamageAoE	4	rule
+3293	Land Mine	21	Trap	1	rule
+3294	Riot Shield	3	SelfBuff	1	rule
+3295	Club Strike	14	Attack	4	rule+uai
+3296	Bludgeon	14	Attack	4	rule+uai
+3297	Tango Down	15	PartyBuff	1	rule
+3298	Ill Be Back	15	PartyBuff	1	rule
+3299	Phased Plasma Burst	5	DamageAoE	4	rule
+3300	Plasma Shot	5	Damage	4	rule
+3301	Annihilator Bash	14	Attack	4	rule
+3302	Sky Net	4	Hex	4	rule
+3303	Damage Assessment	10	Damage	4	rule
+3304	Going Commando	29	None	0	rule
+3305	Unknow	10	GenericSelf	1	rule
+3306	Koss Form	29	None	0	rule
+3307	Dunkoro Form	29	None	0	rule
+3308	Melonni Form	29	None	0	rule
+3309	Acolyte Jin Form	29	None	0	rule
+3310	Acolyte Sousuke Form	29	None	0	rule
+3311	Tahlkora Form	29	None	0	rule
+3312	Zhed Shadowhoof Form	29	None	0	rule
+3313	Margrid the Sly Form	29	None	0	rule
+3314	Master of Whispers Form	29	None	0	rule
+3315	Goren Form	29	None	0	rule
+3316	Norgu Form	29	None	0	rule
+3317	Morgahn Form	29	None	0	rule
+3318	Razah Form	29	None	0	rule
+3319	Olias Form	29	None	0	rule
+3320	Zenmai Form	29	None	0	rule
+3321	Ogden Form	29	None	0	rule
+3322	Vekk Form	29	None	0	rule
+3323	Gwen Form	29	None	0	rule
+3324	Xandra Form	29	None	0	rule
+3325	Kahmu Form	29	None	0	rule
+3326	Jora Form	29	None	0	rule
+3327	Pyre Fierceshot Form	29	None	0	rule
+3328	Anton Form	29	None	0	rule
+3329	Hayda Form	29	None	0	rule
+3330	Livia Form	29	None	0	rule
+3331	Keiran Thackeray Form	29	None	0	rule
+3332	Miku Form	29	None	0	rule
+3333	MOX Form	29	None	0	rule
+3334	Shiro Tagachi Form	29	None	0	rule
+3335	Unknow	29	None	0	rule
+3336	Prince Rurik Form	29	None	0	rule
+3337	Margonite Form	29	None	0	rule
+3338	Destroyer Form	29	None	0	rule
+3339	Queen Salma Form	29	None	0	rule
+3340	Slightly Mad King Thorn Form	29	None	0	rule
+3341	Kuunavang Form	29	None	0	rule
+3342	Lone Wolf	18	None	0	rule
+3343	Stand Together	18	None	0	rule
+3344	Unyielding Spirit	18	None	0	rule
+3345	Reckless Advance	18	None	0	rule
+3346	Aura of Thorns PvP	6	SelfBuff	1	rule
+3347	Dust Cloak PvP	6	SelfBuff	1	rule
+3348	Lyssas Haste PvP	6	SelfBuff	1	rule
+3349	Knight Form	29	None	0	rule
+3350	Lord Archer Form	29	None	0	rule
+3351	Bodyguard Form	29	None	0	rule
+3352	Guild Thief Form	29	None	0	rule
+3353	Ghostly Priest Form	29	None	0	rule
+3354	Flame Sentinel Form	29	None	0	rule
+3355	Unknow	29	None	0	rule
+3356	Solidarity	18	None	0	rule
+3357	There Can Be Only One	18	None	0	rule
+3358	Fight Against Despair	18	None	0	rule
+3359	Deaths Succor	18	None	0	rule
+3360	Battle of Attrition	18	None	0	rule
+3361	Fight or Flight	18	None	0	rule
+3362	Renewing Escape	18	None	0	rule
+3363	Battle Frenzy	18	None	0	rule
+3364	The Way of One	18	None	0	rule
+3365	Onslaught PvP	6	SelfBuff	1	rule
+3366	Heart of Fury PvP	3	SelfBuff	1	rule
+3367	Wounding Strike PvP	14	Attack	4	rule
+3368	Pious Fury PvP	3	SelfBuff	1	rule
+3369	Party Mode	2	None	0	rule
+3370	Smash of the Titans	10	DamageAoE	4	rule
+3371	Mirror Shatter	5	GenericSelf	1	rule
+3372	Unknow	18	None	0	rule
+3373	Illusion of Haste PvP	6	SelfBuff	1	rule
+3374	Illusion of Pain PvP	4	Hex	4	rule
+3375	Aura of Restoration PvP	6	SelfBuff	1	rule
+3376	Shapeshift	26	SelfBuff	1	rule
+3377	GOLEM disguise	29	None	0	rule
+3378	Phase Shield	5	PBAoE	1	rule
+3379	Reactor Burst	5	PBAoE	1	rule
+3380	Ill Be Back	15	PartyBuff	1	rule
+3381	Annihilator Strike	14	Attack	4	rule
+3382	Annihilator Beam	5	DamageAoE	4	rule
+3383	Annihilator Knuckle	14	Attack	4	rule
+3384	Annihilator Toss	10	Damage	4	rule
+3385	Unknow	17	None	0	rule
+3386	Web of Disruption PvP	4	Interrupt	4	rule
+3387	Chain Combo	18	None	0	rule
+3388	Unknow	18	None	0	rule
+3389	Unknow	18	None	0	rule
+3390	All In	18	None	0	rule
+3391	Jack of All Trades	18	None	0	rule
+3392	Amateur Hour	18	None	0	rule
+3393	Odrans Razor	18	None	0	rule
+3394	Like a Boss	18	None	0	rule
+3395	The Boss	18	None	0	rule
+3396	Lightning Hammer PvP	5	Damage	4	rule
+3397	Elemental Flame PvP	6	SelfBuff	1	rule
+3398	Slippery Ground PvP	5	Damage	4	rule
+3399	Disguised when using everlasting tonics except Everlasting Legionnaire Tonic	29	None	0	rule
+3400	Disguised when using non everlasting tonics	29	None	0	rule
+3401	Disguised verification requested	29	None	0	rule
+3402	Tonic Tipsiness	10	SelfBuff	1	rule
+3403	Parting Gift	18	None	0	rule
+3404	Gift of Battle	10	PBAoE	1	rule
+3405	Rolling Start	29	None	0	rule
+3406	Disguised when using Everlasting Legionnaire Tonic	29	None	0	rule
+3407	Unknow	16	GenericSelf	1	rule
+3408	Unknow	17	None	0	rule
+3409	Unknow	17	None	0	rule
+3410	Unknow	10	None	0	rule
+3411	Unknow	5	SelfBuff	1	rule
+3412	Unknow	5	SelfBuff	1	rule
+3413	Unknow	5	SelfBuff	1	rule
+3414	Unknow	5	SelfBuff	1	rule
+3415	Unknow	5	GenericSelf	1	rule
+3416	Unknow	5	None	0	rule
+3417	Unknow	10	None	0	rule
+3418	Unknow	10	Damage	4	rule
+3419	Unknow	10	Damage	4	rule
+3420	Unknow	5	Damage	4	rule
+3421	Unknow	5	GenericSelf	1	rule
+3422	Time Ward	11	Ward	1	rule
+3423	Soul Taker	6	SelfBuff	1	rule
+3424	Over the Limit	6	SelfBuff	1	def
+3425	Judgment Strike	14	Attack	4	rule
+3426	Seven Weapons Stance	3	SelfBuff	1	rule
+3427	Together as One	15	PartyBuff	1	rule
+3428	Shadow Theft	10	Damage	4	rule
+3429	Weapons of Three Forges	25	WeaponSpell	1	rule
+3430	Vow of Revolution	6	SelfBuff	1	rule
+3431	Heroic Refrain	28	AllyBuff	3	rule
+3432	unknown	17	None	0	rule
+3433	unknown	17	None	0	rule
+3434	Reforged Mode	18	None	0	rule
+3435	Dhuums Covenant Broken	18	None	0	rule
+3436	monster only	17	None	0	rule
+3437	Farmers Scythe PvP	14	Attack	4	rule
+3438	Seek and Destroy	16	SelfBuff	1	rule
+3439	Birds Eye View	16	SelfBuff	1	rule
+3440	Summoned Merchant	16	SelfBuff	1	rule
+3441	Summoned Merchant Should Die	16	SelfBuff	1	rule
+3442	Mighty Throw PvP	14	Attack	4	rule
+3443	Frenzy PvP	3	SelfBuff	1	rule
+3444	Hundred Blades PvP	16	PBAoE	1	rule
+3445	Natures Renewal PvP	22	Spirit	1	rule
+3446	Soul Ignition	6	SelfBuff	1	rule
+3447	Wastrels Worry PvP	4	Hex	4	rule
+3448	Peace and Harmony PvP	6	AllyBuff	3	rule
+3449	Protectors Strike PvP	14	Attack	4	rule
+3450	Crippling Shot PvP	14	Attack	4	rule
+3451	Otyughs Cry PvP	15	PartyBuff	1	rule
+3452	Shadow Shroud PvP	4	Hex	4	rule
+3453	Dash PvP	3	SelfBuff	1	rule
+3454	Shield Guardian PvP	6	PartyBuff	1	rule
+3455	Auspicious Blow PvP	14	Attack	4	rule
+3456	Coward PvP	15	GenericFoe	4	rule
+3457	Protectors Defense PvP	10	PBAoE	1	rule
+3458	Primal Rage PvP	3	SelfBuff	1	rule
+3459	Melandrus Shot PvP	14	Attack	4	rule
+3460	Tranquility PvP	22	Spirit	1	rule
+3461	Soul Twisting PvP	16	PBAoE	1	rule
+3462	Guided Weapon PvP	25	WeaponSpell	3	rule
+3463	Tease PvP	5	DamageAoE	4	rule
+3464	Flail PvP	3	SelfBuff	1	rule
+3465	Charging Strike PvP	3	SelfBuff	1	rule
+3466	Infuriating Heat PvP	22	Spirit	1	rule
+3467	Mystic Corruption PvP	6	SelfBuff	1	rule
+3468	Harriers Grasp PvP	6	SelfBuff	1	rule
+3469	Mirage Cloak PvP	6	SelfBuff	1	rule
+3470	Fleeting Stability PvP	6	SelfBuff	1	rule
+3471	Pious Restoration PvP	5	HealSelf	1	rule
+3472	Whirling Charge PvP	6	SelfBuff	1	rule
+3473	Aura Slicer PvP	14	Attack	4	rule
+3474	PvP Armor Reduction	17	None	0	rule
+3475	Summoned Merchant Should Die	16	SelfBuff	1	rule
