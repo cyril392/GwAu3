@@ -88,6 +88,10 @@ Global Const $GC_AS_ZS_FLAGNAMES[24] = ["dead", "casting", "attacking", "moving"
 		"conditioned", "bleeding", "poisoned", "deepwound", "crippled", "weaponspell", "boss", "player", "corpse", "spawned", _
 		"burning", "blind", "dazed", "weakness", "diseased", "pet"]
 
+; Profession of the skills each agent was seen using (agent ID -> profession): stands for the primary
+; profession when the game gives none (some monsters)
+Global $g_m_ZS_SeenProf[]
+
 ; The player's pet: agent ID read from the game every second (0 = none); row in the snapshot (0 = not seen)
 Global $g_i_ZS_PetID = 0, $g_i_ZS_PetReadAt = -100000, $g_i_ZS_PetIdx = 0
 ; Attribute rank used for durations when the game cannot be read (test snapshots: "rank=" meta key)

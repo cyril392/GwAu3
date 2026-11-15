@@ -107,6 +107,8 @@ Func ZS_Execute()
 				Return ZS_Exec_SetState($GC_ZS_ST_AFTERCAST)
 			EndIf
 			If $l_i_Elapsed > $g_i_ZS_ExecTimeout Then
+				; Still walking to the target (a range shorter than thought, a foe that moved): the game will cast on arrival
+				If ZS_Is($l_i_Me, $GC_ZS_AF_MOVING) And $l_i_Elapsed <= $g_i_ZS_ExecTimeout + 4000 Then Return
 				$g_i_ZS_StatTimeouts += 1
 				Return ZS_Exec_Abort("no cast after " & $l_i_Elapsed & " ms:", False)
 			EndIf
@@ -210,8 +212,10 @@ Func ZS_Exec_StartSkill($a_i_Slot, $a_i_TargetID)
 	$g_i_ZS_ExecTarget = $a_i_TargetID
 	$g_b_ZS_ExecIsRez = ($l_i_Family = $GC_ZS_FAM_RESURRECT And $l_i_Idx <> $g_i_ZS_MeIdx)
 
-	; How long the activation may take to show: latency, plus the walk to range
+	; How long the activation may take to show: latency, plus the walk to range.
+	; An attack skill only goes off with the next swing of the weapon (up to 2 s for a bow).
 	$g_i_ZS_ExecTimeout = ($l_i_Activation = 0 ? 500 : 1500) + 2 * $g_i_ZS_Ping
+	If $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Type] = $GC_I_SKILL_TYPE_ATTACK Then $g_i_ZS_ExecTimeout += 2000
 	Local $l_f_Extra = $g_amx2_ZS_Agent[$l_i_Idx][$GC_ZS_A_Dist] - ZS_Eval_Range($a_i_Slot)
 	If $l_i_Idx <> $g_i_ZS_MeIdx And $l_f_Extra > 0 Then
 		Local $l_i_Walk = Int($l_f_Extra / 0.25) ; about 250 units per second

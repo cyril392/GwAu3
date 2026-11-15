@@ -187,6 +187,7 @@ Func ZS_Perception_ForgetTracking()
 	$g_i_ZS_CalledTarget = 0
 	ZS_Hazard_Reset()
 	$g_i_ZS_MoveUntil = 0
+	$g_m_ZS_SeenProf = $l_m_Empty
 EndFunc   ;==>ZS_Perception_ForgetTracking
 #EndRegion Build from the game
 
@@ -215,6 +216,19 @@ Func ZS_Snapshot_Finalize()
 	$g_m_ZS_IdToIdx = $l_m_Map
 	$g_i_ZS_MeIdx = ZS_IdxOf($g_i_ZS_MyID)
 	If $g_i_ZS_MeIdx = 0 Then Return False
+
+	; A profession the game does not give: the one of the skills the agent was seen using
+	Local $l_i_Seen, $l_i_AgentID
+	For $i = 1 To $g_i_ZS_AgentCount
+		If $i = $g_i_ZS_MeIdx Then ContinueLoop
+		$l_i_AgentID = $g_amx2_ZS_Agent[$i][$GC_ZS_A_ID]
+		If $g_amx2_ZS_Agent[$i][$GC_ZS_A_Skill] <> 0 Then
+			$l_i_Seen = ZS_SkillData($g_amx2_ZS_Agent[$i][$GC_ZS_A_Skill], $GC_I_SKILL_PROFESSION)
+			If $l_i_Seen > 0 And $l_i_Seen <= 10 Then $g_m_ZS_SeenProf[$l_i_AgentID] = $l_i_Seen
+		EndIf
+		If $g_amx2_ZS_Agent[$i][$GC_ZS_A_Primary] = 0 And MapExists($g_m_ZS_SeenProf, $l_i_AgentID) Then _
+				$g_amx2_ZS_Agent[$i][$GC_ZS_A_Primary] = $g_m_ZS_SeenProf[$l_i_AgentID]
+	Next
 
 	; The pet: from the game's pet list, or from the "pet" flag of a test snapshot
 	$g_i_ZS_PetIdx = ($g_i_ZS_PetID <> 0 ? ZS_IdxOf($g_i_ZS_PetID) : 0)

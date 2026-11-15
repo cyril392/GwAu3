@@ -74,7 +74,7 @@ D:\AutoIt3\AutoIt3.exe /ErrorStdOut "API\Plugins\Zaishen\Tools\ZS_CoverageReport
 D:\AutoIt3\Au3Check.exe -q "API\Plugins\Zaishen\Tests\ZS_TestBench.au3"
 ```
 
-Résultats au 15/11/2026 : 217/217 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
+Résultats au 16/11/2026 : 218/218 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
 2 398 skills équipables, tous avec une famille (0 sans comportement).
 
 ## Historique des retours en jeu
@@ -214,6 +214,16 @@ Résultats au 15/11/2026 : 217/217 ; évaluation ≈ 18 ms pour 40 agents et une
   - le derviche revenait vers le leader entre ses sorts : il était pris pour un personnage à distance
     (arme tenue seule) et reculait au contact. Le build décide maintenant (attaques de mêlée sur la barre,
     set maison de mêlée, guerrier / assassin / derviche) avant l'arme tenue.
+- 16/11 — **2e essai en jeu** (journaux mesmer, élé, derviche, assassin) :
+  - Backfire jamais lancé sur un moine : des monstres n'ont pas de profession dans le jeu (0), donc jamais
+    « Caster ». La profession manquante est déduite des skills qu'on les voit utiliser
+    (`$g_m_ZS_SeenProf`) : un monstre vu lancer Remove Hex est un moine ;
+  - beaucoup d'actions abandonnées « no cast after ~600 ms » (Pious Assault x172 sur le derviche,
+    Psychic Instability x19 sur le mesmer) : une attaque ne part qu'au coup d'arme suivant, et le
+    joueur marchait encore vers sa cible. Délai +2 s pour une attaque, et pas d'abandon tant que le
+    joueur marche vers la cible (jusqu'à 4 s de plus) ;
+  - set en main du derviche non reconnu (objets tenus 661/0, set lu 661/662) : réglé par la
+    reconnaissance sur l'arme seule (correction du 15/11).
 
 ## Écarts par rapport au cahier des charges
 
