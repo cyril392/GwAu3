@@ -74,7 +74,7 @@ D:\AutoIt3\AutoIt3.exe /ErrorStdOut "API\Plugins\Zaishen\Tools\ZS_CoverageReport
 D:\AutoIt3\Au3Check.exe -q "API\Plugins\Zaishen\Tests\ZS_TestBench.au3"
 ```
 
-Résultats au 15/11/2026 : 212/212 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
+Résultats au 15/11/2026 : 215/215 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
 2 398 skills équipables, tous avec une famille (0 sans comportement).
 
 ## Historique des retours en jeu
@@ -203,6 +203,9 @@ Résultats au 15/11/2026 : 212/212 ; évaluation ≈ 18 ms pour 40 agents et une
   personnel, d'autant plus qu'il y a d'alliés autour ; aucun skill de vitesse quand un autre effet de
   vitesse est déjà sur le joueur (les vitesses ne s'additionnent pas) : quand un bot du groupe a crié
   Incoming!, les autres ne relancent rien (les effets du groupe sont visibles).
+  **Vitesse perso hors combat** (`$g_i_ZS_SoloSpeed`, menu « Solo speed » du Follower) : Auto (défaut) =
+  seulement seul ou pour rattraper le groupe (allié le plus proche à plus de 900), pour qu'un bot ne
+  distance jamais les autres ; Never ; Always (bot de run solo). En combat : inchangé.
 
 ## Écarts par rapport au cahier des charges
 

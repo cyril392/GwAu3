@@ -630,6 +630,20 @@ Func ZS_Eval_OutOfCombat($a_i_Slot, $a_i_AgentID)
 		If $g_b_ZS_Explain Then $g_s_ZS_Why &= ", party speed for " & ($l_i_With + 1)
 		Return 0.45 + 0.05 * $l_i_With
 	EndIf
+	; A personal one: the party walks together, a bot never outruns it (see $g_i_ZS_SoloSpeed)
+	If $l_b_Speed Then
+		Switch $g_i_ZS_SoloSpeed
+			Case 0
+				Return 0
+			Case 1
+				Local $l_f_Nearest = 1000000
+				For $i = 1 To $g_ai_ZS_Allies[0]
+					If $g_amx2_ZS_Agent[$g_ai_ZS_Allies[$i]][$GC_ZS_A_Dist] < $l_f_Nearest Then $l_f_Nearest = $g_amx2_ZS_Agent[$g_ai_ZS_Allies[$i]][$GC_ZS_A_Dist]
+				Next
+				If $g_ai_ZS_Allies[0] > 0 And $l_f_Nearest <= $g_f_ZS_CatchUpDist Then Return 0
+				If $g_b_ZS_Explain Then $g_s_ZS_Why &= ($g_ai_ZS_Allies[0] = 0 ? ", alone" : ", catching up (" & Round($l_f_Nearest) & ")")
+		EndSwitch
+	EndIf
 	Return 0.4
 EndFunc   ;==>ZS_Eval_OutOfCombat
 

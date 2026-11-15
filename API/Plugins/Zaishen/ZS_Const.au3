@@ -307,6 +307,11 @@ Global $g_m_ZS_HazSkill[]                  ; skill ID -> True/False: leaves a da
 Global $g_f_ZS_MoveX = 0, $g_f_ZS_MoveY = 0, $g_i_ZS_MoveUntil = 0, $g_i_ZS_MoveBand = 0, $g_f_ZS_MoveU = 0
 Global $g_s_ZS_MoveWhy = "", $g_i_ZS_MoveSentAt = -100000
 Global $g_i_ZS_StatMoves = 0
+; Personal speed skills (Sprint...) between fights. A party one (Incoming!) speeds everyone and is not concerned.
+;   0 never; 1 only alone or to catch up with the party (nearest ally farther than $g_f_ZS_CatchUpDist), so a bot
+;   never outruns the others; 2 always (a bot running alone)
+Global $g_i_ZS_SoloSpeed = 1
+Global $g_f_ZS_CatchUpDist = 900
 #EndRegion Positioning
 
 #Region Execution

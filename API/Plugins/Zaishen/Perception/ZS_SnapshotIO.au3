@@ -65,6 +65,7 @@ Func ZS_Snapshot_Load($a_s_File)
 	$g_i_ZS_Expertise = 0
 	$g_i_ZS_FastCasting = 0
 	$g_i_ZS_OfflineRank = 12
+	$g_i_ZS_SoloSpeed = 1
 	$g_i_ZS_PetID = 0
 	Local $l_m_NoneLearned[]
 	$g_m_ZS_Maintainable = $l_m_NoneLearned
@@ -204,6 +205,8 @@ Func ZS_SnapshotIO_Meta($a_s_Pair)
 			$g_i_ZS_FastCasting = Int($l_f_Value)
 		Case "rank"
 			$g_i_ZS_OfflineRank = Int($l_f_Value)
+		Case "solospeed"
+			$g_i_ZS_SoloSpeed = Int($l_f_Value)
 		Case "wset"
 			$g_i_ZS_ActiveSet = Int($l_f_Value)
 	EndSwitch
