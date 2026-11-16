@@ -158,10 +158,12 @@ Func ZS_Eval_Slot($a_i_Slot, $a_i_Family)
 	Local $l_b_FoeOK = (ZS_Veto_Punished(ZS_Veto_KindOf($a_i_Slot, True)) = "")
 	Local $l_b_OwnOK = (ZS_Veto_Punished(ZS_Veto_KindOf($a_i_Slot, False)) = "")
 
-	; A skill cast on oneself for the pet (Comfort Animal, Revive Animal): judged on the pet
-	If ZS_SlotParam($a_i_Slot, "OnPet") = "1" Then
+	; A skill cast on oneself for the pet (Comfort Animal, Revive Animal): judged on the pet.
+	; OnPet=2 (Heal as One): judged on the pet AND on the player
+	Local $l_s_OnPet = ZS_SlotParam($a_i_Slot, "OnPet")
+	If $l_s_OnPet <> "" Then
 		If $g_i_ZS_PetIdx > 0 And $l_b_OwnOK Then ZS_Eval_Candidate($a_i_Slot, $a_i_Family, $g_i_ZS_PetIdx)
-		Return
+		If $l_s_OnPet = "1" Then Return
 	EndIf
 
 	If BitAND($l_i_Mask, $GC_ZS_TM_SELF) And $l_b_OwnOK Then ZS_Eval_Candidate($a_i_Slot, $a_i_Family, $g_i_ZS_MeIdx)
@@ -196,7 +198,7 @@ Func ZS_Eval_Candidate($a_i_Slot, $a_i_Family, $a_i_Idx)
 	Local $l_i_SkillID = $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_SkillID]
 	Local $l_i_TargetID = $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_ID]
 	; Judged on the pet, cast on the player
-	Local $l_b_OnPet = ($a_i_Idx = $g_i_ZS_PetIdx And $a_i_Idx > 0 And ZS_SlotParam($a_i_Slot, "OnPet") = "1")
+	Local $l_b_OnPet = ($a_i_Idx = $g_i_ZS_PetIdx And $a_i_Idx > 0 And ZS_SlotParam($a_i_Slot, "OnPet") <> "")
 	If $l_b_OnPet Then $l_i_TargetID = $g_i_ZS_MyID
 
 	; Pair acted on a moment ago: let the game show the result before trying again
@@ -237,6 +239,8 @@ Func ZS_Eval_Candidate($a_i_Slot, $a_i_Family, $a_i_Idx)
 	If $g_b_ZS_AsDamage Then $l_i_Band = $GC_ZS_BAND_DAMAGE
 	; A core buff of the build ("Upkeep=1") goes before damage when it is down
 	If ZS_SlotParam($a_i_Slot, "Upkeep") = "1" And $l_i_Band < $GC_ZS_BAND_UPKEEP Then $l_i_Band = $GC_ZS_BAND_UPKEEP
+	; A heal paid with something else (Spirit to Flesh: a spirit) is a heal
+	If ZS_SlotParam($a_i_Slot, "HurtNear") <> "" And $l_i_Band < $GC_ZS_BAND_HEAL Then $l_i_Band = $GC_ZS_BAND_HEAL
 	; A refrain kept up by the shout goes before damage, like any buff renewal
 	If $l_b_Echo And $l_i_Band < $GC_ZS_BAND_UPKEEP Then $l_i_Band = $GC_ZS_BAND_UPKEEP
 	; Keeping up a buff that was worth casting goes before damage
@@ -479,6 +483,23 @@ EndFunc   ;==>ZS_Eval_Offer
 #EndRegion Candidates
 
 #Region Shared considerations
+;~ Description: With "HurtNear=n" (Spirit to Flesh): number of us under 70 % health within 240 of agent row $a_i_Idx
+;~ (the player included), when at least n; 0 otherwise or without the parameter.
+Func ZS_Req_HurtNear($a_i_Slot, $a_i_Idx)
+	Local $l_s_V = ZS_SlotParam($a_i_Slot, "HurtNear")
+	If $l_s_V = "" Then Return 0
+	Local $l_f_X = $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_X], $l_f_Y = $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_Y]
+	Local $l_i_N = 0, $l_i_A, $l_f_DX, $l_f_DY
+	For $i = 0 To $g_ai_ZS_Allies[0]
+		$l_i_A = ($i = 0 ? $g_i_ZS_MeIdx : $g_ai_ZS_Allies[$i])
+		If $g_amx2_ZS_Agent[$l_i_A][$GC_ZS_A_HP] >= 0.7 Then ContinueLoop
+		$l_f_DX = $g_amx2_ZS_Agent[$l_i_A][$GC_ZS_A_X] - $l_f_X
+		$l_f_DY = $g_amx2_ZS_Agent[$l_i_A][$GC_ZS_A_Y] - $l_f_Y
+		If $l_f_DX * $l_f_DX + $l_f_DY * $l_f_DY <= 240 * 240 Then $l_i_N += 1
+	Next
+	Return ($l_i_N >= Int($l_s_V) ? $l_i_N : 0)
+EndFunc   ;==>ZS_Req_HurtNear
+
 ;~ Description: Who a corpse skill works on around the corpse ("Corpse=" of the slot): "Foes" (wells against foes,
 ;~ Putrid Explosion), "Allies" (Well of Blood, Well of Power), "" when where the corpse lies does not matter
 ;~ (Animate..., Soul Feast). A well without the parameter works on foes.
@@ -981,6 +1002,17 @@ Func ZS_Eval_Utility($a_i_Slot, $a_i_Family, $a_i_Idx)
 			; Holding an urn: drop it first (ZS_Eval_Bundles), never pick another one over it
 			If $a_i_Family = $GC_ZS_FAM_ITEM_SPELL And $g_i_ZS_HeldUrn <> 0 Then Return 0
 			If ZS_Eval_BuffState($a_i_Slot, $l_i_ID) < 0 Then Return 0
+			; Recharges the other signets (Keystone Signet): only once some of them are spent
+			If ZS_SlotParam($a_i_Slot, "Recharges") = "Signet" Then
+				Local $l_i_Spent = 0
+				For $l_i_S = 1 To 8
+					If $l_i_S = $a_i_Slot Or $g_amx2_ZS_Slot[$l_i_S][$GC_ZS_S_Type] <> $GC_I_SKILL_TYPE_SIGNET Then ContinueLoop
+					If Not $g_amx2_ZS_Slot[$l_i_S][$GC_ZS_S_Recharged] And $g_amx2_ZS_Slot[$l_i_S][$GC_ZS_S_RechargeMs] > 3000 Then $l_i_Spent += 1
+				Next
+				If $l_i_Spent = 0 Then Return 0
+				If $g_b_ZS_Explain Then $g_s_ZS_Why = $l_i_Spent & " signets recharging"
+				Return ZS_Curve_Clamp(0.45 + 0.1 * ($l_i_Spent - 1))
+			EndIf
 			; One stance (one form) at a time: a new one replaces the one up. Only a defensive one under
 			; pressure may replace a stance that is not defensive.
 			Local $l_i_SelfType = $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Type]
@@ -1039,6 +1071,14 @@ Func ZS_Eval_Utility($a_i_Slot, $a_i_Family, $a_i_Idx)
 			EndIf
 
 		Case $GC_ZS_FAM_ALLY_BUFF, $GC_ZS_FAM_GENERIC_ALLY
+			; Spirit to Flesh: the spirit is spent to heal the hurt allies around it (HurtNear=n, see ZS_Req_Target)
+			Local $l_i_Hurt = ZS_Req_HurtNear($a_i_Slot, $a_i_Idx)
+			If $l_i_Hurt > 0 Then
+				$l_f_U = ZS_Curve_Clamp(0.5 + 0.1 * ($l_i_Hurt - Int(ZS_SlotParam($a_i_Slot, "HurtNear"))))
+				If $g_b_ZS_Explain Then $g_s_ZS_Why = $l_i_Hurt & " hurt allies near it"
+				Return $l_f_U
+			EndIf
+			If ZS_SlotParam($a_i_Slot, "HurtNear") <> "" Then Return 0
 			If Not $g_b_ZS_InCombat Then Return ZS_Eval_OutOfCombat($a_i_Slot, $l_i_ID)
 			If ZS_Eval_BuffState($a_i_Slot, $l_i_ID) < 0 Then Return 0
 			If ZS_Eval_IsDefensive($a_i_Slot) Then

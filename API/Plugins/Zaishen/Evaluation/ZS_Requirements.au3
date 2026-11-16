@@ -293,6 +293,14 @@ Func ZS_Req_Slot($a_i_Slot)
 	$l_s_V = ZS_SlotParam($a_i_Slot, "MyHPBelow")
 	If $l_s_V <> "" And $l_f_HP > Number($l_s_V) Then Return "my health over " & $l_s_V
 	$l_s_V = ZS_SlotParam($a_i_Slot, "MyEnergyBelow")
+	; "@a,b,c...": the threshold by rank in the skill's attribute (Ether Signet: 5 at rank 0, 9 at rank 12)
+	If StringLeft($l_s_V, 1) = "@" Then
+		Local $l_as_ByRank = StringSplit(StringMid($l_s_V, 2), ",", 2)
+		Local $l_i_Rank = ZS_Knowledge_Rank($g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Attribute])
+		If $l_i_Rank > UBound($l_as_ByRank) - 1 Then $l_i_Rank = UBound($l_as_ByRank) - 1
+		If $l_i_Rank < 0 Then $l_i_Rank = 0
+		$l_s_V = $l_as_ByRank[$l_i_Rank]
+	EndIf
 	If $l_s_V <> "" And $g_f_ZS_Energy >= Number($l_s_V) Then Return "my energy over " & $l_s_V
 	$l_s_V = ZS_SlotParam($a_i_Slot, "MinAdjacent")
 	If $l_s_V <> "" Then

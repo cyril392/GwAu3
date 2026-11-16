@@ -31,7 +31,10 @@
 ;                   Conditions, all needed, comma separated: Cost:n, Cast:ms, Type:Enchantment|Hex|Spell,
 ;                   Prof:<profession>, Damage, Skill:<id> (glyph default: 10 energy or 2 s of cast)
 ;   OnPet=1         cast on the player, judged on the player's pet; PetRez=1 also brings a dead pet back,
-;                   PetRez=2 only that (Revive Animal)
+;                   PetRez=2 only that (Revive Animal); OnPet=2: judged on the pet and on the player (Heal as One)
+;   HurtNear=n      at least n of us under 70 % within 240 of the target (Spirit to Flesh): a heal
+;   Recharges=Signet  recharges the other signets (Keystone Signet): only once some are spent
+;   MyEnergyBelow=@a,b,...  threshold by rank in the skill's attribute
 ;   Hold=1          Interrupt attack: never used as a plain attack when nothing is to be stopped
 ;   Speed=1 | 2     speed skill: used while the player walks, in fights and between them (2: in fights as usual)
 ;   OutOfCombat=1   a buff also kept up between fights (the others wait for a fight)
@@ -166,6 +169,8 @@ Func ZS_LoadDefs_Audit()
 	ZS_DefineSkill($GC_I_SKILL_ID_OTYUGHS_CRY, -1, -1, "OnPet=1|SelfIs=PetAlive")
 	ZS_DefineSkill($GC_I_SKILL_ID_PREDATORY_BOND, -1, -1, "OnPet=1|SelfIs=PetAlive")
 	; "You and your animal companion": nothing without a living pet
+	; Heals the player and the pet, brings a dead pet back; works without a pet (a self heal)
+	ZS_DefineSkill($GC_I_SKILL_ID_HEAL_AS_ONE, -1, -1, "OnPet=2|PetRez=1")
 	ZS_DefineSkill($GC_I_SKILL_ID_RAMPAGE_AS_ONE, -1, -1, "SelfIs=PetAlive")
 	ZS_DefineSkill($GC_I_SKILL_ID_NEVER_RAMPAGE_ALONE, -1, -1, "SelfIs=PetAlive")
 
@@ -187,7 +192,7 @@ Func ZS_LoadDefs_Audit()
 	; ===== Cleanses the rules took for buffs =====
 	ZS_DefineSkill($GC_I_SKILL_ID_DISMISS_CONDITION, $GC_ZS_FAM_COND_REMOVAL)
 	ZS_DefineSkill($GC_I_SKILL_ID_FOUL_FEAST, $GC_ZS_FAM_COND_REMOVAL, $GC_ZS_TM_ALLY)
-	ZS_DefineSkill($GC_I_SKILL_ID_SIGNET_OF_REMOVAL, $GC_ZS_FAM_HEX_REMOVAL)
+	ZS_DefineSkill($GC_I_SKILL_ID_SIGNET_OF_REMOVAL, $GC_ZS_FAM_HEX_REMOVAL, -1, "Need=Enchanted")  ; no effect unless enchanted
 	ZS_DefineSkill($GC_I_SKILL_ID_PURIFYING_PRAYER, $GC_ZS_FAM_HEX_REMOVAL)
 	ZS_DefineSkill($GC_I_SKILL_ID_ANTIDOTE_SIGNET, $GC_ZS_FAM_COND_REMOVAL, $GC_ZS_TM_SELF)
 
@@ -264,7 +269,7 @@ Func ZS_LoadDefs_Audit()
 	ZS_DefineSkill($GC_I_SKILL_ID_GLASS_ARROWS, -1, -1, "Upkeep=1")
 
 	; ===== Buffs the rules took for area skills (a small area of the game data) =====
-	ZS_DefineSkill($GC_I_SKILL_ID_KEYSTONE_SIGNET, $GC_ZS_FAM_SELF_BUFF, $GC_ZS_TM_SELF)
+	ZS_DefineSkill($GC_I_SKILL_ID_KEYSTONE_SIGNET, $GC_ZS_FAM_SELF_BUFF, $GC_ZS_TM_SELF, "Recharges=Signet")  ; recharges our other signets
 	; Preparations: only right before a spell they work on is cast (see Before= above)
 	ZS_DefineSkill($GC_I_SKILL_ID_INTENSITY, $GC_ZS_FAM_SELF_BUFF, $GC_ZS_TM_SELF, "Before=Prof:Elementalist,Damage")
 	ZS_DefineSkill($GC_I_SKILL_ID_SIGNET_OF_ILLUSIONS, $GC_ZS_FAM_SELF_BUFF, $GC_ZS_TM_SELF, "Before=Prof:Mesmer")
@@ -326,7 +331,7 @@ Func ZS_LoadDefs_Audit()
 	ZS_DefineSkill($GC_I_SKILL_ID_GAZE_OF_CONTEMPT, -1, -1, "Need=Enchanted|TargetAbove=0.5")
 	ZS_DefineSkill($GC_I_SKILL_ID_AWE, -1, -1, "Need=Knocked|Prefer=")
 	ZS_DefineSkill($GC_I_SKILL_ID_SIGNET_OF_HUMILITY, -1, -1, "Need=Boss")              ; disables an elite skill
-	ZS_DefineSkill($GC_I_SKILL_ID_ARCANE_CONUNDRUM, -1, -1, "Need=Caster|Prefer=Casting")
+	ZS_DefineSkill($GC_I_SKILL_ID_ARCANE_CONUNDRUM, -1, -1, "Need=Caster|Prefer=Casting|Spread=1")   ; also hexes adjacent foes
 	ZS_DefineSkill($GC_I_SKILL_ID_SMOOTH_CRIMINAL, -1, -1, "Need=Caster")
 	ZS_DefineSkill($GC_I_SKILL_ID_BLINDING_FLASH, -1, -1, "Avoid=Blind|Prefer=NotCaster,Attacking|Pick=")
 	ZS_DefineSkill($GC_I_SKILL_ID_YOU_MOVE_LIKE_A_DWARF, -1, -1, "Prefer=Casting,Monk")
@@ -376,7 +381,8 @@ Func ZS_LoadDefs_Audit()
 	ZS_DefineSkill($GC_I_SKILL_ID_WARRIORS_ENDURANCE, -1, -1, "MyEnergyBelow=20")
 	ZS_DefineSkill($GC_I_SKILL_ID_ETHER_LORD, -1, -1, "MyEnergyBelow=10")           ; "you lose all energy"
 	ZS_DefineSkill($GC_I_SKILL_ID_ETHER_PRODIGY, -1, -1, "MyEnergyBelow=15")        ; ends all our enchantments later
-	ZS_DefineSkill($GC_I_SKILL_ID_ETHER_SIGNET, $GC_ZS_FAM_ENERGY, $GC_ZS_TM_SELF, "MyEnergyBelow=10")
+	; No effect unless energy is under 5..10 (Inspiration Magic rank 0..21, wiki table)
+	ZS_DefineSkill($GC_I_SKILL_ID_ETHER_SIGNET, $GC_ZS_FAM_ENERGY, $GC_ZS_TM_SELF, "MyEnergyBelow=@5,5,6,6,7,7,7,8,8,8,9,9,9,10,10,10,11,11,11,12,12,12")
 	ZS_DefineSkill($GC_I_SKILL_ID_SPIRIT_SIPHON, $GC_ZS_FAM_ENERGY, $GC_ZS_TM_SELF, "SpiritsNear=1")
 	ZS_DefineSkill($GC_I_SKILL_ID_RECLAIM_ESSENCE, -1, -1, "MyEnergyBelow=10|SpiritsNear=1")   ; kills all our spirits
 	ZS_DefineSkill($GC_I_SKILL_ID_ORDER_OF_PAIN, -1, -1, "MyHPAbove=0.5")
@@ -418,5 +424,7 @@ Func ZS_LoadDefs_Audit()
 	ZS_DefineSkill($GC_I_SKILL_ID_PUTRID_FLESH, -1, $GC_ZS_TM_MINION, "MinFoes=2")
 	ZS_DefineSkill($GC_I_SKILL_ID_DEATH_NOVA, -1, $GC_ZS_TM_MINION)
 	ZS_DefineSkill($GC_I_SKILL_ID_RUPTURE_SOUL, -1, -1, "Need=Spirit|TargetBelow=0.5|MinFoes=1")
-	ZS_DefineSkill($GC_I_SKILL_ID_SPIRIT_TO_FLESH, -1, -1, "TargetBelow=0.3")
+	; Touch spell: destroys our spirit, heals the allies near it (wiki): when 2 of us or more are hurt there;
+	; never otherwise (the spirit is worth more standing). A weak spirit first.
+	ZS_DefineSkill($GC_I_SKILL_ID_SPIRIT_TO_FLESH, -1, -1, "Need=Spirit|HurtNear=2|Prefer=Below50HP|Pick=")
 EndFunc   ;==>ZS_LoadDefs_Audit

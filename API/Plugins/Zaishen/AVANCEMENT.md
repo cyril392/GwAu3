@@ -74,7 +74,7 @@ D:\AutoIt3\AutoIt3.exe /ErrorStdOut "API\Plugins\Zaishen\Tools\ZS_CoverageReport
 D:\AutoIt3\Au3Check.exe -q "API\Plugins\Zaishen\Tests\ZS_TestBench.au3"
 ```
 
-Résultats au 16/11/2026 : 250/250 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
+Résultats au 16/11/2026 : 259/259 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
 2 398 skills équipables, tous avec une famille (0 sans comportement).
 
 ## Historique des retours en jeu
@@ -267,6 +267,13 @@ Résultats au 16/11/2026 : 250/250 ; évaluation ≈ 18 ms pour 40 agents et une
   **Glowing Ice** : qualificatif `WaterHexed` = un maléfice d'eau que le joueur a posé sur la cible et qui dure
   encore (`$g_m_ZS_Recent`) ; sans aucun maléfice sur la barre, « a un maléfice » comme avant. Nouvelle ligne
   `R|skill|cible|ms` dans les snapshots (ce que le joueur vient de lancer sur qui).
+- 16/11 — **descriptions relues sur le wiki** (captures fournies) :
+  Spirit to Flesh (détruit notre esprit, soigne les alliés proches) : seulement si 2 d'entre nous au moins
+  sont sous 70 % à moins de 240 de l'esprit (`HurtNear=2`, bande Heal), un esprit faible d'abord ; jamais sinon.
+  Ether Signet : seuil d'énergie selon le rang d'Inspiration Magic (`MyEnergyBelow=@5,5,6,...` : 9 au rang 12).
+  Signet of Removal : `Need=Enchanted` (sans effet sinon). Keystone Signet : seulement quand d'autres signets
+  rechargent (`Recharges=Signet`). Arcane Conundrum : `Spread=1` (touche les adjacents). Heal as One :
+  jugé sur le joueur ET le familier (`OnPet=2|PetRez=1`), ressuscite un familier mort, marche sans familier.
 
 ## Écarts par rapport au cahier des charges
 
@@ -325,13 +332,11 @@ Résultats au 16/11/2026 : 250/250 ; évaluation ≈ 18 ms pour 40 agents et une
 - Un enchantement n'est reconnu comme « entretenu » qu'après l'avoir vu entretenu une fois : le
   premier lancement n'est donc pas limité.
 - Unyielding Aura ressuscite un membre **au hasard** : avec plusieurs morts, on ne choisit pas lequel.
-- Non repris : Heal as One (soigne aussi le familier : jugé sur le joueur seul), jonglage d'adrénaline
-  Brawling (mini-jeu) ; le wiki refuse la lecture automatique, descriptions à confirmer à la main.
+- Non repris : skills Brawling (réservés au PNJ Courier Falken) ; Lightbringer Signet ne marche qu'au contact
+  d'un démon d'Abaddon, que Zaishen ne sait pas reconnaître (il peut partir pour rien).
 - Portée d'exploitation d'un cadavre supposée = portée de voix (1000) ; le cadavre choisi par le jeu est supposé
   être le plus proche du lanceur.
 - Sorts « Mind » (Mind Burn, Mind Shock...) : l'énergie ennemie n'est pas visible, ce sont de simples nukes.
-- Descriptions incertaines lors de l'audit, réglages prudents : Spirit to Flesh, Ether Signet,
-  Signet of Removal, Keystone Signet, Arcane Conundrum, Lightbringer Signet (non touché).
 - `AdrenReq` de quelques skills n'est pas un multiple de 25 (Cleave 80...) : unité à vérifier en jeu.
 - Glowing Ice : seuls NOS maléfices d'eau sont connus (ceux des autres joueurs : « a un maléfice » si la barre n'en a aucun).
 - `BonusIf` vient de descriptions rédigées : quelques correspondances approximatives possibles
@@ -359,7 +364,5 @@ Résultats au 16/11/2026 : 250/250 ; évaluation ≈ 18 ms pour 40 agents et une
 ## Prochaines étapes proposées
 
 1. Essais en jeu avec le Follower et corrections d'après `logs\zaishen_issues.log` et les journaux.
-2. Cas de skills restants (voir « Limites connues ») : Heal as One, Brawling, descriptions incertaines
-   (à relire sur le wiki à la main).
-3. Réglages par compte (couche 4, INI).
-4. P4/P5 : mémoire partagée puis leader / suiveurs (en dernier).
+2. Réglages par compte (couche 4, INI).
+3. P4/P5 : mémoire partagée puis leader / suiveurs (en dernier).
