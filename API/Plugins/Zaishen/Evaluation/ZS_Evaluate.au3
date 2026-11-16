@@ -203,6 +203,19 @@ Func ZS_Eval_Candidate($a_i_Slot, $a_i_Family, $a_i_Idx)
 	Local $l_s_ReqWhy = $g_s_ZS_Why
 	$g_s_ZS_Why = ""
 	Local $l_f_U = ZS_Eval_Utility($a_i_Slot, $a_i_Family, $a_i_Idx)
+	; A shout or chant also keeps the Paragon echoes going (refrains renewed, finales triggered when it ends)
+	Local $l_b_Echo = False
+	If $g_b_ZS_InCombat Then
+		Local $l_f_EchoBonus = 0, $l_s_Why = $g_s_ZS_Why
+		Local $l_f_Echo = ZS_Eval_EchoRenewal($a_i_Slot, $a_i_Idx, $l_f_EchoBonus)
+		If $l_f_U > 0 Then $l_f_U += $l_f_EchoBonus
+		If $l_f_Echo > $l_f_U Then
+			$l_f_U = $l_f_Echo
+			$l_b_Echo = True
+		ElseIf $g_b_ZS_Explain Then
+			$g_s_ZS_Why = $l_s_Why & ($l_f_EchoBonus > 0 And $l_f_U > 0 ? " +finale" : "")
+		EndIf
+	EndIf
 	If $l_f_U <= 0 Then Return
 	$l_f_U += $l_f_ReqBonus + $g_f_ZS_SlotBonus + ZS_Eval_GlyphFollowUp($a_i_Slot)
 	$g_s_ZS_Why &= $l_s_ReqWhy & $g_s_ZS_SlotWhy
@@ -215,6 +228,8 @@ Func ZS_Eval_Candidate($a_i_Slot, $a_i_Family, $a_i_Idx)
 	If $g_b_ZS_AsDamage Then $l_i_Band = $GC_ZS_BAND_DAMAGE
 	; A core buff of the build ("Upkeep=1") goes before damage when it is down
 	If ZS_SlotParam($a_i_Slot, "Upkeep") = "1" And $l_i_Band < $GC_ZS_BAND_UPKEEP Then $l_i_Band = $GC_ZS_BAND_UPKEEP
+	; A refrain kept up by the shout goes before damage, like any buff renewal
+	If $l_b_Echo And $l_i_Band < $GC_ZS_BAND_UPKEEP Then $l_i_Band = $GC_ZS_BAND_UPKEEP
 	; Keeping up a buff that was worth casting goes before damage
 	If $g_b_ZS_Renewal Then
 		If $l_i_Band < $GC_ZS_BAND_UPKEEP Then $l_i_Band = $GC_ZS_BAND_UPKEEP
@@ -455,6 +470,64 @@ EndFunc   ;==>ZS_Eval_Offer
 #EndRegion Candidates
 
 #Region Shared considerations
+;~ Description: Paragon echoes: a refrain is put back each time a shout or chant ENDS on the one carrying it, a finale
+;~ fires then. Returns the utility a shout or chant (slot) cast on agent row $a_i_Idx gets for renewing a refrain about
+;~ to end that nothing else renews (0 when none); $a_f_Bonus receives a small bonus when it would trigger a finale.
+;~ The shout must end before the refrain: its duration plus its cast must be shorter than what the refrain has left.
+Func ZS_Eval_EchoRenewal($a_i_Slot, $a_i_Idx, ByRef $a_f_Bonus)
+	$a_f_Bonus = 0
+	Local $l_i_Type = $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Type]
+	If $l_i_Type <> $GC_I_SKILL_TYPE_SHOUT And $l_i_Type <> $GC_I_SKILL_TYPE_CHANT Then Return 0
+	Local $l_i_SkillID = $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_SkillID]
+	Local $l_i_Dur = ZS_Knowledge_Duration($l_i_SkillID) * 1000
+	If $l_i_Dur <= 0 Then Return 0
+	Local $l_i_EndsIn = $l_i_Dur + $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_ActivationMs] + $g_i_ZS_Ping + $g_i_ZS_CastMargin
+	; A shout cast on oneself with an area reaches the party around; otherwise only its target
+	Local $l_f_Area = 0
+	If $a_i_Idx = $g_i_ZS_MeIdx And $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_AoE] > 0 Then
+		$l_f_Area = $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_AoE]
+		If $l_f_Area < $GC_I_RANGE_EARSHOT Then $l_f_Area = $GC_I_RANGE_EARSHOT
+	EndIf
+	Local $l_i_TargetID = $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_ID]
+	Local $l_i_FxSkill, $l_i_AgentID, $l_i_Idx, $l_i_Remain, $l_s_Name, $l_f_Best = 0
+	For $f = 0 To $g_i_ZS_FxCount - 1
+		$l_i_FxSkill = $g_amx2_ZS_Fx[$f][$GC_ZS_FX_SkillID]
+		If ZS_SkillData($l_i_FxSkill, $GC_I_SKILL_TYPE) <> $GC_I_SKILL_TYPE_ECHO_REFRAIN Then ContinueLoop
+		$l_i_AgentID = $g_amx2_ZS_Fx[$f][$GC_ZS_FX_AgentID]
+		If $l_i_AgentID <> $l_i_TargetID Then
+			If $l_f_Area = 0 Then ContinueLoop
+			$l_i_Idx = ZS_IdxOf($l_i_AgentID)
+			If $l_i_Idx = 0 Or Not ZS_IsAlly($l_i_Idx) Or $g_amx2_ZS_Agent[$l_i_Idx][$GC_ZS_A_Dist] > $l_f_Area Then ContinueLoop
+		EndIf
+		$l_i_Remain = $g_amx2_ZS_Fx[$f][$GC_ZS_FX_RemainMs]
+		If $l_i_Remain <= $l_i_EndsIn Then ContinueLoop          ; the shout would end after it: too late
+		$l_s_Name = ZS_SkillName($l_i_FxSkill)
+		If StringInStr($l_s_Name, "Finale") Then
+			$a_f_Bonus = 0.1
+		ElseIf StringInStr($l_s_Name, "Refrain") Then
+			; Not yet: renewing it this early would waste the shout
+			If $l_i_Remain - $l_i_EndsIn > $g_i_ZS_EchoWindowMs Then ContinueLoop
+			; Another shout or chant on that ally already ends before the refrain
+			If ZS_Eval_ShoutEndsBefore($l_i_AgentID, $l_i_Remain - $g_i_ZS_CastMargin) Then ContinueLoop
+			$l_f_Best = 0.6
+			If $g_b_ZS_Explain Then $g_s_ZS_Why = "renews " & $l_s_Name & " (" & Round($l_i_Remain / 1000, 1) & " s left)"
+		EndIf
+	Next
+	Return $l_f_Best
+EndFunc   ;==>ZS_Eval_EchoRenewal
+
+;~ Description: True when a shout or chant on agent $a_i_AgentID ends within $a_i_Ms.
+Func ZS_Eval_ShoutEndsBefore($a_i_AgentID, $a_i_Ms)
+	Local $l_i_Type
+	For $f = 0 To $g_i_ZS_FxCount - 1
+		If $g_amx2_ZS_Fx[$f][$GC_ZS_FX_AgentID] <> $a_i_AgentID Then ContinueLoop
+		$l_i_Type = ZS_SkillData($g_amx2_ZS_Fx[$f][$GC_ZS_FX_SkillID], $GC_I_SKILL_TYPE)
+		If $l_i_Type <> $GC_I_SKILL_TYPE_SHOUT And $l_i_Type <> $GC_I_SKILL_TYPE_CHANT Then ContinueLoop
+		If $g_amx2_ZS_Fx[$f][$GC_ZS_FX_RemainMs] > 0 And $g_amx2_ZS_Fx[$f][$GC_ZS_FX_RemainMs] < $a_i_Ms Then Return True
+	Next
+	Return False
+EndFunc   ;==>ZS_Eval_ShoutEndsBefore
+
 ;~ Description: Distance from which the skill of the slot can be used.
 Func ZS_Eval_Range($a_i_Slot)
 	Local $l_i_Special = $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Special]

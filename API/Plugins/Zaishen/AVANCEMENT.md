@@ -74,7 +74,7 @@ D:\AutoIt3\AutoIt3.exe /ErrorStdOut "API\Plugins\Zaishen\Tools\ZS_CoverageReport
 D:\AutoIt3\Au3Check.exe -q "API\Plugins\Zaishen\Tests\ZS_TestBench.au3"
 ```
 
-Résultats au 16/11/2026 : 231/231 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
+Résultats au 16/11/2026 : 237/237 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
 2 398 skills équipables, tous avec une famille (0 sans comportement).
 
 ## Historique des retours en jeu
@@ -247,6 +247,12 @@ Résultats au 16/11/2026 : 231/231 ; évaluation ≈ 18 ms pour 40 agents et une
   (`Prof:`, `Type:`, `Damage`, `Skill:`, `Cost:`, `Cast:`). Intensity (`Prof:Elementalist,Damage`),
   Signet of Illusions (`Prof:Mesmer`), Extend Enchantments (`Type:Enchantment`, donc avant Vow of
   Strength). Une préparation passe juste avant son sort (0,9).
+- 16/11 — **refrains du parangon** : un refrain est réappliqué quand un cri ou un chant **finit** sur celui
+  qui le porte. Quand un refrain (sur le joueur, ou sur un allié à portée de voix pour un cri de groupe)
+  finit dans moins de « durée du cri + incantation + 5 s » ($g_i_ZS_EchoWindowMs), qu'il reste plus de
+  temps que la durée du cri, et qu'aucun autre cri ou chant sur lui ne finit avant, un cri ou chant de la
+  barre est lancé (0,6, bande Upkeep : avant les dégâts), même s'il n'était pas utile autrement (anthem
+  défensif sans pression). Finales (Blazing Finale...) actives : +0,1 aux cris et chants.
 
 ## Écarts par rapport au cahier des charges
 
@@ -307,7 +313,6 @@ Résultats au 16/11/2026 : 231/231 ; évaluation ≈ 18 ms pour 40 agents et une
 - Unyielding Aura ressuscite un membre **au hasard** : avec plusieurs morts, on ne choisit pas lequel.
 - Non repris : Rampage as One / Never Rampage Alone / Heal as One (familier vu, mais pas leur logique),
   jonglage d'adrénaline Brawling.
-- **Refrains du parangon** : relancés quand ils finissent, pas renouvelés par les cris (coûte plus d'énergie).
 - Puits et Putrid Explosion : on sait qu'un cadavre existe, pas **où** il est ni qui l'entoure.
 - Sorts « Mind » (Mind Burn, Mind Shock...) : l'énergie ennemie n'est pas visible, ce sont de simples nukes.
 - Descriptions incertaines lors de l'audit, réglages prudents : Spirit to Flesh, Ether Signet,
@@ -339,7 +344,7 @@ Résultats au 16/11/2026 : 231/231 ; évaluation ≈ 18 ms pour 40 agents et une
 ## Prochaines étapes proposées
 
 1. Essais en jeu avec le Follower et corrections d'après `logs\zaishen_issues.log` et les journaux.
-2. Cas de skills restants (voir « Limites connues ») : refrains du parangon, position des cadavres
+2. Cas de skills restants (voir « Limites connues ») : position des cadavres
    (puits, Putrid Explosion), Rampage as One / Heal as One, Brawling, Glowing Ice.
 3. Réglages par compte (couche 4, INI).
 4. P4/P5 : mémoire partagée puis leader / suiveurs (en dernier).

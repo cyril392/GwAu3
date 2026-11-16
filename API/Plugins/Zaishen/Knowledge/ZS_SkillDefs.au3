@@ -91,8 +91,8 @@ Func ZS_Knowledge_LoadDefs()
 	ZS_DefineSkill($GC_I_SKILL_ID_SMITE_HEX, -1, -1, "MinFoes=0")
 	ZS_DefineSkill($GC_I_SKILL_ID_SPIRIT_TRANSFER, $GC_ZS_FAM_HEAL_SINGLE, -1, "SpiritsNear=1")   ; heals from a spirit's health
 	ZS_DefineSkill($GC_I_SKILL_ID_GHOSTMIRROR_LIGHT, $GC_ZS_FAM_HEAL_SINGLE, -1, "SpiritsNear=")  ; a spirit only adds to it
-	; Not carried over (rare in PvE): Brawling adrenaline juggling,
-	; Paragon refrains renewed by shouts (they are recast when they end instead).
+	; Not carried over (rare in PvE): Brawling adrenaline juggling.
+	; Paragon refrains and finales: no definition needed, see ZS_Eval_EchoRenewal (shouts and chants keep them going).
 
 	; --- Enchantment removal: the game data has no flag for it ---
 	ZS_DefineSkill($GC_I_SKILL_ID_INSPIRED_ENCHANTMENT, $GC_ZS_FAM_ENCH_REMOVAL)

@@ -19,6 +19,7 @@ Global $g_i_ZS_MaxMaintained = 3           ; enchantments the player keeps up at
 Global $g_f_ZS_SacrificeFloor = 0.1        ; never sacrifice health below this fraction of max health
 Global $g_f_ZS_ReservePenalty = 0.35       ; utility factor of a non urgent action that eats the emergency energy
 Global $g_i_ZS_CastMargin = 250            ; ms of safety before renewing an effect that is about to end
+Global $g_i_ZS_EchoWindowMs = 5000         ; a refrain is renewed by a shout ending at most this long before it would
 Global $g_i_ZS_InterruptMargin = 60        ; ms of safety for an interrupt (detection lag is already partly in the ping)
 Global $g_b_ZS_DryRun = False              ; True = decide but never send a command to the game
 Global $g_b_ZS_Explain = False             ; True = build the textual detail of every candidate (journal, tests)
