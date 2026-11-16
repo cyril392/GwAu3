@@ -17,7 +17,7 @@ bundles et enchantements entretenus ajoutés et vérifiés hors jeu.
 | P4 mémoire partagée | à faire | |
 | P5 leader / suiveurs, déplacement tactique | à faire | |
 | P6 descriptions dédiées, extraction UtilityAI | extraction faite | 446 skills enrichis depuis UtilityAI, 37 définitions dédiées ; reste la relecture profession par profession |
-| P7 façade de compatibilité `UAI_Fight` | à faire | |
+| P7 façade de compatibilité `UAI_Fight` | abandonné | seul le Follower utilisera Zaishen (16/11) |
 
 ## Ce qui existe
 
@@ -74,7 +74,7 @@ D:\AutoIt3\AutoIt3.exe /ErrorStdOut "API\Plugins\Zaishen\Tools\ZS_CoverageReport
 D:\AutoIt3\Au3Check.exe -q "API\Plugins\Zaishen\Tests\ZS_TestBench.au3"
 ```
 
-Résultats au 16/11/2026 : 224/224 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
+Résultats au 16/11/2026 : 231/231 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
 2 398 skills équipables, tous avec une famille (0 sans comportement).
 
 ## Historique des retours en jeu
@@ -235,6 +235,18 @@ Résultats au 16/11/2026 : 224/224 ; évaluation ≈ 18 ms pour 40 agents et une
   la raison (blocage, condition sur le joueur, ou aucune cible ne convient + ses paramètres). Ne sont pas
   signalés : l'attente de recharge, d'adrénaline ou d'énergie, et les skills qui attendent une occasion par
   nature (résurrections, soins, protections, retraits, interruptions, défensifs, urnes, cadavres).
+- 16/11 — **maléfices anti-attaque** : Clumsiness, Ineptitude, Wandering Eye comme Empathy (`Need=Attacking`) :
+  jamais sur un ennemi qui n'attaque pas, un combattant avant un caster qui frappe au bâton.
+  **Sorts vus par ennemi** (`$g_m_ZS_SeenSpells`) : chaque sort qu'on voit un ennemi lancer est noté
+  « sur nous » (cible ennemie pour lui) ou « sur son camp » (soin, enchantement...). Qualificatifs
+  `CastsOnUs` / `CastsOnAllies` (avant tout sort vu : d'après la profession, caster non moine / moine ou
+  ritualiste). Guilt et Mistrust : `Need=CastsOnUs` (un moine vu lancer Banish y a droit, un élé vu
+  seulement se soigner non) ; Shame : `Prefer=CastsOnAllies`.
+  **Préparations** : la logique des glyphes (ne lancer que si le sort préparé est prêt, puis dépenser
+  l'effet sur ce sort) vaut pour tout skill ayant `Before=`, avec des conditions combinables
+  (`Prof:`, `Type:`, `Damage`, `Skill:`, `Cost:`, `Cast:`). Intensity (`Prof:Elementalist,Damage`),
+  Signet of Illusions (`Prof:Mesmer`), Extend Enchantments (`Type:Enchantment`, donc avant Vow of
+  Strength). Une préparation passe juste avant son sort (0,9).
 
 ## Écarts par rapport au cahier des charges
 
@@ -294,11 +306,10 @@ Résultats au 16/11/2026 : 224/224 ; évaluation ≈ 18 ms pour 40 agents et une
   premier lancement n'est donc pas limité.
 - Unyielding Aura ressuscite un membre **au hasard** : avec plusieurs morts, on ne choisit pas lequel.
 - Non repris : Rampage as One / Never Rampage Alone / Heal as One (familier vu, mais pas leur logique),
-  Extend Enchantments avant Vow of Strength, jonglage d'adrénaline Brawling.
+  jonglage d'adrénaline Brawling.
 - **Refrains du parangon** : relancés quand ils finissent, pas renouvelés par les cris (coûte plus d'énergie).
 - Puits et Putrid Explosion : on sait qu'un cadavre existe, pas **où** il est ni qui l'entoure.
 - Sorts « Mind » (Mind Burn, Mind Shock...) : l'énergie ennemie n'est pas visible, ce sont de simples nukes.
-- Intensity / Signet of Illusions : pas de condition « un sort de zone est prêt » (seuls les glyphes l'ont).
 - Descriptions incertaines lors de l'audit, réglages prudents : Spirit to Flesh, Ether Signet,
   Signet of Removal, Keystone Signet, Arcane Conundrum, Lightbringer Signet (non touché).
 - `AdrenReq` de quelques skills n'est pas un multiple de 25 (Cleave 80...) : unité à vérifier en jeu.
@@ -327,9 +338,8 @@ Résultats au 16/11/2026 : 224/224 ; évaluation ≈ 18 ms pour 40 agents et une
 
 ## Prochaines étapes proposées
 
-1. Continuer les essais en jeu et corriger au fil des retours (journal + snapshot).
-2. P6 : outil d'extraction du savoir des `CanUse_*` / `BestTarget_*` d'UtilityAI, puis descriptions
-   dédiées profession par profession.
-3. P2 : table de dangerosité des skills ennemis, dépense d'adrénaline, préparation des conditions requises.
-4. P4/P5 : mémoire partagée puis leader / suiveurs.
-5. P7 : façade `UAI_Fight` → `ZS_Fight` pour basculer GwFarmer et Pathfinder.
+1. Essais en jeu avec le Follower et corrections d'après `logs\zaishen_issues.log` et les journaux.
+2. Cas de skills restants (voir « Limites connues ») : refrains du parangon, position des cadavres
+   (puits, Putrid Explosion), Rampage as One / Heal as One, Brawling, Glowing Ice.
+3. Réglages par compte (couche 4, INI).
+4. P4/P5 : mémoire partagée puis leader / suiveurs (en dernier).

@@ -63,6 +63,15 @@ Func ZS_Qualifies($a_i_Idx, $a_s_Q)
 			Return ZS_IsCasterProfession($l_i_Prim)
 		Case "NotCaster"
 			Return Not ZS_IsCasterProfession($l_i_Prim)
+		; From the spells it was seen casting; before any is seen, from its profession
+		Case "CastsOnUs"
+			Local $l_i_Kinds = ZS_SeenSpellKinds($a_i_Idx)
+			If $l_i_Kinds Then Return BitAND($l_i_Kinds, $GC_ZS_SPELLS_OFFENSIVE) <> 0
+			Return ZS_IsCasterProfession($l_i_Prim) And $l_i_Prim <> $GC_I_PROFESSION_MONK
+		Case "CastsOnAllies"
+			Local $l_i_Kinds2 = ZS_SeenSpellKinds($a_i_Idx)
+			If $l_i_Kinds2 Then Return BitAND($l_i_Kinds2, $GC_ZS_SPELLS_SUPPORT) <> 0
+			Return $l_i_Prim = $GC_I_PROFESSION_MONK Or $l_i_Prim = $GC_I_PROFESSION_RITUALIST
 		Case "Melee"
 			Return $l_i_Prim = $GC_I_PROFESSION_WARRIOR Or $l_i_Prim = $GC_I_PROFESSION_ASSASSIN Or $l_i_Prim = $GC_I_PROFESSION_DERVISH
 		Case "Ranged"
@@ -123,6 +132,20 @@ Func ZS_Qualifies($a_i_Idx, $a_s_Q)
 	EndSwitch
 	Return True
 EndFunc   ;==>ZS_Qualifies
+
+;~ Description: $GC_ZS_SPELLS_* bits of the spells the agent was seen casting (0 = none seen yet).
+Func ZS_SeenSpellKinds($a_i_Idx)
+	Local $l_i_ID = $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_ID]
+	If MapExists($g_m_ZS_SeenSpells, $l_i_ID) Then Return $g_m_ZS_SeenSpells[$l_i_ID]
+	Return 0
+EndFunc   ;==>ZS_SeenSpellKinds
+
+;~ Description: True when profession $a_i_Prof is the one named ("Mesmer", "Elementalist"...).
+Func ZS_Qualifies_Prof($a_i_Prof, $a_s_Name)
+	Local Static $s_as_Names = StringSplit("Warrior,Ranger,Monk,Necromancer,Mesmer,Elementalist,Assassin,Ritualist,Paragon,Dervish", ",")
+	If $a_i_Prof < 1 Or $a_i_Prof > 10 Then Return False
+	Return $s_as_Names[$a_i_Prof] = $a_s_Name
+EndFunc   ;==>ZS_Qualifies_Prof
 
 Func ZS_IsCasterProfession($a_i_Prof)
 	Switch $a_i_Prof

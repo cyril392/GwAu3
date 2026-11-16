@@ -574,23 +574,58 @@ Func ZS_Eval_OtherStanceUp($a_i_Slot)
 	Return 0
 EndFunc   ;==>ZS_Eval_OtherStanceUp
 
-;~ Description: True when spell slot $a_i_Spell is what glyph slot $a_i_Glyph prepares ("Before=Cost:10" or "Before=Cast:2000";
-;~ without it: a spell of 10 energy or more, or of 2 s or more).
+;~ Description: True for a skill whose effect prepares the next spell: a glyph, or any skill given "Before="
+;~ (Intensity, Signet of Illusions, Extend Enchantments). It is only used when such a spell is ready to follow.
+Func ZS_Eval_IsPrep($a_i_Slot)
+	Return $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Type] = $GC_I_SKILL_TYPE_GLYPH Or ZS_SlotParam($a_i_Slot, "Before") <> ""
+EndFunc   ;==>ZS_Eval_IsPrep
+
+;~ Description: True when spell slot $a_i_Spell is what preparation slot $a_i_Glyph prepares. "Before=" lists conditions
+;~ that must all hold, separated by commas: Cost:n (energy), Cast:ms, Type:Enchantment|Hex|Spell, Prof:<profession>,
+;~ Damage (a damage spell), Skill:<id>. Without it (glyphs): a spell of 10 energy or more, or of 2 s or more.
 Func ZS_Eval_GlyphFits($a_i_Glyph, $a_i_Spell)
 	If Not ZS_IsSpellType($g_amx2_ZS_Slot[$a_i_Spell][$GC_ZS_S_Type]) Then Return False
 	Local $l_s_Rule = ZS_SlotParam($a_i_Glyph, "Before")
 	Local $l_i_Cost = $g_amx2_ZS_Slot[$a_i_Spell][$GC_ZS_S_Energy], $l_i_Cast = $g_amx2_ZS_Slot[$a_i_Spell][$GC_ZS_S_ActivationMs]
 	If $l_s_Rule = "" Then Return $l_i_Cost >= 10 Or $l_i_Cast >= 2000
-	Local $l_as_R = StringSplit($l_s_Rule, ":", 2)
-	If UBound($l_as_R) < 2 Then Return True
-	Switch $l_as_R[0]
-		Case "Cost"
-			Return $l_i_Cost >= Number($l_as_R[1])
-		Case "Cast"
-			Return $l_i_Cast >= Number($l_as_R[1])
-	EndSwitch
+	Local $l_as_Conds = StringSplit($l_s_Rule, ",", 2), $l_as_R, $l_s_V
+	For $l_s_Cond In $l_as_Conds
+		$l_as_R = StringSplit($l_s_Cond, ":", 2)
+		$l_s_V = (UBound($l_as_R) > 1 ? $l_as_R[1] : "")
+		Switch $l_as_R[0]
+			Case "Cost"
+				If $l_i_Cost < Number($l_s_V) Then Return False
+			Case "Cast"
+				If $l_i_Cast < Number($l_s_V) Then Return False
+			Case "Type"
+				If Not ZS_Eval_TypeIs($g_amx2_ZS_Slot[$a_i_Spell][$GC_ZS_S_Type], $l_s_V) Then Return False
+			Case "Prof"
+				If Not ZS_Qualifies_Prof($g_amx2_ZS_Slot[$a_i_Spell][$GC_ZS_S_Profession], $l_s_V) Then Return False
+			Case "Damage"
+				Switch $g_amx2_ZS_Slot[$a_i_Spell][$GC_ZS_S_Family]
+					Case $GC_ZS_FAM_DAMAGE, $GC_ZS_FAM_DAMAGE_AOE, $GC_ZS_FAM_PBAOE
+					Case Else
+						Return False
+				EndSwitch
+			Case "Skill"
+				If $g_amx2_ZS_Slot[$a_i_Spell][$GC_ZS_S_SkillID] <> Int($l_s_V) Then Return False
+		EndSwitch
+	Next
 	Return True
 EndFunc   ;==>ZS_Eval_GlyphFits
+
+;~ Description: True when skill type $a_i_Type is the one named ("Enchantment", "Hex", "Spell": a plain spell).
+Func ZS_Eval_TypeIs($a_i_Type, $a_s_Name)
+	Switch $a_s_Name
+		Case "Enchantment"
+			Return $a_i_Type = $GC_I_SKILL_TYPE_ENCHANTMENT
+		Case "Hex"
+			Return $a_i_Type = $GC_I_SKILL_TYPE_HEX
+		Case "Spell"
+			Return $a_i_Type = $GC_I_SKILL_TYPE_SPELL
+	EndSwitch
+	Return False
+EndFunc   ;==>ZS_Eval_TypeIs
 
 ;~ Description: True when a spell of the bar that glyph slot $a_i_Glyph prepares is ready to follow it.
 Func ZS_Eval_GlyphTargetReady($a_i_Glyph)
@@ -602,11 +637,12 @@ Func ZS_Eval_GlyphTargetReady($a_i_Glyph)
 	Return False
 EndFunc   ;==>ZS_Eval_GlyphTargetReady
 
-;~ Description: Bonus of a spell slot while the effect of a glyph that prepares it is on the player: spend the glyph on it.
+;~ Description: Bonus of a spell slot while the effect of a glyph (or other preparation) that prepares it is on the
+;~ player: spend it on that spell.
 Func ZS_Eval_GlyphFollowUp($a_i_Slot)
 	If Not ZS_IsSpellType($g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Type]) Then Return 0
 	For $l_i_G = 1 To 8
-		If $g_amx2_ZS_Slot[$l_i_G][$GC_ZS_S_Type] <> $GC_I_SKILL_TYPE_GLYPH Then ContinueLoop
+		If $l_i_G = $a_i_Slot Or $g_amx2_ZS_Slot[$l_i_G][$GC_ZS_S_SkillID] = 0 Or Not ZS_Eval_IsPrep($l_i_G) Then ContinueLoop
 		If Not ZS_SelfHasFx($g_amx2_ZS_Slot[$l_i_G][$GC_ZS_S_SkillID]) Then ContinueLoop
 		If ZS_Eval_GlyphFits($l_i_G, $a_i_Slot) Then
 			If $g_b_ZS_Explain Then $g_s_ZS_Why &= " glyph up"
@@ -847,11 +883,12 @@ Func ZS_Eval_Utility($a_i_Slot, $a_i_Family, $a_i_Idx)
 					If $l_i_UpSlot = 0 And BitAND(ZS_SkillData($l_i_Up, $GC_I_SKILL_EFFECT_2), $GC_I_SKILL_EFFECT2_BLOCKING) Then Return 0
 				EndIf
 			EndIf
-			; A glyph only before the spell it prepares
-			If $l_i_SelfType = $GC_I_SKILL_TYPE_GLYPH Then
+			; A glyph (or Intensity, Extend Enchantments...) only before the spell it prepares
+			If ZS_Eval_IsPrep($a_i_Slot) Then
 				If Not ZS_Eval_GlyphTargetReady($a_i_Slot) Then Return 0
-				$l_f_U = 0.5
-				If $g_b_ZS_Explain Then $g_s_ZS_Why = "glyph: its spell is ready"
+				; Right before its spell: worth more than the spell itself, which follows on the next tick
+				$l_f_U = 0.9
+				If $g_b_ZS_Explain Then $g_s_ZS_Why = "preparation: its spell is ready"
 				Return $l_f_U
 			EndIf
 			If ZS_IsFlashEnchant($g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_SkillID]) Then

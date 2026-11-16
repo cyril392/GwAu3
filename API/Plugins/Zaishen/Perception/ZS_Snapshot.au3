@@ -133,6 +133,14 @@ Func ZS_Perception_TrackCast($a_i_AgentID, $a_i_SkillID)
 EndFunc   ;==>ZS_Perception_TrackCast
 
 
+;~ Description: Remember whether $a_i_AgentID casts its spells on its foes (our side) or on its own side.
+Func ZS_Perception_TrackSpellKind($a_i_AgentID, $a_i_SkillID)
+	If Not ZS_IsSpellType(ZS_SkillData($a_i_SkillID, $GC_I_SKILL_TYPE)) Then Return
+	Local $l_i_Kind = (BitAND(ZS_Knowledge_TargetMask($a_i_SkillID), $GC_ZS_TM_FOE) ? $GC_ZS_SPELLS_OFFENSIVE : $GC_ZS_SPELLS_SUPPORT)
+	Local $l_i_Old = (MapExists($g_m_ZS_SeenSpells, $a_i_AgentID) ? $g_m_ZS_SeenSpells[$a_i_AgentID] : 0)
+	$g_m_ZS_SeenSpells[$a_i_AgentID] = BitOR($l_i_Old, $l_i_Kind)
+EndFunc   ;==>ZS_Perception_TrackSpellKind
+
 ;~ Description: Smoothed health loss of an agent, in fraction of its max health per second.
 ;~ Counts every source (melee, arrows, spells, degeneration) since it only looks at the health going down.
 Func ZS_Perception_TrackDamage($a_i_AgentID, $a_f_HP, $a_b_Dead)
@@ -188,6 +196,7 @@ Func ZS_Perception_ForgetTracking()
 	ZS_Hazard_Reset()
 	$g_i_ZS_MoveUntil = 0
 	$g_m_ZS_SeenProf = $l_m_Empty
+	$g_m_ZS_SeenSpells = $l_m_Empty
 	$g_m_ZS_NoCast = $l_m_Empty
 EndFunc   ;==>ZS_Perception_ForgetTracking
 #EndRegion Build from the game
@@ -226,6 +235,7 @@ Func ZS_Snapshot_Finalize()
 		If $g_amx2_ZS_Agent[$i][$GC_ZS_A_Skill] <> 0 Then
 			$l_i_Seen = ZS_SkillData($g_amx2_ZS_Agent[$i][$GC_ZS_A_Skill], $GC_I_SKILL_PROFESSION)
 			If $l_i_Seen > 0 And $l_i_Seen <= 10 Then $g_m_ZS_SeenProf[$l_i_AgentID] = $l_i_Seen
+			ZS_Perception_TrackSpellKind($l_i_AgentID, $g_amx2_ZS_Agent[$i][$GC_ZS_A_Skill])
 		EndIf
 		If $g_amx2_ZS_Agent[$i][$GC_ZS_A_Primary] = 0 And MapExists($g_m_ZS_SeenProf, $l_i_AgentID) Then _
 				$g_amx2_ZS_Agent[$i][$GC_ZS_A_Primary] = $g_m_ZS_SeenProf[$l_i_AgentID]

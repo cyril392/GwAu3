@@ -27,7 +27,9 @@
 ;   MinionsNear=n   at least n of our minions in earshot
 ;   Spread=1        Hex: worth more on a foe with others around it
 ;   Ward=Foes       Ward: works on the foes standing in it (else: defensive with Defensive=1, or support)
-;   Before=Cost:n | Cast:ms   Glyph: the spell it prepares (default: 10 energy or 2 s of cast)
+;   Before=<conds>  Glyph or other preparation (Intensity...): the spell it prepares; only used when one is ready.
+;                   Conditions, all needed, comma separated: Cost:n, Cast:ms, Type:Enchantment|Hex|Spell,
+;                   Prof:<profession>, Damage, Skill:<id> (glyph default: 10 energy or 2 s of cast)
 ;   OnPet=1         cast on the player, judged on the player's pet; PetRez=1 also brings a dead pet back,
 ;                   PetRez=2 only that (Revive Animal)
 ;   Hold=1          Interrupt attack: never used as a plain attack when nothing is to be stopped
@@ -46,20 +48,20 @@ Func ZS_Knowledge_LoadDefs()
 	ZS_DefineSkill($GC_I_SKILL_ID_WORD_OF_HEALING, -1, -1, "BonusBelow=0.5")       ; +115 healing under 50 %
 	ZS_DefineSkill($GC_I_SKILL_ID_ZEALOUS_BENEDICTION, -1, -1, "BonusBelow=0.5")   ; +7 energy under 50 %
 
-	; --- Hexes that only work when the foe attacks: fighters and attacking foes first, a caster with a wand
-	;     when no fighter is there (UtilityAI had no rule) ---
-	ZS_DefineSkill($GC_I_SKILL_ID_CLUMSINESS, -1, -1, "Prefer=NotCaster,Attacking")
-	ZS_DefineSkill($GC_I_SKILL_ID_INEPTITUDE, -1, -1, "Prefer=NotCaster,Attacking")
-	ZS_DefineSkill($GC_I_SKILL_ID_WANDERING_EYE, -1, -1, "Prefer=NotCaster,Attacking")
-	; Empathy only hurts a foe that attacks: never on one that is not attacking right now
+	; --- Hexes that only work when the foe attacks: never on a foe that is not attacking right now;
+	;     a fighter before a caster swinging its wand ---
+	ZS_DefineSkill($GC_I_SKILL_ID_CLUMSINESS, -1, -1, "Need=Attacking|Prefer=NotCaster")
+	ZS_DefineSkill($GC_I_SKILL_ID_INEPTITUDE, -1, -1, "Need=Attacking|Prefer=NotCaster")
+	ZS_DefineSkill($GC_I_SKILL_ID_WANDERING_EYE, -1, -1, "Need=Attacking|Prefer=NotCaster")
 	ZS_DefineSkill($GC_I_SKILL_ID_EMPATHY, -1, -1, "Need=Attacking|Prefer=NotCaster")
 
 	; --- Hexes against skill users (from the game descriptions) ---
-	; Spells that fail when cast on one of OUR allies: offensive casters, the one casting first
-	ZS_DefineSkill($GC_I_SKILL_ID_GUILT, -1, -1, "Need=Caster|Avoid=Monk|Prefer=Casting")
-	ZS_DefineSkill($GC_I_SKILL_ID_MISTRUST, -1, -1, "Need=Caster|Avoid=Monk|Prefer=Casting")
+	; CastsOnUs / CastsOnAllies: from the spells the foe was seen casting (its profession before that)
+	; Spells that fail when cast on one of OUR allies: foes seen casting at us (a smiting monk too), the one casting first
+	ZS_DefineSkill($GC_I_SKILL_ID_GUILT, -1, -1, "Need=CastsOnUs|Prefer=Casting")
+	ZS_DefineSkill($GC_I_SKILL_ID_MISTRUST, -1, -1, "Need=CastsOnUs|Prefer=Casting")
 	; Spell that fails when cast on ITS allies: healers and supports
-	ZS_DefineSkill($GC_I_SKILL_ID_SHAME, -1, -1, "Need=Caster|Prefer=Monk,Ritualist,Casting")
+	ZS_DefineSkill($GC_I_SKILL_ID_SHAME, -1, -1, "Need=Caster|Prefer=CastsOnAllies,Casting")
 	ZS_DefineSkill($GC_I_SKILL_ID_BACKFIRE, -1, -1, "Prefer=Casting")                 ; Need=Caster comes from UtilityAI
 	; Any skill: worth most on a boss (elite skill), a caster otherwise; never blocked on a fighter
 	ZS_DefineSkill($GC_I_SKILL_ID_DIVERSION, -1, -1, "Need=|Prefer=Boss,Caster")
@@ -89,7 +91,7 @@ Func ZS_Knowledge_LoadDefs()
 	ZS_DefineSkill($GC_I_SKILL_ID_SMITE_HEX, -1, -1, "MinFoes=0")
 	ZS_DefineSkill($GC_I_SKILL_ID_SPIRIT_TRANSFER, $GC_ZS_FAM_HEAL_SINGLE, -1, "SpiritsNear=1")   ; heals from a spirit's health
 	ZS_DefineSkill($GC_I_SKILL_ID_GHOSTMIRROR_LIGHT, $GC_ZS_FAM_HEAL_SINGLE, -1, "SpiritsNear=")  ; a spirit only adds to it
-	; Not carried over (rare in PvE): Extend Enchantments before Vow of Strength, Brawling adrenaline juggling,
+	; Not carried over (rare in PvE): Brawling adrenaline juggling,
 	; Paragon refrains renewed by shouts (they are recast when they end instead).
 
 	; --- Enchantment removal: the game data has no flag for it ---
@@ -246,7 +248,10 @@ Func ZS_LoadDefs_Audit()
 
 	; ===== Buffs the rules took for area skills (a small area of the game data) =====
 	ZS_DefineSkill($GC_I_SKILL_ID_KEYSTONE_SIGNET, $GC_ZS_FAM_SELF_BUFF, $GC_ZS_TM_SELF)
-	ZS_DefineSkill($GC_I_SKILL_ID_INTENSITY, $GC_ZS_FAM_SELF_BUFF, $GC_ZS_TM_SELF)
+	; Preparations: only right before a spell they work on is cast (see Before= above)
+	ZS_DefineSkill($GC_I_SKILL_ID_INTENSITY, $GC_ZS_FAM_SELF_BUFF, $GC_ZS_TM_SELF, "Before=Prof:Elementalist,Damage")
+	ZS_DefineSkill($GC_I_SKILL_ID_SIGNET_OF_ILLUSIONS, $GC_ZS_FAM_SELF_BUFF, $GC_ZS_TM_SELF, "Before=Prof:Mesmer")
+	ZS_DefineSkill($GC_I_SKILL_ID_EXTEND_ENCHANTMENTS, $GC_ZS_FAM_SELF_BUFF, $GC_ZS_TM_SELF, "Before=Type:Enchantment")
 	ZS_DefineSkill($GC_I_SKILL_ID_SPIRIT_CHANNELING, $GC_ZS_FAM_ENERGY_BUFF, $GC_ZS_TM_SELF, "SpiritsNear=1")
 	ZS_DefineSkill($GC_I_SKILL_ID_GHOSTLY_HASTE, $GC_ZS_FAM_SELF_BUFF, $GC_ZS_TM_SELF, "SpiritsNear=1")
 	ZS_DefineSkill($GC_I_SKILL_ID_ARMOR_OF_UNFEELING, -1, -1, "SpiritsNear=1")

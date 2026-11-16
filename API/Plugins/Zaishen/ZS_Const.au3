@@ -91,6 +91,10 @@ Global Const $GC_AS_ZS_FLAGNAMES[24] = ["dead", "casting", "attacking", "moving"
 ; Profession of the skills each agent was seen using (agent ID -> profession): stands for the primary
 ; profession when the game gives none (some monsters)
 Global $g_m_ZS_SeenProf[]
+; Kind of spells each agent was seen casting (agent ID -> bits): who a hex like Guilt or Shame should go on
+Global Const $GC_ZS_SPELLS_SUPPORT = 0x1     ; on itself or its allies (heals, enchantments...)
+Global Const $GC_ZS_SPELLS_OFFENSIVE = 0x2   ; on its foes: our side
+Global $g_m_ZS_SeenSpells[]
 
 ; The player's pet: agent ID read from the game every second (0 = none); row in the snapshot (0 = not seen)
 Global $g_i_ZS_PetID = 0, $g_i_ZS_PetReadAt = -100000, $g_i_ZS_PetIdx = 0
