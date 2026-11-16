@@ -79,7 +79,7 @@ Func ZS_Knowledge_LoadDefs()
 	; --- Energy only on a target in some state: prefer such a target, priority when energy is low ---
 	ZS_DefineSkill($GC_I_SKILL_ID_GLOWING_GAZE1, -1, -1, "BonusIf=Burning")     ; damage, + energy if burning
 	ZS_DefineSkill($GC_I_SKILL_ID_GLOWING_GAZE2, -1, -1, "BonusIf=Burning")
-	ZS_DefineSkill($GC_I_SKILL_ID_GLOWING_ICE, -1, -1, "BonusIf=Hexed")        ; water hex in fact: any hex is the closest we see
+	ZS_DefineSkill($GC_I_SKILL_ID_GLOWING_ICE, -1, -1, "Prefer=WaterHexed|BonusIf=WaterHexed")  ; our own water hexes (see ZS_WaterHexed)
 	ZS_DefineSkill($GC_I_SKILL_ID_GLOWING_SIGNET, -1, -1, "Need=Burning")      ; does nothing else: only on a burning foe
 
 	; --- Conditions UtilityAI wrote in code that the extraction tool cannot read (Tools/uai_review.md) ---
@@ -159,6 +159,15 @@ Func ZS_LoadDefs_Audit()
 	; ===== Pet (Zaishen reads the player's pet from the game) =====
 	ZS_DefineSkill($GC_I_SKILL_ID_COMFORT_ANIMAL, $GC_ZS_FAM_HEAL_SINGLE, $GC_ZS_TM_SELF, "OnPet=1|PetRez=1|Below=0.7")
 	ZS_DefineSkill($GC_I_SKILL_ID_REVIVE_ANIMAL, $GC_ZS_FAM_HEAL_SINGLE, $GC_ZS_TM_SELF, "OnPet=1|PetRez=2")
+	; Shouts that buff the pet only: judged on the pet (its effect is on it), never without a living pet
+	ZS_DefineSkill($GC_I_SKILL_ID_CALL_OF_PROTECTION, -1, -1, "OnPet=1|SelfIs=PetAlive")
+	ZS_DefineSkill($GC_I_SKILL_ID_CALL_OF_HASTE, -1, -1, "OnPet=1|SelfIs=PetAlive")
+	ZS_DefineSkill($GC_I_SKILL_ID_SYMBIOTIC_BOND, -1, -1, "OnPet=1|SelfIs=PetAlive")
+	ZS_DefineSkill($GC_I_SKILL_ID_OTYUGHS_CRY, -1, -1, "OnPet=1|SelfIs=PetAlive")
+	ZS_DefineSkill($GC_I_SKILL_ID_PREDATORY_BOND, -1, -1, "OnPet=1|SelfIs=PetAlive")
+	; "You and your animal companion": nothing without a living pet
+	ZS_DefineSkill($GC_I_SKILL_ID_RAMPAGE_AS_ONE, -1, -1, "SelfIs=PetAlive")
+	ZS_DefineSkill($GC_I_SKILL_ID_NEVER_RAMPAGE_ALONE, -1, -1, "SelfIs=PetAlive")
 
 	; ===== Heals the rules took for buffs =====
 	ZS_DefineSkill($GC_I_SKILL_ID_MYSTIC_HEALING, $GC_ZS_FAM_HEAL_PARTY, $GC_ZS_TM_SELF)

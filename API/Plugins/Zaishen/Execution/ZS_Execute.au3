@@ -253,6 +253,13 @@ Func ZS_Exec_StartSkill($a_i_Slot, $a_i_TargetID)
 			Local $l_i_Duration = $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Duration]
 			If $l_i_Duration > 120 Then $l_i_Duration = 120
 			$l_i_Quiet += $l_i_Duration * 1000
+		Case Else
+			; A buff of the pet (Call of Protection...): its effect is on the pet, maybe not visible to us
+			If ZS_SlotParam($a_i_Slot, "OnPet") = "1" And ZS_SlotParam($a_i_Slot, "PetRez") = "" Then
+				Local $l_i_PetDur = ZS_Knowledge_Duration($l_i_SkillID)
+				If $l_i_PetDur > 120 Then $l_i_PetDur = 120
+				$l_i_Quiet += $l_i_PetDur * 1000
+			EndIf
 	EndSwitch
 	$g_m_ZS_Recent[$l_i_SkillID & ":" & $a_i_TargetID] = $g_i_ZS_Now + $l_i_Quiet
 

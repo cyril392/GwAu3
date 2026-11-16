@@ -16,6 +16,8 @@
 ;   B|skillID|agentID            the spirit that ritual created (bound while playing)
 ;   H|x|y|radius|remainMs|skillID   a damaging area a foe put on the ground
 ;   N|skillID|targetID           an enchantment the player keeps up (bond), on that target
+;   R|skillID|targetID|remainMs   a skill the player used on that target a moment ago, not offered again for that long
+;        (a hex we put on a foe: Glowing Ice knows our water hexes this way)
 ;   W|set|itemType|offhandType|energy|energyEnchanted|energyHexed|energyHPAbove|hpAboveThr|energyHPBelow|hpBelowThr|enchant%|hct%|hsr%
 ;        a weapon set (1..4); item types as GwAu3_Const_Item ($GC_I_TYPE_*); the set in hand is M|wset=n
 ;   E|key=value|key=value...     expectation of a test scenario, kept in $g_as_ZS_Expect
@@ -72,6 +74,7 @@ Func ZS_Snapshot_Load($a_s_File)
 	Local $l_ab_SlotSeen[9]
 
 	Local $l_i_A = 0, $l_i_F = 0, $l_i_E = 0, $l_s_Line, $l_as_P, $l_i_N
+	Local $l_m_Recent[]   ; applied once "now" is known
 	For $i = 0 To UBound($l_as_Lines) - 1
 		$l_s_Line = StringStripWS($l_as_Lines[$i], 3)
 		If $l_s_Line = "" Or StringLeft($l_s_Line, 1) = "#" Then ContinueLoop
@@ -121,6 +124,9 @@ Func ZS_Snapshot_Load($a_s_File)
 				$g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_HSR] = Int($l_as_P[13])
 				ZS_Weapon_FinishSet($l_i_Set)
 
+			Case "R"
+				$l_m_Recent[Int($l_as_P[1]) & ":" & Int($l_as_P[2])] = Int($l_as_P[3])
+
 			Case "N"
 				$g_amx2_ZS_Bond[$g_i_ZS_BondCount][0] = Int($l_as_P[1])
 				$g_amx2_ZS_Bond[$g_i_ZS_BondCount][1] = Int($l_as_P[2])
@@ -165,6 +171,9 @@ Func ZS_Snapshot_Load($a_s_File)
 		EndSwitch
 	Next
 	$g_i_ZS_FxCount = $l_i_F
+	For $l_s_Key In MapKeys($l_m_Recent)
+		$g_m_ZS_Recent[$l_s_Key] = $g_i_ZS_Now + $l_m_Recent[$l_s_Key]
+	Next
 
 	For $l_i_Slot = 1 To 8
 		If Not $l_ab_SlotSeen[$l_i_Slot] Then ZS_Knowledge_ResolveSlot($l_i_Slot, 0)
@@ -282,6 +291,13 @@ Func ZS_Snapshot_Save($a_s_File, $a_s_Comment = "")
 	Next
 	For $l_i_Skill In MapKeys($g_m_ZS_SpiritOf)
 		FileWriteLine($l_h_File, "B|" & $l_i_Skill & "|" & $g_m_ZS_SpiritOf[$l_i_Skill])
+	Next
+	Local $l_as_Pair
+	For $l_s_Key In MapKeys($g_m_ZS_Recent)
+		If Not StringRegExp($l_s_Key, "^\d+:\d+$") Or $g_m_ZS_Recent[$l_s_Key] <= $g_i_ZS_Now Then ContinueLoop
+		$l_as_Pair = StringSplit($l_s_Key, ":", 2)
+		FileWriteLine($l_h_File, "R|" & $l_as_Pair[0] & "|" & $l_as_Pair[1] & "|" & ($g_m_ZS_Recent[$l_s_Key] - $g_i_ZS_Now) & _
+				"   # " & ZS_SkillName(Int($l_as_Pair[0])))
 	Next
 	For $i = 0 To $g_i_ZS_HazardCount - 1
 		FileWriteLine($l_h_File, "H|" & Round($g_amx2_ZS_Hazard[$i][$GC_ZS_HZ_X]) & "|" & Round($g_amx2_ZS_Hazard[$i][$GC_ZS_HZ_Y]) & "|" & _

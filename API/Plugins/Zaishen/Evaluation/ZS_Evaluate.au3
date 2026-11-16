@@ -1089,6 +1089,15 @@ Func ZS_Eval_Utility($a_i_Slot, $a_i_Family, $a_i_Idx)
 			If $g_b_ZS_Explain Then $g_s_ZS_Why = "foe hp " & Round($l_f_HP * 100) & "%"
 			$l_f_U = ($a_i_Family = $GC_ZS_FAM_GENERIC_FOE ? 0.4 : 0.45) + ZS_Eval_FoeBias($a_i_Idx)
 			If Not ZS_Eval_ReqMet($a_i_Slot, $a_i_Idx) Then $l_f_U *= 0.6
+			; The pet hits at once a foe it already stands next to (no run to the target)
+			If $a_i_Family = $GC_ZS_FAM_PET_ATTACK And $g_i_ZS_PetIdx > 0 Then
+				Local $l_f_PX = $g_amx2_ZS_Agent[$g_i_ZS_PetIdx][$GC_ZS_A_X] - $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_X]
+				Local $l_f_PY = $g_amx2_ZS_Agent[$g_i_ZS_PetIdx][$GC_ZS_A_Y] - $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_Y]
+				If $l_f_PX * $l_f_PX + $l_f_PY * $l_f_PY <= 300 * 300 Then
+					$l_f_U += 0.1
+					If $g_b_ZS_Explain Then $g_s_ZS_Why &= ", next to the pet"
+				EndIf
+			EndIf
 
 		Case $GC_ZS_FAM_DAMAGE_AOE
 			Local $l_i_Near = ZS_CountSameSideNear($a_i_Idx, ($g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_AoE] <= 240 ? 240 : 312))

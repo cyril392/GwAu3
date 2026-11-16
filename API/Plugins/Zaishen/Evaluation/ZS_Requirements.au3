@@ -118,6 +118,10 @@ Func ZS_Qualifies($a_i_Idx, $a_s_Q)
 			Return $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_Allegiance] = $GC_I_ALLEGIANCE_SPIRIT Or BitAND($l_i_Flags, $GC_ZS_AF_SPAWNED) <> 0
 		Case "Minion"
 			Return $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_Allegiance] = $GC_I_ALLEGIANCE_MINION
+		; Under a water hex (Glowing Ice): one the player put on it and that still lasts; when the bar has no hex
+		; of its own, any hex (someone else's, of unknown attribute)
+		Case "WaterHexed"
+			Return ZS_WaterHexed($a_i_Idx)
 		Case "NotEnchanted"
 			Return BitAND($l_i_Flags, $GC_ZS_AF_ENCHANTED) = 0
 		Case "NotBlind"
@@ -132,6 +136,20 @@ Func ZS_Qualifies($a_i_Idx, $a_s_Q)
 	EndSwitch
 	Return True
 EndFunc   ;==>ZS_Qualifies
+
+;~ Description: True when agent row $a_i_Idx carries a water hex (see qualifier "WaterHexed").
+Func ZS_WaterHexed($a_i_Idx)
+	Local $l_i_ID = $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_ID], $l_b_OwnHex = False, $l_s_Key
+	For $l_i_S = 1 To 8
+		If $g_amx2_ZS_Slot[$l_i_S][$GC_ZS_S_Type] <> $GC_I_SKILL_TYPE_HEX Then ContinueLoop
+		$l_b_OwnHex = True
+		If $g_amx2_ZS_Slot[$l_i_S][$GC_ZS_S_Attribute] <> $GC_I_ATTRIBUTE_WATER_MAGIC Then ContinueLoop
+		$l_s_Key = $g_amx2_ZS_Slot[$l_i_S][$GC_ZS_S_SkillID] & ":" & $l_i_ID
+		If MapExists($g_m_ZS_Recent, $l_s_Key) And $g_m_ZS_Recent[$l_s_Key] > $g_i_ZS_Now Then Return True
+	Next
+	If $l_b_OwnHex Then Return False
+	Return BitAND($g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_Flags], $GC_ZS_AF_HEXED) <> 0
+EndFunc   ;==>ZS_WaterHexed
 
 ;~ Description: $GC_ZS_SPELLS_* bits of the spells the agent was seen casting (0 = none seen yet).
 Func ZS_SeenSpellKinds($a_i_Idx)
