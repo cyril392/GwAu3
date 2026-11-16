@@ -74,7 +74,7 @@ D:\AutoIt3\AutoIt3.exe /ErrorStdOut "API\Plugins\Zaishen\Tools\ZS_CoverageReport
 D:\AutoIt3\Au3Check.exe -q "API\Plugins\Zaishen\Tests\ZS_TestBench.au3"
 ```
 
-Résultats au 16/11/2026 : 237/237 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
+Résultats au 16/11/2026 : 244/244 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
 2 398 skills équipables, tous avec une famille (0 sans comportement).
 
 ## Historique des retours en jeu
@@ -253,6 +253,13 @@ Résultats au 16/11/2026 : 237/237 ; évaluation ≈ 18 ms pour 40 agents et une
   temps que la durée du cri, et qu'aucun autre cri ou chant sur lui ne finit avant, un cri ou chant de la
   barre est lancé (0,6, bande Upkeep : avant les dégâts), même s'il n'était pas utile autrement (anthem
   défensif sans pression). Finales (Blazing Finale...) actives : +0,1 aux cris et chants.
+- 16/11 — **position des cadavres** : le jeu exploite le cadavre le plus proche du lanceur ; Zaishen le
+  repère (`$g_i_ZS_CorpseIdx`, à portée de voix). Puits contre les ennemis (par défaut pour un puits) et
+  Putrid Explosion (`Corpse=Foes`) : seulement avec des ennemis autour de ce cadavre (0,4 + 0,1 par ennemi en
+  plus) ; Well of Blood et Well of Power (`Corpse=Allies`) : seulement avec des alliés blessés (< 85 %)
+  dessus. Animate..., Soul Feast, Consume Corpse : inchangés (un cadavre à portée suffit).
+  **Puits ennemis** : une zone à éviter centrée sur le cadavre le plus proche du lanceur (sauf Well of
+  Blood / Well of Power).
 
 ## Écarts par rapport au cahier des charges
 
@@ -313,7 +320,8 @@ Résultats au 16/11/2026 : 237/237 ; évaluation ≈ 18 ms pour 40 agents et une
 - Unyielding Aura ressuscite un membre **au hasard** : avec plusieurs morts, on ne choisit pas lequel.
 - Non repris : Rampage as One / Never Rampage Alone / Heal as One (familier vu, mais pas leur logique),
   jonglage d'adrénaline Brawling.
-- Puits et Putrid Explosion : on sait qu'un cadavre existe, pas **où** il est ni qui l'entoure.
+- Portée d'exploitation d'un cadavre supposée = portée de voix (1000) ; le cadavre choisi par le jeu est supposé
+  être le plus proche du lanceur.
 - Sorts « Mind » (Mind Burn, Mind Shock...) : l'énergie ennemie n'est pas visible, ce sont de simples nukes.
 - Descriptions incertaines lors de l'audit, réglages prudents : Spirit to Flesh, Ether Signet,
   Signet of Removal, Keystone Signet, Arcane Conundrum, Lightbringer Signet (non touché).
@@ -330,7 +338,7 @@ Résultats au 16/11/2026 : 237/237 ; évaluation ≈ 18 ms pour 40 agents et une
 - Aucune gestion de la portée d'aggro des groupes non engagés ; pas de fuite face à un groupe trop fort
   (demande la carte et un chemin) ; pas de « kiting ».
 - Zones de dégâts : seules celles lancées **pendant que Zaishen regarde** sont connues (pas celles posées
-  avant, ni les puits ennemis dont le cadavre est inconnu) ; centre = l'allié que l'ennemi regardait.
+  avant) ; centre = l'allié que l'ennemi regardait (un puits : le cadavre le plus proche du lanceur).
   Les esprits ennemis ne sont pas évités (ils se tuent).
 - La menace (`ZS_Threat`) combine : ennemis au contact (< 300), ennemis à distance qui attaquent ou
   incantent **orientés** vers la cible (`ZS_AimOf` attribue chaque ennemi à celui d'entre nous qu'il
@@ -344,7 +352,6 @@ Résultats au 16/11/2026 : 237/237 ; évaluation ≈ 18 ms pour 40 agents et une
 ## Prochaines étapes proposées
 
 1. Essais en jeu avec le Follower et corrections d'après `logs\zaishen_issues.log` et les journaux.
-2. Cas de skills restants (voir « Limites connues ») : position des cadavres
-   (puits, Putrid Explosion), Rampage as One / Heal as One, Brawling, Glowing Ice.
+2. Cas de skills restants (voir « Limites connues ») : Rampage as One / Heal as One, Brawling, Glowing Ice.
 3. Réglages par compte (couche 4, INI).
 4. P4/P5 : mémoire partagée puis leader / suiveurs (en dernier).

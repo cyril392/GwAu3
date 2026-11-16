@@ -57,13 +57,19 @@ Func ZS_Hazard_Update()
 		ZS_Hazard_Add($l_av_Cast[1], $l_av_Cast[2], $l_i_Skill)
 	Next
 
-	; Foes casting one now: remember where the one of us it faces stands
+	; Foes casting one now: remember where the one of us it faces stands (a well: the corpse nearest the caster)
 	Local $l_i_Aim
 	For $i = 1 To $g_i_ZS_AgentCount
 		If Not ZS_IsFoe($i) Then ContinueLoop
 		$l_i_Skill = $g_amx2_ZS_Agent[$i][$GC_ZS_A_Skill]
-		If $l_i_Skill = 0 Or Not ZS_IsGroundArea($l_i_Skill) Then ContinueLoop
-		$l_i_Aim = ZS_AimOf($i)
+		If $l_i_Skill = 0 Then ContinueLoop
+		If ZS_IsFoeWell($l_i_Skill) Then
+			$l_i_Aim = ZS_NearestCorpseTo($i)
+		ElseIf ZS_IsGroundArea($l_i_Skill) Then
+			$l_i_Aim = ZS_AimOf($i)
+		Else
+			ContinueLoop
+		EndIf
 		If $l_i_Aim = 0 Then ContinueLoop
 		Local $l_i_FoeID = $g_amx2_ZS_Agent[$i][$GC_ZS_A_ID]
 		Local $l_i_Start = $g_i_ZS_Now - $g_amx2_ZS_Agent[$i][$GC_ZS_A_CastMs]
@@ -75,6 +81,29 @@ Func ZS_Hazard_Update()
 		$g_m_ZS_HazCast[$l_i_FoeID] = $l_av_New
 	Next
 EndFunc   ;==>ZS_Hazard_Update
+
+;~ Description: True for a well that harms the ones standing in it (all but Well of Blood and Well of Power).
+Func ZS_IsFoeWell($a_i_SkillID)
+	If ZS_SkillData($a_i_SkillID, $GC_I_SKILL_TYPE) <> $GC_I_SKILL_TYPE_WELL Then Return False
+	Return $a_i_SkillID <> $GC_I_SKILL_ID_WELL_OF_BLOOD And $a_i_SkillID <> $GC_I_SKILL_ID_WELL_OF_POWER
+EndFunc   ;==>ZS_IsFoeWell
+
+;~ Description: Row of the exploitable corpse nearest agent row $a_i_Idx, within earshot of it (0 = none).
+Func ZS_NearestCorpseTo($a_i_Idx)
+	Local $l_f_X = $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_X], $l_f_Y = $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_Y]
+	Local $l_f_Best = $GC_I_RANGE_EARSHOT * $GC_I_RANGE_EARSHOT, $l_i_Best = 0, $l_f_DX, $l_f_DY, $l_f_Sq
+	For $i = 1 To $g_i_ZS_AgentCount
+		If Not BitAND($g_amx2_ZS_Agent[$i][$GC_ZS_A_Flags], $GC_ZS_AF_CORPSE) Then ContinueLoop
+		$l_f_DX = $g_amx2_ZS_Agent[$i][$GC_ZS_A_X] - $l_f_X
+		$l_f_DY = $g_amx2_ZS_Agent[$i][$GC_ZS_A_Y] - $l_f_Y
+		$l_f_Sq = $l_f_DX * $l_f_DX + $l_f_DY * $l_f_DY
+		If $l_f_Sq <= $l_f_Best Then
+			$l_f_Best = $l_f_Sq
+			$l_i_Best = $i
+		EndIf
+	Next
+	Return $l_i_Best
+EndFunc   ;==>ZS_NearestCorpseTo
 
 ;~ Description: Add a damaging area of skill $a_i_SkillID centred on ($a_f_X, $a_f_Y), for the skill's duration
 ;~ (the foe's rank is unknown: the rank 15 one), $a_i_RemainMs when given.

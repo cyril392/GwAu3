@@ -35,6 +35,8 @@
 ;   Hold=1          Interrupt attack: never used as a plain attack when nothing is to be stopped
 ;   Speed=1 | 2     speed skill: used while the player walks, in fights and between them (2: in fights as usual)
 ;   OutOfCombat=1   a buff also kept up between fights (the others wait for a fight)
+;   Corpse=Foes|Allies  corpse skill that works around the corpse it exploits: foes / hurt allies must be there
+;                   (wells: Foes by default)
 
 Func ZS_Knowledge_LoadDefs()
 	; --- Mesmer: interrupts that only work on spells and chants ---
@@ -117,6 +119,12 @@ Func ZS_Knowledge_LoadDefs()
 	ZS_DefineSkill($GC_I_SKILL_ID_ANGUISHED_WAS_LINGWAH, $GC_ZS_FAM_ITEM_SPELL, -1, "Drop=RitHexesRecharging") ; its bonus is spent
 	ZS_DefineSkill($GC_I_SKILL_ID_COURAGEOUS_WAS_SAIDRA, $GC_ZS_FAM_ITEM_SPELL, -1, "Drop=PartyHurt")      ; party heal on drop
 	; Vocal, Attuned, Vengeful, Tranquil and Mighty Was...: no drop effect, the bundle itself is the effect: kept
+
+	; --- Corpse skills that work around the corpse (the nearest one, chosen by the game) ---
+	; Wells work on the foes standing in them unless told otherwise; Putrid Explosion hits the foes near the corpse
+	ZS_DefineSkill($GC_I_SKILL_ID_WELL_OF_BLOOD, -1, -1, "Corpse=Allies")
+	ZS_DefineSkill($GC_I_SKILL_ID_WELL_OF_POWER, -1, -1, "Corpse=Allies")
+	ZS_DefineSkill($GC_I_SKILL_ID_PUTRID_EXPLOSION, -1, -1, "Corpse=Foes")
 
 	; --- Enchantments whose end does the job ---
 	; Unyielding Aura: kept up on oneself (heals +60 %); when it ends, a dead party member is resurrected.

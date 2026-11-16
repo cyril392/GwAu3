@@ -11,6 +11,7 @@ Global $g_ai_ZS_Allies[1]     ; rows of the living allies in reach (player exclu
 Global $g_ai_ZS_DeadAllies[1]
 Global $g_ai_ZS_Others[1]     ; allied minions and spirits
 Global $g_b_ZS_AnyCorpse = False
+Global $g_i_ZS_CorpseIdx = 0      ; nearest exploitable corpse in earshot (row), the one the game will use
 Global $g_b_ZS_Renewal = False   ; scratch: the candidate being scored renews an effect that is about to end
 
 #Region Response curves
@@ -87,6 +88,8 @@ Func ZS_Eval_BuildLists()
 	Local $l_i_N = $g_i_ZS_AgentCount
 	Global $g_ai_ZS_Foes[$l_i_N + 1], $g_ai_ZS_Allies[$l_i_N + 1], $g_ai_ZS_DeadAllies[$l_i_N + 1], $g_ai_ZS_Others[$l_i_N + 1]
 	$g_b_ZS_AnyCorpse = False
+	$g_i_ZS_CorpseIdx = 0
+	Local $l_f_CorpseDist = $GC_I_RANGE_EARSHOT + 1
 
 	Local $l_f_FoeReach = $g_f_ZS_AggroRange * 1.25
 	Local $l_f_AllyReach = 1500
@@ -95,7 +98,13 @@ Func ZS_Eval_BuildLists()
 		If $i = $g_i_ZS_MeIdx Then ContinueLoop
 		$l_f_Dist = $g_amx2_ZS_Agent[$i][$GC_ZS_A_Dist]
 		$l_i_Flags = $g_amx2_ZS_Agent[$i][$GC_ZS_A_Flags]
-		If BitAND($l_i_Flags, $GC_ZS_AF_CORPSE) And $l_f_Dist <= $GC_I_RANGE_EARSHOT Then $g_b_ZS_AnyCorpse = True
+		If BitAND($l_i_Flags, $GC_ZS_AF_CORPSE) And $l_f_Dist <= $GC_I_RANGE_EARSHOT Then
+			$g_b_ZS_AnyCorpse = True
+			If $l_f_Dist < $l_f_CorpseDist Then
+				$l_f_CorpseDist = $l_f_Dist
+				$g_i_ZS_CorpseIdx = $i
+			EndIf
+		EndIf
 
 		Switch $g_amx2_ZS_Agent[$i][$GC_ZS_A_Allegiance]
 			Case $GC_I_ALLEGIANCE_ENEMY
@@ -213,7 +222,7 @@ Func ZS_Eval_Candidate($a_i_Slot, $a_i_Family, $a_i_Idx)
 			$l_f_U = $l_f_Echo
 			$l_b_Echo = True
 		ElseIf $g_b_ZS_Explain Then
-			$g_s_ZS_Why = $l_s_Why & ($l_f_EchoBonus > 0 And $l_f_U > 0 ? " +finale" : "")
+			$g_s_ZS_Why = $l_s_Why & (($l_f_EchoBonus > 0 And $l_f_U > 0) ? " +finale" : "")
 		EndIf
 	EndIf
 	If $l_f_U <= 0 Then Return
@@ -470,6 +479,34 @@ EndFunc   ;==>ZS_Eval_Offer
 #EndRegion Candidates
 
 #Region Shared considerations
+;~ Description: Who a corpse skill works on around the corpse ("Corpse=" of the slot): "Foes" (wells against foes,
+;~ Putrid Explosion), "Allies" (Well of Blood, Well of Power), "" when where the corpse lies does not matter
+;~ (Animate..., Soul Feast). A well without the parameter works on foes.
+Func ZS_Eval_CorpseFor($a_i_Slot)
+	Local $l_s_For = ZS_SlotParam($a_i_Slot, "Corpse")
+	If $l_s_For = "" And $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_Type] = $GC_I_SKILL_TYPE_WELL Then $l_s_For = "Foes"
+	Return $l_s_For
+EndFunc   ;==>ZS_Eval_CorpseFor
+
+;~ Description: Number of foes ("Foes") or hurt allies ("Allies", the player included) in the area of the slot around
+;~ the nearest corpse, the one the game exploits.
+Func ZS_Eval_AtCorpse($a_i_Slot, $a_s_For)
+	If $g_i_ZS_CorpseIdx = 0 Then Return 0
+	Local $l_f_X = $g_amx2_ZS_Agent[$g_i_ZS_CorpseIdx][$GC_ZS_A_X], $l_f_Y = $g_amx2_ZS_Agent[$g_i_ZS_CorpseIdx][$GC_ZS_A_Y]
+	Local $l_f_R = $g_amx2_ZS_Slot[$a_i_Slot][$GC_ZS_S_AoE]
+	If $l_f_R <= 0 Then $l_f_R = $GC_I_RANGE_AREA
+	If $a_s_For = "Foes" Then Return ZS_CountAround($l_f_X, $l_f_Y, $l_f_R, True)
+	Local $l_f_Sq = $l_f_R * $l_f_R, $l_f_DX, $l_f_DY, $l_i_N = 0, $l_i_Idx
+	For $i = 0 To $g_ai_ZS_Allies[0]
+		$l_i_Idx = ($i = 0 ? $g_i_ZS_MeIdx : $g_ai_ZS_Allies[$i])
+		If $g_amx2_ZS_Agent[$l_i_Idx][$GC_ZS_A_HP] >= 0.85 Then ContinueLoop
+		$l_f_DX = $g_amx2_ZS_Agent[$l_i_Idx][$GC_ZS_A_X] - $l_f_X
+		$l_f_DY = $g_amx2_ZS_Agent[$l_i_Idx][$GC_ZS_A_Y] - $l_f_Y
+		If $l_f_DX * $l_f_DX + $l_f_DY * $l_f_DY <= $l_f_Sq Then $l_i_N += 1
+	Next
+	Return $l_i_N
+EndFunc   ;==>ZS_Eval_AtCorpse
+
 ;~ Description: Paragon echoes: a refrain is put back each time a shout or chant ENDS on the one carrying it, a finale
 ;~ fires then. Returns the utility a shout or chant (slot) cast on agent row $a_i_Idx gets for renewing a refrain about
 ;~ to end that nothing else renews (0 when none); $a_f_Bonus receives a small bonus when it would trigger a finale.
@@ -1101,8 +1138,17 @@ Func ZS_Eval_Utility($a_i_Slot, $a_i_Family, $a_i_Idx)
 
 		Case $GC_ZS_FAM_CORPSE
 			If Not $g_b_ZS_AnyCorpse Then Return 0
-			$l_f_U = 0.5
-			If $g_b_ZS_Explain Then $g_s_ZS_Why = "corpse in reach"
+			Local $l_s_CorpseFor = ZS_Eval_CorpseFor($a_i_Slot)
+			If $l_s_CorpseFor = "" Then
+				$l_f_U = 0.5
+				If $g_b_ZS_Explain Then $g_s_ZS_Why = "corpse in reach"
+			Else
+				; A well or Putrid Explosion works where the nearest corpse lies, not where the player stands
+				Local $l_i_Found = ZS_Eval_AtCorpse($a_i_Slot, $l_s_CorpseFor)
+				If $l_i_Found = 0 Then Return 0
+				$l_f_U = ZS_Curve_Clamp(0.4 + 0.1 * ($l_i_Found - 1))
+				If $g_b_ZS_Explain Then $g_s_ZS_Why = $l_i_Found & ($l_s_CorpseFor = "Allies" ? " hurt allies" : " foes") & " at the corpse"
+			EndIf
 
 		Case $GC_ZS_FAM_WARD
 			If Not $g_b_ZS_InCombat Then Return 0

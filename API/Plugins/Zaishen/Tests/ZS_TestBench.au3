@@ -152,6 +152,20 @@ Func Bench_Hazards()
 			Bench_Check($g_i_ZS_HazardCount = 0, "interrupted cast leaves nothing", $g_i_ZS_HazardCount & " areas")
 		EndIf
 	Next
+
+	; A foe well: centred on the corpse nearest the caster, not on the one of us it faces
+	$l_h = FileOpen($l_s_File, 2)
+	FileWrite($l_h, "M|now=1000|ping=80|myid=1|energy=30|maxenergy=40" & @CRLF & _
+			"A|1|0|0|0.9|480|0|ally|player|0|0|4" & @CRLF & _
+			"A|20|600|300|0|0|0|foe|dead,corpse" & @CRLF & _
+			"A|10|700|0|1|0|0|foe|-|93|800|4|0|0|0|0|0|-1|0" & @CRLF) ; Well of Suffering, 0.8 s into its 1 s
+	FileClose($l_h)
+	ZS_Snapshot_Load($l_s_File)
+	$g_i_ZS_Now += 400
+	$g_amx2_ZS_Agent[ZS_IdxOf(10)][$GC_ZS_A_Skill] = 0
+	ZS_Snapshot_Finalize()
+	Bench_Check($g_i_ZS_HazardCount = 1 And ZS_Hazard_At(600, 300) >= 0 And ZS_Hazard_At(0, 0) < 0, _
+			"a foe well is an area on its corpse", $g_i_ZS_HazardCount & " areas")
 	FileDelete($l_s_File)
 EndFunc   ;==>Bench_Hazards
 #EndRegion 1c) damaging areas
