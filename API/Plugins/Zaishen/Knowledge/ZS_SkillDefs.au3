@@ -361,9 +361,10 @@ Func ZS_LoadDefs_Audit()
 	ZS_DefineSkill($GC_I_SKILL_ID_JUDGES_INSIGHT, -1, -1, "Need=NotCaster|Prefer=Attacking")
 	ZS_DefineSkill($GC_I_SKILL_ID_TAINTED_FLESH, -1, -1, "Need=Melee")
 	; Energy for an ally whose energy cannot be read: on the one that seems shortest (EnergyNeed, see
-	; ZS_EnergyNeedGuess: energy seen spent lately, caster gone idle in the fight), a monk first
-	ZS_DefineSkill($GC_I_SKILL_ID_BLOOD_IS_POWER, -1, -1, "Need=Caster|EnergyNeed=0.35|Prefer=Monk|MyHPAbove=0.6")
-	ZS_DefineSkill($GC_I_SKILL_ID_BLOOD_RITUAL, -1, -1, "Need=Caster|EnergyNeed=0.35|Prefer=Monk|MyHPAbove=0.6")
+	; ZS_EnergyNeedGuess: energy seen spent lately, caster gone idle in the fight), a monk first.
+	; A fighter spending energy on its skills gets it too ("Need=" clears UtilityAI's Need=Caster)
+	ZS_DefineSkill($GC_I_SKILL_ID_BLOOD_IS_POWER, -1, -1, "Need=|EnergyNeed=0.35|Prefer=Monk|MyHPAbove=0.6")
+	ZS_DefineSkill($GC_I_SKILL_ID_BLOOD_RITUAL, -1, -1, "Need=|EnergyNeed=0.35|Prefer=Monk|MyHPAbove=0.6")
 	ZS_DefineSkill($GC_I_SKILL_ID_INSPIRATIONAL_SPEECH, -1, -1, "Avoid=Caster|Prefer=Attacking")
 	ZS_DefineSkill($GC_I_SKILL_ID_LIFE_BOND, -1, -1, "MaxTargets=1")
 	ZS_DefineSkill($GC_I_SKILL_ID_LIFE_BARRIER, -1, -1, "MaxTargets=1")

@@ -74,7 +74,7 @@ D:\AutoIt3\AutoIt3.exe /ErrorStdOut "API\Plugins\Zaishen\Tools\ZS_CoverageReport
 D:\AutoIt3\Au3Check.exe -q "API\Plugins\Zaishen\Tests\ZS_TestBench.au3"
 ```
 
-Résultats au 19/11/2026 : 262/262 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
+Résultats au 19/11/2026 : 263/263 ; évaluation ≈ 18 ms pour 40 agents et une barre pleine ;
 2 398 skills équipables, tous avec une famille (0 sans comportement).
 
 ## Historique des retours en jeu
@@ -278,7 +278,7 @@ Résultats au 19/11/2026 : 262/262 ; évaluation ≈ 18 ms pour 40 agents et une
   (`ZS_EnergyNeedGuess`, 0..1) : énergie qu'on l'a vu dépenser (coût de chaque skill qu'il commence, moins
   $g_f_ZS_RegenGuess = 1 par seconde ; 30 dépensés = 1), et un caster qui ne commence plus rien depuis
   $g_i_ZS_StallMs = 5 s en combat, après avoir lancé des sorts, est sans doute à sec (0,8). `EnergyNeed=0.35` :
-  jamais sur un allié dont rien ne montre le manque ; +0,3 × besoin. Ligne `U|agent|dépensé|dernier sort il y a ms`
+  jamais sur un allié dont rien ne montre le manque ; +0,3 × besoin ; physiques compris (dépense vue). Ligne `U|agent|dépensé|dernier sort il y a ms`
   dans les snapshots. Plus tard : l'énergie exacte de nos propres bots par un fichier commun.
 
 ## Écarts par rapport au cahier des charges
