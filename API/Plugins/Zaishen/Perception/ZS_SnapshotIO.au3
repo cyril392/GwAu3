@@ -16,6 +16,7 @@
 ;   B|skillID|agentID            the spirit that ritual created (bound while playing)
 ;   H|x|y|radius|remainMs|skillID   a damaging area a foe put on the ground
 ;   N|skillID|targetID           an enchantment the player keeps up (bond), on that target
+;   U|agentID|spentEnergy|lastCastAgoMs   energy an ally was seen spending lately, and when it last started a skill
 ;   R|skillID|targetID|remainMs   a skill the player used on that target a moment ago, not offered again for that long
 ;        (a hex we put on a foe: Glowing Ice knows our water hexes this way)
 ;   W|set|itemType|offhandType|energy|energyEnchanted|energyHexed|energyHPAbove|hpAboveThr|energyHPBelow|hpBelowThr|enchant%|hct%|hsr%
@@ -124,6 +125,10 @@ Func ZS_Snapshot_Load($a_s_File)
 				$g_amx2_ZS_WSet[$l_i_Set][$GC_ZS_W_HSR] = Int($l_as_P[13])
 				ZS_Weapon_FinishSet($l_i_Set)
 
+			Case "U"
+				Local $l_av_U[3] = [Int($l_as_P[1]), Number($l_as_P[2]), Int($l_as_P[3])]
+				$l_m_Recent["U" & $l_as_P[1]] = $l_av_U
+
 			Case "R"
 				$l_m_Recent[Int($l_as_P[1]) & ":" & Int($l_as_P[2])] = Int($l_as_P[3])
 
@@ -171,8 +176,16 @@ Func ZS_Snapshot_Load($a_s_File)
 		EndSwitch
 	Next
 	$g_i_ZS_FxCount = $l_i_F
+	Local $l_av_Use
 	For $l_s_Key In MapKeys($l_m_Recent)
-		$g_m_ZS_Recent[$l_s_Key] = $g_i_ZS_Now + $l_m_Recent[$l_s_Key]
+		If StringLeft($l_s_Key, 1) = "U" Then
+			$l_av_Use = $l_m_Recent[$l_s_Key]
+			$g_m_ZS_Spent[$l_av_Use[0]] = $l_av_Use[1]
+			$g_m_ZS_SpentAt[$l_av_Use[0]] = $g_i_ZS_Now
+			If $l_av_Use[2] > 0 Then $g_m_ZS_LastCastAt[$l_av_Use[0]] = $g_i_ZS_Now - $l_av_Use[2]
+		Else
+			$g_m_ZS_Recent[$l_s_Key] = $g_i_ZS_Now + $l_m_Recent[$l_s_Key]
+		EndIf
 	Next
 
 	For $l_i_Slot = 1 To 8
@@ -291,6 +304,9 @@ Func ZS_Snapshot_Save($a_s_File, $a_s_Comment = "")
 	Next
 	For $l_i_Skill In MapKeys($g_m_ZS_SpiritOf)
 		FileWriteLine($l_h_File, "B|" & $l_i_Skill & "|" & $g_m_ZS_SpiritOf[$l_i_Skill])
+	Next
+	For $l_i_ID In MapKeys($g_m_ZS_LastCastAt)
+		FileWriteLine($l_h_File, "U|" & $l_i_ID & "|" & Round(ZS_SpentEnergy($l_i_ID), 1) & "|" & ($g_i_ZS_Now - $g_m_ZS_LastCastAt[$l_i_ID]))
 	Next
 	Local $l_as_Pair
 	For $l_s_Key In MapKeys($g_m_ZS_Recent)

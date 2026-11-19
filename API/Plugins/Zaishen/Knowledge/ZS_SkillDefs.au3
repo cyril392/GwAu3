@@ -35,6 +35,7 @@
 ;   HurtNear=n      at least n of us under 70 % within 240 of the target (Spirit to Flesh): a heal
 ;   Recharges=Signet  recharges the other signets (Keystone Signet): only once some are spent
 ;   MyEnergyBelow=@a,b,...  threshold by rank in the skill's attribute
+;   EnergyNeed=f    energy given to an ally: only to one whose guessed energy need (0..1) reaches f
 ;   Hold=1          Interrupt attack: never used as a plain attack when nothing is to be stopped
 ;   Speed=1 | 2     speed skill: used while the player walks, in fights and between them (2: in fights as usual)
 ;   OutOfCombat=1   a buff also kept up between fights (the others wait for a fight)
@@ -359,8 +360,10 @@ Func ZS_LoadDefs_Audit()
 	ZS_DefineSkill($GC_I_SKILL_ID_BALTHAZARS_SPIRIT, -1, -1, "Prefer=Melee,Attacking")
 	ZS_DefineSkill($GC_I_SKILL_ID_JUDGES_INSIGHT, -1, -1, "Need=NotCaster|Prefer=Attacking")
 	ZS_DefineSkill($GC_I_SKILL_ID_TAINTED_FLESH, -1, -1, "Need=Melee")
-	ZS_DefineSkill($GC_I_SKILL_ID_BLOOD_IS_POWER, -1, -1, "Need=Caster|Prefer=Monk,Casting|MyHPAbove=0.6")
-	ZS_DefineSkill($GC_I_SKILL_ID_BLOOD_RITUAL, -1, -1, "Need=Caster|Prefer=Monk,Casting|MyHPAbove=0.6")
+	; Energy for an ally whose energy cannot be read: on the one that seems shortest (EnergyNeed, see
+	; ZS_EnergyNeedGuess: energy seen spent lately, caster gone idle in the fight), a monk first
+	ZS_DefineSkill($GC_I_SKILL_ID_BLOOD_IS_POWER, -1, -1, "Need=Caster|EnergyNeed=0.35|Prefer=Monk|MyHPAbove=0.6")
+	ZS_DefineSkill($GC_I_SKILL_ID_BLOOD_RITUAL, -1, -1, "Need=Caster|EnergyNeed=0.35|Prefer=Monk|MyHPAbove=0.6")
 	ZS_DefineSkill($GC_I_SKILL_ID_INSPIRATIONAL_SPEECH, -1, -1, "Avoid=Caster|Prefer=Attacking")
 	ZS_DefineSkill($GC_I_SKILL_ID_LIFE_BOND, -1, -1, "MaxTargets=1")
 	ZS_DefineSkill($GC_I_SKILL_ID_LIFE_BARRIER, -1, -1, "MaxTargets=1")

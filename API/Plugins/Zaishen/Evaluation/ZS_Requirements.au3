@@ -151,6 +151,21 @@ Func ZS_WaterHexed($a_i_Idx)
 	Return BitAND($g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_Flags], $GC_ZS_AF_HEXED) <> 0
 EndFunc   ;==>ZS_WaterHexed
 
+;~ Description: 0..1 guess of how short of energy ally row $a_i_Idx is (its energy cannot be read):
+;~ - the energy it was seen spending lately (30 spent and not got back = 1);
+;~ - a caster that started nothing for $g_i_ZS_StallMs in a fight, after casting in it: 0.8 (out of energy, most likely).
+Func ZS_EnergyNeedGuess($a_i_Idx)
+	Local $l_i_ID = $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_ID]
+	Local $l_f_Need = ZS_SpentEnergy($l_i_ID) / 30
+	If $l_f_Need > 1 Then $l_f_Need = 1
+	If $g_b_ZS_InCombat And MapExists($g_m_ZS_LastCastAt, $l_i_ID) And $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_Skill] = 0 _
+			And ZS_IsCasterProfession($g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_Primary]) Then
+		Local $l_i_Idle = $g_i_ZS_Now - $g_m_ZS_LastCastAt[$l_i_ID]
+		If $l_i_Idle >= $g_i_ZS_StallMs And $l_i_Idle < 60000 And $l_f_Need < 0.8 Then $l_f_Need = 0.8
+	EndIf
+	Return $l_f_Need
+EndFunc   ;==>ZS_EnergyNeedGuess
+
 ;~ Description: $GC_ZS_SPELLS_* bits of the spells the agent was seen casting (0 = none seen yet).
 Func ZS_SeenSpellKinds($a_i_Idx)
 	Local $l_i_ID = $g_amx2_ZS_Agent[$a_i_Idx][$GC_ZS_A_ID]
@@ -339,6 +354,13 @@ Func ZS_Req_Target($a_i_Slot, $a_i_Idx)
 	EndIf
 
 	Local $l_f_Bonus = 0
+	; Energy given to an ally (Blood is Power): only to one that seems short of it
+	If $l_b_Other And ZS_SlotParam($a_i_Slot, "EnergyNeed") <> "" Then
+		Local $l_f_Need = ZS_EnergyNeedGuess($a_i_Idx)
+		If $l_f_Need < Number(ZS_SlotParam($a_i_Slot, "EnergyNeed")) Then Return -1
+		$l_f_Bonus += 0.3 * $l_f_Need
+		If $g_b_ZS_Explain Then $g_s_ZS_Why &= " energy need ~" & Round($l_f_Need, 2)
+	EndIf
 	If $l_b_Other Then
 		$l_s_V = $g_amx2_ZS_Req[$a_i_Slot][$GC_ZS_RQ_Prefer]
 		If $l_s_V <> "" Then

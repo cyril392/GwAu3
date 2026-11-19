@@ -96,6 +96,11 @@ Global $g_m_ZS_SeenProf[]
 Global Const $GC_ZS_SPELLS_SUPPORT = 0x1     ; on itself or its allies (heals, enchantments...)
 Global Const $GC_ZS_SPELLS_OFFENSIVE = 0x2   ; on its foes: our side
 Global $g_m_ZS_SeenSpells[]
+; Energy the allies were seen spending (their energy cannot be read): agent ID -> energy spent, worn down by
+; $g_f_ZS_RegenGuess per second; when it was last updated; when the agent last started a skill
+Global $g_m_ZS_Spent[], $g_m_ZS_SpentAt[], $g_m_ZS_LastCastAt[]
+Global $g_f_ZS_RegenGuess = 1.0          ; energy per second an ally is supposed to get back
+Global $g_i_ZS_StallMs = 5000            ; a caster ally idle this long in a fight is probably out of energy
 
 ; The player's pet: agent ID read from the game every second (0 = none); row in the snapshot (0 = not seen)
 Global $g_i_ZS_PetID = 0, $g_i_ZS_PetReadAt = -100000, $g_i_ZS_PetIdx = 0

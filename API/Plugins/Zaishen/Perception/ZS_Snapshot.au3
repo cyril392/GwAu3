@@ -80,6 +80,8 @@ Func ZS_Perceive($a_f_AggroRange = 1320)
 		$g_amx2_ZS_Agent[$i][$GC_ZS_A_Flags] = $l_i_Flags
 		$g_amx2_ZS_Agent[$i][$GC_ZS_A_Skill] = $l_i_Skill
 		$g_amx2_ZS_Agent[$i][$GC_ZS_A_CastMs] = ZS_Perception_TrackCast($l_i_ID, $l_i_Skill)
+		If $l_i_Skill <> 0 And $g_amx2_ZS_Agent[$i][$GC_ZS_A_CastMs] = 0 And $l_i_ID <> $l_i_MyID And _
+				$l_ax_Rows[$i][$GC_ZS_R_Allegiance] = $GC_I_ALLEGIANCE_ALLY Then ZS_Perception_TrackSpend($l_i_ID, $l_i_Skill)
 		$g_amx2_ZS_Agent[$i][$GC_ZS_A_Primary] = $l_ax_Rows[$i][$GC_ZS_R_Primary]
 		$g_amx2_ZS_Agent[$i][$GC_ZS_A_Secondary] = $l_ax_Rows[$i][$GC_ZS_R_Secondary]
 		$g_amx2_ZS_Agent[$i][$GC_ZS_A_Model] = $l_ax_Rows[$i][$GC_ZS_R_PlayerNumber]
@@ -141,6 +143,20 @@ Func ZS_Perception_TrackSpellKind($a_i_AgentID, $a_i_SkillID)
 	$g_m_ZS_SeenSpells[$a_i_AgentID] = BitOR($l_i_Old, $l_i_Kind)
 EndFunc   ;==>ZS_Perception_TrackSpellKind
 
+;~ Description: An ally starts skill $a_i_SkillID: count its energy cost (once per activation).
+Func ZS_Perception_TrackSpend($a_i_AgentID, $a_i_SkillID)
+	$g_m_ZS_Spent[$a_i_AgentID] = ZS_SpentEnergy($a_i_AgentID) + ZS_SkillData($a_i_SkillID, $GC_I_SKILL_ENERGY_REQ)
+	$g_m_ZS_SpentAt[$a_i_AgentID] = $g_i_ZS_Now
+	$g_m_ZS_LastCastAt[$a_i_AgentID] = $g_i_ZS_Now
+EndFunc   ;==>ZS_Perception_TrackSpend
+
+;~ Description: Energy $a_i_AgentID was seen spending, minus what it is supposed to have got back since.
+Func ZS_SpentEnergy($a_i_AgentID)
+	If Not MapExists($g_m_ZS_Spent, $a_i_AgentID) Then Return 0
+	Local $l_f_Left = $g_m_ZS_Spent[$a_i_AgentID] - $g_f_ZS_RegenGuess * ($g_i_ZS_Now - $g_m_ZS_SpentAt[$a_i_AgentID]) / 1000
+	Return ($l_f_Left > 0 ? $l_f_Left : 0)
+EndFunc   ;==>ZS_SpentEnergy
+
 ;~ Description: Smoothed health loss of an agent, in fraction of its max health per second.
 ;~ Counts every source (melee, arrows, spells, degeneration) since it only looks at the health going down.
 Func ZS_Perception_TrackDamage($a_i_AgentID, $a_f_HP, $a_b_Dead)
@@ -197,6 +213,9 @@ Func ZS_Perception_ForgetTracking()
 	$g_i_ZS_MoveUntil = 0
 	$g_m_ZS_SeenProf = $l_m_Empty
 	$g_m_ZS_SeenSpells = $l_m_Empty
+	$g_m_ZS_Spent = $l_m_Empty
+	$g_m_ZS_SpentAt = $l_m_Empty
+	$g_m_ZS_LastCastAt = $l_m_Empty
 	$g_m_ZS_NoCast = $l_m_Empty
 EndFunc   ;==>ZS_Perception_ForgetTracking
 #EndRegion Build from the game
